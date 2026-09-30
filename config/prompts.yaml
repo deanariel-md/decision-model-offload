@@ -1,0 +1,71 @@
+# Prompts for arm 1 and the eICU replication. The statement is identical for Jev (Noul instructions) and the LLMs. No
+# prompt carries an example number (a worked value would anchor the answer).
+statements:
+  nhanes: "This person will die from any cause within ten years of this examination."
+  eicu:   "This patient will die before hospital discharge."
+  eicu_demo: "This patient will die before hospital discharge."   # the population sent to models (the open demo)
+complements:            # Jev coherence diagnostic only (baseline states, 200-profile subset)
+  nhanes: "This person will be alive ten years after this examination."
+  eicu:   "This patient will be discharged from hospital alive."
+  eicu_demo: "This patient will be discharged from hospital alive."
+llm:
+  system: >
+    You are helping with a research study of mortality risk. You will see one de-identified record from a national
+    health survey and one statement about the person it describes. Give the probability that the statement is true, as
+    a number between 0 and 1 with three decimal places.
+  record_source:          # the system message's "record from ..." phrase per population; only this phrase changes
+    nhanes: "a national health survey"
+    eicu_demo: "an intensive care unit database"
+  reply: >                # always last; the M1 instruction, when present, goes between system and reply
+    Always give a number. Reply with a JSON object whose only key is "p", and nothing else.
+  user_template: |
+    Record:
+    {record}
+
+    Statement: {statement}
+  json_schema:
+    name: probability
+    strict: true
+    schema:
+      type: object
+      properties:
+        p: {type: number, minimum: 0, maximum: 1}
+      required: [p]
+      additionalProperties: false
+framing_sensitivity:    # sensitivity analysis (variant F1; primary chatbots only, Jev has no system prompt): the LLM
+  drop: "You are helping with a research study of mortality risk."   # system message without this sentence
+mitigation:
+  M1_instruction: >      # LLMs: in the system prompt, before the reply format. Jev: at the start of the state.
+    Estimate as if the record did not contain race and ethnicity, education, family income or health insurance.
+jev:
+  primary:              # one Noul per call, no criteria block
+    question_id: death
+    type: noul
+  risk_bands:           # Jev-only secondary: a distribution over checkable outcomes; P(death by 10 y) = 1 - P(alive)
+    question_id: ten_year_outcome
+    type: choice
+    instructions:
+      nhanes: "Which of these will happen to this person after this examination?"
+    options:            # label: [from, to) years after the examination in which the person dies; null = alive at 10 years
+      died_within_2_years: [0, 2]
+      died_2_to_5_years:   [2, 5]
+      died_5_to_10_years:  [5, 10]
+      alive_at_10_years:   null
+
+exposure:                 # masked-field recovery (exposure diagnostic; LLMs only; never used for the estimands)
+  system: >
+    You are helping with a research study. In the de-identified record below, one field's value has been replaced by
+    "MISSING". Give the value you think this record most likely contains, in the unit shown. Always give a number.
+    Reply with a JSON object whose only key is "value", and nothing else.
+  user_template: |
+    Record:
+    {record}
+
+    Missing field: {field} ({unit})
+  fields:                 # recorded precision matters: exact-match scoring at the recorded precision
+    mean_corpuscular_volume: {unit: fL, decimals: 1}
+    alkaline_phosphatase: {unit: U/L, decimals: 0}
+    total_cholesterol: {unit: mg/dL, decimals: 0}
+    lymphocyte_percent: {unit: "%", decimals: 1}
+    waist_circumference: {unit: cm, decimals: 1}
+  n_profiles: 200

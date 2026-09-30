@@ -1,0 +1,16 @@
+Ten-year risk of death, Jev with structured input (Supplementary Table 12a; not given in the Supplementary Notes): the
+same Noul question, with the record sent as a JSON object whose numeric fields are replaced by named categories.
+{structured record}: that object (src/jevity/docuse_risk.py, config/docuse_risk.yaml).
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{structured record}",
+  "questions": {
+    "death": {
+      "type": "noul",
+      "instructions": "This person will die from any cause within ten years of this examination."
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

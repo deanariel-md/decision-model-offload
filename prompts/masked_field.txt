@@ -1,0 +1,13 @@
+Masked-field test (Supplementary Note 1; chatbots only), on the survey records and on the intensive care records.
+{record}: the record as text with one value replaced by "MISSING"; {field}: that field's key in the record; {unit}:
+its unit (config/prompts.yaml and config/eicu.yaml, exposure). No reply schema is sent. Built by src/jevity/clients.py
+(FillClient) from config/prompts.yaml.
+
+### SYSTEM MESSAGE
+You are helping with a research study. In the de-identified record below, one field's value has been replaced by "MISSING". Give the value you think this record most likely contains, in the unit shown. Always give a number. Reply with a JSON object whose only key is "value", and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Record:
+{record}
+
+Missing field: {field} ({unit})

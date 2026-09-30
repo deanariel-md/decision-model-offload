@@ -1,0 +1,60 @@
+Next step for a patient's message (Supplementary Note 1). {patient message}: the message as sent; {option}: the four
+options in the order shown (shuffled per message with a seed, the same order for every system). Reply schema: sent as
+response_format to every chatbot whose entry in config/models.yaml has structured_outputs: true. Built by
+src/jevity/categorical.py from config/arm2.yaml.
+
+### SYSTEM MESSAGE
+Choose the option that is the most appropriate next step, and give the probability that each option is the most appropriate next step, as numbers between 0 and 1 that add up to 1. Always choose one option. Reply with a JSON object with two keys, "choice" (the letter of the option you choose) and "probabilities" (an object with one number for each letter), and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Message:
+{patient message}
+
+Question: Which is the most appropriate next step for this person?
+
+A. {option}
+B. {option}
+C. {option}
+D. {option}
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "arm2_answer",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "choice": {"type": "string", "enum": ["A", "B", "C", "D"]},
+        "probabilities": {
+          "type": "object",
+          "properties": {
+            "A": {"type": "number", "minimum": 0, "maximum": 1},
+            "B": {"type": "number", "minimum": 0, "maximum": 1},
+            "C": {"type": "number", "minimum": 0, "maximum": 1},
+            "D": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "required": ["A", "B", "C", "D"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["choice", "probabilities"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{patient message}",
+  "questions": {
+    "next_step": {
+      "type": "choice",
+      "instructions": "Which is the most appropriate next step for this person?",
+      "criteria": {"A": "{option}", "B": "{option}", "C": "{option}", "D": "{option}"}
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

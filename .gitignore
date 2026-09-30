@@ -1,0 +1,16 @@
+# keys
+.env
+# data and raw replies stay local and are never committed: the downloads, the records and items built or supplied
+# (board-examination questions, patient messages, reports), every eICU-derived file, and the raw API responses
+data/
+runs/
+**/eicu-crd*/
+**/eicu-collaborative-research-database*/
+# figures drawn by scripts/figures from results/ (the top-level output folder only)
+/figures/
+# caches and local environments
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/

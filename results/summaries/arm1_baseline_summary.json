@@ -1,0 +1,88 @@
+{
+ "note": "descriptive ranges for the manuscript; values from results/wide/analysis.json",
+ "n_records": 12697,
+ "deaths": 2002,
+ "observed_death_share": 0.15767504134835,
+ "jev": {
+  "log_loss": 0.37874544531692744,
+  "log_loss_recalibrated": 0.3375758983525881,
+  "brier": 0.1172328581554698,
+  "auroc": 0.8222103515932407,
+  "calibration_slope": 1.1449684029764726,
+  "calibration_intercept": -0.7423342230061297,
+  "mean_p": 0.263166102228873
+ },
+ "reference": {
+  "log_loss": 0.3113120641395155,
+  "log_loss_recalibrated": 0.31106521597056597,
+  "brier": 0.0943717466059396,
+  "auroc": 0.8540778529558334,
+  "calibration_slope": 0.9275771191173869,
+  "calibration_intercept": -0.07817758643347825,
+  "mean_p": 0.15666730012360167
+ },
+ "age_sex": {
+  "log_loss": 0.3714720628299376,
+  "log_loss_recalibrated": 0.37163954401627525,
+  "brier": 0.11425862833450712,
+  "auroc": 0.7693094189587877,
+  "calibration_slope": 0.9886582079093408,
+  "calibration_intercept": -0.01774645671341729,
+  "mean_p": 0.15795872305777506
+ },
+ "chatbots": {
+  "log_loss": {
+   "min": 0.3253520694631379,
+   "max": 0.36153773638542164
+  },
+  "log_loss_recalibrated": {
+   "min": 0.31878456737017064,
+   "max": 0.32664117588488717
+  },
+  "brier": {
+   "min": 0.09943108387808142,
+   "max": 0.11243697204063953
+  },
+  "auroc": {
+   "min": 0.8369246228292513,
+   "max": 0.8455342927292436
+  },
+  "calibration_slope": {
+   "min": 1.0083694280685087,
+   "max": 1.1031367633295877
+  },
+  "calibration_intercept": {
+   "min": -0.7780419241439499,
+   "max": -0.1690693217083951
+  },
+  "mean_p": {
+   "min": 0.18549169095061827,
+   "max": 0.25156477908167285
+  }
+ },
+ "jev_minus_chatbot_log_loss": {
+  "diff": {
+   "min": 0.017207708931506638,
+   "max": 0.05339337585378939
+  },
+  "simultaneous_lower": {
+   "min": 0.014051293236167873,
+   "max": 0.04878481707415486
+  },
+  "noninferior_any": false,
+  "margin": 0.006015999869042211
+ },
+ "jev_minus_chatbot_log_loss_recalibrated": {
+  "diff": {
+   "min": 0.010934722467694613,
+   "max": 0.018791330982418475
+  },
+  "simultaneous_lower": {
+   "min": 0.007108067771675714,
+   "max": 0.014977266680423987
+  },
+  "noninferior_any": false,
+  "margin": 0.006015999869042211
+ },
+ "jev_minus_age_sex_log_loss": 0.007273382486989832
+}

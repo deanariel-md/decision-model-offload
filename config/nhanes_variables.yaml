@@ -1,0 +1,89 @@
+# NHANES continuous cycles 1999–2008 (A–E) and the public-use Linked Mortality File (deaths to 31 Dec 2019).
+# File base names differ across cycles; variable names are harmonised in src/jevity/nhanes.py.
+base_url: "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public"   # <start year>/DataFiles/<file>.xpt
+lmf_url: "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality"
+cycles:
+  "1999-2000": {suffix: "",   lmf: "NHANES_1999_2000_MORT_2019_PUBLIC.dat"}
+  "2001-2002": {suffix: "_B", lmf: "NHANES_2001_2002_MORT_2019_PUBLIC.dat"}
+  "2003-2004": {suffix: "_C", lmf: "NHANES_2003_2004_MORT_2019_PUBLIC.dat"}
+  "2005-2006": {suffix: "_D", lmf: "NHANES_2005_2006_MORT_2019_PUBLIC.dat"}
+  "2007-2008": {suffix: "_E", lmf: "NHANES_2007_2008_MORT_2019_PUBLIC.dat"}
+# component -> file base name per cycle (suffix appended where the pattern is regular)
+files:
+  demo:   {"1999-2000": DEMO,   "2001-2002": DEMO_B,   "2003-2004": DEMO_C,   "2005-2006": DEMO_D,     "2007-2008": DEMO_E}
+  bmx:    {"1999-2000": BMX,    "2001-2002": BMX_B,    "2003-2004": BMX_C,    "2005-2006": BMX_D,      "2007-2008": BMX_E}
+  bpx:    {"1999-2000": BPX,    "2001-2002": BPX_B,    "2003-2004": BPX_C,    "2005-2006": BPX_D,      "2007-2008": BPX_E}
+  smq:    {"1999-2000": SMQ,    "2001-2002": SMQ_B,    "2003-2004": SMQ_C,    "2005-2006": SMQ_D,      "2007-2008": SMQ_E}
+  mcq:    {"1999-2000": MCQ,    "2001-2002": MCQ_B,    "2003-2004": MCQ_C,    "2005-2006": MCQ_D,      "2007-2008": MCQ_E}
+  diq:    {"1999-2000": DIQ,    "2001-2002": DIQ_B,    "2003-2004": DIQ_C,    "2005-2006": DIQ_D,      "2007-2008": DIQ_E}
+  huq:    {"1999-2000": HUQ,    "2001-2002": HUQ_B,    "2003-2004": HUQ_C,    "2005-2006": HUQ_D,      "2007-2008": HUQ_E}
+  hiq:    {"1999-2000": HIQ,    "2001-2002": HIQ_B,    "2003-2004": HIQ_C,    "2005-2006": HIQ_D,      "2007-2008": HIQ_E}
+  rxq:    {"1999-2000": RXQ_RX, "2001-2002": RXQ_RX_B, "2003-2004": RXQ_RX_C, "2005-2006": RXQ_RX_D,   "2007-2008": RXQ_RX_E}
+  biopro: {"1999-2000": LAB18,  "2001-2002": L40_B,    "2003-2004": L40_C,    "2005-2006": BIOPRO_D,   "2007-2008": BIOPRO_E}
+  cbc:    {"1999-2000": LAB25,  "2001-2002": L25_B,    "2003-2004": L25_C,    "2005-2006": CBC_D,      "2007-2008": CBC_E}
+  crp:    {"1999-2000": LAB11,  "2001-2002": L11_B,    "2003-2004": L11_C,    "2005-2006": CRP_D,      "2007-2008": CRP_E}
+  ghb:    {"1999-2000": LAB10,  "2001-2002": L10_B,    "2003-2004": L10_C,    "2005-2006": GHB_D,      "2007-2008": GHB_E}
+  tchol:  {"1999-2000": LAB13,  "2001-2002": L13_B,    "2003-2004": L13_C,    "2005-2006": TCHOL_D,    "2007-2008": TCHOL_E}
+  hdl:    {"1999-2000": LAB13,  "2001-2002": L13_B,    "2003-2004": L13_C,    "2005-2006": HDL_D,      "2007-2008": HDL_E}
+  albcr:  {"1999-2000": LAB16,  "2001-2002": L16_B,    "2003-2004": L16_C,    "2005-2006": ALB_CR_D,   "2007-2008": ALB_CR_E}
+# variable candidates per harmonised name (first present wins); units as recorded
+variables:
+  age:            {vars: [RIDAGEYR], unit: years}
+  sex:            {vars: [RIAGENDR], codes: {1: male, 2: female}}
+  race_ethnicity: {vars: [RIDRETH1], codes: {1: "Mexican American", 2: "Other Hispanic", 3: "Non-Hispanic White", 4: "Non-Hispanic Black", 5: "Other race including multiracial"}}
+  education:      {vars: [DMDEDUC2], codes: {1: "less than 9th grade", 2: "9th to 11th grade", 3: "high school graduate or GED", 4: "some college", 5: "college graduate or above"}}
+  income_poverty_ratio: {vars: [INDFMPIR]}
+  insured:        {vars: [HID010, HIQ011], codes: {1: "yes", 2: "no"}}
+  bmi:            {vars: [BMXBMI], unit: "kg/m2"}
+  waist_cm:       {vars: [BMXWAIST], unit: cm}
+  smoked_100:     {vars: [SMQ020], codes: {1: "yes", 2: "no"}}
+  smoke_now:      {vars: [SMQ040], codes: {1: "every day", 2: "some days", 3: "not at all"}}
+  chf:            {vars: [MCQ160B], codes: {1: "yes", 2: "no"}}
+  chd:            {vars: [MCQ160C], codes: {1: "yes", 2: "no"}}
+  mi:             {vars: [MCQ160E], codes: {1: "yes", 2: "no"}}
+  stroke:         {vars: [MCQ160F], codes: {1: "yes", 2: "no"}}
+  emphysema:      {vars: [MCQ160G], codes: {1: "yes", 2: "no"}}
+  chronic_bronchitis: {vars: [MCQ160K], codes: {1: "yes", 2: "no"}}
+  cancer:         {vars: [MCQ220], codes: {1: "yes", 2: "no"}}
+  diabetes:       {vars: [DIQ010], codes: {1: "yes", 2: "no", 3: borderline}}
+  self_rated_health: {vars: [HUQ010], codes: {1: excellent, 2: "very good", 3: good, 4: fair, 5: poor}}
+  albumin_g_dl:   {vars: [LBXSAL], unit: "g/dL"}
+  creatinine_mg_dl: {vars: [LBXSCR, LBDSCR], unit: "mg/dL"}   # LBDSCR in 2001-02 (L40_B)
+  glucose_mg_dl:  {vars: [LBXSGL], unit: "mg/dL"}
+  alk_phos_u_l:   {vars: [LBXSAPSI, LBDSAPSI], unit: "U/L"}   # LBDSAPSI in 2001-02
+  wbc_10e3_ul:    {vars: [LBXWBCSI], unit: "10^3/uL"}
+  lymphocyte_pct: {vars: [LBXLYPCT], unit: "%"}
+  mcv_fl:         {vars: [LBXMCVSI], unit: fL}
+  rdw_pct:        {vars: [LBXRDW], unit: "%"}
+  crp_mg_dl:      {vars: [LBXCRP], unit: "mg/dL"}
+  hba1c_pct:      {vars: [LBXGH], unit: "%"}
+  total_chol_mg_dl: {vars: [LBXTC], unit: "mg/dL"}
+  hdl_mg_dl:      {vars: [LBDHDL, LBXHDD, LBDHDD], unit: "mg/dL"}
+  urine_albumin_mg_l: {vars: [URXUMA], unit: "mg/L"}
+  urine_creatinine_mg_dl: {vars: [URXUCR], unit: "mg/dL"}
+phenoage_nine: [albumin_g_dl, creatinine_mg_dl, glucose_mg_dl, crp_mg_dl, lymphocyte_pct, mcv_fl, rdw_pct, alk_phos_u_l, wbc_10e3_ul]
+eligibility: {age_min: 40, age_max: 79, horizon_months: 120, fit_min_biomarkers: 7}
+# Records sent to models (evaluation split, and the held-out 'pilot' split) need all nine biomarkers; the fitting set may
+# miss up to two (imputed in the reference with missingness indicators), which enlarges the sample that informs the
+# reference contrasts.
+# Age top-code: 85 in 1999-2006, 80 in 2007-08; the 40-79 window never touches a top-coded value.
+# DMDEDUC2 7/9 (refused/don't know) -> missing. INDFMPIR top-coded at 5.
+# Serum creatinine: CDC-recommended standardisation applied in load_cycle (1999-2000: 1.013x + 0.147;
+# 2005-2006: -0.016 + 0.978x; 2001-04 none; 2007-08 already adjusted in the released file). The corrected value is
+# what every model and every reference sees.
+creatinine_correction:
+  "1999-2000": {slope: 1.013, intercept: 0.147}
+  "2005-2006": {slope: 0.978, intercept: -0.016}
+# Public-use LMF fixed-width layout for NHANES continuous (CDC data dictionary): 1-based column spans.
+# SEQN occupies 1-6 (PUBLICID is the NHIS field). Missing coded ".". ELIGSTAT 1 eligible, 2 <18, 3 ineligible.
+# MORTSTAT 0 assumed alive, 1 assumed deceased. Column spans follow CDC's R program for the public-use LMF;
+# build_cohort prints a sanity table by cycle.
+lmf_layout:
+  seqn: [1, 6]
+  eligstat: [15, 15]
+  mortstat: [16, 16]
+  ucod_leading: [17, 19]
+  diabetes: [20, 20]
+  hyperten: [21, 21]
+  permth_int: [43, 45]
+  permth_exm: [46, 48]

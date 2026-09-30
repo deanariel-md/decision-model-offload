@@ -1,0 +1,83 @@
+{
+ "built_by": "scripts/build_arm2_ext_items.py",
+ "config": "config/arm2_ext.yaml",
+ "sources": {
+  "medqa": {
+   "helm": "crfm-helm src/helm/benchmark/scenarios/med_qa_scenario.py (MedQAScenario), run spec medhelm_med_qa",
+   "url": "https://drive.google.com/uc?export=download&id=1ImYUSLk9JbgHXOemfvyiDiirluZHPeQw&confirm=t",
+   "file": "data_clean.zip",
+   "zip_sha256": "1c2ca8130b3d86d9a99a432ab9bef14f3bb9807bef20facd9ac86ba36960f629",
+   "member": "data_clean/questions/US/4_options/phrases_no_exclude_test.jsonl",
+   "member_sha256": "c3b905ccfa66152dc25afbcb2c10e86c0bdb208824f0658fcdb2c040f60a2beb",
+   "licence": "MIT (github.com/jind11/MedQA)"
+  },
+  "medqa_alt": {
+   "file": "data_clean.zip",
+   "member": "data_clean/questions/US/test.jsonl",
+   "member_sha256": "cfa75cbcc53c29b023752b0a395ff49d8202121041392735ae44771a5ec734a3"
+  },
+  "medbullets": {
+   "helm": "crfm-helm src/helm/benchmark/scenarios/medbullets_scenario.py (MedBulletsScenario, split _op5), run spec medbullets",
+   "url": "https://raw.githubusercontent.com/HanjieChen/ChallengeClinicalQA/refs/heads/main/medbullets/medbullets_op5.csv",
+   "file": "medbullets_op5.csv",
+   "sha256": "7da4b1397418b4bd15074066ea6a377ac44a599794a959cd8ebc76937ea597e6",
+   "licence": "none stated (github.com/HanjieChen/ChallengeClinicalQA has no licence file; its README gives no terms)"
+  },
+  "medbullets_alt": {
+   "url": "https://raw.githubusercontent.com/HanjieChen/ChallengeClinicalQA/refs/heads/main/medbullets/medbullets_op4.csv",
+   "file": "medbullets_op4.csv",
+   "sha256": "f35c24c7940fd3fd28594a4081e66bded3718cd98b4491d0f307d34ceb945893"
+  }
+ },
+ "items_by_source": {
+  "medbullets": 298,
+  "medqa": 1273
+ },
+ "medbullets_repeats_left_out": 10,
+ "subgroup_by_source": {
+  "medbullets": 117,
+  "medqa": 242
+ },
+ "lead_in_type_by_source": {
+  "medbullets": {
+   "management": 5,
+   "next_step": 91,
+   "treatment": 21
+  },
+  "medqa": {
+   "management": 16,
+   "next_step": 164,
+   "treatment": 62
+  }
+ },
+ "options_by_source": {
+  "medbullets": 5,
+  "medqa": 4
+ },
+ "options_alt_by_source": {
+  "medbullets": 4,
+  "medqa": 5
+ },
+ "truth_by_source": {
+  "medbullets": {
+   "A": 55,
+   "B": 72,
+   "C": 52,
+   "D": 67,
+   "E": 52
+  },
+  "medqa": {
+   "A": 353,
+   "B": 309,
+   "C": 346,
+   "D": 265,
+   "E": 0
+  }
+ },
+ "medqa_meta_info": {
+  "step1": 679,
+  "step2&3": 594
+ },
+ "items_sha256": "8c5412ee3b1d87f5a88e263054b34564fa88f5dfb1902d768c79f238f6b5cbe7",
+ "n_items": 1571
+}

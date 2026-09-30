@@ -1,0 +1,3472 @@
+{
+ "meta": {
+  "added_after_results": true,
+  "note": "descriptive; outside the fixed family; no model called",
+  "n_wide": 12697,
+  "deaths_wide": 2002,
+  "B": 1000,
+  "seed": 20260922
+ },
+ "calibration_split": {
+  "jev": {
+   "log_loss": 0.37874544531692744,
+   "log_loss_recalibrated": 0.3375758983525881,
+   "calibration_component": 0.04116954696433933,
+   "mean_p": 0.263166102228873,
+   "auroc": 0.8222103515932407,
+   "calibration_slope": 1.1449684029764726,
+   "calibration_intercept": -0.7423342230061297,
+   "eval_log_loss": 0.4023093770164657
+  },
+  "gpt": {
+   "log_loss": 0.32890784450168464,
+   "log_loss_recalibrated": 0.3248857361234903,
+   "calibration_component": 0.004022108378194333,
+   "mean_p": 0.1883956052610853,
+   "auroc": 0.8385146176871282,
+   "calibration_slope": 1.0083694280685087,
+   "calibration_intercept": -0.2817597620706646,
+   "eval_log_loss": 0.35275479159039663
+  },
+  "claude": {
+   "log_loss": 0.32651135125015335,
+   "log_loss_recalibrated": 0.31878456737017064,
+   "calibration_component": 0.007726783879982713,
+   "mean_p": 0.19849893675671418,
+   "auroc": 0.8455342927292436,
+   "calibration_slope": 1.1031367633295877,
+   "calibration_intercept": -0.28237834793394756,
+   "eval_log_loss": 0.35263731197271747
+  },
+  "gemini": {
+   "log_loss": 0.3253520694631379,
+   "log_loss_recalibrated": 0.3221262140139751,
+   "calibration_component": 0.0032258554491627622,
+   "mean_p": 0.18549169095061827,
+   "auroc": 0.8420913822035843,
+   "calibration_slope": 1.009331345369913,
+   "calibration_intercept": -0.25830132346576345,
+   "eval_log_loss": 0.352672149129801
+  },
+  "muse": {
+   "log_loss": 0.36153773638542164,
+   "log_loss_recalibrated": 0.32661973954538687,
+   "calibration_component": 0.03491799684003477,
+   "mean_p": 0.25156477908167285,
+   "auroc": 0.8369246228292513,
+   "calibration_slope": 1.0294432217811376,
+   "calibration_intercept": -0.7780419241439499,
+   "eval_log_loss": 0.3858990363255617
+  },
+  "glm": {
+   "log_loss": 0.33041152787929673,
+   "log_loss_recalibrated": 0.32664117588488717,
+   "calibration_component": 0.00377035199440956,
+   "mean_p": 0.1857428526423565,
+   "auroc": 0.837101748181692,
+   "calibration_slope": 1.0890206701855893,
+   "calibration_intercept": -0.1690693217083951,
+   "eval_log_loss": 0.35802700772635554
+  },
+  "reference_spline_logit": {
+   "log_loss": 0.3113120641395155,
+   "log_loss_recalibrated": 0.31106521597056597,
+   "calibration_component": 0.00024684816894954276,
+   "mean_p": 0.15666730012360167,
+   "auroc": 0.8540778529558334,
+   "calibration_slope": 0.9275771191173869,
+   "calibration_intercept": -0.07817758643347825,
+   "eval_log_loss": 0.34002533984058037
+  },
+  "reference_lightgbm": {
+   "log_loss": 0.3134241807230899,
+   "log_loss_recalibrated": 0.3126249293654457,
+   "calibration_component": 0.0007992513576441929,
+   "mean_p": 0.1525706969479457,
+   "auroc": 0.8513340796650755,
+   "calibration_slope": 0.906003594640677,
+   "calibration_intercept": -0.05869890157426278,
+   "eval_log_loss": 0.3416020716817208
+  },
+  "reference_age_sex": {
+   "log_loss": 0.3714720628299376,
+   "log_loss_recalibrated": 0.37163954401627525,
+   "calibration_component": -0.00016748118633763687,
+   "mean_p": 0.15795872305777506,
+   "auroc": 0.7693094189587877,
+   "calibration_slope": 0.9886582079093408,
+   "calibration_intercept": -0.01774645671341729,
+   "eval_log_loss": 0.39269949408026994
+  },
+  "phenoage_10y": {
+   "log_loss": 0.36401974836691675,
+   "log_loss_recalibrated": 0.3512648591387376,
+   "calibration_component": 0.012754889228179134,
+   "mean_p": 0.12034746028482346,
+   "auroc": 0.8117211446804715,
+   "calibration_slope": 0.7691525837235144,
+   "calibration_intercept": 0.00886467686822247,
+   "eval_log_loss": 0.39090016653257087
+  }
+ },
+ "calibration_split_meta": {
+  "n": 12697,
+  "deaths": 2002,
+  "jev_vs_chatbots_recalibrated": {
+   "jev - gpt": {
+    "diff": 0.012690162229094082,
+    "ci": [
+     0.010059392056551635,
+     0.015256981845168119
+    ],
+    "ci_simultaneous": [
+     0.009343807903344237,
+     0.01603651655484393
+    ],
+    "fraction_of_age_sex_gap": 0.2109402012190277,
+    "noninferiority_margin": 0.006015999869042211,
+    "noninferior": false
+   },
+   "jev - claude": {
+    "diff": 0.018791330982418475,
+    "ci": [
+     0.0156555813309276,
+     0.02201952557401109
+    ],
+    "ci_simultaneous": [
+     0.014977266680423991,
+     0.02260539528441296
+    ],
+    "fraction_of_age_sex_gap": 0.31235590743804637,
+    "noninferiority_margin": 0.006015999869042211,
+    "noninferior": false
+   },
+   "jev - gemini": {
+    "diff": 0.015449684338597669,
+    "ci": [
+     0.012561676190961133,
+     0.018236364558963613
+    ],
+    "ci_simultaneous": [
+     0.011928559631840622,
+     0.018970809045354715
+    ],
+    "fraction_of_age_sex_gap": 0.25680991813348175,
+    "noninferiority_margin": 0.006015999869042211,
+    "noninferior": false
+   },
+   "jev - muse": {
+    "diff": 0.01095615880719536,
+    "ci": [
+     0.008502519472608671,
+     0.013701467916473807
+    ],
+    "ci_simultaneous": [
+     0.007768701459209375,
+     0.014143616155181345
+    ],
+    "fraction_of_age_sex_gap": 0.1821170054137594,
+    "noninferiority_margin": 0.006015999869042211,
+    "noninferior": false
+   },
+   "jev - glm": {
+    "diff": 0.010934722467694613,
+    "ci": [
+     0.007960647010393921,
+     0.013893427846653374
+    ],
+    "ci_simultaneous": [
+     0.007108067771675714,
+     0.014761377163713512
+    ],
+    "fraction_of_age_sex_gap": 0.1817606832733442,
+    "noninferiority_margin": 0.006015999869042211,
+    "noninferior": false
+   }
+  },
+  "jev_vs_age_sex": {
+   "jev - reference_age_sex": {
+    "diff": 0.007273382486988222,
+    "ci": [
+     0.00028516611099206336,
+     0.013541136050469088
+    ],
+    "ci_simultaneous": [
+     0.0006756714937714231,
+     0.013871093480205023
+    ],
+    "fraction_of_age_sex_gap": 0.12090064237561556,
+    "noninferiority_margin": 0.006015999869042211,
+    "noninferior": false
+   }
+  }
+ },
+ "slope": {
+  "jev": {
+   "all_clinical_edits": {
+    "slope": 0.4069686190982474,
+    "ci": [
+     0.28509452172038635,
+     0.535726456905639
+    ],
+    "field_weights": {
+     "age": 0.1891253346602941,
+     "albumin_g_dl": 0.04653505612923739,
+     "creatinine_mg_dl": 0.0661376662239826,
+     "hba1c_pct": 2.245017745898734e-05,
+     "sbp_mmhg": 0.007059978095473818,
+     "smoking": 0.691119514713553
+    }
+   },
+   "without_smoking": {
+    "slope": 0.8860518319302976,
+    "ci": [
+     0.571975726871077,
+     1.0338668618442888
+    ],
+    "field_weights": {
+     "age": 0.612292921273109,
+     "albumin_g_dl": 0.1506571581758625,
+     "creatinine_mg_dl": 0.21412057211270055,
+     "hba1c_pct": 7.268240801346739e-05,
+     "sbp_mmhg": 0.0228566660303146
+    }
+   },
+   "without_smoking_and_age": {
+    "slope": 0.8259604091474715,
+    "ci": [
+     0.22799197256272774,
+     1.4168675708179435
+    ],
+    "field_weights": {
+     "albumin_g_dl": 0.38858500770884435,
+     "creatinine_mg_dl": 0.552274084898851,
+     "hba1c_pct": 0.0001874673226295834,
+     "sbp_mmhg": 0.05895344006967515
+    }
+   },
+   "reported_class_slope": 0.4069686190982474,
+   "reported_class_slope_ci": [
+    0.28509452172038635,
+    0.535726456905639
+   ]
+  },
+  "gpt": {
+   "all_clinical_edits": {
+    "slope": 1.0424602225446067,
+    "ci": [
+     0.8053213543283012,
+     1.2460090305818898
+    ],
+    "field_weights": {
+     "age": 0.18912533466029433,
+     "albumin_g_dl": 0.046535056129237404,
+     "creatinine_mg_dl": 0.06613766622398257,
+     "hba1c_pct": 2.245017745898734e-05,
+     "sbp_mmhg": 0.0070599780954738265,
+     "smoking": 0.691119514713553
+    }
+   },
+   "without_smoking": {
+    "slope": 1.3073776579626109,
+    "ci": [
+     0.9080892154330489,
+     1.4785360483183716
+    ],
+    "field_weights": {
+     "age": 0.6122929212731092,
+     "albumin_g_dl": 0.15065715817586242,
+     "creatinine_mg_dl": 0.21412057211270033,
+     "hba1c_pct": 7.268240801346734e-05,
+     "sbp_mmhg": 0.02285666603031461
+    }
+   },
+   "without_smoking_and_age": {
+    "slope": 1.344084206578702,
+    "ci": [
+     0.5862739618441862,
+     2.1249400204392748
+    ],
+    "field_weights": {
+     "albumin_g_dl": 0.3885850077088444,
+     "creatinine_mg_dl": 0.5522740848988508,
+     "hba1c_pct": 0.0001874673226295834,
+     "sbp_mmhg": 0.05895344006967521
+    }
+   },
+   "reported_class_slope": 1.0424602225446067,
+   "reported_class_slope_ci": [
+    0.8053213543283012,
+    1.2460090305818898
+   ]
+  },
+  "claude": {
+   "all_clinical_edits": {
+    "slope": 1.0012601717562593,
+    "ci": [
+     0.7778797440342163,
+     1.170927288808349
+    ],
+    "field_weights": {
+     "age": 0.18912533466029413,
+     "albumin_g_dl": 0.04653505612923733,
+     "creatinine_mg_dl": 0.06613766622398257,
+     "hba1c_pct": 2.2450177458987318e-05,
+     "sbp_mmhg": 0.007059978095473821,
+     "smoking": 0.6911195147135532
+    }
+   },
+   "without_smoking": {
+    "slope": 1.13905792982433,
+    "ci": [
+     0.7651805545231342,
+     1.2859666325771455
+    ],
+    "field_weights": {
+     "age": 0.6122929212731092,
+     "albumin_g_dl": 0.1506571581758623,
+     "creatinine_mg_dl": 0.21412057211270052,
+     "hba1c_pct": 7.268240801346732e-05,
+     "sbp_mmhg": 0.022856666030314613
+    }
+   },
+   "without_smoking_and_age": {
+    "slope": 1.182103200529335,
+    "ci": [
+     0.4342563044809977,
+     1.9050023514199266
+    ],
+    "field_weights": {
+     "albumin_g_dl": 0.3885850077088441,
+     "creatinine_mg_dl": 0.5522740848988512,
+     "hba1c_pct": 0.00018746732262958334,
+     "sbp_mmhg": 0.05895344006967521
+    }
+   },
+   "reported_class_slope": 1.0012601717562593,
+   "reported_class_slope_ci": [
+    0.7778797440342163,
+    1.170927288808349
+   ]
+  },
+  "gemini": {
+   "all_clinical_edits": {
+    "slope": 1.0368805136211985,
+    "ci": [
+     0.7952287444280673,
+     1.2422964645742718
+    ],
+    "field_weights": {
+     "age": 0.18912533466029427,
+     "albumin_g_dl": 0.04653505612923738,
+     "creatinine_mg_dl": 0.06613766622398257,
+     "hba1c_pct": 2.2450177458987324e-05,
+     "sbp_mmhg": 0.007059978095473815,
+     "smoking": 0.6911195147135529
+    }
+   },
+   "without_smoking": {
+    "slope": 1.2603561250568573,
+    "ci": [
+     0.8715707178356706,
+     1.4256408912955847
+    ],
+    "field_weights": {
+     "age": 0.6122929212731091,
+     "albumin_g_dl": 0.1506571581758624,
+     "creatinine_mg_dl": 0.21412057211270033,
+     "hba1c_pct": 7.26824080134673e-05,
+     "sbp_mmhg": 0.022856666030314575
+    }
+   },
+   "without_smoking_and_age": {
+    "slope": 1.4561416584991276,
+    "ci": [
+     0.6225874077889608,
+     2.330117961717295
+    ],
+    "field_weights": {
+     "albumin_g_dl": 0.38858500770884435,
+     "creatinine_mg_dl": 0.5522740848988508,
+     "hba1c_pct": 0.00018746732262958329,
+     "sbp_mmhg": 0.05895344006967513
+    }
+   },
+   "reported_class_slope": 1.0368805136211985,
+   "reported_class_slope_ci": [
+    0.7952287444280673,
+    1.2422964645742718
+   ]
+  },
+  "muse": {
+   "all_clinical_edits": {
+    "slope": 0.8840736256602175,
+    "ci": [
+     0.6629555871134556,
+     1.0761491997467396
+    ],
+    "field_weights": {
+     "age": 0.1891253346602944,
+     "albumin_g_dl": 0.046535056129237404,
+     "creatinine_mg_dl": 0.06613766622398257,
+     "hba1c_pct": 2.245017745898734e-05,
+     "sbp_mmhg": 0.007059978095473806,
+     "smoking": 0.6911195147135527
+    }
+   },
+   "without_smoking": {
+    "slope": 1.3077057405098453,
+    "ci": [
+     0.9234241454483547,
+     1.4691277085402434
+    ],
+    "field_weights": {
+     "age": 0.6122929212731093,
+     "albumin_g_dl": 0.15065715817586237,
+     "creatinine_mg_dl": 0.2141205721127003,
+     "hba1c_pct": 7.268240801346732e-05,
+     "sbp_mmhg": 0.022856666030314533
+    }
+   },
+   "without_smoking_and_age": {
+    "slope": 1.5316138697895403,
+    "ci": [
+     0.6640632719771288,
+     2.4325796228941003
+    ],
+    "field_weights": {
+     "albumin_g_dl": 0.38858500770884447,
+     "creatinine_mg_dl": 0.552274084898851,
+     "hba1c_pct": 0.00018746732262958342,
+     "sbp_mmhg": 0.058953440069675046
+    }
+   },
+   "reported_class_slope": 0.8840736256602175,
+   "reported_class_slope_ci": [
+    0.6629555871134556,
+    1.0761491997467396
+   ]
+  },
+  "glm": {
+   "all_clinical_edits": {
+    "slope": 1.061573513544319,
+    "ci": [
+     0.8147378157800886,
+     1.2343649418418743
+    ],
+    "field_weights": {
+     "age": 0.1883212167528338,
+     "albumin_g_dl": 0.04630214235466426,
+     "creatinine_mg_dl": 0.06602132584623123,
+     "hba1c_pct": 2.1809504863160315e-05,
+     "sbp_mmhg": 0.006930412840617951,
+     "smoking": 0.6924030927007896
+    }
+   },
+   "without_smoking": {
+    "slope": 1.0214623816231572,
+    "ci": [
+     0.6438223557724916,
+     1.1904309902646273
+    ],
+    "field_weights": {
+     "age": 0.6122337783118447,
+     "albumin_g_dl": 0.1505286342480177,
+     "creatinine_mg_dl": 0.21463585712196365,
+     "hba1c_pct": 7.090287433204078e-05,
+     "sbp_mmhg": 0.02253082744384192
+    }
+   },
+   "without_smoking_and_age": {
+    "slope": 1.0435912213034397,
+    "ci": [
+     0.28050938383522983,
+     1.7400077174962691
+    ],
+    "field_weights": {
+     "albumin_g_dl": 0.388194292923931,
+     "creatinine_mg_dl": 0.5535187056457319,
+     "hba1c_pct": 0.0001828495375986138,
+     "sbp_mmhg": 0.05810415189273859
+    }
+   },
+   "reported_class_slope": 1.061573513544319,
+   "reported_class_slope_ci": [
+    0.8147378157800886,
+    1.2343649418418743
+   ]
+  }
+ },
+ "confirmatory_slope_without_smoking": {
+  "jev": {
+   "all_edits": 0.3653040126704899,
+   "all_edits_ci_simultaneous": [
+    0.19692441669425242,
+    0.5336836086467274
+   ],
+   "without_smoking": 0.8104132993414515,
+   "without_smoking_ci": [
+    0.5915661112011897,
+    0.9571767441954758
+   ],
+   "without_smoking_ci_wald": [
+    0.6262284661207038,
+    0.9945981325621991
+   ],
+   "fields": [
+    "C1a_hba1c_plus1",
+    "C2a_creatinine_x1.5",
+    "C3_albumin_minus0.5",
+    "C4_sbp_plus20",
+    "C6_age_plus5"
+   ]
+  },
+  "gpt": {
+   "all_edits": 0.9924697645958769,
+   "all_edits_ci_simultaneous": [
+    0.6653955609952656,
+    1.3195439681964882
+   ],
+   "without_smoking": 1.1690373729236234,
+   "without_smoking_ci": [
+    0.8822312851323846,
+    1.3204531280620642
+   ],
+   "without_smoking_ci_wald": [
+    0.9492333936295541,
+    1.3888413522176928
+   ],
+   "fields": [
+    "C1a_hba1c_plus1",
+    "C2a_creatinine_x1.5",
+    "C3_albumin_minus0.5",
+    "C4_sbp_plus20",
+    "C6_age_plus5"
+   ]
+  },
+  "claude": {
+   "all_edits": 0.9607630635331001,
+   "all_edits_ci_simultaneous": [
+    0.6546007126974244,
+    1.2669254143687758
+   ],
+   "without_smoking": 1.0151941964161537,
+   "without_smoking_ci": [
+    0.7603838929128406,
+    1.1510566929247512
+   ],
+   "without_smoking_ci_wald": [
+    0.8183917575997068,
+    1.2119966352326006
+   ],
+   "fields": [
+    "C1a_hba1c_plus1",
+    "C2a_creatinine_x1.5",
+    "C3_albumin_minus0.5",
+    "C4_sbp_plus20",
+    "C6_age_plus5"
+   ]
+  },
+  "gemini": {
+   "all_edits": 0.9785888748982343,
+   "all_edits_ci_simultaneous": [
+    0.6641094802004022,
+    1.2930682695960665
+   ],
+   "without_smoking": 1.0859250692226712,
+   "without_smoking_ci": [
+    0.8186218616658587,
+    1.2311422701272288
+   ],
+   "without_smoking_ci_wald": [
+    0.8815304107601627,
+    1.2903197276851797
+   ],
+   "fields": [
+    "C1a_hba1c_plus1",
+    "C2a_creatinine_x1.5",
+    "C3_albumin_minus0.5",
+    "C4_sbp_plus20",
+    "C6_age_plus5"
+   ]
+  },
+  "muse": {
+   "all_edits": 0.8171899455721009,
+   "all_edits_ci_simultaneous": [
+    0.5266784782525283,
+    1.1077014128916733
+   ],
+   "without_smoking": 1.1332409607728813,
+   "without_smoking_ci": [
+    0.858009061217624,
+    1.2869630629460478
+   ],
+   "without_smoking_ci_wald": [
+    0.920679578881574,
+    1.3458023426641885
+   ],
+   "fields": [
+    "C1a_hba1c_plus1",
+    "C2a_creatinine_x1.5",
+    "C3_albumin_minus0.5",
+    "C4_sbp_plus20",
+    "C6_age_plus5"
+   ]
+  },
+  "glm": {
+   "all_edits": 1.0330016512596667,
+   "all_edits_ci_simultaneous": [
+    0.7111114554966937,
+    1.3548918470226397
+   ],
+   "without_smoking": 0.9124644179726893,
+   "without_smoking_ci": [
+    0.6718895113433356,
+    1.0478964464875922
+   ],
+   "without_smoking_ci_wald": [
+    0.7213526463769157,
+    1.103576189568463
+   ],
+   "fields": [
+    "C1a_hba1c_plus1",
+    "C2a_creatinine_x1.5",
+    "C3_albumin_minus0.5",
+    "C4_sbp_plus20",
+    "C6_age_plus5"
+   ]
+  }
+ },
+ "confirmatory_slope_without_smoking_chatbots": {
+  "min": 0.9124644179726893,
+  "max": 1.1690373729236234,
+  "n": 5
+ },
+ "age_equivalents": {
+  "C5_smoking_never_to_current": {
+   "jev": {
+    "excess_in_years_of_age": -7.714794161104705,
+    "ci": [
+     -10.44708074379134,
+     -5.24621546497632
+    ]
+   },
+   "gpt": {
+    "excess_in_years_of_age": -0.7258302302322351,
+    "ci": [
+     -3.4281072432338955,
+     1.640796485538629
+    ]
+   },
+   "claude": {
+    "excess_in_years_of_age": -0.5765970777541609,
+    "ci": [
+     -3.2237280664439316,
+     1.8421040122471546
+    ]
+   },
+   "gemini": {
+    "excess_in_years_of_age": -0.6021312435872634,
+    "ci": [
+     -3.2309008397400074,
+     1.8580548211146335
+    ]
+   },
+   "muse": {
+    "excess_in_years_of_age": -2.9177001614341087,
+    "ci": [
+     -5.591008247030092,
+     -0.5609936661675704
+    ]
+   },
+   "glm": {
+    "excess_in_years_of_age": 0.7584103699645905,
+    "ci": [
+     -1.9317612022247281,
+     3.240630455654319
+    ]
+   }
+  },
+  "L5a_sex_male_to_female": {
+   "jev": {
+    "excess_in_years_of_age": 5.55774669058454,
+    "ci": [
+     2.7968823648038086,
+     8.364413050857952
+    ]
+   },
+   "gpt": {
+    "excess_in_years_of_age": 0.7765994397289632,
+    "ci": [
+     -1.8383718176602062,
+     3.4629371484855
+    ]
+   },
+   "claude": {
+    "excess_in_years_of_age": 2.1571251103124247,
+    "ci": [
+     -0.4793859843784291,
+     4.8879692247511235
+    ]
+   },
+   "gemini": {
+    "excess_in_years_of_age": 0.11095120420516107,
+    "ci": [
+     -2.494982934332948,
+     2.815295523622323
+    ]
+   },
+   "muse": {
+    "excess_in_years_of_age": 1.3976002838791814,
+    "ci": [
+     -1.177231773154906,
+     4.073820091966669
+    ]
+   },
+   "glm": {
+    "excess_in_years_of_age": 1.4826788357494698,
+    "ci": [
+     -1.3410594250842738,
+     4.167617272459266
+    ]
+   }
+  },
+  "C6_age_plus5": {
+   "jev": {
+    "excess_in_years_of_age": -0.37948982507277407,
+    "ci": [
+     -1.0488930274958954,
+     0.31791941876295926
+    ]
+   },
+   "gpt": {
+    "excess_in_years_of_age": 1.4206743974124962,
+    "ci": [
+     0.5336178996811917,
+     2.379730112843443
+    ]
+   },
+   "claude": {
+    "excess_in_years_of_age": 0.5590071968980839,
+    "ci": [
+     -0.21198472827186432,
+     1.3848849992992478
+    ]
+   },
+   "gemini": {
+    "excess_in_years_of_age": 0.681918508717114,
+    "ci": [
+     -0.09634726288434899,
+     1.5221131678414117
+    ]
+   },
+   "muse": {
+    "excess_in_years_of_age": 0.8296297124569386,
+    "ci": [
+     0.030628988254227905,
+     1.710606220279684
+    ]
+   },
+   "glm": {
+    "excess_in_years_of_age": 0.037099078115159945,
+    "ci": [
+     -0.7176566556098464,
+     0.804912588062782
+    ]
+   }
+  }
+ },
+ "smoking_gradient": {
+  "n_current": 2675,
+  "n_never": 5943,
+  "deaths_current": 547,
+  "deaths_never": 637,
+  "observed_risk_current": 0.20448598130841122,
+  "observed_risk_never": 0.1071849234393404,
+  "systems": {
+   "jev": {
+    "log_odds_gap": 0.09234965472856338,
+    "log_odds_gap_ci": [
+     0.038733941690222234,
+     0.14177062771939947
+    ],
+    "mean_predicted_current": 0.24013084112149533,
+    "mean_predicted_never": 0.23834931852599697
+   },
+   "gpt": {
+    "log_odds_gap": 0.6036569797607039,
+    "log_odds_gap_ci": [
+     0.544626948850603,
+     0.6632250200063854
+    ],
+    "mean_predicted_current": 0.19873271028037384,
+    "mean_predicted_never": 0.14959835100117785
+   },
+   "claude": {
+    "log_odds_gap": 0.716652034157923,
+    "log_odds_gap_ci": [
+     0.6599503213557429,
+     0.7759420037649166
+    ],
+    "mean_predicted_current": 0.2252381308411215,
+    "mean_predicted_never": 0.15558371193000167
+   },
+   "gemini": {
+    "log_odds_gap": 0.6515652663390465,
+    "log_odds_gap_ci": [
+     0.5925371690578349,
+     0.7097633946494739
+    ],
+    "mean_predicted_current": 0.2037996261682243,
+    "mean_predicted_never": 0.1429892310281003
+   },
+   "muse": {
+    "log_odds_gap": 0.486299079215911,
+    "log_odds_gap_ci": [
+     0.4259475175553049,
+     0.542891894381216
+    ],
+    "mean_predicted_current": 0.25684971962616826,
+    "mean_predicted_never": 0.20834225138818777
+   },
+   "glm": {
+    "log_odds_gap": 0.7214585584547768,
+    "log_odds_gap_ci": [
+     0.6681589653332412,
+     0.7744458437953619
+    ],
+    "mean_predicted_current": 0.20581121495327107,
+    "mean_predicted_never": 0.1470116102978294
+   },
+   "reference_spline_logit": {
+    "log_odds_gap": 1.0966572521294002,
+    "log_odds_gap_ci": [
+     1.0253672853372027,
+     1.1635556395333253
+    ],
+    "mean_predicted_current": 0.20431306415433503,
+    "mean_predicted_never": 0.10677097122229516
+   }
+  }
+ },
+ "subgroups": [
+  {
+   "group": "age 40-49",
+   "n": 3771,
+   "deaths": 158,
+   "observed_risk": 0.041898700609917794,
+   "systems": {
+    "jev": {
+     "log_loss": 0.17925584669740446,
+     "mean_predicted": 0.09891540705383191,
+     "auroc": 0.7559980310201908
+    },
+    "gpt": {
+     "log_loss": 0.1468624799134975,
+     "mean_predicted": 0.04203235216123045,
+     "auroc": 0.7915859396623305,
+     "jev_minus_system": 0.032393366783906974,
+     "jev_minus_system_ci": [
+      0.02608527488996753,
+      0.0383452900904394
+     ]
+    },
+    "claude": {
+     "log_loss": 0.1450548803520265,
+     "mean_predicted": 0.054266507557677014,
+     "auroc": 0.804668093768284,
+     "jev_minus_system": 0.03420096634537798,
+     "jev_minus_system_ci": [
+      0.029237223271774842,
+      0.03901541285581712
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.14492212087178838,
+     "mean_predicted": 0.04708088040307611,
+     "auroc": 0.8011102663728379,
+     "jev_minus_system": 0.03433372582561612,
+     "jev_minus_system_ci": [
+      0.02895465434121465,
+      0.03958275846644731
+     ]
+    },
+    "muse": {
+     "log_loss": 0.1535081795964566,
+     "mean_predicted": 0.06776239724211085,
+     "auroc": 0.7943300738892957,
+     "jev_minus_system": 0.02574766710094787,
+     "jev_minus_system_ci": [
+      0.021775004050489995,
+      0.029606503665514393
+     ]
+    },
+    "glm": {
+     "log_loss": 0.14892799737512205,
+     "mean_predicted": 0.05425775656324582,
+     "auroc": 0.795300549702726,
+     "jev_minus_system": 0.030327849322282444,
+     "jev_minus_system_ci": [
+      0.025514350450572057,
+      0.03541394713757449
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.14076324301937337,
+     "mean_predicted": 0.04004689801002412,
+     "auroc": 0.8061973814670651
+    },
+    "reference_age_sex": {
+     "log_loss": 0.17038152033703693,
+     "mean_predicted": 0.0370496633945018,
+     "auroc": 0.623390569217348
+    }
+   },
+   "jev_minus_mean_chatbot": 0.03140071507562628,
+   "jev_minus_mean_chatbot_ci": [
+    0.0264584024404833,
+    0.03634541505360431
+   ]
+  },
+  {
+   "group": "age 50-59",
+   "n": 3044,
+   "deaths": 261,
+   "observed_risk": 0.08574244415243101,
+   "systems": {
+    "jev": {
+     "log_loss": 0.28941140391822784,
+     "mean_predicted": 0.1659198423127464,
+     "auroc": 0.7407040281512135
+    },
+    "gpt": {
+     "log_loss": 0.25021373871319136,
+     "mean_predicted": 0.09742477003942182,
+     "auroc": 0.7835448666851148,
+     "jev_minus_system": 0.03919766520503649,
+     "jev_minus_system_ci": [
+      0.03165874514965596,
+      0.04602213719832178
+     ]
+    },
+    "claude": {
+     "log_loss": 0.2480743462446683,
+     "mean_predicted": 0.11105190538764784,
+     "auroc": 0.7869529422616516,
+     "jev_minus_system": 0.04133705767355954,
+     "jev_minus_system_ci": [
+      0.03509126470382205,
+      0.0472971441788955
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.2493522157040802,
+     "mean_predicted": 0.10266327201051248,
+     "auroc": 0.7802744633193044,
+     "jev_minus_system": 0.04005918821414764,
+     "jev_minus_system_ci": [
+      0.033103961199276735,
+      0.0463226637820036
+     ]
+    },
+    "muse": {
+     "log_loss": 0.27298345587441186,
+     "mean_predicted": 0.14987647831800263,
+     "auroc": 0.775429089862782,
+     "jev_minus_system": 0.016427948043815976,
+     "jev_minus_system_ci": [
+      0.011414844936668058,
+      0.02116720054615953
+     ]
+    },
+    "glm": {
+     "log_loss": 0.2508122345219823,
+     "mean_predicted": 0.10265275952693825,
+     "auroc": 0.7759928575657075,
+     "jev_minus_system": 0.038599169396245504,
+     "jev_minus_system_ci": [
+      0.0313931877202992,
+      0.045418462431973304
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.23696347492873704,
+     "mean_predicted": 0.08638960656505777,
+     "auroc": 0.8037592773861004
+    },
+    "reference_age_sex": {
+     "log_loss": 0.28790641307145015,
+     "mean_predicted": 0.08677142685198946,
+     "auroc": 0.5980921385037509
+    }
+   },
+   "jev_minus_mean_chatbot": 0.03512420570656103,
+   "jev_minus_mean_chatbot_ci": [
+    0.028945561213811227,
+    0.040691308669785826
+   ]
+  },
+  {
+   "group": "age 60-69",
+   "n": 3384,
+   "deaths": 628,
+   "observed_risk": 0.18557919621749408,
+   "systems": {
+    "jev": {
+     "log_loss": 0.47451136757863044,
+     "mean_predicted": 0.32117316784869976,
+     "auroc": 0.7258884495206752
+    },
+    "gpt": {
+     "log_loss": 0.41311405919442323,
+     "mean_predicted": 0.23042523640661938,
+     "auroc": 0.7619860085233838,
+     "jev_minus_system": 0.061397308384207226,
+     "jev_minus_system_ci": [
+      0.053990425538062804,
+      0.06915922750955239
+     ]
+    },
+    "claude": {
+     "log_loss": 0.4112966939446965,
+     "mean_predicted": 0.24155437352245865,
+     "auroc": 0.7710409482957854,
+     "jev_minus_system": 0.0632146736339339,
+     "jev_minus_system_ci": [
+      0.056073508496687324,
+      0.0707305640000949
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.40905787718594344,
+     "mean_predicted": 0.22146660756501182,
+     "auroc": 0.7616543638431031,
+     "jev_minus_system": 0.06545349039268702,
+     "jev_minus_system_ci": [
+      0.0572500723384834,
+      0.07386848063217606
+     ]
+    },
+    "muse": {
+     "log_loss": 0.45968831791803566,
+     "mean_predicted": 0.3172730496453901,
+     "auroc": 0.7585912727760161,
+     "jev_minus_system": 0.014823049660594702,
+     "jev_minus_system_ci": [
+      0.008710745245641038,
+      0.020193428470711
+     ]
+    },
+    "glm": {
+     "log_loss": 0.4178220993898922,
+     "mean_predicted": 0.2282526595744681,
+     "auroc": 0.7543743586662106,
+     "jev_minus_system": 0.056689268188738186,
+     "jev_minus_system_ci": [
+      0.04862155353827365,
+      0.06484368958155601
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.3903070521035626,
+     "mean_predicted": 0.18376433342445006,
+     "auroc": 0.784272646593882
+    },
+    "reference_age_sex": {
+     "log_loss": 0.47332191583340577,
+     "mean_predicted": 0.1945497312813296,
+     "auroc": 0.5878173735590212
+    }
+   },
+   "jev_minus_mean_chatbot": 0.05231555805203221,
+   "jev_minus_mean_chatbot_ci": [
+    0.045887397683591645,
+    0.059097807402988735
+   ]
+  },
+  {
+   "group": "age 70-79",
+   "n": 2498,
+   "deaths": 955,
+   "observed_risk": 0.3823058446757406,
+   "systems": {
+    "jev": {
+     "log_loss": 0.6590241552761986,
+     "mean_predicted": 0.5510408326661329,
+     "auroc": 0.7189896611279449
+    },
+    "gpt": {
+     "log_loss": 0.5855467946065686,
+     "mean_predicted": 0.46326421136909524,
+     "auroc": 0.7493700651141959,
+     "jev_minus_system": 0.07347736066963018,
+     "jev_minus_system_ci": [
+      0.06331097279318039,
+      0.08362069240343854
+     ]
+    },
+    "claude": {
+     "log_loss": 0.5811634710720903,
+     "mean_predicted": 0.4644675740592474,
+     "auroc": 0.7572557030059752,
+     "jev_minus_system": 0.07786068420410833,
+     "jev_minus_system_ci": [
+      0.06695855116144116,
+      0.08863271949061649
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.5769471205626484,
+     "mean_predicted": 0.4466357085668535,
+     "auroc": 0.7523485560528379,
+     "jev_minus_system": 0.08207703471355034,
+     "jev_minus_system_ci": [
+      0.07122647814365655,
+      0.0930092456803677
+     ]
+    },
+    "muse": {
+     "log_loss": 0.6505277766657797,
+     "mean_predicted": 0.5639351481184948,
+     "auroc": 0.7457937043835867,
+     "jev_minus_system": 0.008496378610418931,
+     "jev_minus_system_ci": [
+      0.0008274319712738383,
+      0.016234178762302123
+     ]
+    },
+    "glm": {
+     "log_loss": 0.5829644776467318,
+     "mean_predicted": 0.4278975180144115,
+     "auroc": 0.7383926056875671,
+     "jev_minus_system": 0.07605967762946686,
+     "jev_minus_system_ci": [
+      0.0631372615742514,
+      0.08939930058798096
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.5523599707573418,
+     "mean_predicted": 0.38153943341901436,
+     "auroc": 0.7726581453821175
+    },
+    "reference_age_sex": {
+     "log_loss": 0.6388965508370744,
+     "mean_predicted": 0.37766177422355013,
+     "auroc": 0.6370309419672698
+    }
+   },
+   "jev_minus_mean_chatbot": 0.06359422716543492,
+   "jev_minus_mean_chatbot_ci": [
+    0.05428717966956965,
+    0.07270308489372444
+   ]
+  },
+  {
+   "group": "sex male",
+   "n": 6375,
+   "deaths": 1225,
+   "observed_risk": 0.19215686274509805,
+   "systems": {
+    "jev": {
+     "log_loss": 0.4013978842160775,
+     "mean_predicted": 0.27637333333333336,
+     "auroc": 0.8223919952446997
+    },
+    "gpt": {
+     "log_loss": 0.36741959256713547,
+     "mean_predicted": 0.22245850980392157,
+     "auroc": 0.8356863086982366,
+     "jev_minus_system": 0.033978291648942054,
+     "jev_minus_system_ci": [
+      0.02917021827089938,
+      0.038569013174733525
+     ]
+    },
+    "claude": {
+     "log_loss": 0.3614628347540297,
+     "mean_predicted": 0.22929458823529414,
+     "auroc": 0.8445922726372102,
+     "jev_minus_system": 0.039935049462047824,
+     "jev_minus_system_ci": [
+      0.03536439890426462,
+      0.04459727520059489
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.36521002677221004,
+     "mean_predicted": 0.22310823529411766,
+     "auroc": 0.8383667128987518,
+     "jev_minus_system": 0.03618785744386749,
+     "jev_minus_system_ci": [
+      0.03149812204273745,
+      0.040884479722203326
+     ]
+    },
+    "muse": {
+     "log_loss": 0.40045843886132,
+     "mean_predicted": 0.28904156862745095,
+     "auroc": 0.8335363582326134,
+     "jev_minus_system": 0.0009394453547575484,
+     "jev_minus_system_ci": [
+      -0.0030108220813827684,
+      0.00519168949525279
+     ]
+    },
+    "glm": {
+     "log_loss": 0.36787202037219113,
+     "mean_predicted": 0.21413662745098042,
+     "auroc": 0.834629680998613,
+     "jev_minus_system": 0.033525863843886373,
+     "jev_minus_system_ci": [
+      0.028193576543601495,
+      0.038547546924642455
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.3502733047690472,
+     "mean_predicted": 0.19224123070301719,
+     "auroc": 0.8502828611056072
+    },
+    "reference_age_sex": {
+     "log_loss": 0.4188304374643975,
+     "mean_predicted": 0.19359203227387636,
+     "auroc": 0.7629552605508222
+    }
+   },
+   "jev_minus_mean_chatbot": 0.028913301550700255,
+   "jev_minus_mean_chatbot_ci": [
+    0.024760781820324176,
+    0.03281656353096796
+   ]
+  },
+  {
+   "group": "sex female",
+   "n": 6322,
+   "deaths": 777,
+   "observed_risk": 0.12290414425814615,
+   "systems": {
+    "jev": {
+     "log_loss": 0.35590310144124226,
+     "mean_predicted": 0.24984814931983548,
+     "auroc": 0.8194425392802309
+    },
+    "gpt": {
+     "log_loss": 0.2900732361629866,
+     "mean_predicted": 0.1540469788041759,
+     "auroc": 0.8327932337851185,
+     "jev_minus_system": 0.06582986527825564,
+     "jev_minus_system_ci": [
+      0.059802824137539935,
+      0.07212134307669264
+     ]
+    },
+    "claude": {
+     "log_loss": 0.29126685467672536,
+     "mean_predicted": 0.1674451123062322,
+     "auroc": 0.8375944797044887,
+     "jev_minus_system": 0.06463624676451686,
+     "jev_minus_system_ci": [
+      0.0591069941501997,
+      0.07022836471807122
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.2851599660393267,
+     "mean_predicted": 0.1475597912053148,
+     "auroc": 0.8369332233173531,
+     "jev_minus_system": 0.07074313540191557,
+     "jev_minus_system_ci": [
+      0.06431109157340303,
+      0.07781928410632681
+     ]
+    },
+    "muse": {
+     "log_loss": 0.3222907451984789,
+     "mean_predicted": 0.21377380575767163,
+     "auroc": 0.831882352531586,
+     "jev_minus_system": 0.03361235624276334,
+     "jev_minus_system_ci": [
+      0.030042605981191392,
+      0.03761657377883485
+     ]
+    },
+    "glm": {
+     "log_loss": 0.2926369882332667,
+     "mean_predicted": 0.15711088263207845,
+     "auroc": 0.8309408339164877,
+     "jev_minus_system": 0.06326611320797548,
+     "jev_minus_system_ci": [
+      0.057074946526027126,
+      0.06967816875150105
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.27202419495045116,
+     "mean_predicted": 0.1207518155705693,
+     "auroc": 0.8493660735319887
+    },
+    "reference_age_sex": {
+     "log_loss": 0.3237166629098677,
+     "mean_predicted": 0.12202668473878646,
+     "auroc": 0.7613764995189701
+    }
+   },
+   "jev_minus_mean_chatbot": 0.05961754337908538,
+   "jev_minus_mean_chatbot_ci": [
+    0.05451580813220906,
+    0.0651934906792078
+   ]
+  },
+  {
+   "group": "race Mexican American",
+   "n": 2601,
+   "deaths": 328,
+   "observed_risk": 0.1261053440984237,
+   "systems": {
+    "jev": {
+     "log_loss": 0.34690439864352557,
+     "mean_predicted": 0.24027681660899655,
+     "auroc": 0.8229266146598992
+    },
+    "gpt": {
+     "log_loss": 0.2995501477798892,
+     "mean_predicted": 0.16782737408688966,
+     "auroc": 0.8283796798042772,
+     "jev_minus_system": 0.04735425086363638,
+     "jev_minus_system_ci": [
+      0.03889043790433079,
+      0.05590607757074048
+     ]
+    },
+    "claude": {
+     "log_loss": 0.2960990470375678,
+     "mean_predicted": 0.17312379853902346,
+     "auroc": 0.8360016310237893,
+     "jev_minus_system": 0.050805351605957824,
+     "jev_minus_system_ci": [
+      0.04315117308483036,
+      0.05843894441478499
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.29401131483713067,
+     "mean_predicted": 0.16524951941560936,
+     "auroc": 0.83501577371691,
+     "jev_minus_system": 0.052893083806394924,
+     "jev_minus_system_ci": [
+      0.044748836514308825,
+      0.06184601152326715
+     ]
+    },
+    "muse": {
+     "log_loss": 0.33927510814101913,
+     "mean_predicted": 0.23401076509034988,
+     "auroc": 0.8307551264579958,
+     "jev_minus_system": 0.0076292905025064596,
+     "jev_minus_system_ci": [
+      0.002108942692896272,
+      0.013361082441864137
+     ]
+    },
+    "glm": {
+     "log_loss": 0.30809859249510646,
+     "mean_predicted": 0.17941714725105729,
+     "auroc": 0.8242987670747803,
+     "jev_minus_system": 0.038805806148419095,
+     "jev_minus_system_ci": [
+      0.03160932293944217,
+      0.04677135035245524
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.28807164268400276,
+     "mean_predicted": 0.12647791531447802,
+     "auroc": 0.8324337664846071
+    },
+    "reference_age_sex": {
+     "log_loss": 0.32891999722535203,
+     "mean_predicted": 0.1455087305692642,
+     "auroc": 0.7654806423229211
+    }
+   },
+   "jev_minus_mean_chatbot": 0.03949755658538294,
+   "jev_minus_mean_chatbot_ci": [
+    0.03276747490631896,
+    0.0466299693330757
+   ]
+  },
+  {
+   "group": "race Non-Hispanic Black",
+   "n": 2565,
+   "deaths": 461,
+   "observed_risk": 0.1797270955165692,
+   "systems": {
+    "jev": {
+     "log_loss": 0.39800897449968603,
+     "mean_predicted": 0.25904483430799224,
+     "auroc": 0.8035340184587977
+    },
+    "gpt": {
+     "log_loss": 0.3650728257752415,
+     "mean_predicted": 0.20847563352826512,
+     "auroc": 0.8219288948640333,
+     "jev_minus_system": 0.03293614872444458,
+     "jev_minus_system_ci": [
+      0.025063429649692145,
+      0.04110342805100465
+     ]
+    },
+    "claude": {
+     "log_loss": 0.36234962517606206,
+     "mean_predicted": 0.22647329434697855,
+     "auroc": 0.8310830315977005,
+     "jev_minus_system": 0.035659349323624044,
+     "jev_minus_system_ci": [
+      0.02903316364138515,
+      0.0422653765579323
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.3600684043121767,
+     "mean_predicted": 0.20774230019493178,
+     "auroc": 0.8276328324109434,
+     "jev_minus_system": 0.03794057018750934,
+     "jev_minus_system_ci": [
+      0.030261582183499034,
+      0.045447551684751265
+     ]
+    },
+    "muse": {
+     "log_loss": 0.3940742037623457,
+     "mean_predicted": 0.27031461988304095,
+     "auroc": 0.8197019621751358,
+     "jev_minus_system": 0.003934770737340376,
+     "jev_minus_system_ci": [
+      -0.0038688538918304725,
+      0.01104117386744337
+     ]
+    },
+    "glm": {
+     "log_loss": 0.36386988299458073,
+     "mean_predicted": 0.20466627680311894,
+     "auroc": 0.8233171193388484,
+     "jev_minus_system": 0.034139091505105315,
+     "jev_minus_system_ci": [
+      0.025918084694001708,
+      0.04154837983562601
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.3432554677141556,
+     "mean_predicted": 0.17875198037564796,
+     "auroc": 0.8450271355872092
+    },
+    "reference_age_sex": {
+     "log_loss": 0.4172422752831474,
+     "mean_predicted": 0.14375592536318826,
+     "auroc": 0.7480529803782485
+    }
+   },
+   "jev_minus_mean_chatbot": 0.028921986095604726,
+   "jev_minus_mean_chatbot_ci": [
+    0.022482623586860612,
+    0.035120543994843836
+   ]
+  },
+  {
+   "group": "race Non-Hispanic White",
+   "n": 6392,
+   "deaths": 1082,
+   "observed_risk": 0.1692740926157697,
+   "systems": {
+    "jev": {
+     "log_loss": 0.3891697024834247,
+     "mean_predicted": 0.2806038798498122,
+     "auroc": 0.8331574541112747
+    },
+    "gpt": {
+     "log_loss": 0.3333772121992668,
+     "mean_predicted": 0.19583275969962452,
+     "auroc": 0.8491485391842546,
+     "jev_minus_system": 0.05579249028415787,
+     "jev_minus_system_ci": [
+      0.05001477111963159,
+      0.061265473534174664
+     ]
+    },
+    "claude": {
+     "log_loss": 0.3321511393452601,
+     "mean_predicted": 0.20553613892365455,
+     "auroc": 0.8539043272728539,
+     "jev_minus_system": 0.05701856313816463,
+     "jev_minus_system_ci": [
+      0.05154686165242765,
+      0.06232964610172434
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.3307963861675527,
+     "mean_predicted": 0.19158901752190238,
+     "auroc": 0.8512174044717358,
+     "jev_minus_system": 0.05837331631587199,
+     "jev_minus_system_ci": [
+      0.05247109475549072,
+      0.06420543504304074
+     ]
+    },
+    "muse": {
+     "log_loss": 0.36420714129853776,
+     "mean_predicted": 0.2586586357947434,
+     "auroc": 0.8465131356802462,
+     "jev_minus_system": 0.024962561184886906,
+     "jev_minus_system_ci": [
+      0.021459157002733553,
+      0.028244244618879717
+     ]
+    },
+    "glm": {
+     "log_loss": 0.3331732541739138,
+     "mean_predicted": 0.1866900813516896,
+     "auroc": 0.8488966864041272,
+     "jev_minus_system": 0.055996448309510886,
+     "jev_minus_system_ci": [
+      0.04950607047082378,
+      0.06263999570448522
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.3134624020787702,
+     "mean_predicted": 0.1673681036374742,
+     "auroc": 0.8658303483470312
+    },
+    "reference_age_sex": {
+     "log_loss": 0.3820492097898702,
+     "mean_predicted": 0.17263304208203525,
+     "auroc": 0.7787635194641994
+    }
+   },
+   "jev_minus_mean_chatbot": 0.05042867584651845,
+   "jev_minus_mean_chatbot_ci": [
+    0.04549394193984749,
+    0.055395516397469265
+   ]
+  },
+  {
+   "group": "race Other Hispanic",
+   "n": 705,
+   "deaths": 83,
+   "observed_risk": 0.11773049645390071,
+   "systems": {
+    "jev": {
+     "log_loss": 0.35441822155342256,
+     "mean_predicted": 0.22645390070921986,
+     "auroc": 0.7818637895633983
+    },
+    "gpt": {
+     "log_loss": 0.29521627502092185,
+     "mean_predicted": 0.147954609929078,
+     "auroc": 0.8085654515166777,
+     "jev_minus_system": 0.05920194653250065,
+     "jev_minus_system_ci": [
+      0.041650608972787335,
+      0.0739714145488541
+     ]
+    },
+    "claude": {
+     "log_loss": 0.29373561351192917,
+     "mean_predicted": 0.15315602836879433,
+     "auroc": 0.8133208073451361,
+     "jev_minus_system": 0.060682608041493405,
+     "jev_minus_system_ci": [
+      0.04483383948687164,
+      0.07495899726465687
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.29460474209487825,
+     "mean_predicted": 0.14465248226950353,
+     "auroc": 0.8073451361716963,
+     "jev_minus_system": 0.0598134794585443,
+     "jev_minus_system_ci": [
+      0.0420687956455018,
+      0.07617726577624706
+     ]
+    },
+    "muse": {
+     "log_loss": 0.32705415871503224,
+     "mean_predicted": 0.21070496453900708,
+     "auroc": 0.8151609654050284,
+     "jev_minus_system": 0.02736406283839034,
+     "jev_minus_system_ci": [
+      0.017056760761955937,
+      0.03756360755941263
+     ]
+    },
+    "glm": {
+     "log_loss": 0.2996434831569575,
+     "mean_predicted": 0.1541744680851064,
+     "auroc": 0.7978828497268818,
+     "jev_minus_system": 0.054774738396465024,
+     "jev_minus_system_ci": [
+      0.03799682604973019,
+      0.070811271347904
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.29788459030906544,
+     "mean_predicted": 0.1161717642235788,
+     "auroc": 0.8101344283887963
+    },
+    "reference_age_sex": {
+     "log_loss": 0.30696787272045345,
+     "mean_predicted": 0.13903525539083075,
+     "auroc": 0.7876457598884282
+    }
+   },
+   "jev_minus_mean_chatbot": 0.05236736705347874,
+   "jev_minus_mean_chatbot_ci": [
+    0.03849828073201807,
+    0.06498058897643288
+   ]
+  },
+  {
+   "group": "race Other race including multiracial",
+   "n": 434,
+   "deaths": 48,
+   "observed_risk": 0.11059907834101383,
+   "systems": {
+    "jev": {
+     "log_loss": 0.3417096181020948,
+     "mean_predicted": 0.22751152073732722,
+     "auroc": 0.7834358808290155
+    },
+    "gpt": {
+     "log_loss": 0.2800151034134565,
+     "mean_predicted": 0.14914285714285716,
+     "auroc": 0.8016245682210709,
+     "jev_minus_system": 0.06169451468863832,
+     "jev_minus_system_ci": [
+      0.04066764085585601,
+      0.08113288100953826
+     ]
+    },
+    "claude": {
+     "log_loss": 0.2671440706937139,
+     "mean_predicted": 0.15525345622119816,
+     "auroc": 0.827612262521589,
+     "jev_minus_system": 0.07456554740838095,
+     "jev_minus_system_ci": [
+      0.05347315708628187,
+      0.09403485703549236
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.2777638144273406,
+     "mean_predicted": 0.15183870967741936,
+     "auroc": 0.809855354058722,
+     "jev_minus_system": 0.06394580367475422,
+     "jev_minus_system_ci": [
+      0.04140625467434575,
+      0.08405775268346113
+     ]
+    },
+    "muse": {
+     "log_loss": 0.3193652554980174,
+     "mean_predicted": 0.2078479262672811,
+     "auroc": 0.799411701208981,
+     "jev_minus_system": 0.022344362604077378,
+     "jev_minus_system_ci": [
+      0.008186420131345578,
+      0.03471583461388883
+     ]
+    },
+    "glm": {
+     "log_loss": 0.27569673782775855,
+     "mean_predicted": 0.14914055299539172,
+     "auroc": 0.8171955958549223,
+     "jev_minus_system": 0.06601288027433631,
+     "jev_minus_system_ci": [
+      0.04534328846049398,
+      0.08569931704455354
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.25194550879294325,
+     "mean_predicted": 0.11461964088484114,
+     "auroc": 0.8479598445595855
+    },
+    "reference_age_sex": {
+     "log_loss": 0.3049827963652847,
+     "mean_predicted": 0.13112785681666062,
+     "auroc": 0.7522938255613125
+    }
+   },
+   "jev_minus_mean_chatbot": 0.05771262173003744,
+   "jev_minus_mean_chatbot_ci": [
+    0.03919520532436926,
+    0.0740789344928063
+   ]
+  },
+  {
+   "group": "income below poverty line",
+   "n": 1942,
+   "deaths": 426,
+   "observed_risk": 0.21936148300720906,
+   "systems": {
+    "jev": {
+     "log_loss": 0.46061413326720624,
+     "mean_predicted": 0.32100926879505665,
+     "auroc": 0.7896250634855748
+    },
+    "gpt": {
+     "log_loss": 0.4187739019871977,
+     "mean_predicted": 0.22963233779608652,
+     "auroc": 0.8036050515936426,
+     "jev_minus_system": 0.04184023128000861,
+     "jev_minus_system_ci": [
+      0.029445022721558585,
+      0.05463808664308811
+     ]
+    },
+    "claude": {
+     "log_loss": 0.41147770311465814,
+     "mean_predicted": 0.24882801235839344,
+     "auroc": 0.813313699257993,
+     "jev_minus_system": 0.04913643015254819,
+     "jev_minus_system_ci": [
+      0.0385938003927463,
+      0.05972438003060401
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.41431436184321596,
+     "mean_predicted": 0.2322590113285273,
+     "auroc": 0.8107765989074288,
+     "jev_minus_system": 0.046299771423990305,
+     "jev_minus_system_ci": [
+      0.03423395343733744,
+      0.058358681478841115
+     ]
+    },
+    "muse": {
+     "log_loss": 0.44641499848474825,
+     "mean_predicted": 0.307143666323378,
+     "auroc": 0.8013373778289792,
+     "jev_minus_system": 0.014199134782458055,
+     "jev_minus_system_ci": [
+      0.006043018726500293,
+      0.02244246153267169
+     ]
+    },
+    "glm": {
+     "log_loss": 0.4229189650728004,
+     "mean_predicted": 0.23837435633367662,
+     "auroc": 0.797700893133648,
+     "jev_minus_system": 0.03769516819440592,
+     "jev_minus_system_ci": [
+      0.025970738782823136,
+      0.04899629277695237
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.4086071711862647,
+     "mean_predicted": 0.21944639522998932,
+     "auroc": 0.8197830341769173
+    },
+    "reference_age_sex": {
+     "log_loss": 0.4785195721430916,
+     "mean_predicted": 0.1561429855743065,
+     "auroc": 0.7439866773198558
+    }
+   },
+   "jev_minus_mean_chatbot": 0.037834147166682215,
+   "jev_minus_mean_chatbot_ci": [
+    0.027739738374688853,
+    0.04787325666838648
+   ]
+  },
+  {
+   "group": "income at or above poverty line",
+   "n": 9747,
+   "deaths": 1413,
+   "observed_risk": 0.14496768236380425,
+   "systems": {
+    "jev": {
+     "log_loss": 0.3586379956722818,
+     "mean_predicted": 0.24864471119318765,
+     "auroc": 0.8292755263230747
+    },
+    "gpt": {
+     "log_loss": 0.3086576906703674,
+     "mean_predicted": 0.1782624397250436,
+     "auroc": 0.8471929888920988,
+     "jev_minus_system": 0.049980305001914326,
+     "jev_minus_system_ci": [
+      0.045623855655158224,
+      0.05386919048645616
+     ]
+    },
+    "claude": {
+     "log_loss": 0.3075086888783843,
+     "mean_predicted": 0.18689094080229818,
+     "auroc": 0.8524765577140241,
+     "jev_minus_system": 0.05112930679389745,
+     "jev_minus_system_ci": [
+      0.047057066305940747,
+      0.0546740689159164
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.3054143101786004,
+     "mean_predicted": 0.17479634759413154,
+     "auroc": 0.8495846022339445,
+     "jev_minus_system": 0.05322368549368136,
+     "jev_minus_system_ci": [
+      0.0487911751058223,
+      0.05742344711541131
+     ]
+    },
+    "muse": {
+     "log_loss": 0.341590083815682,
+     "mean_predicted": 0.23822499230532473,
+     "auroc": 0.8452944571228358,
+     "jev_minus_system": 0.017047911856599752,
+     "jev_minus_system_ci": [
+      0.01394470033103826,
+      0.01984357085942767
+     ]
+    },
+    "glm": {
+     "log_loss": 0.3099003248333749,
+     "mean_predicted": 0.1736456345542218,
+     "auroc": 0.8450940485270733,
+     "jev_minus_system": 0.04873767083890689,
+     "jev_minus_system_ci": [
+      0.04413003915748402,
+      0.05298320400823153
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.2910164708824661,
+     "mean_predicted": 0.14293682379606118,
+     "auroc": 0.8600389675832302
+    },
+    "reference_age_sex": {
+     "log_loss": 0.34756865877675586,
+     "mean_predicted": 0.1568249000668173,
+     "auroc": 0.7828247625540274
+    }
+   },
+   "jev_minus_mean_chatbot": 0.044023775996999956,
+   "jev_minus_mean_chatbot_ci": [
+    0.0403927417512283,
+    0.04737426138980312
+   ]
+  },
+  {
+   "group": "diabetes",
+   "n": 1906,
+   "deaths": 556,
+   "observed_risk": 0.291710388247639,
+   "systems": {
+    "jev": {
+     "log_loss": 0.536562508142546,
+     "mean_predicted": 0.4184207764952781,
+     "auroc": 0.7868771649347188
+    },
+    "gpt": {
+     "log_loss": 0.4805066941379305,
+     "mean_predicted": 0.3352282266526757,
+     "auroc": 0.8014428457234212,
+     "jev_minus_system": 0.05605581400461542,
+     "jev_minus_system_ci": [
+      0.044603536331887586,
+      0.06755842857211476
+     ]
+    },
+    "claude": {
+     "log_loss": 0.4795561126485707,
+     "mean_predicted": 0.3581558237145855,
+     "auroc": 0.8097208899547028,
+     "jev_minus_system": 0.0570063954939753,
+     "jev_minus_system_ci": [
+      0.04732052455178456,
+      0.06593937317885021
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.47962203661981395,
+     "mean_predicted": 0.334601259181532,
+     "auroc": 0.8022255528910205,
+     "jev_minus_system": 0.056940471522731975,
+     "jev_minus_system_ci": [
+      0.04550875816063737,
+      0.06861441189268237
+     ]
+    },
+    "muse": {
+     "log_loss": 0.529747185895244,
+     "mean_predicted": 0.42663641133263386,
+     "auroc": 0.7980149213962163,
+     "jev_minus_system": 0.006815322247301935,
+     "jev_minus_system_ci": [
+      -0.0022174274661228466,
+      0.01582713265218199
+     ]
+    },
+    "glm": {
+     "log_loss": 0.4860026586234324,
+     "mean_predicted": 0.339889296956978,
+     "auroc": 0.7987516653343991,
+     "jev_minus_system": 0.05055984951911352,
+     "jev_minus_system_ci": [
+      0.03962059176341615,
+      0.06131375108833152
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.4565716942577526,
+     "mean_predicted": 0.2875452352039888,
+     "auroc": 0.8226179056754596
+    },
+    "reference_age_sex": {
+     "log_loss": 0.5774501120930261,
+     "mean_predicted": 0.20109170482335065,
+     "auroc": 0.7034758859579004
+    }
+   },
+   "jev_minus_mean_chatbot": 0.045475570557547626,
+   "jev_minus_mean_chatbot_ci": [
+    0.03642749784915674,
+    0.05437036461684432
+   ]
+  },
+  {
+   "group": "no diabetes",
+   "n": 10791,
+   "deaths": 1446,
+   "observed_risk": 0.13400055601890465,
+   "systems": {
+    "jev": {
+     "log_loss": 0.3508704270845459,
+     "mean_predicted": 0.23574367528495968,
+     "auroc": 0.81674314930877
+    },
+    "gpt": {
+     "log_loss": 0.302131141007413,
+     "mean_predicted": 0.16246066166249654,
+     "auroc": 0.834533818500437,
+     "jev_minus_system": 0.04873928607713286,
+     "jev_minus_system_ci": [
+      0.04487240480967403,
+      0.05292412418114569
+     ]
+    },
+    "claude": {
+     "log_loss": 0.29947925828144023,
+     "mean_predicted": 0.17029895283106292,
+     "auroc": 0.842046508254723,
+     "jev_minus_system": 0.05139116880310571,
+     "jev_minus_system_ci": [
+      0.04755015268680586,
+      0.05538069161774743
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.2981035700283659,
+     "mean_predicted": 0.15915466592530814,
+     "auroc": 0.8388741251858413,
+     "jev_minus_system": 0.052766857056180005,
+     "jev_minus_system_ci": [
+      0.048571881944964555,
+      0.05699630571580943
+     ]
+    },
+    "muse": {
+     "log_loss": 0.33182712469366726,
+     "mean_predicted": 0.2206421091650449,
+     "auroc": 0.8331466964456848,
+     "jev_minus_system": 0.01904330239087867,
+     "jev_minus_system_ci": [
+      0.01624448719513057,
+      0.021878236045759065
+     ]
+    },
+    "glm": {
+     "log_loss": 0.3029296730745221,
+     "mean_predicted": 0.15851607821332592,
+     "auroc": 0.8334680197471005,
+     "jev_minus_system": 0.04794075401002375,
+     "jev_minus_system_ci": [
+      0.04365588147786788,
+      0.05233339929922389
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.2856550485704894,
+     "mean_predicted": 0.13352512329441857,
+     "auroc": 0.8505458869951388
+    },
+    "reference_age_sex": {
+     "log_loss": 0.3350904335188963,
+     "mean_predicted": 0.1503402017673305,
+     "auroc": 0.7755393561841415
+    }
+   },
+   "jev_minus_mean_chatbot": 0.04397627366746419,
+   "jev_minus_mean_chatbot_ci": [
+    0.040522883668887504,
+    0.047609349606376895
+   ]
+  },
+  {
+   "group": "smoking never",
+   "n": 5943,
+   "deaths": 637,
+   "observed_risk": 0.1071849234393404,
+   "systems": {
+    "jev": {
+     "log_loss": 0.3328907953809065,
+     "mean_predicted": 0.23834931852599697,
+     "auroc": 0.8338380293983115
+    },
+    "gpt": {
+     "log_loss": 0.26454864778755544,
+     "mean_predicted": 0.14959835100117785,
+     "auroc": 0.845069945401107,
+     "jev_minus_system": 0.06834214759335104,
+     "jev_minus_system_ci": [
+      0.06299860495185743,
+      0.07404828428194779
+     ]
+    },
+    "claude": {
+     "log_loss": 0.2649853385860794,
+     "mean_predicted": 0.15558371193000167,
+     "auroc": 0.8470399612772128,
+     "jev_minus_system": 0.06790545679482708,
+     "jev_minus_system_ci": [
+      0.06247195705176496,
+      0.07348801356644458
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.2599788302331746,
+     "mean_predicted": 0.1429892310281003,
+     "auroc": 0.8466335909526908,
+     "jev_minus_system": 0.07291196514773192,
+     "jev_minus_system_ci": [
+      0.06705644237797345,
+      0.07918841091257048
+     ]
+    },
+    "muse": {
+     "log_loss": 0.3028529008561815,
+     "mean_predicted": 0.20834225138818777,
+     "auroc": 0.8445857626300252,
+     "jev_minus_system": 0.030037894524724947,
+     "jev_minus_system_ci": [
+      0.026297095145044375,
+      0.033814226325321155
+     ]
+    },
+    "glm": {
+     "log_loss": 0.264468474613328,
+     "mean_predicted": 0.1470116102978294,
+     "auroc": 0.8450067782629302,
+     "jev_minus_system": 0.06842232076757848,
+     "jev_minus_system_ci": [
+      0.06229637631560678,
+      0.07441170410718231
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.24303007770899898,
+     "mean_predicted": 0.10677097122229516,
+     "auroc": 0.8597855216777192
+    },
+    "reference_age_sex": {
+     "log_loss": 0.291899163970733,
+     "mean_predicted": 0.14483203164997355,
+     "auroc": 0.7922228678649981
+    }
+   },
+   "jev_minus_mean_chatbot": 0.061523956965642695,
+   "jev_minus_mean_chatbot_ci": [
+    0.05665967346128906,
+    0.06678530126235181
+   ]
+  },
+  {
+   "group": "smoking former",
+   "n": 4063,
+   "deaths": 816,
+   "observed_risk": 0.200836820083682,
+   "systems": {
+    "jev": {
+     "log_loss": 0.42464980804452096,
+     "mean_predicted": 0.31444991385675614,
+     "auroc": 0.8283628704022417
+    },
+    "gpt": {
+     "log_loss": 0.37822471449771544,
+     "mean_predicted": 0.23828033472803348,
+     "auroc": 0.8352168593030067,
+     "jev_minus_system": 0.04642509354680549,
+     "jev_minus_system_ci": [
+      0.03951032987709885,
+      0.0532448129467936
+     ]
+    },
+    "claude": {
+     "log_loss": 0.3744761657557752,
+     "mean_predicted": 0.243550824513906,
+     "auroc": 0.8422727691322911,
+     "jev_minus_system": 0.05017364228874575,
+     "jev_minus_system_ci": [
+      0.04345261563200612,
+      0.056646518064891335
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.37586457994394695,
+     "mean_predicted": 0.23550972188038394,
+     "auroc": 0.8366195492671968,
+     "jev_minus_system": 0.04878522810057407,
+     "jev_minus_system_ci": [
+      0.04166527585516659,
+      0.05572968329436444
+     ]
+    },
+    "muse": {
+     "log_loss": 0.41632132008549244,
+     "mean_predicted": 0.31112158503568793,
+     "auroc": 0.8347139440931902,
+     "jev_minus_system": 0.008328487959028477,
+     "jev_minus_system_ci": [
+      0.0031016006294806316,
+      0.012980790686280911
+     ]
+    },
+    "glm": {
+     "log_loss": 0.38101255173414533,
+     "mean_predicted": 0.22908220526704404,
+     "auroc": 0.829919359952173,
+     "jev_minus_system": 0.04363725631037559,
+     "jev_minus_system_ci": [
+      0.035755946236084656,
+      0.05139791357463804
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.36765955332502187,
+     "mean_predicted": 0.19819431696870857,
+     "auroc": 0.8409331086915826
+    },
+    "reference_age_sex": {
+     "log_loss": 0.4236020831636289,
+     "mean_predicted": 0.20234184626553894,
+     "auroc": 0.7723288691824127
+    }
+   },
+   "jev_minus_mean_chatbot": 0.03946994164110587,
+   "jev_minus_mean_chatbot_ci": [
+    0.03351346597460447,
+    0.04526087214046033
+   ]
+  },
+  {
+   "group": "smoking current",
+   "n": 2675,
+   "deaths": 547,
+   "observed_risk": 0.20448598130841122,
+   "systems": {
+    "jev": {
+     "log_loss": 0.4104791751298895,
+     "mean_predicted": 0.24013084112149533,
+     "auroc": 0.7969929107503677
+    },
+    "gpt": {
+     "log_loss": 0.39708701046480055,
+     "mean_predicted": 0.19873271028037384,
+     "auroc": 0.8077028150815796,
+     "jev_minus_system": 0.013392164665089015,
+     "jev_minus_system_ci": [
+      0.005508483594812848,
+      0.020995160468343748
+     ]
+    },
+    "claude": {
+     "log_loss": 0.39054550396690657,
+     "mean_predicted": 0.2252381308411215,
+     "auroc": 0.8180098039889486,
+     "jev_minus_system": 0.019933671162983037,
+     "jev_minus_system_ci": [
+      0.013361650048519783,
+      0.026896641655127652
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.39403152476932746,
+     "mean_predicted": 0.2037996261682243,
+     "auroc": 0.8129033449712031,
+     "jev_minus_system": 0.01644765036056207,
+     "jev_minus_system_ci": [
+      0.009688828464738323,
+      0.023534800416463074
+     ]
+    },
+    "muse": {
+     "log_loss": 0.40855879946295437,
+     "mean_predicted": 0.25684971962616826,
+     "auroc": 0.8060666691866779,
+     "jev_minus_system": 0.0019203756669351375,
+     "jev_minus_system_ci": [
+      -0.0051026455966932715,
+      0.009301316836578474
+     ]
+    },
+    "glm": {
+     "log_loss": 0.4003703463769795,
+     "mean_predicted": 0.20581121495327107,
+     "auroc": 0.8065056665887754,
+     "jev_minus_system": 0.010108828752910078,
+     "jev_minus_system_ci": [
+      0.0023258998820790406,
+      0.01783165273595839
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.3771989578663971,
+     "mean_predicted": 0.20431306415433503,
+     "auroc": 0.8303451155310582
+    },
+    "reference_age_sex": {
+     "log_loss": 0.46923635777108713,
+     "mean_predicted": 0.11949222352258813,
+     "auroc": 0.7543800944316917
+    }
+   },
+   "jev_minus_mean_chatbot": 0.012360538121695868,
+   "jev_minus_mean_chatbot_ci": [
+    0.006007505042405043,
+    0.01884758655325885
+   ]
+  },
+  {
+   "group": "reference risk tertile low",
+   "n": 4233,
+   "deaths": 82,
+   "observed_risk": 0.01937160406331207,
+   "systems": {
+    "jev": {
+     "log_loss": 0.1384221377927778,
+     "mean_predicted": 0.09042995511457595,
+     "auroc": 0.645186878272059
+    },
+    "gpt": {
+     "log_loss": 0.09812262185330321,
+     "mean_predicted": 0.0366392629340893,
+     "auroc": 0.6483891627641885,
+     "jev_minus_system": 0.04029951593947458,
+     "jev_minus_system_ci": [
+      0.03585446323491165,
+      0.04481740189133438
+     ]
+    },
+    "claude": {
+     "log_loss": 0.10045745302912072,
+     "mean_predicted": 0.04109213323883771,
+     "auroc": 0.6440234795024414,
+     "jev_minus_system": 0.03796468476365708,
+     "jev_minus_system_ci": [
+      0.03383928999004668,
+      0.04191242968983247
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.0981106394798323,
+     "mean_predicted": 0.037608079376328846,
+     "auroc": 0.6549935072947454,
+     "jev_minus_system": 0.04031149831294551,
+     "jev_minus_system_ci": [
+      0.036101094291062945,
+      0.04445886312283867
+     ]
+    },
+    "muse": {
+     "log_loss": 0.11371328781454293,
+     "mean_predicted": 0.06130900070871721,
+     "auroc": 0.6574216615449701,
+     "jev_minus_system": 0.024708849978234866,
+     "jev_minus_system_ci": [
+      0.02210408621918139,
+      0.027215206777614433
+     ]
+    },
+    "glm": {
+     "log_loss": 0.09996984214272385,
+     "mean_predicted": 0.04075549255846918,
+     "auroc": 0.6611762666650998,
+     "jev_minus_system": 0.038452295650053946,
+     "jev_minus_system_ci": [
+      0.03431502827469091,
+      0.04257136022577139
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.093444387273399,
+     "mean_predicted": 0.016975673268934482,
+     "auroc": 0.6365612752730756
+    },
+    "reference_age_sex": {
+     "log_loss": 0.11201810039922602,
+     "mean_predicted": 0.05505559908461198,
+     "auroc": 0.5934773284133709
+    }
+   },
+   "jev_minus_mean_chatbot": 0.0363473689288732,
+   "jev_minus_mean_chatbot_ci": [
+    0.03262705056566477,
+    0.04019878103020334
+   ]
+  },
+  {
+   "group": "reference risk tertile middle",
+   "n": 4231,
+   "deaths": 330,
+   "observed_risk": 0.07799574568659891,
+   "systems": {
+    "jev": {
+     "log_loss": 0.3566935581266731,
+     "mean_predicted": 0.21950602694398488,
+     "auroc": 0.5638169700076903
+    },
+    "gpt": {
+     "log_loss": 0.28579089336372376,
+     "mean_predicted": 0.12541385015362796,
+     "auroc": 0.5974575283726784,
+     "jev_minus_system": 0.07090266476294932,
+     "jev_minus_system_ci": [
+      0.06426916103841043,
+      0.07781506853239006
+     ]
+    },
+    "claude": {
+     "log_loss": 0.28802873129733175,
+     "mean_predicted": 0.13503852517135428,
+     "auroc": 0.6038257478657376,
+     "jev_minus_system": 0.06866482682934137,
+     "jev_minus_system_ci": [
+      0.06294765268307216,
+      0.07496433919409322
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.28061644017431153,
+     "mean_predicted": 0.1172096431103758,
+     "auroc": 0.6007806856050897,
+     "jev_minus_system": 0.07607711795236154,
+     "jev_minus_system_ci": [
+      0.06941778840197452,
+      0.08339371655404378
+     ]
+    },
+    "muse": {
+     "log_loss": 0.3268581274912791,
+     "mean_predicted": 0.18919735287166153,
+     "auroc": 0.5910403703790015,
+     "jev_minus_system": 0.02983543063539395,
+     "jev_minus_system_ci": [
+      0.025964612641894296,
+      0.03416710894772869
+     ]
+    },
+    "glm": {
+     "log_loss": 0.28808689742465715,
+     "mean_predicted": 0.1305606239659655,
+     "auroc": 0.5945825856617961,
+     "jev_minus_system": 0.06860666070201593,
+     "jev_minus_system_ci": [
+      0.062256796828718694,
+      0.07539325776404546
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.2684370618963963,
+     "mean_predicted": 0.07248023300395474,
+     "auroc": 0.6136755921170174
+    },
+    "reference_age_sex": {
+     "log_loss": 0.3040856305771594,
+     "mean_predicted": 0.13602082751006353,
+     "auroc": 0.5489194689784282
+    }
+   },
+   "jev_minus_mean_chatbot": 0.06281734017641243,
+   "jev_minus_mean_chatbot_ci": [
+    0.05751550088921785,
+    0.06881861756479157
+   ]
+  },
+  {
+   "group": "reference risk tertile high",
+   "n": 4233,
+   "deaths": 1590,
+   "observed_risk": 0.3756201275690999,
+   "systems": {
+    "jev": {
+     "log_loss": 0.6411102209965144,
+     "mean_predicted": 0.4795416961965509,
+     "auroc": 0.6816058557433067
+    },
+    "gpt": {
+     "log_loss": 0.6027896464708107,
+     "mean_predicted": 0.40310370895346087,
+     "auroc": 0.7005669419874976,
+     "jev_minus_system": 0.03832057452570357,
+     "jev_minus_system_ci": [
+      0.02978956613032508,
+      0.04627323178477325
+     ]
+    },
+    "claude": {
+     "log_loss": 0.5910296872270064,
+     "mean_predicted": 0.4193361682022207,
+     "auroc": 0.7163140085237616,
+     "jev_minus_system": 0.05008053376950787,
+     "jev_minus_system_ci": [
+      0.04240793546803758,
+      0.05769888323811423
+     ]
+    },
+    "gemini": {
+     "log_loss": 0.597307992127999,
+     "mean_predicted": 0.4016250885896528,
+     "auroc": 0.7086540452173417,
+     "jev_minus_system": 0.043802228868515335,
+     "jev_minus_system_ci": [
+      0.03543456149763136,
+      0.052025924764487884
+     ]
+    },
+    "muse": {
+     "log_loss": 0.644025408493063,
+     "mean_predicted": 0.5041585164186156,
+     "auroc": 0.6972699928849674,
+     "jev_minus_system": -0.002915187496548719,
+     "jev_minus_system_ci": [
+      -0.009605455307887903,
+      0.003383284268295044
+     ]
+    },
+    "glm": {
+     "log_loss": 0.603157846607502,
+     "mean_predicted": 0.3858861327663596,
+     "auroc": 0.6971305477623342,
+     "jev_minus_system": 0.03795237438901226,
+     "jev_minus_system_ci": [
+      0.02875448241099299,
+      0.04673045959667826
+     ]
+    },
+    "reference_spline_logit": {
+     "log_loss": 0.5720344857471007,
+     "mean_predicted": 0.3804415149968678,
+     "auroc": 0.7395367376028289
+    },
+    "reference_age_sex": {
+     "log_loss": 0.6982806188967239,
+     "mean_predicted": 0.28278937740239274,
+     "auroc": 0.5931529113333667
+    }
+   },
+   "jev_minus_mean_chatbot": 0.03344810481123806,
+   "jev_minus_mean_chatbot_ci": [
+    0.026459668003373252,
+    0.04019112604373656
+   ]
+  }
+ ],
+ "subgroups_meta": {
+  "no_diabetes_means_not_coded_yes": {
+   "no": 10533,
+   "borderline": 250,
+   "missing": 8
+  },
+  "income_missing": 1008,
+  "smoking_missing": 16
+ },
+ "race_calibration": {
+  "jev": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1835.27,
+     "O_E": 0.5993668506541272,
+     "O_E_ci": [
+      0.5711353075472925,
+      0.6269646682295386
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 682.18,
+     "O_E": 0.6992289425078425,
+     "O_E_ci": [
+      0.6495097260547479,
+      0.7519475854562523
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 637.33,
+     "O_E": 0.5209232265859131,
+     "O_E_ci": [
+      0.47442976973291573,
+      0.56724338846509
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.1666126375603347,
+     "ci": [
+      1.0670875406050082,
+      1.2714263062306184
+     ]
+    }
+   },
+   "M2": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1814.0,
+     "O_E": 0.6063947078280044,
+     "O_E_ci": [
+      0.5778402437087883,
+      0.6352938978667656
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 727.29,
+     "O_E": 0.6558594233386957,
+     "O_E_ci": [
+      0.6097867382165314,
+      0.7056805939638799
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 715.36,
+     "O_E": 0.4641019906061284,
+     "O_E_ci": [
+      0.4206319398520475,
+      0.5082511420697997
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.0815718126694491,
+     "ci": [
+      0.9922809396568136,
+      1.1755163070957912
+     ]
+    }
+   }
+  },
+  "gpt": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1282.597,
+     "O_E": 0.8576349391118177,
+     "O_E_ci": [
+      0.8180413484508648,
+      0.8962641420995358
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 552.205,
+     "O_E": 0.8638096359141985,
+     "O_E_ci": [
+      0.8050989977033111,
+      0.9185749784344313
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 446.156,
+     "O_E": 0.7441343386618133,
+     "O_E_ci": [
+      0.6746681810923023,
+      0.8094928129360512
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.007199679631494,
+     "ci": [
+      0.9220855501798514,
+      1.092737882872123
+     ]
+    }
+   },
+   "M2": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1274.649,
+     "O_E": 0.8629826720924741,
+     "O_E_ci": [
+      0.8215630336020171,
+      0.9018672875131305
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 519.698,
+     "O_E": 0.917840745971699,
+     "O_E_ci": [
+      0.8571533185751276,
+      0.9808236956181836
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 476.784,
+     "O_E": 0.6963320916809289,
+     "O_E_ci": [
+      0.6327306823630874,
+      0.7570486763034475
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.0635679900109818,
+     "ci": [
+      0.9767109033572388,
+      1.160986968342661
+     ]
+    }
+   }
+  },
+  "claude": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6506,
+     "deaths": 1100,
+     "expected": 1346.826,
+     "O_E": 0.8167350496649158,
+     "O_E_ci": [
+      0.7786887362616257,
+      0.8527233566798823
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 598.662,
+     "O_E": 0.7967768122914098,
+     "O_E_ci": [
+      0.7355185331335062,
+      0.8554469604037699
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 459.74,
+     "O_E": 0.7221473006481924,
+     "O_E_ci": [
+      0.6604028517024141,
+      0.7877835156080694
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 0.9755633881738095,
+     "ci": [
+      0.8933331411354578,
+      1.0578282878744925
+     ]
+    }
+   },
+   "M2": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1338.996999,
+     "O_E": 0.8215104296884238,
+     "O_E_ci": [
+      0.782587642529723,
+      0.8608170371659195
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 561.386,
+     "O_E": 0.8496827494807495,
+     "O_E_ci": [
+      0.7921278801052444,
+      0.9062320966278956
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 506.48,
+     "O_E": 0.6555046596114358,
+     "O_E_ci": [
+      0.5941863420379822,
+      0.7097438016817786
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.034293319687993,
+     "ci": [
+      0.953263384410803,
+      1.1192155166881317
+     ]
+    }
+   }
+  },
+  "gemini": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1254.25,
+     "O_E": 0.8770181383296791,
+     "O_E_ci": [
+      0.840092699015217,
+      0.9175384141644114
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 549.373,
+     "O_E": 0.8682625465758237,
+     "O_E_ci": [
+      0.8089724227680561,
+      0.9345736868964224
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 438.83400000000006,
+     "O_E": 0.7565503128745721,
+     "O_E_ci": [
+      0.6851877954768195,
+      0.8253925157526536
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 0.990016635493388,
+     "ci": [
+      0.9090524726925382,
+      1.074383616924995
+     ]
+    }
+   },
+   "M2": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1247.345,
+     "O_E": 0.8818730984611314,
+     "O_E_ci": [
+      0.8380337233253862,
+      0.9211320946359122
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 518.6120000000001,
+     "O_E": 0.9197627513439719,
+     "O_E_ci": [
+      0.8536666297351517,
+      0.9875898609140695
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 456.08500000000004,
+     "O_E": 0.7279344858962693,
+     "O_E_ci": [
+      0.6661432252327378,
+      0.7908819225272091
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.042964971886497,
+     "ci": [
+      0.9550782617766314,
+      1.1355819077657021
+     ]
+    }
+   }
+  },
+  "muse": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1694.1870000000001,
+     "O_E": 0.6492789756974879,
+     "O_E_ci": [
+      0.619427224551509,
+      0.6786005327246354
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 714.533,
+     "O_E": 0.6675688876510951,
+     "O_E_ci": [
+      0.6212759989165858,
+      0.7179244141204775
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 621.273,
+     "O_E": 0.5343866544981031,
+     "O_E_ci": [
+      0.4845432419455031,
+      0.5806695387012252
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.0281695736935872,
+     "ci": [
+      0.9442692716229357,
+      1.111019253550658
+     ]
+    }
+   },
+   "M2": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1688.866,
+     "O_E": 0.6513246166362517,
+     "O_E_ci": [
+      0.6203078890227886,
+      0.6817785783939321
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 691.847,
+     "O_E": 0.6894587965258214,
+     "O_E_ci": [
+      0.6427110310162247,
+      0.7400555363281942
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 659.6020000000001,
+     "O_E": 0.5033338285814779,
+     "O_E_ci": [
+      0.4585611010221949,
+      0.5475002111126498
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.0585486544121618,
+     "ci": [
+      0.972619045353427,
+      1.1547214009948954
+     ]
+    }
+   }
+  },
+  "glm": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6393,
+     "deaths": 1082,
+     "expected": 1193.3880000000001,
+     "O_E": 0.9066623763604125,
+     "O_E_ci": [
+      0.8626734823580895,
+      0.9470147421894424
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2565,
+     "deaths": 461,
+     "expected": 524.969,
+     "O_E": 0.878147090590111,
+     "O_E_ci": [
+      0.8157920495920381,
+      0.9417276694408144
+     ]
+    },
+    "Mexican American": {
+     "n": 2601,
+     "deaths": 328,
+     "expected": 466.664,
+     "O_E": 0.7028611592066241,
+     "O_E_ci": [
+      0.6358644922943507,
+      0.7674829608520167
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 0.9685491683411751,
+     "ci": [
+      0.8869244570953481,
+      1.0552902320515307
+     ]
+    }
+   },
+   "M2": {
+    "Non-Hispanic White": {
+     "n": 6390,
+     "deaths": 1076,
+     "expected": 1198.654,
+     "O_E": 0.897673557173296,
+     "O_E_ci": [
+      0.8523559077196844,
+      0.94196250824673
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2557,
+     "deaths": 459,
+     "expected": 516.198,
+     "O_E": 0.8891936814943103,
+     "O_E_ci": [
+      0.8240760230599519,
+      0.9562341405555401
+     ]
+    },
+    "Mexican American": {
+     "n": 2586,
+     "deaths": 318,
+     "expected": 491.39300000000003,
+     "O_E": 0.6471398656472518,
+     "O_E_ci": [
+      0.5837537199819985,
+      0.7108563726734214
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 0.9905534973028635,
+     "ci": [
+      0.9064271729457143,
+      1.0855735516574847
+     ]
+    }
+   }
+  },
+  "reference": {
+   "raw": {
+    "Non-Hispanic White": {
+     "n": 6507,
+     "deaths": 1100,
+     "expected": 1094.8110806213217,
+     "O_E": 1.004739556870153,
+     "O_E_ci": [
+      0.9611042549124785,
+      1.0537739267001969
+     ]
+    },
+    "Non-Hispanic Black": {
+     "n": 2614,
+     "deaths": 477,
+     "expected": 474.64882542728844,
+     "O_E": 1.0049535034045327,
+     "O_E_ci": [
+      0.9378121234563658,
+      1.0717897208174907
+     ]
+    },
+    "Mexican American": {
+     "n": 2636,
+     "deaths": 332,
+     "expected": 335.6527360158411,
+     "O_E": 0.9891175145503097,
+     "O_E_ci": [
+      0.9015673538381919,
+      1.07561063866252
+     ]
+    },
+    "ratio_NHB_to_NHW": {
+     "est": 1.0002129373059085,
+     "ci": [
+      0.9181156739243959,
+      1.083854178945257
+     ]
+    }
+   }
+  }
+ },
+ "m1_race_edit": {
+  "jev": {
+   "diff_logit": 0.037862979229150884,
+   "diff_logit_ci": [
+    0.0199860655208842,
+    0.05461748846919455
+   ],
+   "n": 384
+  },
+  "gpt": {
+   "diff_logit": -0.09986039023476455,
+   "diff_logit_ci": [
+    -0.1278289588386012,
+    -0.07385988789619062
+   ],
+   "n": 384
+  },
+  "claude": {
+   "diff_logit": -0.05336774227795431,
+   "diff_logit_ci": [
+    -0.07066773236235899,
+    -0.035811027349545124
+   ],
+   "n": 384
+  },
+  "gemini": {
+   "diff_logit": -0.05863594036715367,
+   "diff_logit_ci": [
+    -0.07918438431889147,
+    -0.037078299092374686
+   ],
+   "n": 384
+  },
+  "muse": {
+   "diff_logit": -0.05440050375703792,
+   "diff_logit_ci": [
+    -0.0833126420923308,
+    -0.025241811489384574
+   ],
+   "n": 384
+  },
+  "glm": {
+   "diff_logit": -0.03844873587712892,
+   "diff_logit_ci": [
+    -0.08617748349592085,
+    0.005372310708225185
+   ],
+   "n": 372
+  }
+ },
+ "format_dependence": {
+  "drift": {
+   "jev": {
+    "mean_abs_drift_pts": 3.5226666666666664,
+    "mean_abs_repeat_pts": 1.2695530726256983,
+    "excess_pts": 2.2531135940409683,
+    "excess_pts_ci": [
+     2.042700208718389,
+     2.4528478296632232
+    ],
+    "exceeds_operational_2pts": true,
+    "by_edit": {
+     "I1_field_order": {
+      "mean_abs_pts": 3.6230000000000007,
+      "mean_signed_pts": 1.221,
+      "n": 1000
+     },
+     "I2_units": {
+      "mean_abs_pts": 1.5080000000000002,
+      "mean_signed_pts": 0.23799999999999988,
+      "n": 1000
+     },
+     "I3_prose": {
+      "mean_abs_pts": 5.437,
+      "mean_signed_pts": 5.253,
+      "n": 1000
+     }
+    }
+   },
+   "gpt": {
+    "mean_abs_drift_pts": 1.7847000000000002,
+    "mean_abs_repeat_pts": 1.59231843575419,
+    "excess_pts": 0.1923815642458102,
+    "excess_pts_ci": [
+     -0.02936182623719747,
+     0.4267671175479022
+    ],
+    "exceeds_operational_2pts": false,
+    "by_edit": {
+     "I1_field_order": {
+      "mean_abs_pts": 1.8052,
+      "mean_signed_pts": -0.4095999999999999,
+      "n": 1000
+     },
+     "I2_units": {
+      "mean_abs_pts": 1.7920000000000003,
+      "mean_signed_pts": 0.44700000000000006,
+      "n": 1000
+     },
+     "I3_prose": {
+      "mean_abs_pts": 1.7568999999999997,
+      "mean_signed_pts": -0.43510000000000004,
+      "n": 1000
+     }
+    }
+   },
+   "claude": {
+    "mean_abs_drift_pts": 1.4469999999999998,
+    "mean_abs_repeat_pts": 1.193435754189944,
+    "excess_pts": 0.25356424581005577,
+    "excess_pts_ci": [
+     0.04133179884991625,
+     0.4551899469673644
+    ],
+    "exceeds_operational_2pts": false,
+    "by_edit": {
+     "I1_field_order": {
+      "mean_abs_pts": 1.6460000000000004,
+      "mean_signed_pts": 0.337,
+      "n": 1000
+     },
+     "I2_units": {
+      "mean_abs_pts": 1.2478,
+      "mean_signed_pts": 0.10860000000000002,
+      "n": 1000
+     },
+     "I3_prose": {
+      "mean_abs_pts": 1.4472,
+      "mean_signed_pts": 0.10140000000000003,
+      "n": 1000
+     }
+    }
+   },
+   "gemini": {
+    "mean_abs_drift_pts": 1.392,
+    "mean_abs_repeat_pts": 0.06997206703910618,
+    "excess_pts": 1.3220279329608937,
+    "excess_pts_ci": [
+     1.2238692223664334,
+     1.417013867521374
+    ],
+    "exceeds_operational_2pts": false,
+    "by_edit": {
+     "I1_field_order": {
+      "mean_abs_pts": 1.3649000000000002,
+      "mean_signed_pts": 0.1039000000000001,
+      "n": 1000
+     },
+     "I2_units": {
+      "mean_abs_pts": 1.4219000000000002,
+      "mean_signed_pts": 0.4993000000000001,
+      "n": 1000
+     },
+     "I3_prose": {
+      "mean_abs_pts": 1.3892,
+      "mean_signed_pts": 0.268,
+      "n": 1000
+     }
+    }
+   },
+   "muse": {
+    "mean_abs_drift_pts": 2.421933333333333,
+    "mean_abs_repeat_pts": 2.3927374301675974,
+    "excess_pts": 0.029195903165735615,
+    "excess_pts_ci": [
+     -0.3579295667099951,
+     0.3519912670649556
+    ],
+    "exceeds_operational_2pts": false,
+    "by_edit": {
+     "I1_field_order": {
+      "mean_abs_pts": 2.5420000000000003,
+      "mean_signed_pts": 0.1474,
+      "n": 1000
+     },
+     "I2_units": {
+      "mean_abs_pts": 2.4009,
+      "mean_signed_pts": 0.11329999999999994,
+      "n": 1000
+     },
+     "I3_prose": {
+      "mean_abs_pts": 2.3228999999999997,
+      "mean_signed_pts": -0.3812999999999999,
+      "n": 1000
+     }
+    }
+   },
+   "glm": {
+    "mean_abs_drift_pts": 3.4160793705097503,
+    "mean_abs_repeat_pts": 3.1721590909090907,
+    "excess_pts": 0.24392027960065965,
+    "excess_pts_ci": [
+     -0.24899666984238752,
+     0.7225604537510754
+    ],
+    "exceeds_operational_2pts": false,
+    "by_edit": {
+     "I1_field_order": {
+      "mean_abs_pts": 3.3403905447070925,
+      "mean_signed_pts": 0.5627954779033915,
+      "n": 973
+     },
+     "I2_units": {
+      "mean_abs_pts": 3.6690965092402474,
+      "mean_signed_pts": 1.191889117043121,
+      "n": 974
+     },
+     "I3_prose": {
+      "mean_abs_pts": 3.2390368852459015,
+      "mean_signed_pts": -1.1521516393442626,
+      "n": 976
+     }
+    }
+   }
+  },
+  "jev_bands_vs_noul": {
+   "bands": {
+    "clinical": {
+     "beta": 0.9817917281383063,
+     "beta_ci": [
+      0.6836890234543986,
+      1.2805202689247313
+     ]
+    },
+    "label": {
+     "beta": 0.7061378687352613,
+     "beta_ci": [
+      0.0015354745168368522,
+      1.255879769755211
+     ]
+    }
+   },
+   "noul_same_instances": {
+    "clinical": {
+     "beta": 0.40764198934402546,
+     "beta_ci": [
+      0.2809980098306727,
+      0.5456369213276195
+     ]
+    },
+    "label": {
+     "beta": 0.28051087619744186,
+     "beta_ci": [
+      0.016926936262120783,
+      0.47732498534058476
+     ]
+    }
+   }
+  },
+  "jev_complement": {
+   "n": 200,
+   "sum_mean": 0.9436,
+   "sum_sd": 0.04591930873361298,
+   "sum_range": [
+    0.8600000000000001,
+    1.09
+   ],
+   "share_within_0.05_of_1": 0.33
+  },
+  "jev_complement_hundredths": {
+   "n": 200,
+   "on_0.01_grid": true,
+   "within_0.05_inclusive": 77,
+   "share_within_0.05_inclusive": 0.385,
+   "strictly_within_0.05": 60,
+   "at_exactly_0.95_or_1.05": 17
+  }
+ },
+ "supp_tiers": {
+  "gpt_free - gpt": {
+   "clinical_slope": {
+    "a": 0.8149738284161283,
+    "b": 0.9924697645958769,
+    "diff": -0.17749593617974857,
+    "ci": [
+     -0.2201125548818438,
+     -0.12621278851809428
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": 0.029212307247612396,
+    "ci": [
+     0.01910099705601481,
+     0.03932361743920998
+    ],
+    "n_instances": 6956
+   }
+  },
+  "claude_free - claude": {
+   "clinical_slope": {
+    "a": 0.661785227586274,
+    "b": 0.9607630635331001,
+    "diff": -0.29897783594682614,
+    "ci": [
+     -0.3582297890425816,
+     -0.23523352242176435
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": 0.027229078585941452,
+    "ci": [
+     0.014919966720460124,
+     0.03953819045142278
+    ],
+    "n_instances": 6956
+   }
+  },
+  "gemini_free - gemini": {
+   "clinical_slope": {
+    "a": 0.6517067687058892,
+    "b": 0.9785888748982343,
+    "diff": -0.32688210619234515,
+    "ci": [
+     -0.3942598277142869,
+     -0.2501976261120276
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": 0.0940030801498439,
+    "ci": [
+     0.0794303774558396,
+     0.10857578284384821
+    ],
+    "n_instances": 6956
+   }
+  },
+  "gemma - medgemma": {
+   "clinical_slope": {
+    "a": 0.3873729900262755,
+    "b": 0.5972571847069846,
+    "diff": -0.20988419468070912,
+    "ci": [
+     -0.34147152281228366,
+     -0.06923786066445171
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": -0.41238646980023785,
+    "ci": [
+     -0.43886122714304415,
+     -0.38591171245743155
+    ],
+    "n_instances": 6956
+   }
+  }
+ },
+ "supp_reasoning_effort": {
+  "gpt": {
+   "n_profiles": 200,
+   "clinical_slope": {
+    "a": 1.0754896528208688,
+    "b": 1.0430218695179598,
+    "diff": 0.032467783302909003,
+    "ci": [
+     -0.04642106362988367,
+     0.10958041929033702
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": 0.012260349458592584,
+    "ci": [
+     -0.004004088199671525,
+     0.028524787116856694
+    ],
+    "n_instances": 1382
+   }
+  },
+  "claude": {
+   "n_profiles": 200,
+   "clinical_slope": {
+    "a": 1.0722614648916735,
+    "b": 0.9541792503071753,
+    "diff": 0.11808221458449819,
+    "ci": [
+     0.042919389980547534,
+     0.18216464339593627
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": 0.01215342365875452,
+    "ci": [
+     -0.0009835668353664617,
+     0.0252904141528755
+    ],
+    "n_instances": 1382
+   }
+  },
+  "gemini": {
+   "n_profiles": 200,
+   "clinical_slope": {
+    "a": 1.0202330218546556,
+    "b": 0.9529930324198896,
+    "diff": 0.06723998943476595,
+    "ci": [
+     -0.004604163292989135,
+     0.13236530714401243
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": -0.03095731097251961,
+    "ci": [
+     -0.043373328184792455,
+     -0.018541293760246762
+    ],
+    "n_instances": 1382
+   }
+  },
+  "muse": {
+   "n_profiles": 200,
+   "clinical_slope": {
+    "a": 0.8580758952651277,
+    "b": 0.7939719607505757,
+    "diff": 0.06410393451455199,
+    "ci": [
+     -0.020101821820872296,
+     0.1411771627011612
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": -0.030586529533260992,
+    "ci": [
+     -0.04648659137738971,
+     -0.01468646768913227
+    ],
+    "n_instances": 1382
+   }
+  },
+  "glm": {
+   "n_profiles": 200,
+   "clinical_slope": {
+    "a": 0.8875914292868974,
+    "b": 0.8073997374550671,
+    "diff": 0.08019169183183028,
+    "ci": [
+     -0.05800743902726906,
+     0.23191662197103663
+    ]
+   },
+   "per_call_error_diff": {
+    "diff": -0.015333684090653998,
+    "ci": [
+     -0.04393154779717969,
+     0.013264179615871695
+    ],
+    "n_instances": 1379
+   }
+  }
+ }
+}

@@ -1,0 +1,42 @@
+Ten-year risk of death (Supplementary Note 1). Chatbots: system message, user message and reply schema. Jev: one Noul
+question with the record as the case and the same statement. {record}: the survey record as text
+(src/jevity/serialize.py). Reply schema: sent as response_format to every chatbot whose entry in config/models.yaml
+has structured_outputs: true. Built by src/jevity/clients.py (LLMClient.request, JevClient.request) from
+config/prompts.yaml.
+
+### SYSTEM MESSAGE
+You are helping with a research study of mortality risk. You will see one de-identified record from a national health survey and one statement about the person it describes. Give the probability that the statement is true, as a number between 0 and 1 with three decimal places. Always give a number. Reply with a JSON object whose only key is "p", and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Record:
+{record}
+
+Statement: This person will die from any cause within ten years of this examination.
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "probability",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {"p": {"type": "number", "minimum": 0, "maximum": 1}},
+      "required": ["p"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{record}",
+  "questions": {
+    "death": {
+      "type": "noul",
+      "instructions": "This person will die from any cause within ten years of this examination."
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

@@ -1,0 +1,60 @@
+{
+ "note": "Missing values handled by the outcome reference (Supplementary Note 3, PROBAST+AI appraisal).",
+ "eval": {
+  "n": 1000,
+  "deaths": 163,
+  "numeric_imputed": 159,
+  "numeric_imputed_pct": 15.9,
+  "categorical_missing": 24,
+  "biomarkers_incomplete": 0,
+  "numeric_missing_pct_by_field": {
+   "income_poverty_ratio": 8.0,
+   "sbp_mmhg": 4.6,
+   "dbp_mmhg": 4.6,
+   "waist_cm": 3.2,
+   "bmi": 2.4,
+   "uacr_mg_g": 1.2,
+   "hdl_mg_dl": 0.2,
+   "hba1c_pct": 0.1
+  }
+ },
+ "fit": {
+  "n": 11971,
+  "deaths": 1899,
+  "numeric_imputed": 1856,
+  "numeric_imputed_pct": 15.504134992899507,
+  "categorical_missing": 307,
+  "biomarkers_incomplete": 61,
+  "numeric_missing_pct_by_field": {
+   "income_poverty_ratio": 8.04,
+   "sbp_mmhg": 3.86,
+   "dbp_mmhg": 3.86,
+   "waist_cm": 3.74,
+   "bmi": 2.17,
+   "uacr_mg_g": 1.6,
+   "lymphocyte_pct": 0.43,
+   "hba1c_pct": 0.13,
+   "total_chol_mg_dl": 0.1,
+   "hdl_mg_dl": 0.09,
+   "crp_mg_dl": 0.07,
+   "alk_phos_u_l": 0.01,
+   "glucose_mg_dl": 0.01
+  }
+ },
+ "pilot": {
+  "n": 200,
+  "deaths": 31,
+  "numeric_imputed": 25,
+  "numeric_imputed_pct": 12.5,
+  "categorical_missing": 3,
+  "biomarkers_incomplete": 0,
+  "numeric_missing_pct_by_field": {
+   "income_poverty_ratio": 6.5,
+   "waist_cm": 3.0,
+   "sbp_mmhg": 2.5,
+   "bmi": 2.5,
+   "dbp_mmhg": 2.5,
+   "hba1c_pct": 0.5
+  }
+ }
+}

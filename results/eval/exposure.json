@@ -1,0 +1,219 @@
+{
+ "n_profiles": 200,
+ "fields": [
+  "mean_corpuscular_volume",
+  "alkaline_phosphatase",
+  "total_cholesterol",
+  "lymphocyte_percent",
+  "waist_circumference"
+ ],
+ "by_model": [
+  {
+   "model": "claude",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.025,
+   "mae": 11.8655,
+   "exact_match_ratio_to_baseline": 2.5,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "gemini",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.005,
+   "mae": 12.0396,
+   "exact_match_ratio_to_baseline": 0.5,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "glm",
+   "n": 200,
+   "valid": 0.995,
+   "exact_match": 0.01,
+   "mae": 12.4041,
+   "exact_match_ratio_to_baseline": 1.0,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "gpt",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.005,
+   "mae": 11.2477,
+   "exact_match_ratio_to_baseline": 0.5,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "imputation_baseline",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.01,
+   "mae": 11.4249,
+   "exact_match_ratio_to_baseline": 1.0,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "muse",
+   "n": 200,
+   "valid": 0.93,
+   "exact_match": 0.015,
+   "mae": 11.618,
+   "exact_match_ratio_to_baseline": 1.5,
+   "flag_possible_exposure": false
+  }
+ ],
+ "by_model_field": [
+  {
+   "model": "claude",
+   "field": "alkaline_phosphatase",
+   "exact": 0.025
+  },
+  {
+   "model": "claude",
+   "field": "lymphocyte_percent",
+   "exact": 0.025
+  },
+  {
+   "model": "claude",
+   "field": "mean_corpuscular_volume",
+   "exact": 0.025
+  },
+  {
+   "model": "claude",
+   "field": "total_cholesterol",
+   "exact": 0.05
+  },
+  {
+   "model": "claude",
+   "field": "waist_circumference",
+   "exact": 0.0
+  },
+  {
+   "model": "gemini",
+   "field": "alkaline_phosphatase",
+   "exact": 0.025
+  },
+  {
+   "model": "gemini",
+   "field": "lymphocyte_percent",
+   "exact": 0.0
+  },
+  {
+   "model": "gemini",
+   "field": "mean_corpuscular_volume",
+   "exact": 0.0
+  },
+  {
+   "model": "gemini",
+   "field": "total_cholesterol",
+   "exact": 0.0
+  },
+  {
+   "model": "gemini",
+   "field": "waist_circumference",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "alkaline_phosphatase",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "lymphocyte_percent",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "mean_corpuscular_volume",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "total_cholesterol",
+   "exact": 0.025
+  },
+  {
+   "model": "glm",
+   "field": "waist_circumference",
+   "exact": 0.025
+  },
+  {
+   "model": "gpt",
+   "field": "alkaline_phosphatase",
+   "exact": 0.025
+  },
+  {
+   "model": "gpt",
+   "field": "lymphocyte_percent",
+   "exact": 0.0
+  },
+  {
+   "model": "gpt",
+   "field": "mean_corpuscular_volume",
+   "exact": 0.0
+  },
+  {
+   "model": "gpt",
+   "field": "total_cholesterol",
+   "exact": 0.0
+  },
+  {
+   "model": "gpt",
+   "field": "waist_circumference",
+   "exact": 0.0
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "alkaline_phosphatase",
+   "exact": 0.025
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "lymphocyte_percent",
+   "exact": 0.0
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "mean_corpuscular_volume",
+   "exact": 0.0
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "total_cholesterol",
+   "exact": 0.0
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "waist_circumference",
+   "exact": 0.025
+  },
+  {
+   "model": "muse",
+   "field": "alkaline_phosphatase",
+   "exact": 0.0
+  },
+  {
+   "model": "muse",
+   "field": "lymphocyte_percent",
+   "exact": 0.0
+  },
+  {
+   "model": "muse",
+   "field": "mean_corpuscular_volume",
+   "exact": 0.0
+  },
+  {
+   "model": "muse",
+   "field": "total_cholesterol",
+   "exact": 0.075
+  },
+  {
+   "model": "muse",
+   "field": "waist_circumference",
+   "exact": 0.0
+  }
+ ],
+ "note": "Limited specificity: a negative result does not exclude exposure; a positive result is a flag, not proof."
+}

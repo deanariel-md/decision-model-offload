@@ -1,0 +1,7 @@
+# Item and report files are compared byte for byte: no line-end conversion.
+*.csv text eol=lf
+*.jsonl text eol=lf
+*.txt text eol=lf
+*.parquet binary
+*.npz binary
+*.joblib binary

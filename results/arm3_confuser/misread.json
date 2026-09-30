@@ -1,0 +1,511 @@
+{
+ "note": "descriptive; counts of reports",
+ "types_1_4": {
+  "1": {
+   "feature": "itc",
+   "systems": {
+    "jev": {
+     "n": 20,
+     "correct": 9,
+     "misread": 0,
+     "other": 11,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "gpt": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "claude": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "gemini": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "muse": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "glm": {
+     "n": 20,
+     "correct": 19,
+     "misread": 0,
+     "other": 0,
+     "unusable": 1,
+     "control_same_level_main": 0.0
+    }
+   }
+  },
+  "2": {
+   "feature": "adhesion",
+   "systems": {
+    "jev": {
+     "n": 20,
+     "correct": 9,
+     "misread": 3,
+     "other": 8,
+     "unusable": 0,
+     "control_same_level_main": 0.335
+    },
+    "gpt": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "claude": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.06
+    },
+    "gemini": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "muse": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "glm": {
+     "n": 20,
+     "correct": 19,
+     "misread": 0,
+     "other": 1,
+     "unusable": 0,
+     "control_same_level_main": 0.025
+    }
+   }
+  },
+  "3": {
+   "feature": "perforation",
+   "systems": {
+    "jev": {
+     "n": 20,
+     "correct": 6,
+     "misread": 6,
+     "other": 8,
+     "unusable": 0,
+     "control_same_level_main": 0.10500000000000001
+    },
+    "gpt": {
+     "n": 20,
+     "correct": 18,
+     "misread": 2,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "claude": {
+     "n": 20,
+     "correct": 19,
+     "misread": 1,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "gemini": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "muse": {
+     "n": 20,
+     "correct": 19,
+     "misread": 1,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "glm": {
+     "n": 20,
+     "correct": 14,
+     "misread": 1,
+     "other": 0,
+     "unusable": 5,
+     "control_same_level_main": 0.019999999999999997
+    }
+   }
+  },
+  "4": {
+   "feature": "nonregional_node",
+   "systems": {
+    "jev": {
+     "n": 20,
+     "correct": 9,
+     "misread": 6,
+     "other": 5,
+     "unusable": 0,
+     "control_same_level_main": 0.0045
+    },
+    "gpt": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "claude": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "gemini": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    },
+    "muse": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0045
+    },
+    "glm": {
+     "n": 20,
+     "correct": 20,
+     "misread": 0,
+     "other": 0,
+     "unusable": 0,
+     "control_same_level_main": 0.0
+    }
+   }
+  }
+ },
+ "type_5": {
+  "budding": {
+   "jev": {
+    "n": 7,
+    "correct": 5,
+    "misread": 0,
+    "other": 2,
+    "unusable": 0
+   },
+   "gpt": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "claude": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "gemini": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "muse": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "glm": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   }
+  },
+  "emvi": {
+   "jev": {
+    "n": 6,
+    "correct": 1,
+    "misread": 0,
+    "other": 5,
+    "unusable": 0
+   },
+   "gpt": {
+    "n": 6,
+    "correct": 6,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "claude": {
+    "n": 6,
+    "correct": 5,
+    "misread": 0,
+    "other": 1,
+    "unusable": 0
+   },
+   "gemini": {
+    "n": 6,
+    "correct": 6,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "muse": {
+    "n": 6,
+    "correct": 6,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "glm": {
+    "n": 6,
+    "correct": 6,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   }
+  },
+  "margin_positive": {
+   "jev": {
+    "n": 7,
+    "correct": 4,
+    "misread": 0,
+    "other": 3,
+    "unusable": 0
+   },
+   "gpt": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "claude": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "gemini": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "muse": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "glm": {
+    "n": 7,
+    "correct": 7,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   }
+  }
+ },
+ "type_6": {
+  "changes_level": {
+   "jev": {
+    "n": 15,
+    "correct": 5,
+    "misread": 8,
+    "other": 2,
+    "unusable": 0
+   },
+   "gpt": {
+    "n": 15,
+    "correct": 15,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "claude": {
+    "n": 15,
+    "correct": 12,
+    "misread": 3,
+    "other": 0,
+    "unusable": 0
+   },
+   "gemini": {
+    "n": 15,
+    "correct": 15,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "muse": {
+    "n": 15,
+    "correct": 15,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "glm": {
+    "n": 15,
+    "correct": 8,
+    "misread": 3,
+    "other": 0,
+    "unusable": 4
+   },
+   "gpt_free": {
+    "n": 15,
+    "correct": 15,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "claude_free": {
+    "n": 15,
+    "correct": 14,
+    "misread": 1,
+    "other": 0,
+    "unusable": 0
+   },
+   "gemini_free": {
+    "n": 15,
+    "correct": 1,
+    "misread": 12,
+    "other": 2,
+    "unusable": 0
+   },
+   "medgemma": {
+    "n": 15,
+    "correct": 2,
+    "misread": 0,
+    "other": 13,
+    "unusable": 0
+   },
+   "gemma": {
+    "n": 15,
+    "correct": 1,
+    "misread": 5,
+    "other": 9,
+    "unusable": 0
+   }
+  },
+  "level_unchanged": {
+   "jev": {
+    "n": 89,
+    "correct": 52,
+    "misread": 0,
+    "other": 37,
+    "unusable": 0
+   },
+   "gpt": {
+    "n": 89,
+    "correct": 89,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "claude": {
+    "n": 89,
+    "correct": 88,
+    "misread": 0,
+    "other": 1,
+    "unusable": 0
+   },
+   "gemini": {
+    "n": 89,
+    "correct": 89,
+    "misread": 0,
+    "other": 0,
+    "unusable": 0
+   },
+   "muse": {
+    "n": 89,
+    "correct": 88,
+    "misread": 0,
+    "other": 1,
+    "unusable": 0
+   },
+   "glm": {
+    "n": 89,
+    "correct": 80,
+    "misread": 0,
+    "other": 6,
+    "unusable": 3
+   },
+   "gpt_free": {
+    "n": 89,
+    "correct": 88,
+    "misread": 0,
+    "other": 1,
+    "unusable": 0
+   },
+   "claude_free": {
+    "n": 89,
+    "correct": 80,
+    "misread": 0,
+    "other": 9,
+    "unusable": 0
+   },
+   "gemini_free": {
+    "n": 89,
+    "correct": 40,
+    "misread": 0,
+    "other": 49,
+    "unusable": 0
+   },
+   "medgemma": {
+    "n": 89,
+    "correct": 21,
+    "misread": 0,
+    "other": 68,
+    "unusable": 0
+   },
+   "gemma": {
+    "n": 89,
+    "correct": 38,
+    "misread": 0,
+    "other": 51,
+    "unusable": 0
+   }
+  }
+ }
+}

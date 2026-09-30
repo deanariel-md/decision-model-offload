@@ -1,0 +1,1058 @@
+{
+ "sets": {
+  "fit": {
+   "label": "Fitting set",
+   "n": 11971
+  },
+  "eval": {
+   "label": "Evaluation set",
+   "n": 1000
+  }
+ },
+ "rows": [
+  {
+   "column": "cycle",
+   "label": "Survey cycle",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "1999-2000": {
+       "n": 2137,
+       "share": 0.17851474396458106
+      },
+      "2001-2002": {
+       "n": 2397,
+       "share": 0.20023389858825494
+      },
+      "2003-2004": {
+       "n": 2239,
+       "share": 0.18703533539386852
+      },
+      "2005-2006": {
+       "n": 2223,
+       "share": 0.18569877203241167
+      },
+      "2007-2008": {
+       "n": 2975,
+       "share": 0.2485172500208838
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "1999-2000": {
+       "n": 187,
+       "share": 0.187
+      },
+      "2001-2002": {
+       "n": 192,
+       "share": 0.192
+      },
+      "2003-2004": {
+       "n": 215,
+       "share": 0.215
+      },
+      "2005-2006": {
+       "n": 180,
+       "share": 0.18
+      },
+      "2007-2008": {
+       "n": 226,
+       "share": 0.226
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "age",
+   "label": "Age, years",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 58.0,
+     "q1": 48.0,
+     "q3": 67.0,
+     "missing": 0
+    },
+    "eval": {
+     "median": 59.0,
+     "q1": 48.0,
+     "q3": 67.25,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "sex",
+   "label": "Sex",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "male": {
+       "n": 6000,
+       "share": 0.5012112605463203
+      },
+      "female": {
+       "n": 5971,
+       "share": 0.49878873945367974
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "male": {
+       "n": 519,
+       "share": 0.519
+      },
+      "female": {
+       "n": 481,
+       "share": 0.481
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "race_ethnicity",
+   "label": "Race and ethnicity",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "Non-Hispanic White": {
+       "n": 6009,
+       "share": 0.5019630774371397
+      },
+      "Non-Hispanic Black": {
+       "n": 2462,
+       "share": 0.20566368724417342
+      },
+      "Mexican American": {
+       "n": 2432,
+       "share": 0.20315763094144182
+      },
+      "Other Hispanic": {
+       "n": 660,
+       "share": 0.05513323866009523
+      },
+      "Other race including multiracial": {
+       "n": 408,
+       "share": 0.03408236571714978
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "Non-Hispanic White": {
+       "n": 516,
+       "share": 0.516
+      },
+      "Non-Hispanic Black": {
+       "n": 181,
+       "share": 0.181
+      },
+      "Mexican American": {
+       "n": 212,
+       "share": 0.212
+      },
+      "Other Hispanic": {
+       "n": 59,
+       "share": 0.059
+      },
+      "Other race including multiracial": {
+       "n": 32,
+       "share": 0.032
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "education",
+   "label": "Education",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "less than 9th grade": {
+       "n": 2042,
+       "share": 0.170578899005931
+      },
+      "9th to 11th grade": {
+       "n": 1898,
+       "share": 0.1585498287528193
+      },
+      "high school graduate or GED": {
+       "n": 2799,
+       "share": 0.23381505304485842
+      },
+      "some college": {
+       "n": 2919,
+       "share": 0.2438392782557848
+      },
+      "college graduate or above": {
+       "n": 2299,
+       "share": 0.1920474479993317
+      },
+      "missing": {
+       "n": 14,
+       "share": 0.0011694929412747472
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "less than 9th grade": {
+       "n": 172,
+       "share": 0.172
+      },
+      "9th to 11th grade": {
+       "n": 153,
+       "share": 0.153
+      },
+      "high school graduate or GED": {
+       "n": 219,
+       "share": 0.219
+      },
+      "some college": {
+       "n": 250,
+       "share": 0.25
+      },
+      "college graduate or above": {
+       "n": 204,
+       "share": 0.204
+      },
+      "missing": {
+       "n": 2,
+       "share": 0.002
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "income_poverty_ratio",
+   "label": "Family income to poverty ratio",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 2.48,
+     "q1": 1.24,
+     "q3": 4.54,
+     "missing": 962
+    },
+    "eval": {
+     "median": 2.49,
+     "q1": 1.24,
+     "q3": 4.55,
+     "missing": 80
+    }
+   }
+  },
+  {
+   "column": "insured",
+   "label": "Health insurance",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 9997,
+       "share": 0.8351014952802607
+      },
+      "no": {
+       "n": 1893,
+       "share": 0.15813215270236405
+      },
+      "missing": {
+       "n": 81,
+       "share": 0.006766352017375324
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 826,
+       "share": 0.826
+      },
+      "no": {
+       "n": 169,
+       "share": 0.169
+      },
+      "missing": {
+       "n": 5,
+       "share": 0.005
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "smoking",
+   "label": "Smoking",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "never": {
+       "n": 5609,
+       "share": 0.4685489934007184
+      },
+      "former": {
+       "n": 3796,
+       "share": 0.3170996575056386
+      },
+      "current": {
+       "n": 2550,
+       "share": 0.21301478573218613
+      },
+      "missing": {
+       "n": 16,
+       "share": 0.001336563361456854
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "never": {
+       "n": 452,
+       "share": 0.452
+      },
+      "former": {
+       "n": 340,
+       "share": 0.34
+      },
+      "current": {
+       "n": 208,
+       "share": 0.208
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "self_rated_health",
+   "label": "Self-rated health",
+   "kind": "cat",
+   "sets": {
+    "fit": {
+     "levels": {
+      "excellent": {
+       "n": 1667,
+       "share": 0.13925319522178597
+      },
+      "very good": {
+       "n": 2968,
+       "share": 0.24793250355024643
+      },
+      "good": {
+       "n": 3988,
+       "share": 0.33313841784312087
+      },
+      "fair": {
+       "n": 2570,
+       "share": 0.21468548993400718
+      },
+      "poor": {
+       "n": 771,
+       "share": 0.06440564698020215
+      },
+      "missing": {
+       "n": 7,
+       "share": 0.0005847464706373736
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "excellent": {
+       "n": 142,
+       "share": 0.142
+      },
+      "very good": {
+       "n": 229,
+       "share": 0.229
+      },
+      "good": {
+       "n": 343,
+       "share": 0.343
+      },
+      "fair": {
+       "n": 221,
+       "share": 0.221
+      },
+      "poor": {
+       "n": 63,
+       "share": 0.063
+      },
+      "missing": {
+       "n": 2,
+       "share": 0.002
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "bmi",
+   "label": "Body mass index, kg/m2",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 28.29,
+     "q1": 24.9,
+     "q3": 32.315,
+     "missing": 260
+    },
+    "eval": {
+     "median": 28.43,
+     "q1": 25.425,
+     "q3": 32.4,
+     "missing": 24
+    }
+   }
+  },
+  {
+   "column": "waist_cm",
+   "label": "Waist circumference, cm",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 99.4,
+     "q1": 90.2,
+     "q3": 109.3,
+     "missing": 448
+    },
+    "eval": {
+     "median": 100.25,
+     "q1": 91.5,
+     "q3": 109.525,
+     "missing": 32
+    }
+   }
+  },
+  {
+   "column": "sbp_mmhg",
+   "label": "Systolic blood pressure, mmHg",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 126.0,
+     "q1": 115.0,
+     "q3": 140.0,
+     "missing": 462
+    },
+    "eval": {
+     "median": 126.66666666666667,
+     "q1": 116.0,
+     "q3": 140.0,
+     "missing": 46
+    }
+   }
+  },
+  {
+   "column": "dbp_mmhg",
+   "label": "Diastolic blood pressure, mmHg",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 73.0,
+     "q1": 65.0,
+     "q3": 80.0,
+     "missing": 462
+    },
+    "eval": {
+     "median": 73.0,
+     "q1": 66.0,
+     "q3": 80.0,
+     "missing": 46
+    }
+   }
+  },
+  {
+   "column": "rx_count",
+   "label": "Prescription medicines in the past 30 days",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 2.0,
+     "q1": 0.0,
+     "q3": 4.0,
+     "missing": 0
+    },
+    "eval": {
+     "median": 1.5,
+     "q1": 0.0,
+     "q3": 4.0,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "diabetes",
+   "label": "Diabetes",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 1810,
+       "share": 0.15119873026480662
+      },
+      "borderline": {
+       "n": 238,
+       "share": 0.019881380001670706
+      },
+      "missing": {
+       "n": 7,
+       "share": 0.0005847464706373736
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 155,
+       "share": 0.155
+      },
+      "borderline": {
+       "n": 17,
+       "share": 0.017
+      },
+      "missing": {
+       "n": 1,
+       "share": 0.001
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "chf",
+   "label": "Congestive heart failure",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 496,
+       "share": 0.041433464205162474
+      },
+      "missing": {
+       "n": 55,
+       "share": 0.004594436555007936
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 35,
+       "share": 0.035
+      },
+      "missing": {
+       "n": 4,
+       "share": 0.004
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "chd",
+   "label": "Coronary heart disease",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 665,
+       "share": 0.0555509147105505
+      },
+      "missing": {
+       "n": 71,
+       "share": 0.00593099991646479
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 64,
+       "share": 0.064
+      },
+      "missing": {
+       "n": 5,
+       "share": 0.005
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "mi",
+   "label": "Myocardial infarction",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 713,
+       "share": 0.05956060479492106
+      },
+      "missing": {
+       "n": 26,
+       "share": 0.002171915462367388
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 51,
+       "share": 0.051
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "stroke",
+   "label": "Stroke",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 537,
+       "share": 0.04485840781889566
+      },
+      "missing": {
+       "n": 24,
+       "share": 0.002004845042185281
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 48,
+       "share": 0.048
+      },
+      "missing": {
+       "n": 2,
+       "share": 0.002
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "emphysema",
+   "label": "Emphysema",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 347,
+       "share": 0.028986717901595523
+      },
+      "missing": {
+       "n": 24,
+       "share": 0.002004845042185281
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 19,
+       "share": 0.019
+      },
+      "missing": {
+       "n": 2,
+       "share": 0.002
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "chronic_bronchitis",
+   "label": "Chronic bronchitis",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 875,
+       "share": 0.0730933088296717
+      },
+      "missing": {
+       "n": 29,
+       "share": 0.002422521092640548
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 71,
+       "share": 0.071
+      },
+      "missing": {
+       "n": 1,
+       "share": 0.001
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "cancer",
+   "label": "Cancer",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "yes": {
+       "n": 1296,
+       "share": 0.10826163227800518
+      },
+      "missing": {
+       "n": 16,
+       "share": 0.001336563361456854
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "yes": {
+       "n": 93,
+       "share": 0.093
+      },
+      "missing": {
+       "n": 3,
+       "share": 0.003
+      }
+     }
+    }
+   }
+  },
+  {
+   "column": "albumin_g_dl",
+   "label": "Serum albumin, g/dL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 4.2,
+     "q1": 4.0,
+     "q3": 4.4,
+     "missing": 0
+    },
+    "eval": {
+     "median": 4.2,
+     "q1": 4.0,
+     "q3": 4.4,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "creatinine_mg_dl",
+   "label": "Serum creatinine, mg/dL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 0.8642,
+     "q1": 0.7547999999999999,
+     "q3": 1.02,
+     "missing": 0
+    },
+    "eval": {
+     "median": 0.9,
+     "q1": 0.7547999999999999,
+     "q3": 1.0587,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "glucose_mg_dl",
+   "label": "Serum glucose (random), mg/dL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 94.0,
+     "q1": 87.0,
+     "q3": 105.0,
+     "missing": 1
+    },
+    "eval": {
+     "median": 94.0,
+     "q1": 87.0,
+     "q3": 104.0,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "crp_mg_dl",
+   "label": "C-reactive protein, mg/dL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 0.24,
+     "q1": 0.1,
+     "q3": 0.55,
+     "missing": 8
+    },
+    "eval": {
+     "median": 0.24,
+     "q1": 0.1,
+     "q3": 0.52,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "lymphocyte_pct",
+   "label": "Lymphocytes, %",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 29.8,
+     "q1": 24.5,
+     "q3": 35.3,
+     "missing": 51
+    },
+    "eval": {
+     "median": 29.55,
+     "q1": 24.375,
+     "q3": 36.0,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "mcv_fl",
+   "label": "Mean corpuscular volume, fL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 90.5,
+     "q1": 87.3,
+     "q3": 93.5,
+     "missing": 0
+    },
+    "eval": {
+     "median": 90.6,
+     "q1": 87.3,
+     "q3": 93.325,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "rdw_pct",
+   "label": "Red cell distribution width, %",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 12.6,
+     "q1": 12.2,
+     "q3": 13.3,
+     "missing": 0
+    },
+    "eval": {
+     "median": 12.6,
+     "q1": 12.2,
+     "q3": 13.3,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "alk_phos_u_l",
+   "label": "Alkaline phosphatase, U/L",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 71.0,
+     "q1": 58.0,
+     "q3": 87.0,
+     "missing": 1
+    },
+    "eval": {
+     "median": 71.0,
+     "q1": 58.0,
+     "q3": 86.0,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "wbc_10e3_ul",
+   "label": "White blood cell count, x10^3/uL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 6.9,
+     "q1": 5.6,
+     "q3": 8.2,
+     "missing": 0
+    },
+    "eval": {
+     "median": 6.9,
+     "q1": 5.8,
+     "q3": 8.2,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "hba1c_pct",
+   "label": "HbA1c, %",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 5.5,
+     "q1": 5.3,
+     "q3": 5.9,
+     "missing": 16
+    },
+    "eval": {
+     "median": 5.5,
+     "q1": 5.3,
+     "q3": 5.9,
+     "missing": 1
+    }
+   }
+  },
+  {
+   "column": "total_chol_mg_dl",
+   "label": "Total cholesterol, mg/dL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 203.0,
+     "q1": 178.0,
+     "q3": 231.0,
+     "missing": 12
+    },
+    "eval": {
+     "median": 206.0,
+     "q1": 179.0,
+     "q3": 234.0,
+     "missing": 0
+    }
+   }
+  },
+  {
+   "column": "hdl_mg_dl",
+   "label": "HDL cholesterol, mg/dL",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 50.0,
+     "q1": 41.0,
+     "q3": 61.0,
+     "missing": 11
+    },
+    "eval": {
+     "median": 49.0,
+     "q1": 40.0,
+     "q3": 61.0,
+     "missing": 2
+    }
+   }
+  },
+  {
+   "column": "uacr_mg_g",
+   "label": "Urine albumin to creatinine ratio, mg/g",
+   "kind": "num",
+   "sets": {
+    "fit": {
+     "median": 7.291666666666667,
+     "q1": 4.56,
+     "q3": 15.506112953521754,
+     "missing": 192
+    },
+    "eval": {
+     "median": 7.264672472548277,
+     "q1": 4.614674992903775,
+     "q3": 16.606808510638295,
+     "missing": 12
+    }
+   }
+  },
+  {
+   "column": "death_10y",
+   "label": "Died within ten years",
+   "kind": "yes",
+   "sets": {
+    "fit": {
+     "levels": {
+      "1": {
+       "n": 1899,
+       "share": 0.15863336396291036
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    },
+    "eval": {
+     "levels": {
+      "1": {
+       "n": 163,
+       "share": 0.163
+      },
+      "missing": {
+       "n": 0,
+       "share": 0.0
+      }
+     }
+    }
+   }
+  }
+ ]
+}

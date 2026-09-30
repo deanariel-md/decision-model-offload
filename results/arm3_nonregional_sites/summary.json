@@ -1,0 +1,634 @@
+{
+ "run": "non-regional node sites the notes do not name",
+ "written": "2026-09-28T01:33:41",
+ "sites": [
+  {
+   "site": "supraclavicular",
+   "source": "CAP 4.4.0.1 p. 24 (on no colon subsite's list) and p. 26 (nonregional: M1)"
+  },
+  {
+   "site": "mediastinal",
+   "source": "CAP 4.4.0.1 p. 24 (on no colon subsite's list) and p. 26 (nonregional: M1)"
+  },
+  {
+   "site": "inguinal",
+   "source": "CAP 4.4.0.1 p. 24 (on no colon subsite's list) and p. 26 (nonregional: M1)"
+  },
+  {
+   "site": "external iliac",
+   "source": "CAP 4.4.0.1 p. 24 (on no colon subsite's list), p. 25 (distant even for rectal cancers) and p. 26 (nonregional: M1)"
+  },
+  {
+   "site": "common iliac",
+   "source": "CAP 4.4.0.1 p. 24 (on no colon subsite's list), p. 25 (distant even for rectal cancers) and p. 26 (nonregional: M1)"
+  }
+ ],
+ "site_source": {
+  "document": "College of American Pathologists, Protocol for the Examination of Resection Specimens from Patients with Primary Carcinoma of the Colon and / or Rectum, version 4.4.0.1 (posted September 2025), the version config/crc_confusers.yaml cites; www.cap.org/wp-content/uploads/protocols/ColoRectal_4.4.0.1.REL_CAPCP.pdf (read 28 Sep 2026)",
+  "regional_lists": "Explanatory notes, \"N Category Considerations\", page 24: the regional lymph nodes of each anatomical subsite of the large intestine (the lists of CAP figure 7, which the protocol reproduces from the AJCC Cancer Staging Atlas)",
+  "nonregional_rule": "Page 26, \"Nonregional Lymph Nodes\": nodes are designated regional or nonregional by the tumor's anatomic location; metastasis to nonregional lymph nodes is distant metastasis (M1)",
+  "iliac": "Page 25: for rectal cancers, metastasis in the external iliac or common iliac nodes is distant metastasis (the colon lists on page 24 do not include them either)",
+  "ajcc_manual": "The AJCC Cancer Staging Manual, 8th edition, chapter 20, was not available to read; each site is confirmed by the CAP lists and rule above"
+ },
+ "items": "data/arm3_nonregional_sites/items.csv",
+ "items_sha256": "d13eb8ffd6218849b561ea30a56d2a0f1d6c1636495362364df4567cf691acfd",
+ "config_sha256": "b5b470b490de855bccb761083aaa04d644e872844755d52bd043f8113b2f258a",
+ "seed": 20260928,
+ "truth": {
+  "level": "IVA-IVB",
+  "substage": "IVA",
+  "m": "M1a"
+ },
+ "checks": {
+  "n_reports": 20,
+  "cells_as_config": true,
+  "key_by_ajcc_table": true,
+  "ct_m0": true,
+  "phrases_type4_only": true,
+  "site_counts": {
+   "supraclavicular": 4,
+   "mediastinal": 4,
+   "inguinal": 4,
+   "external iliac": 4,
+   "common iliac": 4
+  },
+  "site_counts_by_layout": {
+   "narrative": {
+    "supraclavicular": 2,
+    "mediastinal": 2,
+    "inguinal": 2,
+    "external iliac": 2,
+    "common iliac": 2
+   },
+   "synoptic": {
+    "supraclavicular": 2,
+    "mediastinal": 2,
+    "inguinal": 2,
+    "external iliac": 2,
+    "common iliac": 2
+   }
+  },
+  "site_in_its_report": true,
+  "old_sites_in_reports": [],
+  "tnm_codes_in_reports": [],
+  "stage_in_reports": 0,
+  "ajcc_in_reports": 0,
+  "example_overlaps_8_words": [],
+  "sites_in_sent_questions": {
+   "documented": [],
+   "documented_notes": []
+  },
+  "sites_in_docuse_config": [],
+  "sites_on_a_regional_list": [],
+  "segments_covered": true
+ },
+ "checks_pass": true,
+ "calls": 140,
+ "calls_by_system": {
+  "claude": 20,
+  "gemini": 20,
+  "glm": 20,
+  "gpt": 20,
+  "jev": 40,
+  "muse": 20
+ },
+ "usable": 140,
+ "providers": {
+  "claude": {
+   "Anthropic": 20
+  },
+  "gemini": {
+   "Google": 20
+  },
+  "glm": {
+   "Z.AI": 20
+  },
+  "gpt": {
+   "OpenAI": 20
+  },
+  "jev": {
+   "TypeSafe": 40
+  },
+  "muse": {
+   "Meta": 20
+  }
+ },
+ "models_reported": {
+  "claude": {
+   "anthropic/claude-opus-5.5": 20
+  },
+  "gemini": {
+   "google/gemini-3.8-flash": 20
+  },
+  "glm": {
+   "z-ai/glm-5.3": 20
+  },
+  "gpt": {
+   "openai/gpt-5.6-sol": 20
+  },
+  "jev": {
+   "typesafe/jev-1.13-20260917": 40
+  },
+  "muse": {
+   "meta/muse-spark-1.1": 20
+  }
+ },
+ "routes": {
+  "claude": {
+   "standard": 20
+  },
+  "gemini": {
+   "standard": 20
+  },
+  "glm": {
+   "standard": 20
+  },
+  "gpt": {
+   "standard": 20
+  },
+  "jev": {
+   "standard": 40
+  },
+  "muse": {
+   "standard": 20
+  }
+ },
+ "usd_reported": 0.647736662,
+ "usd_reported_by_system": {
+  "claude": 0.18228,
+  "gemini": 0.0500265,
+  "glm": 0.2058208,
+  "gpt": 0.081112,
+  "jev": 0.004976412,
+  "muse": 0.12352095
+ },
+ "errors": {},
+ "systems": {
+  "jev/documented": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 6,
+   "misread_level": 13,
+   "answers": {
+    "IIIB": 9,
+    "IIIC": 5,
+    "IVA-IVB": 6
+   },
+   "four_questions": {
+    "t_category": {
+     "T3": 7,
+     "T4a": 7,
+     "T4b": 6
+    },
+    "regional_nodes": {
+     "1": 6,
+     "2 to 3": 6,
+     "4 to 6": 8
+    },
+    "tumor_deposits": {
+     "absent": 20
+    },
+    "distant_metastasis": {
+     "none": 14,
+     "M1a": 6
+    }
+   },
+   "four_questions_correct": {
+    "t_category": 20,
+    "regional_nodes": 20,
+    "tumor_deposits": 20,
+    "distant_metastasis": 6
+   },
+   "joint_confidence": {
+    "n": 20,
+    "mean": 0.7781377777777777,
+    "median": 0.76115,
+    "min": 0.54,
+    "max": 0.99
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4,
+     "distant_metastasis": {
+      "M1a": 4
+     }
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 2,
+     "distant_metastasis": {
+      "M1a": 2,
+      "none": 2
+     }
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 0,
+     "distant_metastasis": {
+      "none": 4
+     }
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 0,
+     "distant_metastasis": {
+      "none": 4
+     }
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 0,
+     "distant_metastasis": {
+      "none": 4
+     }
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 0,
+    "misread_level": 20,
+    "answers": {
+     "IIIB": 11,
+     "IIIC": 9
+    },
+    "four_questions": {
+     "t_category": {
+      "T3": 7,
+      "T4a": 7,
+      "T4b": 6
+     },
+     "regional_nodes": {
+      "1": 6,
+      "2 to 3": 6,
+      "4 to 6": 8
+     },
+     "tumor_deposits": {
+      "absent": 20
+     },
+     "distant_metastasis": {
+      "none": 20
+     }
+    },
+    "four_questions_correct": {
+     "t_category": 20,
+     "regional_nodes": 20,
+     "tumor_deposits": 20,
+     "distant_metastasis": 0
+    },
+    "joint_confidence": {
+     "n": 20,
+     "mean": 0.8932369590909088,
+     "median": 0.9104000000000001,
+     "min": 0.7719,
+     "max": 0.9603999999999999
+    },
+    "source": "results/arm3_docuse/calls.parquet and parts.parquet (repeat 0), the 20 type 4 reports"
+   }
+  },
+  "jev/documented_notes": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 14,
+   "misread_level": 6,
+   "answers": {
+    "IIIB": 3,
+    "IIIC": 3,
+    "IVA-IVB": 14
+   },
+   "four_questions": {
+    "t_category": {
+     "T3": 7,
+     "T4a": 7,
+     "T4b": 6
+    },
+    "regional_nodes": {
+     "1": 6,
+     "2 to 3": 6,
+     "4 to 6": 8
+    },
+    "tumor_deposits": {
+     "absent": 20
+    },
+    "distant_metastasis": {
+     "none": 6,
+     "M1a": 14
+    }
+   },
+   "four_questions_correct": {
+    "t_category": 20,
+    "regional_nodes": 20,
+    "tumor_deposits": 20,
+    "distant_metastasis": 14
+   },
+   "joint_confidence": {
+    "n": 20,
+    "mean": 0.75589,
+    "median": 0.73875,
+    "min": 0.49,
+    "max": 0.95
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4,
+     "distant_metastasis": {
+      "M1a": 4
+     }
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 4,
+     "distant_metastasis": {
+      "M1a": 4
+     }
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 2,
+     "distant_metastasis": {
+      "M1a": 2,
+      "none": 2
+     }
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 1,
+     "distant_metastasis": {
+      "M1a": 1,
+      "none": 3
+     }
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 3,
+     "distant_metastasis": {
+      "M1a": 3,
+      "none": 1
+     }
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 20,
+    "misread_level": 0,
+    "answers": {
+     "IVA-IVB": 20
+    },
+    "four_questions": {
+     "t_category": {
+      "T3": 7,
+      "T4a": 7,
+      "T4b": 6
+     },
+     "regional_nodes": {
+      "1": 6,
+      "2 to 3": 6,
+      "4 to 6": 8
+     },
+     "tumor_deposits": {
+      "absent": 20
+     },
+     "distant_metastasis": {
+      "M1a": 20
+     }
+    },
+    "four_questions_correct": {
+     "t_category": 20,
+     "regional_nodes": 20,
+     "tumor_deposits": 20,
+     "distant_metastasis": 20
+    },
+    "joint_confidence": {
+     "n": 20,
+     "mean": 0.9631200000000002,
+     "median": 0.96515,
+     "min": 0.93,
+     "max": 0.99
+    },
+    "source": "results/arm3_docuse/calls.parquet and parts.parquet (repeat 0), the 20 type 4 reports"
+   }
+  },
+  "gpt/names": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 20,
+   "misread_level": 0,
+   "answers": {
+    "IVA-IVB": 20
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 4
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 4
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 20,
+    "misread_level": 0,
+    "answers": {
+     "IVA-IVB": 20
+    },
+    "source": "results/arm3_confuser/calls.parquet (names, repeat 0), the 20 type 4 reports"
+   }
+  },
+  "claude/names": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 20,
+   "misread_level": 0,
+   "answers": {
+    "IVA-IVB": 20
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 4
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 4
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 20,
+    "misread_level": 0,
+    "answers": {
+     "IVA-IVB": 20
+    },
+    "source": "results/arm3_confuser/calls.parquet (names, repeat 0), the 20 type 4 reports"
+   }
+  },
+  "gemini/names": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 20,
+   "misread_level": 0,
+   "answers": {
+    "IVA-IVB": 20
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 4
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 4
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 20,
+    "misread_level": 0,
+    "answers": {
+     "IVA-IVB": 20
+    },
+    "source": "results/arm3_confuser/calls.parquet (names, repeat 0), the 20 type 4 reports"
+   }
+  },
+  "muse/names": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 20,
+   "misread_level": 0,
+   "answers": {
+    "IVA-IVB": 20
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 4
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 4
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 20,
+    "misread_level": 0,
+    "answers": {
+     "IVA-IVB": 20
+    },
+    "source": "results/arm3_confuser/calls.parquet (names, repeat 0), the 20 type 4 reports"
+   }
+  },
+  "glm/names": {
+   "n_reports": 20,
+   "answered": 20,
+   "usable": 20,
+   "correct": 20,
+   "misread_level": 0,
+   "answers": {
+    "IVA-IVB": 20
+   },
+   "by_site": {
+    "supraclavicular": {
+     "n": 4,
+     "correct": 4
+    },
+    "mediastinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "inguinal": {
+     "n": 4,
+     "correct": 4
+    },
+    "external iliac": {
+     "n": 4,
+     "correct": 4
+    },
+    "common iliac": {
+     "n": 4,
+     "correct": 4
+    }
+   },
+   "para_aortic_aortocaval_reports": {
+    "n_reports": 20,
+    "answered": 20,
+    "usable": 20,
+    "correct": 20,
+    "misread_level": 0,
+    "answers": {
+     "IVA-IVB": 20
+    },
+    "source": "results/arm3_confuser/calls.parquet (names, repeat 0), the 20 type 4 reports"
+   }
+  }
+ }
+}

@@ -1,0 +1,107 @@
+# Arm 3, ordered levels (Jev's Score output): colorectal stage group from template-built pathology reports.
+# Read by the shared categorical code (src/jevity/categorical.py, scripts/run_categorical.py).
+# Truth: the stage table of config/crc_ajcc8.yaml.
+arm: arm3
+kind: score
+population: arm3                    # synthetic reports written from templates
+seed: 20260922                      # repeat set, call order, bootstrap
+instructions: "Assign the pathological stage group for this colorectal cancer according to the AJCC Cancer Staging Manual, 8th edition. Stage IVA-IVB here includes IVA and IVB."
+answer_key: stage                   # chatbot reply {"stage": "IIIB", "probabilities": {"0": x, ..., "IVC": x}}
+# Reply rule, the same for every system: an answer of IVA or IVB counts as IVA-IVB, and how often is logged. Applied by
+# the shared chatbot parser (answer_how "alias", prob_alias); counted by arm3_metrics.alias_log.
+answer_aliases: {IVA: IVA-IVB, IVB: IVA-IVB}
+
+# The 10 ordered levels, lowest first (IVA and IVB combined; IVC separate): the same for every system and both versions.
+# Each definition must equal crc.level_definition (tested); the names-only version shows the names alone.
+levels:
+  - {name: "0",    definition: "Tis N0 M0"}
+  - {name: "I",    definition: "T1-T2 N0 M0"}
+  - {name: "IIA",  definition: "T3 N0 M0"}
+  - {name: "IIB",  definition: "T4a N0 M0"}
+  - {name: "IIC",  definition: "T4b N0 M0"}
+  - {name: "IIIA", definition: "T1-T2 N1a-N1c M0; T1 N2a M0"}
+  - {name: "IIIB", definition: "T3-T4a N1a-N1c M0; T2-T3 N2a M0; T1-T2 N2b M0"}
+  - {name: "IIIC", definition: "T4a N2a M0; T3-T4a N2b M0; T4b N1a-N2b M0"}
+  - {name: "IVA-IVB", definition: "any T, any N, M1a-M1b"}
+  - {name: "IVC",  definition: "any T, any N, M1c"}
+# Both versions ask the whole pool of 1,000 reports.
+variants:
+  names: {definitions: false}       # primary
+  definitions: {definitions: true}  # secondary: the 10 levels with their definitions, "IIIB: ..."
+primary_variant: names
+
+items:
+  main: data/arm3/items.csv         # 1,000 reports, 100 per level
+  id_column: report_id
+  state_column: report              # what Jev receives as state and the chatbots as the report
+  truth_column: level
+  stratum_column: level             # the stratified bootstrap resamples within level
+  group_column: substage            # IVA and IVB kept apart for re-scoring
+  repeat_column: repeat             # the 40 asked three times, stored so both
+                                    # versions repeat the same 40
+repeats: {n_items: 40, n_repeats: 3}               # repeat 0 is the main pass
+systems:
+  tiers: [primary, free, pair]      # as in arm 2: Jev plus every active family of these tiers in config/models.yaml
+route:
+  batch: true                       # as in arms 1 and 2
+  workers: {}                       # optional cap on parallel requests per system, e.g. {glm: 8}; empty = no cap
+keys:
+  env_file: .env                    # API keys; a relative path is read from the repository root
+jev:
+  question_id: crc_stage_group      # one Score question; criteria = the 10 levels, low to high
+prompts:                            # chatbots: system and reply joined by one space (tested); Jev gets the report as
+  system: >                         # state and the Score question, no prompt
+    Choose the stage group that is correct, and give the probability that each stage group is correct, as numbers
+    between 0 and 1 that add up to 1.
+  reply: >
+    Always choose one stage group. Reply with a JSON object with two keys, "stage" (the stage group you choose, written
+    exactly as in the list) and "probabilities" (an object with one number for each stage group), and nothing else.
+  user_template: |
+    Pathology report:
+    {state}
+
+    Question: {instructions}
+
+    Stage groups:
+    {options}
+analysis:
+  primary_metric: exact_accuracy
+  strata_column: level
+  proper_score: rps                 # ranked probability score over the 10 ordered levels
+  n_boot: 2000
+  ci: 0.95
+  margin: 0.05                      # non-inferiority and acceptable-cheaper margin on exact accuracy (5 points)
+  coverages: [0.5, 0.8]
+  ece_bins: 10
+  min_errors_auroc: 20
+  cost_basis: list
+  hybrid_share:                     # the hybrid test as in arm 2. Jev answers the half of the reports where its top
+    jev_share: 0.5                  # probability is highest (ties by report id), the chatbot the rest; Jev's output
+                                    # only, never the truth. Hybrid minus the chatbot alone on exact accuracy, margin
+                                    # -5 points, Holm across the five primary chatbots: no worse, inconclusive or worse.
+                                    # The test is the names version's (analysis.json); the definitions version's is
+                                    # descriptive.
+# Supplement tables (scripts/arm3_supplement.py; no calls). Descriptive: repeatability, cost, the hybrid at
+# analysis.hybrid_share, and on the names version accuracy by report format and the component behind each wrong answer.
+# The same share handed to Jev at random and the coverage curve (Jev's share 10-90%, the shared code's grid) come from
+# the shared analysis.
+timing:
+  n: 100
+  window_min: 60
+budget:
+  arm_stop_usd: null                # refuse a run whose projected cost (USD) is above this; null = no limit
+  project_stop_usd: null            # before every batch submission: key usage + open holds + this submission must stay
+                                    # at or below this (USD); null = no limit
+  manifest_roots: [runs]            # run folders whose open batches count as holds; relative to the repository root
+  tokens_out:                       # output tokens per call, for the cost projection only
+    gpt: 400
+    claude: 150
+    gemini: 1100
+    muse: 1900
+    glm: 6000
+    gpt_free: 300
+    claude_free: 150
+    gemini_free: 100
+    medgemma: 100
+    gemma: 100
+    default: 2000

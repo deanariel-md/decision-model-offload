@@ -1,0 +1,56 @@
+{
+ "note": "AUROC 95% intervals for the five free-plan and open-weight models (Fig. 1a; stored answers only, no model call).",
+ "n": 12697,
+ "deaths": 2002,
+ "B": 2000,
+ "seed": 20260927,
+ "checks": {
+  "gpt": "auroc and auroc_ci equal results/summaries/risk_classic.json",
+  "claude": "auroc and auroc_ci equal results/summaries/risk_classic.json",
+  "gemini": "auroc and auroc_ci equal results/summaries/risk_classic.json",
+  "muse": "auroc and auroc_ci equal results/summaries/risk_classic.json",
+  "glm": "auroc and auroc_ci equal results/summaries/risk_classic.json",
+  "gpt_free": "auroc equals results/summaries/wide_cheaper_structured.json",
+  "claude_free": "auroc equals results/summaries/wide_cheaper_structured.json",
+  "gemini_free": "auroc equals results/summaries/wide_cheaper_structured.json",
+  "medgemma": "auroc equals results/summaries/wide_cheaper_structured.json",
+  "gemma": "auroc equals results/summaries/wide_cheaper_structured.json"
+ },
+ "systems": {
+  "gpt_free": {
+   "auroc": 0.8342295385773647,
+   "auroc_ci": [
+    0.8249332975580564,
+    0.8438433555047489
+   ]
+  },
+  "claude_free": {
+   "auroc": 0.8304922753730608,
+   "auroc_ci": [
+    0.8210372160882764,
+    0.8400320676309733
+   ]
+  },
+  "gemini_free": {
+   "auroc": 0.831674309794927,
+   "auroc_ci": [
+    0.8225026856454244,
+    0.8417374699692988
+   ]
+  },
+  "medgemma": {
+   "auroc": 0.7826097464947395,
+   "auroc_ci": [
+    0.7721539265454783,
+    0.7935946999749963
+   ]
+  },
+  "gemma": {
+   "auroc": 0.787310235346701,
+   "auroc_ci": [
+    0.7774606977466827,
+    0.7979657208346423
+   ]
+  }
+ }
+}

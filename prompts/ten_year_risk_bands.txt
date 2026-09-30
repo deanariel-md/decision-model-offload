@@ -1,0 +1,22 @@
+Ten-year risk of death, risk-band question (Supplementary Note 1; Jev only): one Choice question; each of the four
+options is sent as a key with its criterion. {record}: the survey record as text (src/jevity/serialize.py). Built by
+src/jevity/clients.py (JevClient, question "risk_bands") from config/prompts.yaml.
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{record}",
+  "questions": {
+    "ten_year_outcome": {
+      "type": "choice",
+      "instructions": "Which of these will happen to this person after this examination?",
+      "criteria": {
+        "died_within_2_years": "Died from any cause within 2 years of this examination.",
+        "died_2_to_5_years": "Died from any cause at least 2 and under 5 years after this examination.",
+        "died_5_to_10_years": "Died from any cause at least 5 and under 10 years after this examination.",
+        "alive_at_10_years": "Alive ten years after this examination."
+      }
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

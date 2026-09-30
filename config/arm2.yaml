@@ -1,0 +1,109 @@
+# Arm 2, multiple choice (Jev's Choice output). Read by src/jevity/categorical.py (clients, parsing),
+# src/jevity/categorical_analysis.py and scripts/run_categorical.py.
+arm: arm2
+kind: choice
+population: arm2                    # synthetic patient messages
+seed: 20260922                      # option shuffle (per item), repeat set, call order, bootstrap
+instructions: "Which is the most appropriate next step for this person?"
+answer_key: choice                  # chatbot reply {"choice": "A", "probabilities": {"A": x, "B": x, "C": x, "D": x}}
+
+items:
+  main: data/arm2/items.csv                     # 180 items
+  id_column: item_id
+  state_column: prompt_sent                     # the message with its opening line rewritten (what every system
+                                                # receives); prompt_patient keeps the original text
+  truth_column: truth                           # canonical: low_value -> B, appropriate_care -> A
+  stratum_column: vignette_type                 # balanced accuracy and the stratified bootstrap
+  group_column: recommendation_id               # one option set per recommendation
+  order_column: presented_order                 # canonical letters shown as A, B, C, D (seeded shuffle, stored)
+  repeat_column: repeat_set                     # the 40 randomly drawn items asked three times
+  option_columns: {A: option_A, B: option_B, C: option_C, D: option_D}   # option text per canonical letter
+repeats: {n_items: 40, n_repeats: 3}            # repeat 0 is the main pass
+systems:
+  tiers: [primary, free, pair]                  # Jev plus every active family of these tiers in config/models.yaml
+route:
+  batch: true                                   # as in arm 1: families under `batch` in config/models.yaml go through
+                                                # the Batch API; Jev, Muse, GLM, Sonnet 5 and the pair synchronous
+  workers: {}                                   # per-system cap on parallel requests, e.g. {glm: 8} (none: the
+                                                # command-line --workers); any 429 pauses every worker of that family
+keys:
+  env_file: .env                                # API keys; a relative path is read from the repository root
+jev:
+  question_id: next_step                        # one Choice question; criteria = the four option texts keyed by letter
+prompts:                                        # chatbots; Jev receives the message as state and the question
+  system: >                                     # the chatbots' system message is system + " " + reply
+    Choose the option that is the most appropriate next step, and give the probability that each option is the most
+    appropriate next step, as numbers between 0 and 1 that add up to 1.
+  reply: >
+    Always choose one option. Reply with a JSON object with two keys, "choice" (the letter of the option you choose)
+    and "probabilities" (an object with one number for each letter), and nothing else.
+  user_template: |
+    Message:
+    {state}
+
+    Question: {instructions}
+
+    {options}
+analysis:
+  primary_metric: balanced_accuracy             # mean of accuracy on low-value and on appropriate-care items
+  strata_column: vignette_type
+  rates:                                        # share of the items in `among` (every item when omitted) answered in
+    overuse: {answer_in: [A], among: low_value}             # `answer_in`; an unusable answer counts in the
+    false_restraint: {answer_in: [B], among: appropriate_care}   # denominator and not in the numerator
+    distractor: {answer_in: [C, D]}
+  proper_score: brier                           # multiclass Brier score
+  n_boot: 2000
+  ci: 0.95
+  margin: 0.05                                  # non-inferiority and acceptable-cheaper margin (5 points)
+  alpha_one_sided: 0.025                        # Holm-adjusted lower bound across the five primary chatbots
+  coverages: [0.5, 0.8]                         # routing: accuracy on each system's most confident 50% and 80%
+  ece_bins: 10                                  # equal-count bins of the top-choice probability
+  min_errors_auroc: 20
+  cost_basis: list                              # acceptable-cheaper verdict: Holm-adjusted lower bound above -5 points
+                                                # and lower list-price cost per correct answer; billed alongside
+  style_check:                                  # descriptive; items unchanged
+    features:                                   # counted in the message as sent (state_column), in this order
+      word_count: '\S+'                         # a word = a run of non-space characters
+      negation_count: '\b(never|no|not|none|nothing|without|cannot|nobody|nowhere|neither|nor|dont|cant|wont|didnt|doesnt|isnt|wasnt|\w+n[''’]t)\b'
+                                                # every n't contraction (straight or curly apostrophe), cannot,
+                                                # nobody, nowhere, neither, nor, and seven contractions written
+                                                # without an apostrophe
+    ignore_case: true
+    positive_stratum: low_value                 # logistic regression of low_value (1) against appropriate_care (0),
+                                                # unpenalised, leave one recommendation out; out-of-fold prediction
+                                                # low_value -> B, appropriate_care -> A
+    class_weight: balanced                      # the two strata weigh equally, as in balanced accuracy
+  hybrid_share:                                 # Jev answers the share of items where its top probability is highest
+    jev_share: 0.5                              # (ties by item id), the chatbot the rest; Jev's output only, never the
+                                                # truth; hybrid minus chatbot, Holm across the primary chatbots
+  certain_at: 0.995                             # "probability 1.00": a top probability that shows as 1.00 at two
+                                                # decimals, as the second item set
+  post_hoc:                                     # descriptive block (output key post_hoc); the analyses above are
+                                                # unaffected
+    rates_by_group: {rates: [overuse, false_restraint], label_column: intervention, chatbot: gpt, label: A, among: low_value}
+    cluster_sensitivity: true                   # the 14 recommendations resampled whole (they share option sets)
+    certain_errors: true                        # Jev's wrong answers at probability 1.00
+    by_category: {clinical_domain: [clinical_domain], evidence_grade: [evidence_grade]}
+    confidence_table: true                      # Brier score beside the calibration error, AUROC, selective accuracy
+timing: {n: 100, window_min: 60}                # one question at a time per system, interleaved, same hour
+budget:
+  arm_stop_usd: null                            # refuse a run whose projected cost exceeds this (null: no stop)
+  project_stop_usd: null                        # before every batch submission: key usage + every open batch's
+                                                # worst-case hold + this submission's must stay at or below it (null:
+                                                # no stop); the balance must always cover the holds
+  holds_in_balance: true                        # the balance OpenRouter reports already has the booked holds taken
+                                                # off, so it must cover this submission alone
+  manifest_roots: [runs]                        # run folders (<root>/<run>/batches) whose open batches count as
+                                                # holds; relative to the repository root
+  tokens_out:                                   # assumed output tokens per call, for the cost projection only
+    gpt: 400
+    claude: 150
+    gemini: 1100
+    muse: 1900
+    glm: 6000
+    gpt_free: 300
+    claude_free: 150
+    gemini_free: 100
+    medgemma: 100
+    gemma: 100
+    default: 2000

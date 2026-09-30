@@ -1,0 +1,18 @@
+{
+ "n": 100,
+ "variant": "documented",
+ "window_min": 60.0,
+ "date": "20260927",
+ "store": "runs/arm3_docuse_timing_20260927",
+ "systems": {
+  "jev": {
+   "n": 100,
+   "usable": 99,
+   "errors": 1,
+   "median_s": 0.7872328758239746,
+   "p90_s": 0.8935571670532226,
+   "mean_s": 0.7703274789482656,
+   "window_start": "2026-09-27T21:40:56"
+  }
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "n_profiles": 200,
+ "fields": [
+  "heart_rate",
+  "serum_sodium",
+  "haematocrit",
+  "blood_urea_nitrogen",
+  "serum_creatinine"
+ ],
+ "by_model": [
+  {
+   "model": "claude",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.04,
+   "mae": 8.1194,
+   "exact_match_ratio_to_baseline": 1.1429,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "gemini",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.045,
+   "mae": 7.7474,
+   "exact_match_ratio_to_baseline": 1.2857,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "glm",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.025,
+   "mae": 8.5914,
+   "exact_match_ratio_to_baseline": 0.7143,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "gpt",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.03,
+   "mae": 7.6958,
+   "exact_match_ratio_to_baseline": 0.8571,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "imputation_baseline",
+   "n": 200,
+   "valid": 1.0,
+   "exact_match": 0.035,
+   "mae": 8.916,
+   "exact_match_ratio_to_baseline": 1.0,
+   "flag_possible_exposure": false
+  },
+  {
+   "model": "muse",
+   "n": 200,
+   "valid": 0.94,
+   "exact_match": 0.045,
+   "mae": 8.4028,
+   "exact_match_ratio_to_baseline": 1.2857,
+   "flag_possible_exposure": false
+  }
+ ],
+ "by_model_field": [
+  {
+   "model": "claude",
+   "field": "blood_urea_nitrogen",
+   "exact": 0.05
+  },
+  {
+   "model": "claude",
+   "field": "haematocrit",
+   "exact": 0.0
+  },
+  {
+   "model": "claude",
+   "field": "heart_rate",
+   "exact": 0.025
+  },
+  {
+   "model": "claude",
+   "field": "serum_creatinine",
+   "exact": 0.075
+  },
+  {
+   "model": "claude",
+   "field": "serum_sodium",
+   "exact": 0.05
+  },
+  {
+   "model": "gemini",
+   "field": "blood_urea_nitrogen",
+   "exact": 0.05
+  },
+  {
+   "model": "gemini",
+   "field": "haematocrit",
+   "exact": 0.0
+  },
+  {
+   "model": "gemini",
+   "field": "heart_rate",
+   "exact": 0.025
+  },
+  {
+   "model": "gemini",
+   "field": "serum_creatinine",
+   "exact": 0.125
+  },
+  {
+   "model": "gemini",
+   "field": "serum_sodium",
+   "exact": 0.025
+  },
+  {
+   "model": "glm",
+   "field": "blood_urea_nitrogen",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "haematocrit",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "heart_rate",
+   "exact": 0.0
+  },
+  {
+   "model": "glm",
+   "field": "serum_creatinine",
+   "exact": 0.025
+  },
+  {
+   "model": "glm",
+   "field": "serum_sodium",
+   "exact": 0.1
+  },
+  {
+   "model": "gpt",
+   "field": "blood_urea_nitrogen",
+   "exact": 0.025
+  },
+  {
+   "model": "gpt",
+   "field": "haematocrit",
+   "exact": 0.0
+  },
+  {
+   "model": "gpt",
+   "field": "heart_rate",
+   "exact": 0.0
+  },
+  {
+   "model": "gpt",
+   "field": "serum_creatinine",
+   "exact": 0.05
+  },
+  {
+   "model": "gpt",
+   "field": "serum_sodium",
+   "exact": 0.075
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "blood_urea_nitrogen",
+   "exact": 0.025
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "haematocrit",
+   "exact": 0.025
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "heart_rate",
+   "exact": 0.0
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "serum_creatinine",
+   "exact": 0.05
+  },
+  {
+   "model": "imputation_baseline",
+   "field": "serum_sodium",
+   "exact": 0.075
+  },
+  {
+   "model": "muse",
+   "field": "blood_urea_nitrogen",
+   "exact": 0.05
+  },
+  {
+   "model": "muse",
+   "field": "haematocrit",
+   "exact": 0.0
+  },
+  {
+   "model": "muse",
+   "field": "heart_rate",
+   "exact": 0.0
+  },
+  {
+   "model": "muse",
+   "field": "serum_creatinine",
+   "exact": 0.05
+  },
+  {
+   "model": "muse",
+   "field": "serum_sodium",
+   "exact": 0.125
+  }
+ ],
+ "note": "Limited specificity: a negative result does not exclude exposure; a positive result is a flag, not proof. Imputation trained on the other demo stays (open data)."
+}

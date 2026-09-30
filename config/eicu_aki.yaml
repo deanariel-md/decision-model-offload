@@ -1,0 +1,143 @@
+# eICU AKI, ordered levels (Jev's Score output): highest KDIGO AKI stage by the creatinine criteria in the first 72 h of
+# an intensive care unit stay, from eICU-CRD Demo v2.0.1 records. Demo data only (open access, Open Database License);
+# nothing from the credentialed full eICU goes to a model. Arm 3's Score request, parser and analysis, read by the
+# shared categorical code (src/jevity/categorical.py, scripts/run_categorical.py). Records and key:
+# scripts/make_eicu_aki.py with src/jevity/kdigo.py.
+arm: eicu_aki
+kind: score
+population: eicu_demo               # open eICU demo: allowed on every route (config/models.yaml batch.populations)
+seed: 20260922                      # sample, repeat set, call order, bootstrap
+instructions: "By the KDIGO creatinine criteria, what was this patient's highest AKI stage during the first 72 hours in the intensive care unit?"
+answer_key: stage                   # chatbot reply {"stage": "stage 2", "probabilities": {"no AKI": x, ..., "stage 3": x}}
+
+# The 4 ordered levels, lowest first. The definitions version shows the KDIGO creatinine table, written as the key
+# applies it (kdigo below): the baseline is the lowest value in the preceding 7 days; closed bands (1.5 or more but less
+# than 2.0, ...) and the 4.0 rule as the key applies it.
+levels:
+  - {name: "no AKI",  definition: "no value from unit admission to 72 hours is 0.3 mg/dL or more above a value in the preceding 48 hours or 1.5 times or more the lowest value in the preceding 7 days, and no dialysis started"}
+  - {name: "stage 1", definition: "a value 1.5 times or more but less than 2.0 times the lowest value in the preceding 7 days, or 0.3 mg/dL or more above a value in the preceding 48 hours"}
+  - {name: "stage 2", definition: "a value 2.0 times or more but less than 3.0 times the lowest value in the preceding 7 days"}
+  - {name: "stage 3", definition: "a value 3.0 times or more the lowest value in the preceding 7 days; or a value of 4.0 mg/dL or more that itself meets the stage 1 rise or ratio; or dialysis started"}
+variants:
+  names: {definitions: false}       # primary: stage names only
+  definitions: {definitions: true}  # secondary: the KDIGO creatinine table shown, "stage 2: ..."
+primary_variant: names
+
+# The key: KDIGO 2012 applied to exactly the values a record shows (src/jevity/kdigo.py; tested on hand-worked cases).
+# Times in minutes from unit admission.
+kdigo:
+  record_from_min: -10080           # values from 7 days before unit admission
+  record_to_min: 4320               # to 72 h after
+  assess_from_min: 0                # a value can carry a stage only if taken 0-72 h after unit admission; earlier
+  assess_to_min: 4320               # values serve as reference values only
+  rise_mg_dl: "0.3"                 # stage 1: a rise of at least 0.3 mg/dL over the lowest value in the preceding 48 h
+  rise_window_min: 2880
+  ratio_window_min: 10080           # ratio to the lowest value in the preceding 7 days (strictly earlier values)
+  ratio_stages: [["1.5", 1], ["2.0", 2], ["3.0", 3]]   # 1.5-1.9 stage 1, 2.0-2.9 stage 2, 3.0 or more stage 3
+  stage3_mg_dl: "4.0"               # stage 3 also for a value of 4.0 mg/dL or more with an acute rise (either criterion)
+  dialysis_stage: 3                 # stage 3 when dialysis started at or before 72 h (the record shows its time)
+  dialysis_treatments:              # treatment.treatmentstring values that mean dialysis was given (demo 2.0.1)
+    - "renal|dialysis|hemodialysis"
+    - "renal|dialysis|hemodialysis|emergent"
+    - "renal|dialysis|hemodialysis|for acute renal failure"
+    - "renal|dialysis|hemodialysis|for chronic renal failure"
+    - "renal|dialysis|C V V H"
+    - "renal|dialysis|C V V H D"
+    - "renal|electrolyte correction|treatment of hyperkalemia|dialysis"
+    - "endocrine|electrolyte correction|treatment of hyperkalemia|dialysis"
+  not_dialysis:                     # access procedures: not dialysis given
+    - "renal|dialysis|insertion of venous catheter for hemodialysis"
+    - "renal|dialysis|insertion of venous catheter for hemodialysis|percutaneous catheter"
+    - "renal|dialysis|insertion of venous catheter for hemodialysis|tunneled catheter"
+    - "renal|procedures/radiology|insertion of venous catheter for hemodialysis"
+    - "renal|dialysis|arteriovenous shunt for renal dialysis"
+records:
+  demo_dir: data/raw/eicu-crd-demo  # the unzipped demo (csv.gz); scripts/make_eicu_aki.py --demo overrides
+  demo_stays_max: 3000              # guard: the demo has 2,520 unit stays; a larger source is refused
+  min_values: 2                     # at least two creatinine values from 7 days before to 72 h after unit admission
+  per_stage: 250                    # sample: up to 250 stays per stage, seeded
+  parser_test_per_stage: 1          # per stage, the first stay drawn is set aside (never scored); the next per_stage
+                                    # go to the main set
+  # Patients on maintenance dialysis and stays with no creatinine value in the first 72 h are tests of their own (the
+  # side set, config/eicu_aki_side.yaml), not in the main set; one stay per patient across every set.
+  chronic_dialysis:                 # a patient is on maintenance dialysis if any of their stays shows one of these
+    apache_flag: dialysis           # apacheApsVar.dialysis == 1 (APACHE's chronic dialysis)
+    past_history: dialysis          # pastHistory.pasthistorypath contains this word
+    treatment: "for chronic renal failure"   # a dialysis treatment string contains this
+  one_stay_per_patient: true
+  stage_order: ["stage 2", "stage 3", "stage 1", "no AKI"]   # rarest first: a patient's stay is drawn for the rarest
+                                    # stage it can fill; then the side set from the patients not drawn
+  side_items: data/eicu_aki/side_items.csv
+  # The "unknown" version (names wording, "unknown" added to the list), first in the list for half the records and
+  # last for the other half (config/eicu_aki_unknown_first.yaml, _last.yaml). Every main and side record once, halves
+  # drawn at random within set x stage x baseline-sensitive; item ids as in the main and side sets.
+  unknown_items: {first: data/eicu_aki/unknown_first_items.csv, last: data/eicu_aki/unknown_last_items.csv}
+
+items:
+  main: data/eicu_aki/items.csv
+  id_column: item_id
+  state_column: record              # what Jev receives as state and the chatbots as the record
+  truth_column: stage
+  stratum_column: stage             # the stratified bootstrap resamples within stage
+  group_column: criterion           # what gave the key's stage (ratio, rise, value 4.0 or more with a rise, dialysis)
+repeats: {n_items: 40, n_repeats: 3}               # repeat 0 is the main pass; the shared seeded draw
+systems:
+  tiers: [primary, free, pair]      # as arm 3: Jev, the five main chatbots, the free-plan models, MedGemma and Gemma
+route:
+  batch: true                       # as arm 3
+  workers: {glm: 100, medgemma: 3, gemma: 2}   # parallel requests per system (MedGemma and Gemma share one provider)
+keys:
+  env_file: .env                    # API keys; a relative path is read from the repository root
+jev:
+  question_id: aki_stage            # one Score question; criteria = the 4 levels, low to high
+prompts:                            # arm 3's skeleton; only the variables change (the answer noun and the record label, "Patient:")
+  system: >
+    Choose the AKI stage that is correct, and give the probability that each AKI stage is correct, as numbers
+    between 0 and 1 that add up to 1.
+  reply: >
+    Always choose one AKI stage. Reply with a JSON object with two keys, "stage" (the AKI stage you choose, written
+    exactly as in the list) and "probabilities" (an object with one number for each AKI stage), and nothing else.
+  user_template: |
+    Patient:
+    {state}
+
+    Question: {instructions}
+
+    AKI stages:
+    {options}
+analysis:
+  primary_metric: exact_accuracy
+  strata_column: stage
+  proper_score: rps                 # ranked probability score over the 4 ordered levels
+  n_boot: 2000
+  ci: 0.95
+  margin: 0.05                      # non-inferiority and hybrid margin on exact accuracy (5 points)
+  coverages: [0.5, 0.8]
+  ece_bins: 10
+  min_errors_auroc: 20
+  cost_basis: list
+  hybrid_share:                     # as arm 3: Jev answers the half of the records where its top probability is highest
+    jev_share: 0.5                  # (ties by item id), the chatbot the rest; hybrid minus the chatbot alone, margin -5
+                                    # points, Holm across the five main chatbots. The names version's test; the
+                                    # definitions version's is descriptive.
+timing:
+  n: 100
+  window_min: 60
+  hold: "no timing sample for this set"   # the shared code refuses a live timing sample while this is set
+budget:
+  arm_stop_usd: null                # refuse a run whose projected cost (USD) is above this; null = no limit
+  project_stop_usd: null            # before every batch submission: key usage + open holds + this submission must stay
+                                    # at or below this (USD); null = no limit
+  manifest_roots: [runs]            # run folders whose open batches count as holds; relative to the repository root
+  tokens_out:                       # output tokens per call, for the cost projection only
+    gpt: 400
+    claude: 150
+    gemini: 1100
+    muse: 1900
+    glm: 6000
+    gpt_free: 300
+    claude_free: 150
+    gemini_free: 100
+    medgemma: 100
+    gemma: 100
+    default: 2000

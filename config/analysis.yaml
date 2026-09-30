@@ -1,0 +1,11 @@
+# crit_inflation multiplies the confirmatory, per-edit and consensus max-t critical values (not the prediction block).
+# It calibrates the bootstrap max-t for shared reference error: in synthetic null replicates of the confirmatory family
+# (n = 12,000, R = 50, B = 500), the smallest factor on a 0.01 grid that kept the family-wise error at or below 5%.
+crit_inflation: 1.05
+# Reference refits required before the evaluation analysis (scripts/analyze.py stops if any is missing or smaller).
+# Draw b uses refit b mod R: with B = 2,000 draws each spline refit is used twice.
+refits_required:
+  spline_logit: 1000
+  spline_logit_weighted: 1000     # only when the cohort carries examination weights
+  lightgbm: 300
+  survival_logit: 300

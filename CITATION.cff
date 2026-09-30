@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+type: software
+title: "Decision models can offload structured clinical tasks from large language models"
+authors:
+  - given-names: "Dean"
+    family-names: "Ariel"
+  - given-names: "Guy"
+    family-names: "Laban"
+  - given-names: "Stav"
+    family-names: "Endelman"
+  - given-names: "Ran"
+    family-names: "Balicer"
+  - given-names: "Noa"
+    family-names: "Dagan"
+  - given-names: "Seffi"
+    family-names: "Cohen"
+license: MIT
+repository-code: "https://github.com/deanariel-md/decision-model-offload"
+version: "1.0.0"

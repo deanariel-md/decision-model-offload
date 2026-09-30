@@ -1,0 +1,21 @@
+[project]
+name = "jevity"
+version = "1.0.0"
+description = "Code for a comparison of Jev with chatbots on clinical probability, choice and ordered-level questions"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas==2.3.3", "numpy==2.4.4", "pyarrow==23.0.1", "scikit-learn==1.7.2", "lightgbm==4.6.0", "scipy==1.17.1",
+  "joblib==1.5.3", "httpx==0.28.1", "python-dotenv==1.2.2", "pyyaml==6.0.3", "tabulate==0.10.0",
+  "xgboost==3.2.0", "matplotlib==3.10.8",
+]
+[project.optional-dependencies]
+dev = ["pytest==9.0.3", "statsmodels==0.14.6"]
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

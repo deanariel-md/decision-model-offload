@@ -1,0 +1,623 @@
+{
+ "note": "Jev used as its developer documents; numbers copied from results/arm3_docuse and results/wide_docuse; cost at standard list price",
+ "staging": {
+  "documented": {
+   "names": {
+    "n_items": 1000,
+    "exact_accuracy": 1.0,
+    "exact_accuracy_ci": [
+     1.0,
+     1.0
+    ],
+    "correct": 1000,
+    "usable_share": 1.0,
+    "main_stage_accuracy": 1.0,
+    "stage_iii_to_0_ii": 0,
+    "stage_iii_n": 300,
+    "usd_list_per_1000": 0.11525094,
+    "tokens_in_per_answer": 2744.07,
+    "main_chatbots": {
+     "exact_accuracy": {
+      "min": 0.941,
+      "max": 1.0
+     },
+     "jev_minus_chatbot_pts": {
+      "min": 0.0,
+      "max": 5.900000000000006
+     },
+     "outcomes": {
+      "gpt": "non-inferior",
+      "claude": "non-inferior",
+      "gemini": "non-inferior",
+      "muse": "non-inferior",
+      "glm": "non-inferior"
+     },
+     "n_noninferior": 5,
+     "usd_list_per_1000": {
+      "min": 2.40351675,
+      "max": 9.39103
+     }
+    },
+    "cheaper_systems": {
+     "outcomes": {
+      "gpt_free": "non-inferior",
+      "claude_free": "non-inferior",
+      "gemini_free": "non-inferior",
+      "medgemma": "non-inferior",
+      "gemma": "non-inferior"
+     },
+     "n_noninferior": 5
+    }
+   },
+   "definitions": {
+    "n_items": 1000,
+    "exact_accuracy": 1.0,
+    "exact_accuracy_ci": [
+     1.0,
+     1.0
+    ],
+    "correct": 1000,
+    "usable_share": 1.0,
+    "main_stage_accuracy": 1.0,
+    "stage_iii_to_0_ii": 0,
+    "stage_iii_n": 300,
+    "usd_list_per_1000": 0.11525094,
+    "tokens_in_per_answer": 2744.07,
+    "main_chatbots": {
+     "exact_accuracy": {
+      "min": 0.984,
+      "max": 1.0
+     },
+     "jev_minus_chatbot_pts": {
+      "min": 0.0,
+      "max": 1.6000000000000014
+     },
+     "outcomes": {
+      "gpt": "non-inferior",
+      "claude": "non-inferior",
+      "gemini": "non-inferior",
+      "muse": "non-inferior",
+      "glm": "non-inferior"
+     },
+     "n_noninferior": 5,
+     "usd_list_per_1000": {
+      "min": 2.23481175,
+      "max": 8.23211
+     }
+    },
+    "cheaper_systems": {
+     "outcomes": {
+      "gpt_free": "non-inferior",
+      "claude_free": "non-inferior",
+      "gemini_free": "non-inferior",
+      "medgemma": "non-inferior",
+      "gemma": "non-inferior"
+     },
+     "n_noninferior": 5
+    }
+   },
+   "parts_accuracy": {
+    "t_category": 1.0,
+    "regional_nodes": 1.0,
+    "tumor_deposits": 1.0,
+    "distant_metastasis": 0.9818181818181818
+   },
+   "misleading_feature": {
+    "n": 100,
+    "exact_accuracy": 0.8,
+    "by_type": {
+     "itc": {
+      "n": 20,
+      "correct": 20
+     },
+     "adhesion": {
+      "n": 20,
+      "correct": 20
+     },
+     "perforation": {
+      "n": 20,
+      "correct": 20
+     },
+     "nonregional_node": {
+      "n": 20,
+      "correct": 0
+     }
+    },
+    "main_chatbots_exact_accuracy": {
+     "min": 0.92,
+     "max": 1.0
+    }
+   }
+  },
+  "documented_notes": {
+   "names": {
+    "n_items": 1000,
+    "exact_accuracy": 1.0,
+    "exact_accuracy_ci": [
+     1.0,
+     1.0
+    ],
+    "correct": 1000,
+    "usable_share": 1.0,
+    "main_stage_accuracy": 1.0,
+    "stage_iii_to_0_ii": 0,
+    "stage_iii_n": 300,
+    "usd_list_per_1000": 0.13142093999999999,
+    "tokens_in_per_answer": 3129.07,
+    "main_chatbots": {
+     "exact_accuracy": {
+      "min": 0.941,
+      "max": 1.0
+     },
+     "jev_minus_chatbot_pts": {
+      "min": 0.0,
+      "max": 5.900000000000006
+     },
+     "outcomes": {
+      "gpt": "non-inferior",
+      "claude": "non-inferior",
+      "gemini": "non-inferior",
+      "muse": "non-inferior",
+      "glm": "non-inferior"
+     },
+     "n_noninferior": 5,
+     "usd_list_per_1000": {
+      "min": 2.40351675,
+      "max": 9.39103
+     }
+    },
+    "cheaper_systems": {
+     "outcomes": {
+      "gpt_free": "non-inferior",
+      "claude_free": "non-inferior",
+      "gemini_free": "non-inferior",
+      "medgemma": "non-inferior",
+      "gemma": "non-inferior"
+     },
+     "n_noninferior": 5
+    }
+   },
+   "definitions": {
+    "n_items": 1000,
+    "exact_accuracy": 1.0,
+    "exact_accuracy_ci": [
+     1.0,
+     1.0
+    ],
+    "correct": 1000,
+    "usable_share": 1.0,
+    "main_stage_accuracy": 1.0,
+    "stage_iii_to_0_ii": 0,
+    "stage_iii_n": 300,
+    "usd_list_per_1000": 0.13142093999999999,
+    "tokens_in_per_answer": 3129.07,
+    "main_chatbots": {
+     "exact_accuracy": {
+      "min": 0.984,
+      "max": 1.0
+     },
+     "jev_minus_chatbot_pts": {
+      "min": 0.0,
+      "max": 1.6000000000000014
+     },
+     "outcomes": {
+      "gpt": "non-inferior",
+      "claude": "non-inferior",
+      "gemini": "non-inferior",
+      "muse": "non-inferior",
+      "glm": "non-inferior"
+     },
+     "n_noninferior": 5,
+     "usd_list_per_1000": {
+      "min": 2.23481175,
+      "max": 8.23211
+     }
+    },
+    "cheaper_systems": {
+     "outcomes": {
+      "gpt_free": "non-inferior",
+      "claude_free": "non-inferior",
+      "gemini_free": "non-inferior",
+      "medgemma": "non-inferior",
+      "gemma": "non-inferior"
+     },
+     "n_noninferior": 5
+    }
+   },
+   "parts_accuracy": {
+    "t_category": 1.0,
+    "regional_nodes": 1.0,
+    "tumor_deposits": 1.0,
+    "distant_metastasis": 1.0
+   },
+   "misleading_feature": {
+    "n": 100,
+    "exact_accuracy": 1.0,
+    "by_type": {
+     "itc": {
+      "n": 20,
+      "correct": 20
+     },
+     "adhesion": {
+      "n": 20,
+      "correct": 20
+     },
+     "perforation": {
+      "n": 20,
+      "correct": 20
+     },
+     "nonregional_node": {
+      "n": 20,
+      "correct": 20
+     }
+    },
+    "main_chatbots_exact_accuracy": {
+     "min": 0.92,
+     "max": 1.0
+    }
+   }
+  },
+  "reworded": {
+   "n_reports": 20,
+   "exact_correct_min": 20,
+   "same_answers_min": 40,
+   "n_answers": 40,
+   "parser_tnm_right_reworded": 0,
+   "parser_tnm_right_original": 20
+  },
+  "timing": {
+   "n": 100,
+   "usable": 99,
+   "median_s": 0.7872328758239746,
+   "p90_s": 0.8935571670532226
+  },
+  "original": {
+   "names_exact_accuracy": 0.491,
+   "definitions_exact_accuracy": 0.765
+  },
+  "full_confidence": {
+   "altered_wrong": 40,
+   "altered_wrong_below_full": 40,
+   "altered_n_reports": 120,
+   "main_share_full": {
+    "min": 0.614,
+    "max": 0.636
+   }
+  },
+  "nonregional": {
+   "n": 20,
+   "n_sites": 5,
+   "jev_documented": 6,
+   "jev_notes": 14,
+   "jev_other_parts_correct_min": 20,
+   "chatbots_correct": {
+    "min": 20,
+    "max": 20
+   }
+  },
+  "heldout": {
+   "n": 200,
+   "n_kept": 200,
+   "adjudicated": 2,
+   "reader_mismatches": 0,
+   "documented_exact_min": 1.0,
+   "documented_n_noninferior_min": 5,
+   "documented_usd_list_per_1000": 0.12373682999999999,
+   "original_names_exact": 0.58,
+   "original_definitions_exact": 0.835,
+   "original_n_worse_min": 5,
+   "chatbots_names_exact": {
+    "min": 0.975,
+    "max": 1.0
+   },
+   "chatbots_definitions_exact": {
+    "min": 0.99,
+    "max": 1.0
+   }
+  }
+ },
+ "risk": {
+  "records": 12697,
+  "deaths": 2002,
+  "margin": 0.006015999869042211,
+  "jev_documented": {
+   "log_loss": 0.36176161766057896,
+   "log_loss_ci": [
+    0.3545112795750103,
+    0.3689487130858541
+   ],
+   "log_loss_recalibrated": 0.33920716840378135,
+   "brier": 0.11048045207529339,
+   "auroc": 0.8203077894522495,
+   "calibration_slope": 1.2252769782852757,
+   "mean_p": 0.23201307395447743
+  },
+  "jev_original": {
+   "log_loss": 0.37874544531692744,
+   "log_loss_ci": [
+    0.37181481553260376,
+    0.3857720624197238
+   ],
+   "log_loss_recalibrated": 0.3375758983525881,
+   "auroc": 0.8222103515932407,
+   "mean_p": 0.263166102228873
+  },
+  "documented_minus_original": {
+   "diff": -0.016983827656349593,
+   "ci_simultaneous": [
+    -0.0193019343158863,
+    -0.014665720996812886
+   ],
+   "reduction": 0.016983827656349593,
+   "reduction_ci_simultaneous": [
+    0.014665720996812886,
+    0.0193019343158863
+   ]
+  },
+  "documented_minus_original_recalibrated": {
+   "diff": 0.001631270051199396,
+   "ci_simultaneous": [
+    -0.0005395644114981686,
+    0.0038021045138969607
+   ]
+  },
+  "main_chatbots": {
+   "log_loss": {
+    "min": 0.3253520694631379,
+    "max": 0.36153773638542164
+   },
+   "auroc": {
+    "min": 0.8369246228292513,
+    "max": 0.8455342927292436
+   },
+   "mean_p": {
+    "min": 0.18549169095061827,
+    "max": 0.25156477908167285
+   },
+   "diff": {
+    "gpt": 0.03285377315889276,
+    "claude": 0.03525026641041179,
+    "gemini": 0.0364095481974398,
+    "muse": 0.00022388127515704515,
+    "glm": 0.03135008978127751
+   },
+   "diff_worse": {
+    "min": 0.03135008978127751,
+    "max": 0.0364095481974398
+   },
+   "n_worse": 4,
+   "worse": [
+    "gpt",
+    "claude",
+    "gemini",
+    "glm"
+   ],
+   "n_noninferior": 1,
+   "noninferior": [
+    "muse"
+   ]
+  },
+  "vs_age_sex": {
+   "diff": -0.00971044516936137,
+   "ci_simultaneous": [
+    -0.015737260352473605,
+    -0.003683629986249136
+   ],
+   "reduction": 0.00971044516936137,
+   "reduction_ci_simultaneous": [
+    0.003683629986249136,
+    0.015737260352473605
+   ],
+   "noninferior": true
+  },
+  "cheaper_evaluation": {
+   "n_records": 983,
+   "deaths": 157,
+   "margin": 0.005267415423968958,
+   "comparisons": {
+    "gpt_free": {
+     "diff": 0.017565003927289848,
+     "ci_simultaneous": [
+      0.004746885287116188,
+      0.03038312256746351
+     ],
+     "outcome": "inconclusive"
+    },
+    "claude_free": {
+     "diff": 0.008452388855419143,
+     "ci_simultaneous": [
+      -0.0025164997331288633,
+      0.01942127744396715
+     ],
+     "outcome": "inconclusive"
+    },
+    "gemini_free": {
+     "diff": 0.017603326443233966,
+     "ci_simultaneous": [
+      0.0037773461374113575,
+      0.03142930674905657
+     ],
+     "outcome": "inconclusive"
+    },
+    "medgemma": {
+     "diff": -0.00520172805426042,
+     "ci_simultaneous": [
+      -0.03669465564713356,
+      0.026291199538612725
+     ],
+     "outcome": "inconclusive"
+    },
+    "gemma": {
+     "diff": 0.0036827289691542696,
+     "ci_simultaneous": [
+      -0.022447832048391986,
+      0.029813289986700527
+     ],
+     "outcome": "inconclusive"
+    }
+   }
+  },
+  "latency_median_s": 0.9925392866134644,
+  "usd_list_per_1000": 0.03464899798605733,
+  "usable_share": 1.0,
+  "cheaper_full": {
+   "records": 12697,
+   "margin": 0.006015999869042211,
+   "log_loss": {
+    "min": 0.3379682917337466,
+    "max": 0.36984997937889247
+   },
+   "auroc": {
+    "min": 0.7826097464947396,
+    "max": 0.8342295385773647
+   },
+   "usd_list_all_answers": 52.11213298500056,
+   "structured": {
+    "non-inferior": [
+     "medgemma",
+     "gemma"
+    ],
+    "worse": [
+     "gpt_free",
+     "gemini_free"
+    ],
+    "inconclusive": [
+     "claude_free"
+    ],
+    "n": {
+     "non-inferior": 2,
+     "worse": 2,
+     "inconclusive": 1
+    },
+    "diff": {
+     "gpt_free": 0.023793325926832306,
+     "claude_free": 0.008401888966540219,
+     "gemini_free": 0.023525373690889778,
+     "medgemma": -0.008088361718313557,
+     "gemma": -0.00285632218052153
+    }
+   },
+   "chatbot_prompt": {
+    "non-inferior": [],
+    "worse": [
+     "gpt_free",
+     "claude_free",
+     "gemini_free"
+    ],
+    "inconclusive": [
+     "medgemma",
+     "gemma"
+    ],
+    "n": {
+     "non-inferior": 0,
+     "worse": 3,
+     "inconclusive": 2
+    },
+    "diff": {
+     "gpt_free": 0.04077715358318078,
+     "claude_free": 0.025385716622888695,
+     "gemini_free": 0.040509201347238254,
+     "medgemma": 0.008895465938034917,
+     "gemma": 0.01412750547582694
+    }
+   }
+  }
+ },
+ "cheaper_original": {
+  "gpt_free": {
+   "n_noninferior": 0,
+   "n_worse": 4,
+   "n_sets": 6
+  },
+  "claude_free": {
+   "n_noninferior": 0,
+   "n_worse": 3,
+   "n_sets": 6
+  },
+  "gemini_free": {
+   "n_noninferior": 4,
+   "n_worse": 1,
+   "n_sets": 6
+  },
+  "medgemma": {
+   "n_noninferior": 5,
+   "n_worse": 0,
+   "n_sets": 6
+  },
+  "gemma": {
+   "n_noninferior": 6,
+   "n_worse": 0,
+   "n_sets": 6
+  },
+  "open_weights_noninferior": 11
+ },
+ "hybrid_main_with_definitions": {
+  "cost_share": {
+   "min": 0.5114225247859963,
+   "max": 0.7750718489623891
+  },
+  "diff_pts": {
+   "min": -1.5000000000000013,
+   "max": 0.19096117122850975
+  },
+  "diff_pts_abs_max": 1.5000000000000013
+ },
+ "hybrid_luna_with_definitions": {
+  "cost_share": {
+   "min": 0.6286513924346243,
+   "max": 0.7125952589896896
+  },
+  "saving": {
+   "min": 0.28740474101031044,
+   "max": 0.3713486075653757
+  },
+  "diff_pts": {
+   "min": -1.5000000000000013,
+   "max": 0.0
+  }
+ },
+ "chain_luna_sol": {
+  "with_definitions_minus_sol_pts": {
+   "min": 0.40000000000000036,
+   "max": 2.500000000000002
+  },
+  "with_definitions_cost_share": {
+   "min": 0.2751222639153266,
+   "max": 0.4084575272838962
+  },
+  "names_minus_sol_pts": {
+   "min": 16.399286987522277,
+   "max": 21.499999999999996
+  }
+ },
+ "agreement_luna_sol": {
+  "all_minus_sol_pts": {
+   "min": -1.2477718360071277,
+   "max": 0.0
+  },
+  "all_sol_minus_pts": {
+   "min": 0.0,
+   "max": 1.2477718360071277
+  },
+  "with_definitions_cost_share": {
+   "min": 0.17218220743359564,
+   "max": 0.3137828017361284
+  },
+  "names_cost_share": {
+   "min": 0.5035560396659363,
+   "max": 0.5474482287885354
+  },
+  "all_cost_share": {
+   "min": 0.17218220743359564,
+   "max": 0.5474482287885354
+  },
+  "share_escalated": {
+   "min": 0.09090909090909091,
+   "max": 0.508
+  },
+  "names_minus_sol_pts": {
+   "min": -0.89126559714795,
+   "max": -0.40000000000000036
+  }
+ }
+}

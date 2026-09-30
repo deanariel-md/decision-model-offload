@@ -1,0 +1,96 @@
+# Arm 3 truth: AJCC Cancer Staging Manual, 8th edition, colon and rectum.
+# Categories, their definitions (paraphrased close to the AJCC wording) and the stage-group table. The table is the answer
+# key: once T, N and M are known, the stage group follows. Every cell is unit-tested (tests/test_crc.py).
+edition: AJCC 8th edition, colon and rectum
+
+t_categories: [Tis, T1, T2, T3, T4a, T4b]
+n_categories: [N0, N1a, N1b, N1c, N2a, N2b]
+m_categories: [M0, M1a, M1b, M1c]
+
+t_definitions:
+  Tis: Carcinoma in situ or intramucosal carcinoma (involvement of the lamina propria with no extension through the muscularis mucosae)
+  T1: Tumour invades the submucosa (through the muscularis mucosae but not into the muscularis propria)
+  T2: Tumour invades the muscularis propria
+  T3: Tumour invades through the muscularis propria into pericolorectal tissues
+  T4a: Tumour invades through the visceral peritoneum (including gross perforation of the bowel through tumour and continuous invasion of tumour through areas of inflammation to the surface of the visceral peritoneum)
+  T4b: Tumour directly invades or adheres to adjacent organs or structures
+n_definitions:
+  N0: No regional lymph node metastasis
+  N1a: Metastasis in one regional lymph node
+  N1b: Metastasis in two or three regional lymph nodes
+  N1c: No regional lymph node is positive, but there are tumour deposits in the subserosa, mesentery or nonperitonealised pericolic or perirectal/mesorectal tissues
+  N2a: Metastasis in four to six regional lymph nodes
+  N2b: Metastasis in seven or more regional lymph nodes
+m_definitions:
+  M0: No distant metastasis
+  M1a: Metastasis confined to one site or organ, without peritoneal metastasis
+  M1b: Metastasis to two or more sites or organs, without peritoneal metastasis
+  M1c: Metastasis to the peritoneal surface, alone or with other site or organ metastases
+rules:
+  - Tumour deposits change N only when every regional lymph node is negative (N1c); with a positive node, N follows the node count and deposits are not added to it.
+
+# AJCC 8th stage groups (substages), lowest first: what the table gives and what every report stores.
+stage_groups: ["0", "I", "IIA", "IIB", "IIC", "IIIA", "IIIB", "IIIC", "IVA", "IVB", "IVC"]
+
+# The 10 ordered levels scored in arm 3 (10 is the documented maximum of a Jev Score question), lowest first. IVA and
+# IVB are combined as IVA-IVB (distant metastasis, not peritoneal); IVC (peritoneal, M1c) is its own level, as is every
+# other stage group. The same levels for every system and both question versions.
+levels: ["0", "I", "IIA", "IIB", "IIC", "IIIA", "IIIB", "IIIC", "IVA-IVB", "IVC"]
+level_of_stage_group: {IVA: IVA-IVB, IVB: IVA-IVB}
+level_definitions:                     # the other levels read their rows from the table
+  IVA-IVB: "any T, any N, M1a-M1b"
+  IVC: "any T, any N, M1c"
+# Main stage of each level, for the secondary measure main-stage accuracy: the answers collapsed to 0, I, II, III, IV;
+# no extra calls.
+main_stages: ["0", "I", "II", "III", "IV"]
+main_stage_of_level: {"0": "0", I: I, IIA: II, IIB: II, IIC: II, IIIA: III, IIIB: III, IIIC: III, IVA-IVB: IV, IVC: IV}
+
+# The AJCC table, one row per printed line. "any" is the whole category list (Any T, Any N). A (T, N, M) cell that no
+# row covers has no stage group: Tis with a positive node and no distant metastasis.
+stage_table:
+  - {stage: "0",    t: [Tis],      n: [N0],                     m: [M0]}
+  - {stage: "I",    t: [T1, T2],   n: [N0],                     m: [M0]}
+  - {stage: "IIA",  t: [T3],       n: [N0],                     m: [M0]}
+  - {stage: "IIB",  t: [T4a],      n: [N0],                     m: [M0]}
+  - {stage: "IIC",  t: [T4b],      n: [N0],                     m: [M0]}
+  - {stage: "IIIA", t: [T1, T2],   n: [N1a, N1b, N1c],          m: [M0]}
+  - {stage: "IIIA", t: [T1],       n: [N2a],                    m: [M0]}
+  - {stage: "IIIB", t: [T3, T4a],  n: [N1a, N1b, N1c],          m: [M0]}
+  - {stage: "IIIB", t: [T2, T3],   n: [N2a],                    m: [M0]}
+  - {stage: "IIIB", t: [T1, T2],   n: [N2b],                    m: [M0]}
+  - {stage: "IIIC", t: [T4a],      n: [N2a],                    m: [M0]}
+  - {stage: "IIIC", t: [T3, T4a],  n: [N2b],                    m: [M0]}
+  - {stage: "IIIC", t: [T4b],      n: [N1a, N1b, N1c, N2a, N2b], m: [M0]}
+  - {stage: "IVA",  t: any,        n: any,                      m: [M1a]}
+  - {stage: "IVB",  t: any,        n: any,                      m: [M1b]}
+  - {stage: "IVC",  t: any,        n: any,                      m: [M1c]}
+
+# Report generation settings. Tis is written only in stage 0: an in-situ or intramucosal carcinoma
+# with nodal or distant spread is not a real presentation, so IVA-IVB reports draw T from T1-T4b and IVC reports from
+# T3-T4b (m1c_t_redraw).
+generation:
+  seed: 20260922
+  per_level: 60                        # 600 reports; half synoptic and half narrative within every stage group
+  level_split: {IVA-IVB: {IVA: 30, IVB: 30}}   # a level of two stage groups: 30 each (M1a, M1b), each half and half
+  t_excluded_outside_stage_0: [Tis]
+  # Peritoneal metastasis from a tumour that has not reached the serosa is not a real presentation. An IVC (M1c)
+  # report that draws T1 or T2 redraws T from T3-T4b, a second draw on the same stream; N, M and every other draw are
+  # kept. IVA-IVB keep T1-T4b: a liver or lung metastasis from an early
+  # primary is uncommon but real, and M decides the stage whatever T is.
+  m1c_t_redraw: {from: [T1, T2], to: [T3, T4a, T4b]}
+  nodes_involved: {N0: [0, 0], N1a: [1, 1], N1b: [2, 3], N1c: [0, 0], N2a: [4, 6], N2b: [7, 14]}
+  nodes_examined_min: 12
+  nodes_examined_above_involved: 3     # at least 3 negative nodes besides the involved ones
+  # examined = max(minimum, involved + 3) + a right-skewed extra: gamma(shape 2, scale 4), rounded (mean 8), as real
+  # node yields are right-skewed
+  nodes_examined_extra_gamma: {shape: 2, scale: 4}
+  deposits_n1c: [1, 4]                 # N1c: at least one deposit
+  deposits_node_positive_share: 0.25   # node-positive reports that also carry deposits (not added to the node count)
+  deposits_node_positive: [1, 4]
+  # 1,000 reports, 100 per level, asked in both versions: the 600 above and an extension of 400 that draws like the
+  # rest but on draw streams of its own (draw key extension-j), so no other report changes.
+  extension:
+    per_level: 40                      # IVA-IVB: 20 IVA, 20 IVB; half synoptic and half narrative in every stage group
+    first_id: 601                      # crc601-crc1000, in a seeded random order
+# The question, its two versions, prompts and run settings are in config/arm3.yaml (the shared categorical code's arm
+# spec); its level definitions must equal crc.level_definition (tested).

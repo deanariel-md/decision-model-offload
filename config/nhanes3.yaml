@@ -1,0 +1,61 @@
+# NHANES III (1988-1994) public-use files + 2019 public-use Linked Mortality File, used ONLY as an empirical prior for
+# the reference model (power prior). Fixed-width ASCII; column positions are read at runtime from CDC's SAS layout
+# programs, never typed by hand. build_nhanes3.py prints which variables were found.
+base_url: "https://wwwn.cdc.gov/nchs/data/nhanes3/1a"      # lrecl incl. CRLF: adult 3348, exam 6235, lab 1979
+files:
+  adult: {data: adult.dat, layout: adult.sas}
+  exam:  {data: exam.dat,  layout: exam.sas}
+  lab:   {data: lab.dat,   layout: lab.sas}
+lmf_url: "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/datalinkage/linked_mortality"
+lmf_file: "NHANES_III_MORT_2019_PUBLIC.dat"
+seqn_offset: 10000000          # keeps NHANES III ids apart from continuous-NHANES SEQN
+# harmonised name -> NHANES III mnemonic (CDC adult.sas, the exam and lab codebooks, core.pdf)
+variables:
+  age:              {file: adult, var: HSAGEIR}
+  sex:              {file: adult, var: HSSEX, codes: {1: male, 2: female}}
+  race_ethnicity:   {file: adult, var: DMARETHN, codes: {1: "Non-Hispanic White", 2: "Non-Hispanic Black", 3: "Mexican American", 4: "Other race including multiracial"}}
+  education_years:  {file: adult, var: HFA8R}
+  income_poverty_ratio: {file: adult, var: DMPPIR}
+  insured:          {file: adult, any_of: [HFB2, HFB7, HFB9, HFB11]}   # Medicare, Medicaid, CHAMPUS/VA/military, other; last month
+  bmi:              {file: exam, var: BMPBMI}
+  waist_cm:         {file: exam, var: BMPWAIST}
+  sbp_mmhg:         {file: exam, var: PEPMNK1R}
+  dbp_mmhg:         {file: exam, var: PEPMNK5R}
+  smoked_100:       {file: adult, var: HAR1, codes: {1: "yes", 2: "no"}}
+  smoke_now:        {file: adult, var: HAR3, codes: {1: "yes", 2: "no"}}
+  chf:              {file: adult, var: HAC1C, codes: {1: "yes", 2: "no"}}
+  mi:               {file: adult, var: HAF10, codes: {1: "yes", 2: "no"}}
+  stroke:           {file: adult, var: HAC1D, codes: {1: "yes", 2: "no"}}
+  emphysema:        {file: adult, var: HAC1G, codes: {1: "yes", 2: "no"}}
+  chronic_bronchitis: {file: adult, var: HAC1F, codes: {1: "yes", 2: "no"}}
+  cancer:           {file: adult, any_of: [HAC1N, HAC1O]}              # skin, other (continuous MCQ220 includes skin)
+  diabetes:         {file: adult, var: HAD1, codes: {1: "yes", 2: "no"}}
+  self_rated_health: {file: adult, var: HAB1, codes: {1: excellent, 2: "very good", 3: good, 4: fair, 5: poor}}
+  albumin_g_dl:     {file: lab, var: AMP}
+  creatinine_mg_dl: {file: lab, var: CEP}
+  glucose_mg_dl:    {file: lab, var: SGP}
+  crp_mg_dl:        {file: lab, var: CRP}
+  lymphocyte_pct:   {file: lab, var: LMPPCNT}
+  mcv_fl:           {file: lab, var: MVPSI}
+  rdw_pct:          {file: lab, var: RWP}
+  alk_phos_u_l:     {file: lab, var: APPSI}
+  wbc_10e3_ul:      {file: lab, var: WCP}
+  hba1c_pct:        {file: lab, var: GHP}
+  total_chol_mg_dl: {file: lab, var: TCP}
+  hdl_mg_dl:        {file: lab, var: HDP}
+  urine_albumin_mg_l: {file: lab, var: UBP}                        # ug/mL = mg/L (UDP is urinary cadmium)
+  urine_creatinine_mg_dl: {file: lab, var: URP}
+# NHANES III fills: a field of all 8s = blank but applicable, all 9s = don't know, blank = not applicable. The loader
+# masks a value only when its raw string fills the whole field width with 8s or 9s (so a real glucose of 88 survives).
+# CRP below the detection limit is recorded as LOD/sqrt(2) (expect a spike near 0.21 mg/dL; left as recorded).
+creatinine_calibration: {slope: 0.960, intercept: -0.184}   # Selvin et al., Am J Kidney Dis 2007
+prior:
+  # The primary reference uses 1999-2008 outcomes only (a0 = 0); borrowing from NHANES III is a sensitivity analysis.
+  a0: 0.0
+  # Era-specific (NOT borrowed): baseline mortality and every label under test. Only clinical effects are borrowed, so the
+  # race and socioeconomic contrasts are estimated from 1999-2008 alone (borrowing a tested coefficient from an era with
+  # a wider Black-White gap would bias it, and the interval would not carry the bias).
+  era_specific: [intercept, race_ethnicity, income_poverty_ratio, education, insured, sex]
+  sensitivities:
+    spline_logit_prior: {a0: 0.5}                                  # clinical effects borrowed, labels era-specific
+    spline_logit_shared: {a0: 0.5, era_specific: [intercept]}      # labels borrowed too

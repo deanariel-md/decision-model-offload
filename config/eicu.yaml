@@ -1,0 +1,114 @@
+# eICU replication. Two sources, one builder (src/jevity/eicu.py):
+#   demo: eICU-CRD Demo v2.0.1, open access (Open Database License). The only eICU records sent to a model.
+#   full: eICU-CRD v2.0, credentialed access, read on a local machine to fit the outcome references. Never sent anywhere.
+# Every serialised field is one the references use.
+population: eicu_demo
+seed: 20260922
+sources:
+  demo: data/eicu-collaborative-research-database-demo-2.0.1   # unzipped demo folder (csv.gz)
+  full: null                                                   # credentialed full database: pass its folder as --src
+out_dir: data/eicu
+exclude_from_fit:                       # full-eICU rows removed before fitting, so no evaluation record is fitted on
+  demo_stays: true                      # the demo's patientunitstayid values
+  demo_patients: true                   # every stay of a demo patient (uniquepid)
+  demo_hospitals: false                 # every stay of a demo hospital (true would remove most of the full cohort,
+                                        # since the demo's hospitals hold most of its stays)
+cohort:
+  age_min: 18
+  first_unit_stay: true                 # unitvisitnumber == 1, first hospital stay per uniquepid
+  apache_version: IVa                   # an APACHE IVa result exists (APACHE's own exclusions apply)
+  alive_minutes: 1440                   # alive at 24 h after unit admission
+  lactate_window_minutes: [0, 1440]     # first ICU day, as for the APACHE worst values
+splits:
+  n_pilot: 100                          # demo stays of the pilot split; never in the evaluation set
+  # every other eligible demo record is an evaluation record
+record:
+  record_type: "intensive care unit admission record, first 24 hours"
+  source: "United States multicentre intensive care telehealth database, 2014-2015"
+numeric:                                 # state key, column, unit, decimals (worst first-day values unless noted)
+  - [age, age, years, 0]
+  - [temperature, temperature_c, "degrees C", 1]
+  - [heart_rate, heart_rate, "beats/min", 0]
+  - [mean_arterial_pressure, map_mmhg, mmHg, 0]
+  - [respiratory_rate, resp_rate, "breaths/min", 0]
+  - [glasgow_coma_scale, gcs_total, "", 0]
+  - [urine_output_24h, urine_ml, mL, 0]
+  - [white_blood_cell_count, wbc_10e3_ul, "x10^3/uL", 1]
+  - [haematocrit, hematocrit_pct, "%", 1]
+  - [serum_sodium, sodium_mmol_l, mmol/L, 0]
+  - [serum_creatinine, creatinine_mg_dl, mg/dL, 2]
+  - [blood_urea_nitrogen, bun_mg_dl, mg/dL, 0]
+  - [serum_glucose, glucose_mg_dl, mg/dL, 0]
+  - [serum_albumin, albumin_g_dl, g/dL, 1]
+  - [serum_bilirubin, bilirubin_mg_dl, mg/dL, 1]
+  - [arterial_ph, ph, "", 2]
+  - [arterial_po2, pao2_mmhg, mmHg, 0]
+  - [inspired_oxygen_fraction, fio2_pct, "%", 0]
+  - [arterial_pco2, paco2_mmhg, mmHg, 0]
+  - [maximum_lactate, lactate_mmol_l, mmol/L, 1]
+categorical:                             # state key, column
+  - [sex, sex]
+  - [ethnicity, ethnicity]
+  - [admission_diagnosis, admission_dx]
+  - [admitted_from, admit_source]
+  - [unit_type, unit_type]
+flags:                                   # yes/no fields, state key, column
+  - [mechanically_ventilated, vent]
+  - [intubated, intubated]
+  - [chronic_dialysis, dialysis]
+  - [elective_surgery, elective_surgery]
+conditions:                              # APACHE chronic health items, listed under one key
+  - [aids, aids]
+  - [cirrhosis, cirrhosis]
+  - [hepatic_failure, hepatic_failure]
+  - [immunosuppression, immunosuppression]
+  - [leukaemia, leukemia]
+  - [lymphoma, lymphoma]
+  - [metastatic_cancer, metastatic_cancer]
+  - [diabetes, diabetes]
+field_order_first: [record_type, source, age, sex, ethnicity, admission_diagnosis, admitted_from, unit_type,
+                    elective_surgery, mechanically_ventilated, intubated, chronic_dialysis]
+field_order_last: [chronic_conditions]
+edits:
+  irrelevant:
+    I1_field_order: {op: shuffle_fields}
+  clinical:
+    EC1_lactate_plus2:     {column: lactate_mmol_l,   op: add,      value: 2.0}
+    EC1b_lactate_plus4:    {column: lactate_mmol_l,   op: add,      value: 4.0}
+    EC2_creatinine_x1.5:   {column: creatinine_mg_dl, op: multiply, value: 1.5}
+    EC2b_creatinine_x2:    {column: creatinine_mg_dl, op: multiply, value: 2.0}
+    EC3_map_minus15:       {column: map_mmhg,         op: add,      value: -15, require_max: {map_mmhg: 90}}
+    EC4_gcs_minus3:        {column: gcs_total,        op: add,      value: -3,  require_min: {gcs_total: 6}}
+    EC5_age_plus5:         {column: age,              op: add,      value: 5,   require_max: {age: 84}}
+  label:
+    EL1_ethnicity_cauc_to_aa: {column: ethnicity, op: set, value: "African American", require: {ethnicity: "Caucasian"}}
+    EL1b_ethnicity_aa_to_cauc: {column: ethnicity, op: set, value: "Caucasian",       require: {ethnicity: "African American"}}
+    EL2_sex_male_to_female:   {column: sex, op: set, value: female, require: {sex: male}}
+    EL2b_sex_female_to_male:  {column: sex, op: set, value: male,   require: {sex: female}}
+# One edit per field in the family, as on NHANES. MAP is edited only on the hypotensive side (APACHE's worst value is
+# the one furthest from normal, so a worst MAP above 90 is hypertensive); GCS only where it was assessable (not
+# sedated, all three components recorded). Dose rungs (b) and reverse labels are secondary.
+confirmatory_family: [EC1_lactate_plus2, EC2_creatinine_x1.5, EC3_map_minus15, EC4_gcs_minus3, EC5_age_plus5,
+                      EL1_ethnicity_cauc_to_aa, EL2_sex_male_to_female]
+support:
+  quantile: 0.95
+  numeric_columns: [age, temperature_c, heart_rate, map_mmhg, resp_rate, gcs_total, urine_ml, wbc_10e3_ul,
+                    hematocrit_pct, sodium_mmol_l, creatinine_mg_dl, bun_mg_dl, glucose_mg_dl, albumin_g_dl,
+                    bilirubin_mg_dl, ph, pao2_mmhg, fio2_pct, paco2_mmhg, lactate_mmol_l]
+  log_columns: [creatinine_mg_dl, bun_mg_dl, glucose_mg_dl, bilirubin_mg_dl, lactate_mmol_l, urine_ml, wbc_10e3_ul]
+  strata_columns: [ethnicity, sex]
+  min_stratum: 50
+  propensity_quantile: 0.025
+  range_quantiles: [0.005, 0.995]
+reference:
+  spline_C: 10.0                        # light constant penalty, not tuned (as NHANES)
+  dx_min_frequency: 200                 # admission diagnoses rarer than this in the fitting set share one level
+  refits: {spline_logit: 1000, lightgbm: 300}
+exposure:                  # masked-field test on the open demo (as scripts/exposure_diagnostic.py for NHANES): 40
+  n_profiles: 200          # evaluation stays per field, each with the field recorded; exact match at the recorded
+  fields:                  # precision against a LightGBM imputation trained on the other demo stays
+    heart_rate: {column: heart_rate, unit: "beats/min", decimals: 0}
+    serum_sodium: {column: sodium_mmol_l, unit: mmol/L, decimals: 0}
+    haematocrit: {column: hematocrit_pct, unit: "%", decimals: 1}
+    blood_urea_nitrogen: {column: bun_mg_dl, unit: mg/dL, decimals: 0}
+    serum_creatinine: {column: creatinine_mg_dl, unit: mg/dL, decimals: 2}

@@ -1,0 +1,284 @@
+{
+ "note": "log-loss, lower is better; difference Jev minus system; simultaneous 95% intervals (max-t over the five cheaper systems); non-inferior when the upper bound is below the fixed wide margin, worse when the lower bound is above it",
+ "records": 12697,
+ "deaths": 2002,
+ "margin": 0.006015999869042211,
+ "B": 2000,
+ "seed": 20260927,
+ "check_cheaper_log_loss": {
+  "gpt_free": {
+   "log_loss": 0.3379682917337466,
+   "stored": 0.3379682917337466
+  },
+  "claude_free": {
+   "log_loss": 0.35335972869403875,
+   "stored": 0.35335972869403875
+  },
+  "gemini_free": {
+   "log_loss": 0.3382362439696892,
+   "stored": 0.3382362439696892
+  },
+  "medgemma": {
+   "log_loss": 0.36984997937889247,
+   "stored": 0.36984997937889247
+  },
+  "gemma": {
+   "log_loss": 0.3646179398411005,
+   "stored": 0.3646179398411005
+  }
+ },
+ "jev_documented_log_loss": 0.36176161766057896,
+ "systems": {
+  "gpt_free": {
+   "log_loss": 0.3379682917337466,
+   "log_loss_ci": [
+    0.33036619647181853,
+    0.345961723832398
+   ],
+   "brier": 0.10338520185870678,
+   "auroc": 0.8342295385773647,
+   "calibration_slope": 1.1559389242920404,
+   "mean_p": 0.20168118453177916,
+   "log_loss_recalibrated": 0.32896407323833105
+  },
+  "claude_free": {
+   "log_loss": 0.35335972869403875,
+   "log_loss_ci": [
+    0.34622836086845715,
+    0.3607242893638627
+   ],
+   "brier": 0.10825704457745924,
+   "auroc": 0.8304922753730608,
+   "calibration_slope": 1.176207830681016,
+   "mean_p": 0.22980932503741042,
+   "log_loss_recalibrated": 0.3318469584021116
+  },
+  "gemini_free": {
+   "log_loss": 0.3382362439696892,
+   "log_loss_ci": [
+    0.3304474349717998,
+    0.3465190942417922
+   ],
+   "brier": 0.10330731306607861,
+   "auroc": 0.8316743097949267,
+   "calibration_slope": 1.1692168220833055,
+   "mean_p": 0.19680207923131446,
+   "log_loss_recalibrated": 0.3306746693337632
+  },
+  "medgemma": {
+   "log_loss": 0.36984997937889247,
+   "log_loss_ci": [
+    0.35838532116972727,
+    0.38124254137386193
+   ],
+   "brier": 0.11291220028353155,
+   "auroc": 0.7826097464947396,
+   "calibration_slope": 0.8037223054955668,
+   "mean_p": 0.14425415452469087,
+   "log_loss_recalibrated": 0.3667995685986534
+  },
+  "gemma": {
+   "log_loss": 0.3646179398411005,
+   "log_loss_ci": [
+    0.35457398293014625,
+    0.37443652852174414
+   ],
+   "brier": 0.11272360998661102,
+   "auroc": 0.7873102353467011,
+   "calibration_slope": 1.072794444856573,
+   "mean_p": 0.15556619673938726,
+   "log_loss_recalibrated": 0.3651548570683301
+  }
+ },
+ "usd_list_all_answers": {
+  "gpt_free": 4.258857599999988,
+  "claude_free": 39.6999380000004,
+  "gemini_free": 4.048978000000154,
+  "medgemma": 3.1288704250000157,
+  "gemma": 0.9754889599999998
+ },
+ "calls": {
+  "gpt_free": {
+   "planned": 12910,
+   "usable": 12910
+  },
+  "claude_free": {
+   "planned": 12910,
+   "usable": 12910
+  },
+  "gemini_free": {
+   "planned": 12910,
+   "usable": 12910
+  },
+  "medgemma": {
+   "planned": 12910,
+   "usable": 12910
+  },
+  "gemma": {
+   "planned": 12910,
+   "usable": 12910
+  }
+ },
+ "structured": {
+  "n_records": 12697,
+  "deaths": 2002,
+  "margin": 0.006015999869042211,
+  "critical_value": 2.545752553809895,
+  "B": 2000,
+  "seed": 20260927,
+  "note": "log-loss, lower is better; difference Jev, structured input minus system",
+  "comparisons": {
+   "gpt_free": {
+    "diff": 0.023793325926832306,
+    "ci": [
+     0.02114493536376521,
+     0.026342080157274173
+    ],
+    "ci_simultaneous": [
+     0.020510612153309148,
+     0.027076039700355464
+    ],
+    "noninferior": false,
+    "worse": true,
+    "outcome": "worse"
+   },
+   "claude_free": {
+    "diff": 0.008401888966540219,
+    "ci": [
+     0.005967931987002295,
+     0.010676424448569638
+    ],
+    "ci_simultaneous": [
+     0.005397355092223508,
+     0.01140642284085693
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   },
+   "gemini_free": {
+    "diff": 0.023525373690889778,
+    "ci": [
+     0.020726089036130796,
+     0.026212206608465488
+    ],
+    "ci_simultaneous": [
+     0.019947355976004902,
+     0.027103391405774654
+    ],
+    "noninferior": false,
+    "worse": true,
+    "outcome": "worse"
+   },
+   "medgemma": {
+    "diff": -0.008088361718313557,
+    "ci": [
+     -0.014772316492090074,
+     -0.0013857945226669725
+    ],
+    "ci_simultaneous": [
+     -0.016801794258472537,
+     0.0006250708218454235
+    ],
+    "noninferior": true,
+    "worse": false,
+    "outcome": "non-inferior"
+   },
+   "gemma": {
+    "diff": -0.00285632218052153,
+    "ci": [
+     -0.008184422451946904,
+     0.0024161045522797225
+    ],
+    "ci_simultaneous": [
+     -0.009865963938007882,
+     0.0041533195769648205
+    ],
+    "noninferior": true,
+    "worse": false,
+    "outcome": "non-inferior"
+   }
+  }
+ },
+ "chatbot_prompt": {
+  "n_records": 12697,
+  "deaths": 2002,
+  "margin": 0.006015999869042211,
+  "critical_value": 2.431763447934842,
+  "B": 2000,
+  "seed": 20260927,
+  "note": "log-loss, lower is better; difference Jev, chatbot prompt minus system",
+  "comparisons": {
+   "gpt_free": {
+    "diff": 0.04077715358318078,
+    "ci": [
+     0.037447259225809534,
+     0.04387430703007796
+    ],
+    "ci_simultaneous": [
+     0.036818583988437056,
+     0.0447357231779245
+    ],
+    "noninferior": false,
+    "worse": true,
+    "outcome": "worse"
+   },
+   "claude_free": {
+    "diff": 0.025385716622888695,
+    "ci": [
+     0.022697710896853563,
+     0.0278492394750251
+    ],
+    "ci_simultaneous": [
+     0.02216090979862488,
+     0.02861052344715251
+    ],
+    "noninferior": false,
+    "worse": true,
+    "outcome": "worse"
+   },
+   "gemini_free": {
+    "diff": 0.040509201347238254,
+    "ci": [
+     0.036997235008427554,
+     0.043966901876450915
+    ],
+    "ci_simultaneous": [
+     0.036147976703258505,
+     0.044870425991218
+    ],
+    "noninferior": false,
+    "worse": true,
+    "outcome": "worse"
+   },
+   "medgemma": {
+    "diff": 0.008895465938034917,
+    "ci": [
+     0.0013421458324290583,
+     0.01656388540983991
+    ],
+    "ci_simultaneous": [
+     -0.0006416210462373839,
+     0.018432552922307218
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   },
+   "gemma": {
+    "diff": 0.01412750547582694,
+    "ci": [
+     0.007565232070300228,
+     0.020640426414303432
+    ],
+    "ci_simultaneous": [
+     0.00596122074011381,
+     0.02229379021154007
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   }
+  }
+ }
+}

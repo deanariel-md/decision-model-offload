@@ -1,0 +1,187 @@
+{
+ "note": "descriptive summary of the second next-step item set; cost at standard list price",
+ "all": {
+  "n_items": 1571,
+  "jev": {
+   "accuracy": 0.856142584341184,
+   "accuracy_ci": [
+    0.8389560789306174,
+    0.8727084659452577
+   ],
+   "certain_share": 0.29598981540420116,
+   "certain_n": 465,
+   "certain_accuracy": 0.9956989247311828,
+   "certain_accuracy_ci": [
+    0.9891769022734316,
+    1.0
+   ],
+   "accuracy_below_certain": 0.7974683544303798,
+   "usd_list_per_1000": 0.022920343730108213,
+   "confident_half": {
+    "n": 785,
+    "accuracy": 0.9859872611464968,
+    "errors_let_through": 11,
+    "n_errors": 226,
+    "correct_kept": 774,
+    "n_correct": 1345
+   }
+  },
+  "main_chatbots": {
+   "accuracy": {
+    "min": 0.9121578612348823,
+    "max": 0.9586250795671547
+   },
+   "jev_minus_chatbot_abs_pts": {
+    "min": 5.601527689369834,
+    "max": 10.248249522597074
+   },
+   "outcomes": {
+    "gpt": "worse",
+    "claude": "worse",
+    "gemini": "worse",
+    "muse": "worse",
+    "glm": "inconclusive"
+   },
+   "n_worse": 4,
+   "usd_list_per_1000": {
+    "min": 1.9597867600254617,
+    "max": 7.79727294716741
+   },
+   "hybrid_accuracy": {
+    "min": 0.913430935709739,
+    "max": 0.9579885423297263
+   },
+   "hybrid_minus_chatbot_pts": {
+    "min": -0.19096117122852085,
+    "max": 0.19096117122850975
+   },
+   "hybrid_all_noninferior": true,
+   "hybrid_over_chatbot_cost": {
+    "min": 0.5537771518217225,
+    "max": 0.7750718489623891
+   },
+   "hybrid_saving_share": {
+    "min": 0.22492815103761088,
+    "max": 0.4462228481782775
+   },
+   "confidence_minus_random_pts": {
+    "min": 2.9262885016901996,
+    "max": 5.0572093413359
+   }
+  },
+  "other": {
+   "gpt_free": {
+    "accuracy": 0.9191597708465945,
+    "usd_list_per_1000": 0.26068835136855506
+   },
+   "claude_free": {
+    "accuracy": 0.9223424570337365,
+    "usd_list_per_1000": 2.7090006365372377
+   },
+   "gemini_free": {
+    "accuracy": 0.8612348822406111,
+    "usd_list_per_1000": 0.30682367918523235
+   },
+   "medgemma": {
+    "accuracy": 0.6817313812858052,
+    "usd_list_per_1000": 0.11195420432845322
+   },
+   "gemma": {
+    "accuracy": 0.633991088478676,
+    "usd_list_per_1000": 0.04431164863144494
+   }
+  }
+ },
+ "next_step_subgroup": {
+  "n_items": 359,
+  "jev": {
+   "accuracy": 0.8133704735376045,
+   "accuracy_ci": [
+    0.7715877437325905,
+    0.8523676880222841
+   ],
+   "certain_share": 0.22284122562674094,
+   "certain_n": 80,
+   "certain_accuracy": 0.975,
+   "certain_accuracy_ci": [
+    0.9342105263157895,
+    1.0
+   ],
+   "accuracy_below_certain": 0.7670250896057348,
+   "usd_list_per_1000": 0.024165793871866303,
+   "confident_half": {
+    "n": 179,
+    "accuracy": 0.9664804469273743,
+    "errors_let_through": 6,
+    "n_errors": 67,
+    "correct_kept": 173,
+    "n_correct": 292
+   }
+  },
+  "main_chatbots": {
+   "accuracy": {
+    "min": 0.8885793871866295,
+    "max": 0.9387186629526463
+   },
+   "jev_minus_chatbot_abs_pts": {
+    "min": 7.520891364902504,
+    "max": 12.534818941504177
+   },
+   "outcomes": {
+    "gpt": "worse",
+    "claude": "worse",
+    "gemini": "worse",
+    "muse": "inconclusive",
+    "glm": "inconclusive"
+   },
+   "n_worse": 3,
+   "usd_list_per_1000": {
+    "min": 2.1420459610027853,
+    "max": 8.679245682451254
+   },
+   "hybrid_accuracy": {
+    "min": 0.8913649025069638,
+    "max": 0.935933147632312
+   },
+   "hybrid_minus_chatbot_pts": {
+    "min": -0.835654596100277,
+    "max": 0.278551532033422
+   },
+   "hybrid_all_noninferior": true,
+   "hybrid_over_chatbot_cost": {
+    "min": 0.5018134189423437,
+    "max": 0.7336970993333054
+   },
+   "hybrid_saving_share": {
+    "min": 0.2663029006666946,
+    "max": 0.49818658105765634
+   },
+   "confidence_minus_random_pts": {
+    "min": 4.02852243542492,
+    "max": 5.971399973619073
+   }
+  },
+  "other": {
+   "gpt_free": {
+    "accuracy": 0.8885793871866295,
+    "usd_list_per_1000": 0.2837866295264624
+   },
+   "claude_free": {
+    "accuracy": 0.8997214484679665,
+    "usd_list_per_1000": 2.8567298050139276
+   },
+   "gemini_free": {
+    "accuracy": 0.8272980501392758,
+    "usd_list_per_1000": 0.32173481894150413
+   },
+   "medgemma": {
+    "accuracy": 0.6573816155988857,
+    "usd_list_per_1000": 0.1207634679665738
+   },
+   "gemma": {
+    "accuracy": 0.5933147632311978,
+    "usd_list_per_1000": 0.04756406685236769
+   }
+  }
+ }
+}

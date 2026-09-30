@@ -1,0 +1,342 @@
+Colon cancer stage with structured input, options defined without examples (Supplementary Note 1; Supplementary Table
+5): the request of colon_cancer_stage_structured.txt (Supplementary Note 2) with every option's examples list removed;
+nothing else changes. Jev: the report is the one field of the case, and the four Choice questions go in one request.
+Chatbots: the system message, then the report and Jev's four questions written as JSON with two-space indents and
+Jev's key order; the reply schema lists each question's options in Jev's order. The stage group is computed in code
+from the four answers, for every system. {report}: the pathology report, without leading or trailing white space.
+Reply schema: sent as response_format to every chatbot whose entry in config/models.yaml has structured_outputs: true.
+Built by scripts/arm3_jev_parts.py from Jev's stored request of colon_cancer_stage_structured.txt for the same report
+(Jev) and by src/jevity/llm_forms.py from Jev's stored request for the same report (chatbots).
+
+### SYSTEM MESSAGE
+For each question, choose the option that is correct, and give the probability that each option is correct, as numbers between 0 and 1 that add up to 1. Always choose one option for each question. Reply with a JSON object with one key for each question ID, each holding an object with two keys, "choice" (the option you choose, written exactly as in the question's criteria) and "probabilities" (an object with one number for each option), and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Pathology report:
+{report}
+
+Questions:
+{
+  "t_category": {
+    "type": "choice",
+    "instructions": "Which pathological T category does this colorectal cancer have, according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "Tis": {
+        "what": "Carcinoma in situ or intramucosal carcinoma: tumor involves the lamina propria, with no extension through the muscularis mucosae.",
+        "not_for": "Tumor that extends through the muscularis mucosae into the submucosa or deeper."
+      },
+      "T1": {
+        "what": "Tumor invades the submucosa, through the muscularis mucosae but not into the muscularis propria.",
+        "not_for": "Tumor that invades the muscularis propria or deeper."
+      },
+      "T2": {
+        "what": "Tumor invades the muscularis propria, without extending through it.",
+        "not_for": "Tumor that extends through the muscularis propria into the pericolorectal tissues."
+      },
+      "T3": {
+        "what": "Tumor invades through the muscularis propria into the pericolorectal tissues, without reaching the surface of the visceral peritoneum and without invading another organ or structure.",
+        "not_for": "Tumor at the surface of the visceral peritoneum; macroscopic perforation of the bowel through the tumor; tumor that invades another organ or structure."
+      },
+      "T4a": {
+        "what": "Tumor invades through the visceral peritoneum to its surface, including macroscopic perforation of the bowel through the tumor and continuous invasion of tumor through areas of inflammation to the surface of the visceral peritoneum.",
+        "not_for": "Tumor that invades another organ or structure."
+      },
+      "T4b": {
+        "what": "Tumor directly invades another organ or structure.",
+        "not_for": "Tumor limited to the bowel wall and the visceral peritoneum."
+      },
+      "cannot be assessed": {
+        "what": "The report does not allow the depth of invasion of the primary tumor to be assessed.",
+        "not_for": "A report that states how deep the primary tumor invades."
+      }
+    }
+  },
+  "regional_nodes": {
+    "type": "choice",
+    "instructions": "How many regional lymph nodes contain metastatic carcinoma (tumor in the node measuring 0.2 mm or more), according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "none": {
+        "what": "No regional lymph node contains metastatic carcinoma.",
+        "not_for": "A report in which at least one regional lymph node contains metastatic carcinoma."
+      },
+      "1": {
+        "what": "Exactly one regional lymph node contains metastatic carcinoma.",
+        "not_for": "No involved regional node, or two or more involved regional nodes."
+      },
+      "2 to 3": {
+        "what": "Two or three regional lymph nodes contain metastatic carcinoma.",
+        "not_for": "Fewer than two or more than three involved regional nodes."
+      },
+      "4 to 6": {
+        "what": "Four, five or six regional lymph nodes contain metastatic carcinoma.",
+        "not_for": "Fewer than four or more than six involved regional nodes."
+      },
+      "7 or more": {
+        "what": "Seven or more regional lymph nodes contain metastatic carcinoma.",
+        "not_for": "Six or fewer involved regional nodes."
+      },
+      "not stated": {
+        "what": "The report does not give the number of regional lymph nodes that contain metastatic carcinoma.",
+        "not_for": "A report that gives the number of involved regional nodes, including zero."
+      }
+    }
+  },
+  "tumor_deposits": {
+    "type": "choice",
+    "instructions": "Does the report describe tumor deposits, according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "present": {
+        "what": "The report records one or more tumor deposits: discrete tumor nodules in the pericolorectal fat or mesentery, separate from the primary tumor, without identifiable lymph node tissue or identifiable vascular or neural structure.",
+        "not_for": "A report that states tumor deposits are absent or does not mention them."
+      },
+      "absent": {
+        "what": "The report states that no tumor deposits are present.",
+        "not_for": "A report that describes one or more tumor deposits."
+      },
+      "not stated": {
+        "what": "The report neither mentions tumor deposits nor describes such nodules.",
+        "not_for": "A report that states whether tumor deposits are present."
+      }
+    }
+  },
+  "distant_metastasis": {
+    "type": "choice",
+    "instructions": "Which distant metastasis category do the pathology findings and any staging imaging in the report describe, according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "none": {
+        "what": "No distant metastasis.",
+        "not_for": "Metastasis in one or more distant sites or organs, or in the peritoneum."
+      },
+      "M1a": {
+        "what": "Metastasis confined to one distant site or organ, without peritoneal metastasis.",
+        "not_for": "Metastases in two or more distant sites or organs; any peritoneal metastasis."
+      },
+      "M1b": {
+        "what": "Metastases in two or more distant sites or organs, without peritoneal metastasis.",
+        "not_for": "Metastases confined to one site or organ; any peritoneal metastasis."
+      },
+      "M1c": {
+        "what": "Metastasis to the peritoneal surface, alone or with metastases in other sites or organs.",
+        "not_for": "No peritoneal metastasis."
+      },
+      "not stated": {
+        "what": "The report, including any staging imaging, does not say whether distant metastasis is present.",
+        "not_for": "A report whose staging information states whether distant metastasis is present."
+      }
+    }
+  }
+}
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "arm3_parts_answer",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "t_category": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["Tis", "T1", "T2", "T3", "T4a", "T4b", "cannot be assessed"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "Tis": {"type": "number", "minimum": 0, "maximum": 1},
+                "T1": {"type": "number", "minimum": 0, "maximum": 1},
+                "T2": {"type": "number", "minimum": 0, "maximum": 1},
+                "T3": {"type": "number", "minimum": 0, "maximum": 1},
+                "T4a": {"type": "number", "minimum": 0, "maximum": 1},
+                "T4b": {"type": "number", "minimum": 0, "maximum": 1},
+                "cannot be assessed": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["Tis", "T1", "T2", "T3", "T4a", "T4b", "cannot be assessed"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        },
+        "regional_nodes": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["none", "1", "2 to 3", "4 to 6", "7 or more", "not stated"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "none": {"type": "number", "minimum": 0, "maximum": 1},
+                "1": {"type": "number", "minimum": 0, "maximum": 1},
+                "2 to 3": {"type": "number", "minimum": 0, "maximum": 1},
+                "4 to 6": {"type": "number", "minimum": 0, "maximum": 1},
+                "7 or more": {"type": "number", "minimum": 0, "maximum": 1},
+                "not stated": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["none", "1", "2 to 3", "4 to 6", "7 or more", "not stated"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        },
+        "tumor_deposits": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["present", "absent", "not stated"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "present": {"type": "number", "minimum": 0, "maximum": 1},
+                "absent": {"type": "number", "minimum": 0, "maximum": 1},
+                "not stated": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["present", "absent", "not stated"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        },
+        "distant_metastasis": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["none", "M1a", "M1b", "M1c", "not stated"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "none": {"type": "number", "minimum": 0, "maximum": 1},
+                "M1a": {"type": "number", "minimum": 0, "maximum": 1},
+                "M1b": {"type": "number", "minimum": 0, "maximum": 1},
+                "M1c": {"type": "number", "minimum": 0, "maximum": 1},
+                "not stated": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["none", "M1a", "M1b", "M1c", "not stated"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["t_category", "regional_nodes", "tumor_deposits", "distant_metastasis"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": {"pathology_report": "{report}"},
+  "questions": {
+    "t_category": {
+      "type": "choice",
+      "instructions": "Which pathological T category does this colorectal cancer have, according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {
+        "Tis": {
+          "what": "Carcinoma in situ or intramucosal carcinoma: tumor involves the lamina propria, with no extension through the muscularis mucosae.",
+          "not_for": "Tumor that extends through the muscularis mucosae into the submucosa or deeper."
+        },
+        "T1": {
+          "what": "Tumor invades the submucosa, through the muscularis mucosae but not into the muscularis propria.",
+          "not_for": "Tumor that invades the muscularis propria or deeper."
+        },
+        "T2": {
+          "what": "Tumor invades the muscularis propria, without extending through it.",
+          "not_for": "Tumor that extends through the muscularis propria into the pericolorectal tissues."
+        },
+        "T3": {
+          "what": "Tumor invades through the muscularis propria into the pericolorectal tissues, without reaching the surface of the visceral peritoneum and without invading another organ or structure.",
+          "not_for": "Tumor at the surface of the visceral peritoneum; macroscopic perforation of the bowel through the tumor; tumor that invades another organ or structure."
+        },
+        "T4a": {
+          "what": "Tumor invades through the visceral peritoneum to its surface, including macroscopic perforation of the bowel through the tumor and continuous invasion of tumor through areas of inflammation to the surface of the visceral peritoneum.",
+          "not_for": "Tumor that invades another organ or structure."
+        },
+        "T4b": {
+          "what": "Tumor directly invades another organ or structure.",
+          "not_for": "Tumor limited to the bowel wall and the visceral peritoneum."
+        },
+        "cannot be assessed": {
+          "what": "The report does not allow the depth of invasion of the primary tumor to be assessed.",
+          "not_for": "A report that states how deep the primary tumor invades."
+        }
+      }
+    },
+    "regional_nodes": {
+      "type": "choice",
+      "instructions": "How many regional lymph nodes contain metastatic carcinoma (tumor in the node measuring 0.2 mm or more), according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {
+        "none": {
+          "what": "No regional lymph node contains metastatic carcinoma.",
+          "not_for": "A report in which at least one regional lymph node contains metastatic carcinoma."
+        },
+        "1": {
+          "what": "Exactly one regional lymph node contains metastatic carcinoma.",
+          "not_for": "No involved regional node, or two or more involved regional nodes."
+        },
+        "2 to 3": {
+          "what": "Two or three regional lymph nodes contain metastatic carcinoma.",
+          "not_for": "Fewer than two or more than three involved regional nodes."
+        },
+        "4 to 6": {
+          "what": "Four, five or six regional lymph nodes contain metastatic carcinoma.",
+          "not_for": "Fewer than four or more than six involved regional nodes."
+        },
+        "7 or more": {
+          "what": "Seven or more regional lymph nodes contain metastatic carcinoma.",
+          "not_for": "Six or fewer involved regional nodes."
+        },
+        "not stated": {
+          "what": "The report does not give the number of regional lymph nodes that contain metastatic carcinoma.",
+          "not_for": "A report that gives the number of involved regional nodes, including zero."
+        }
+      }
+    },
+    "tumor_deposits": {
+      "type": "choice",
+      "instructions": "Does the report describe tumor deposits, according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {
+        "present": {
+          "what": "The report records one or more tumor deposits: discrete tumor nodules in the pericolorectal fat or mesentery, separate from the primary tumor, without identifiable lymph node tissue or identifiable vascular or neural structure.",
+          "not_for": "A report that states tumor deposits are absent or does not mention them."
+        },
+        "absent": {
+          "what": "The report states that no tumor deposits are present.",
+          "not_for": "A report that describes one or more tumor deposits."
+        },
+        "not stated": {
+          "what": "The report neither mentions tumor deposits nor describes such nodules.",
+          "not_for": "A report that states whether tumor deposits are present."
+        }
+      }
+    },
+    "distant_metastasis": {
+      "type": "choice",
+      "instructions": "Which distant metastasis category do the pathology findings and any staging imaging in the report describe, according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {
+        "none": {
+          "what": "No distant metastasis.",
+          "not_for": "Metastasis in one or more distant sites or organs, or in the peritoneum."
+        },
+        "M1a": {
+          "what": "Metastasis confined to one distant site or organ, without peritoneal metastasis.",
+          "not_for": "Metastases in two or more distant sites or organs; any peritoneal metastasis."
+        },
+        "M1b": {
+          "what": "Metastases in two or more distant sites or organs, without peritoneal metastasis.",
+          "not_for": "Metastases confined to one site or organ; any peritoneal metastasis."
+        },
+        "M1c": {
+          "what": "Metastasis to the peritoneal surface, alone or with metastases in other sites or organs.",
+          "not_for": "No peritoneal metastasis."
+        },
+        "not stated": {
+          "what": "The report, including any staging imaging, does not say whether distant metastasis is present.",
+          "not_for": "A report whose staging information states whether distant metastasis is present."
+        }
+      }
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

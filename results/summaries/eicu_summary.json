@@ -1,0 +1,53 @@
+{
+ "note": "descriptive; every predictor scored on the stays all of them scored",
+ "n_records": 1246,
+ "deaths": 94,
+ "observed": 0.0754414125200642,
+ "evaluation_stays": 1297,
+ "jev": {
+  "log_loss": 0.3745108315779607,
+  "auroc": 0.8361360446217494,
+  "brier": 0.11212271268057786,
+  "calibration_slope": 1.7103249584854223,
+  "mean_predicted": 0.2885152487961477,
+  "log_loss_ci": [
+   0.35926158652077994,
+   0.39131022584204395
+  ],
+  "mean_predicted_ci": [
+   0.27892937399678974,
+   0.29850742375601924
+  ]
+ },
+ "apache_iva": {
+  "log_loss": 0.19752151754325378,
+  "auroc": 0.8638907358156029,
+  "brier": 0.0549730817381024,
+  "calibration_slope": 1.0709321676973331,
+  "mean_predicted": 0.0981031806561083
+ },
+ "main_chatbots": {
+  "log_loss": {
+   "min": 0.210082902172006,
+   "max": 0.2965783465427931
+  },
+  "auroc": {
+   "min": 0.8451121084515367,
+   "max": 0.8799082077423167
+  },
+  "brier": {
+   "min": 0.05812226003210273,
+   "max": 0.08395327688603532
+  },
+  "calibration_slope": {
+   "min": 1.173817309347062,
+   "max": 1.4410239686639779
+  },
+  "mean_predicted": {
+   "min": 0.13229373996789726,
+   "max": 0.22039085072231138
+  }
+ },
+ "jev_highest_log_loss": true,
+ "jev_lowest_auroc": true
+}

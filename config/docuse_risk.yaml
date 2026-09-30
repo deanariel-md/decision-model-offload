@@ -1,0 +1,320 @@
+# Ten-year risk, Jev used as documented. Only the record changes: the same statement and the same question type as Jev's original primary question, with the
+# record sent as a JSON object in `state` and every numeric field turned into a named band computed in code
+# (src/jevity/docuse_risk.py). Every question text, band and cut point is here, each with its source.
+#
+# Labels: the state carries the band's published name only (docs.typesafe.ai/model-jaggedness/jev-1.13: numbers as
+# named buckets). The cut points that define each band are in its `source:` line and in the Methods, not in the state.
+# Where the source's category has no name other than its range (age, medication count, income), the range is the name.
+#
+# Band rule (code): the bands of a field are read in order and the first that matches is taken. `below: x` matches a
+# value < x; `at_most: x` matches a value <= x; a band with neither matches everything left. A value is banded exactly
+# as the original record showed it (serialize.to_state: the same rounding), after `scale` (unit conversion) and a
+# rounding to `decimals` that removes floating-point noise from the conversion. A field missing from the original record
+# is missing here (the original serializer leaves a missing field out of the record; so does this one).
+
+name: wide_docuse
+variant: documented               # calls.parquet variant value for these answers
+
+question:
+  source: >
+    Same statement and question type as the original primary Jev question (config/prompts.yaml statements.nhanes and
+    jev.primary: one Noul, question id "death", no criteria), read from config/prompts.yaml at run time and never copied
+    here, so the two runs cannot drift. docs.typesafe.ai/models: records go in `state`; the question is unchanged.
+  statement_key: nhanes
+  prompt_key: primary
+
+state:
+  source: >
+    docs.typesafe.ai/concepts/state: a JSON object with named fields (recommended for most requests), descriptive
+    field names; docs.typesafe.ai/model-jaggedness/jev-1.13: numbers converted to named buckets, arithmetic (eGFR) done in
+    code. Fields that are not numeric keep the original serializer's key and wording (serialize.to_state).
+  kept_fields: [record_type, source, sex, race_ethnicity, smoking_status, self_rated_health,
+                doctor_diagnosed_conditions, education, has_health_insurance]
+
+keys:
+  env_file: .env                  # API keys; a relative path is read from the repository root
+
+budget:
+  run_stop_usd: null              # refuse a projection above this, and stop between chunks once list spend passes it
+                                  # (USD); null = no limit
+  project_stop_usd: null          # before live calls: key usage + open batch holds + this run's projection must stay at
+                                  # or below this (USD); null = no limit
+  manifest_roots: [runs]          # run folders whose open batches count as holds; relative to the repository root
+  chunk_records: 1000             # the full run goes in chunks of whole 50-record blocks (runner.block_order)
+
+timing:
+  n: 100
+  window_min: 60
+
+# ---------------------------------------------------------------------------------------------------------- fields
+# Each banded field: `key` (state key sent to Jev), `from` (original state key or keys it replaces, at whose place it
+# goes), and the bands. Order in the state = the original record's order.
+fields:
+  age:
+    key: age_group
+    from: [age]
+    source: >
+      Five-year age groups (US Census Bureau and NCHS standard age groups), 40 to 44 through 75 to 79 years (the
+      cohort's ages are 40 to 79 at examination). The range is the group's name.
+    bands:
+      - {label: "40 to 44 years", below: 45}
+      - {label: "45 to 49 years", below: 50}
+      - {label: "50 to 54 years", below: 55}
+      - {label: "55 to 59 years", below: 60}
+      - {label: "60 to 64 years", below: 65}
+      - {label: "65 to 69 years", below: 70}
+      - {label: "70 to 74 years", below: 75}
+      - {label: "75 to 79 years"}
+
+  body_mass_index:
+    key: body_mass_index_category
+    from: [body_mass_index]
+    source: >
+      WHO BMI classification for adults (WHO Technical Report Series 894, 2000): underweight < 18.5; normal weight
+      18.5-24.9; pre-obesity 25.0-29.9; obesity class I 30.0-34.9; obesity class II 35.0-39.9; obesity class III
+      >= 40.0 kg/m2.
+    bands:
+      - {label: "underweight", below: 18.5}
+      - {label: "normal weight", below: 25.0}
+      - {label: "pre-obesity", below: 30.0}
+      - {label: "obesity class I", below: 35.0}
+      - {label: "obesity class II", below: 40.0}
+      - {label: "obesity class III"}
+
+  waist_circumference:
+    key: waist_circumference_category
+    from: [waist_circumference]
+    by_sex: true
+    source: >
+      NCEP ATP III (Third Report of the National Cholesterol Education Program Expert Panel, Circulation
+      2002;106:3143-421), abdominal obesity: waist circumference > 102 cm in men, > 88 cm in women.
+    bands:
+      male:
+        - {label: "no abdominal obesity", at_most: 102}
+        - {label: "abdominal obesity"}
+      female:
+        - {label: "no abdominal obesity", at_most: 88}
+        - {label: "abdominal obesity"}
+
+  blood_pressure:
+    key: blood_pressure_category
+    from: [systolic_blood_pressure, diastolic_blood_pressure]
+    kind: blood_pressure
+    source: >
+      2017 ACC/AHA Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in
+      Adults (Whelton et al., Hypertension 2018;71:e13-e115), Table 6: normal < 120 and < 80; elevated 120-129 and < 80;
+      stage 1 hypertension 130-139 or 80-89; stage 2 hypertension >= 140 or >= 90 mmHg; a person whose systolic and
+      diastolic readings fall in different categories is placed in the higher one. Missing when either reading is
+      missing (in the cohort both are missing together).
+    # read from the highest category down; a category matches when systolic >= its systolic_at_least OR diastolic >=
+    # its diastolic_at_least (null: no diastolic criterion); the last matches everything left
+    categories:
+      - {label: "stage 2 hypertension", systolic_at_least: 140, diastolic_at_least: 90}
+      - {label: "stage 1 hypertension", systolic_at_least: 130, diastolic_at_least: 80}
+      - {label: "elevated blood pressure", systolic_at_least: 120, diastolic_at_least: null}
+      - {label: "normal blood pressure"}
+
+  hba1c:
+    key: hba1c_category
+    from: [hba1c]
+    source: >
+      American Diabetes Association Professional Practice Committee, 2. Diagnosis and Classification of Diabetes:
+      Standards of Care in Diabetes-2024 (Diabetes Care 2024;47 Suppl 1:S20-S42, doi 10.2337/dc24-S002): prediabetes
+      A1C 5.7-6.4%; diabetes A1C >= 6.5%.
+    bands:
+      - {label: "below the prediabetes range", below: 5.7}
+      - {label: "prediabetes range", below: 6.5}
+      - {label: "diabetes range"}
+
+  glucose:
+    key: serum_glucose_random_category
+    from: [serum_glucose_random]
+    source: >
+      The sample is drawn regardless of fasting status (NHANES standard biochemistry profile LBXSGL; the original field
+      name says random), so the fasting cut points do not apply. American Diabetes Association, Standards of Care in
+      Diabetes-2024, section 2 (Diabetes Care 2024;47 Suppl 1:S20-S42): random plasma glucose >= 200 mg/dL is a diagnostic
+      criterion for diabetes in a person with classic symptoms of hyperglycemia or hyperglycemic crisis, the only
+      published cut point for a random sample. The labels name the threshold, not a diagnosis.
+    bands:
+      - {label: "below the ADA random-glucose threshold for diabetes", below: 200}
+      - {label: "at or above the ADA random-glucose threshold for diabetes"}
+
+  kidney_function:
+    key: estimated_glomerular_filtration_rate_category
+    from: [serum_creatinine]
+    kind: egfr
+    source: >
+      eGFR from serum creatinine, age and sex by the race-free CKD-EPI 2021 creatinine equation (Inker et al., NEJM
+      2021;385:1737-49; constants as published by the National Kidney Foundation, kidney.org):
+      eGFR = 142 x min(Scr/kappa, 1)^alpha x max(Scr/kappa, 1)^-1.200 x 0.9938^age x 1.012 [female]; kappa 0.7 (female)
+      / 0.9 (male); alpha -0.241 (female) / -0.302 (male); computed in code on the creatinine and age as the original
+      record showed them (the cohort's creatinine is already standardized: config/nhanes_variables.yaml). Reported as
+      KDIGO 2012 GFR categories (KDIGO 2012 Clinical Practice Guideline for the Evaluation and Management of CKD, Kidney
+      Int Suppl 2013;3:1-150): G1 >= 90; G2 60-89; G3a 45-59; G3b 30-44; G4 15-29; G5 < 15 mL/min/1.73 m2.
+    equation:
+      constant: 142
+      age_base: 0.9938
+      exponent_above: -1.200
+      female: {kappa: 0.7, alpha: -0.241, factor: 1.012}
+      male: {kappa: 0.9, alpha: -0.302, factor: 1.0}
+    bands:
+      - {label: "KDIGO G5, kidney failure", below: 15}
+      - {label: "KDIGO G4, severely decreased", below: 30}
+      - {label: "KDIGO G3b, moderately to severely decreased", below: 45}
+      - {label: "KDIGO G3a, mildly to moderately decreased", below: 60}
+      - {label: "KDIGO G2, mildly decreased", below: 90}
+      - {label: "KDIGO G1, normal or high"}
+
+  albuminuria:
+    key: urine_albumin_creatinine_ratio_category
+    from: [urine_albumin_creatinine_ratio]
+    source: >
+      KDIGO 2012 albuminuria categories (Kidney Int Suppl 2013;3:1-150): A1 < 30; A2 30-300; A3 > 300 mg/g.
+    bands:
+      - {label: "KDIGO A1, normal to mildly increased", below: 30}
+      - {label: "KDIGO A2, moderately increased", at_most: 300}
+      - {label: "KDIGO A3, severely increased"}
+
+  # Laboratory reference ranges: ABIM Laboratory Test Reference Ranges, January 2026 (American Board of Internal
+  # Medicine; the list the MSD Manual Professional Edition, "Laboratory Reference Ranges", May 2026, refers readers to).
+  # Values inside the range, both limits included, are within the reference range.
+  albumin:
+    key: serum_albumin_category
+    from: [serum_albumin]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: albumin, serum 3.5-5.5 g/dL.
+    bands:
+      - {label: "below the reference range", below: 3.5}
+      - {label: "within the reference range", at_most: 5.5}
+      - {label: "above the reference range"}
+
+  white_cells:
+    key: white_blood_cell_count_category
+    from: [white_blood_cell_count]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: leukocyte count 4000-11,000/uL (4.0-11.0 x10^3/uL, the
+      record's unit).
+    bands:
+      - {label: "below the reference range", below: 4.0}
+      - {label: "within the reference range", at_most: 11.0}
+      - {label: "above the reference range"}
+
+  lymphocytes:
+    key: lymphocyte_percent_category
+    from: [lymphocyte_percent]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: leukocyte differential, lymphocytes 30%-45%.
+    bands:
+      - {label: "below the reference range", below: 30.0}
+      - {label: "within the reference range", at_most: 45.0}
+      - {label: "above the reference range"}
+
+  mcv:
+    key: mean_corpuscular_volume_category
+    from: [mean_corpuscular_volume]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: mean corpuscular volume 80-98 fL.
+    bands:
+      - {label: "below the reference range", below: 80.0}
+      - {label: "within the reference range", at_most: 98.0}
+      - {label: "above the reference range"}
+
+  rdw:
+    key: red_cell_distribution_width_category
+    from: [red_cell_distribution_width]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: red cell distribution width (RDW) 9.0%-14.5%.
+    bands:
+      - {label: "below the reference range", below: 9.0}
+      - {label: "within the reference range", at_most: 14.5}
+      - {label: "above the reference range"}
+
+  alkaline_phosphatase:
+    key: alkaline_phosphatase_category
+    from: [alkaline_phosphatase]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: alkaline phosphatase, serum 30-120 U/L.
+    bands:
+      - {label: "below the reference range", below: 30}
+      - {label: "within the reference range", at_most: 120}
+      - {label: "above the reference range"}
+
+  crp:
+    key: c_reactive_protein_category
+    from: [c_reactive_protein]
+    scale: 10.0                   # the record shows mg/dL; the AHA/CDC cut points are in mg/L
+    decimals: 6
+    source: >
+      AHA/CDC Scientific Statement on markers of inflammation and cardiovascular disease (Pearson et al., Circulation
+      2003;107:499-511): CRP < 1.0 mg/L low, 1.0-3.0 mg/L average, > 3.0 mg/L high relative cardiovascular risk; a value
+      above 10 mg/L is not a cardiovascular risk category (the statement advises repeating the test and looking for
+      infection or inflammation). The record's value (mg/dL) is multiplied by 10.
+    bands:
+      - {label: "low relative cardiovascular risk", below: 1.0}
+      - {label: "average relative cardiovascular risk", at_most: 3.0}
+      - {label: "high relative cardiovascular risk", at_most: 10.0}
+      - {label: "markedly raised, suggesting infection or inflammation"}
+
+  total_cholesterol:
+    key: total_cholesterol_category
+    from: [total_cholesterol]
+    source: >
+      NCEP ATP III (Circulation 2002;106:3143-421), classification of total cholesterol: desirable < 200; borderline high
+      200-239; high >= 240 mg/dL.
+    bands:
+      - {label: "desirable", below: 200}
+      - {label: "borderline high", below: 240}
+      - {label: "high"}
+
+  hdl:
+    key: hdl_cholesterol_category
+    from: [hdl_cholesterol]
+    source: >
+      NCEP ATP III (Circulation 2002;106:3143-421), classification of HDL cholesterol: low < 40 mg/dL, high >= 60 mg/dL,
+      the same for both sexes (the < 50 mg/dL cut for women belongs to the metabolic syndrome criteria, not to this
+      classification). ATP III gives the middle range no name.
+    bands:
+      - {label: "low", below: 40}
+      - {label: "neither low nor high", below: 60}
+      - {label: "high"}
+
+  medications:
+    key: prescription_medicines_past_30_days_category
+    from: [prescription_medicines_past_30_days]
+    source: >
+      Polypharmacy, most commonly defined as 5 or more medicines (Masnoon et al., BMC Geriatrics 2017;17:230): none;
+      1 to 4; 5 or more (polypharmacy).
+    bands:
+      - {label: "none", below: 1}
+      - {label: "1 to 4", below: 5}
+      - {label: "5 or more (polypharmacy)"}
+
+  income:
+    key: family_income_to_poverty_ratio_category
+    from: [family_income_to_poverty_ratio]
+    top_coded: {"5 or more": 5.0}   # the original serializer writes NHANES's top code as text; it falls in the top band
+    source: >
+      Family income as a percentage of the federal poverty threshold, NCHS reporting categories (Health, United States:
+      below 100%, 100%-199%, 200%-399%, 400% or more); the category is the name.
+    bands:
+      - {label: "below 100% of the poverty threshold", below: 1.0}
+      - {label: "100% to 199% of the poverty threshold", below: 2.0}
+      - {label: "200% to 399% of the poverty threshold", below: 4.0}
+      - {label: "400% or more of the poverty threshold"}
+
+# ---------------------------------------------------------------------------------------------------------- analysis
+analysis:
+  source: >
+    The same functions and settings that produced results/wide/analysis.json (analysis.prediction_block via
+    analysis.run_wide; the evaluation block as analysis.run_all: B 1000, seed 29, clip [0.005, 0.995]) and, on the 983
+    evaluation records, the five-cheaper-systems family of results/summaries/cheap_family.json (risk_evaluation: B 2000,
+    seed 20260927). The non-inferiority margins are fixed at the stored values (10% of the age-and-sex-to-reference
+    log-loss gap), which depend on the references only, so they do not move with the records Jev answers.
+  wide_B: 1000                    # scripts/analyze.py wide: run_wide(B=min(B, 1000))
+  eval_B: 1000                    # analysis.run_all calls prediction_block with its default B (1000, seed 29)
+  wide_margin: 0.006015999869042211     # results/wide/analysis.json, prediction.focal_vs_llms.pairs["jev - gpt"].noninferiority_margin
+  eval_margin: 0.005267415423968958     # results/summaries/cheap_family.json, sets.risk_evaluation.margin
+  cheap_family: [gpt_free, claude_free, gemini_free, medgemma, gemma]
+  cheap_seed: 20260927
+  cheap_B: 2000
+  reproduction_tolerance: 1.0e-9    # |a - b| <= tol x max(1, |b|); bit-exact status is recorded beside it

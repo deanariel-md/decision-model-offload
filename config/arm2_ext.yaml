@@ -1,0 +1,134 @@
+# Arm 2, second item set: the questions of MedQA and Medbullets, the two MedHELM clinical decision support benchmarks
+# with case vignettes, in the versions MedHELM loads (crfm-helm MedQAScenario and MedBulletsScenario). Same systems,
+# parser, providers, route and settings as arm 2's main pass; one pass, no repeats. Read by src/jevity/categorical*.py
+# and scripts/run_categorical.py; scripts/build_arm2_ext_items.py builds the item file from the original sources.
+arm: arm2_ext
+kind: choice
+population: arm2_ext                # public benchmark questions
+seed: 20260922                      # samples printed by the builder, call order, bootstrap, timing items
+labels: [A, B, C, D, E]             # MedQA items offer A-D, Medbullets A-E; a letter an item does not offer carries zero
+                                    # probability (the multiclass Brier score is then the item's own)
+instructions: "Answer this medical question."   # Jev's Choice instructions; the chatbots' system message starts with
+                                                # the same words
+answer_key: choice                  # chatbot reply {"choice": "A", "probabilities": {"A": x, ...}}, as arm 2
+parse:
+  embedded_json: true               # a reply that reasons first and ends with the requested JSON object is read from the
+                                    # last such object (parse "json_embedded"), for every system
+
+items:
+  main: data/arm2_ext/items.csv     # scripts/build_arm2_ext_items.py
+  id_column: item_id
+  state_column: stem                # the dataset's question text, verbatim (its own question sentence included)
+  truth_column: truth               # the dataset's answer letter
+  stratum_column: source            # medqa | medbullets: the stratified bootstrap and the per-source accuracies
+  group_column: source
+  options_column: options           # JSON letter -> text, in the dataset's order (not shuffled: the order MedHELM shows)
+source:                             # scripts/build_arm2_ext_items.py; files cached under data/raw/arm2_ext
+  medqa:
+    helm: crfm-helm src/helm/benchmark/scenarios/med_qa_scenario.py (MedQAScenario), run spec medhelm_med_qa
+    url: https://drive.google.com/uc?export=download&id=1ImYUSLk9JbgHXOemfvyiDiirluZHPeQw&confirm=t
+    file: data_clean.zip
+    zip_sha256: 1c2ca8130b3d86d9a99a432ab9bef14f3bb9807bef20facd9ac86ba36960f629
+    member: data_clean/questions/US/4_options/phrases_no_exclude_test.jsonl
+    member_sha256: c3b905ccfa66152dc25afbcb2c10e86c0bdb208824f0658fcdb2c040f60a2beb
+    licence: MIT (github.com/jind11/MedQA)
+  medbullets:
+    helm: crfm-helm src/helm/benchmark/scenarios/medbullets_scenario.py (MedBulletsScenario, split _op5), run spec medbullets
+    url: https://raw.githubusercontent.com/HanjieChen/ChallengeClinicalQA/refs/heads/main/medbullets/medbullets_op5.csv
+    file: medbullets_op5.csv
+    sha256: 7da4b1397418b4bd15074066ea6a377ac44a599794a959cd8ebc76937ea597e6
+    licence: none stated (github.com/HanjieChen/ChallengeClinicalQA has no licence file; its README gives no terms)
+  medqa_alt:                        # the same questions with 5 options: the 4-option file is this one with one wrong
+    file: data_clean.zip            # option deleted per question (Jin et al.), line for line
+    member: data_clean/questions/US/test.jsonl
+    member_sha256: cfa75cbcc53c29b023752b0a395ff49d8202121041392735ae44771a5ec734a3
+  medbullets_alt:                   # the same questions with 4 options (HELM's unused _op4 split), matched on question and link
+    url: https://raw.githubusercontent.com/HanjieChen/ChallengeClinicalQA/refs/heads/main/medbullets/medbullets_op4.csv
+    file: medbullets_op4.csv
+    sha256: f35c24c7940fd3fd28594a4081e66bded3718cd98b4491d0f307d34ceb945893
+  cache_dir: data/raw/arm2_ext
+  question_sentence: the last sentence of the stem that holds a question mark (else its last sentence); sentences end
+    at . ! or ? followed by a space, or at a line break
+  subgroup_patterns:                # every question enters; the subgroup: the lead-in asks for the next step, the most
+                                    # appropriate management or the best treatment; matched in the question sentence
+                                    # only, ignoring case
+    next_step: '\b(next|initial|first|1st|immediate)\s+(\S+\s+){0,2}?(step|course of action)\b'
+    management: '\b(most appropriate|appropriate|proper|best|optimal)\s+(\S+\s+){0,4}?management\b'
+    treatment: '\b(most appropriate|best|optimal)\s+(\S+\s+){0,3}?(treatment|therapy|pharmacotherapy)\b'
+  subgroup_exclude:                 # basic-science lead-ins the wording above also catches
+    basic_science: '\b(enzymes?|virulence factors?|neurotransmitters?)\b'
+  n_samples: 10                     # seeded random stems inside and outside the subgroup, printed by the builder
+repeats: {n_items: 0, n_repeats: 1}             # one pass, no repeats
+variants:                                       # the same questions, two option counts
+  medhelm: {}                                   # as MedHELM: MedQA 4 options, Medbullets 5 (primary)
+  other_count: {options_column: options_alt, truth_column: truth_alt}   # MedQA 5 options, Medbullets 4
+primary_variant: medhelm
+systems:
+  tiers: [primary, free, pair]                  # Jev plus every active family of these tiers, as arm 2
+route:
+  batch: true                                   # as arm 2: GPT, Opus, Gemini, GPT free and Gemini free on the Batch API
+  workers: {}                                   # per-system cap on parallel requests, e.g. {glm: 8} (none: the
+                                                # command-line --workers)
+keys:
+  env_file: .env                                # API keys; a relative path is read from the repository root
+jev:
+  question_id: answer                           # one Choice question; criteria = the item's option texts by letter
+prompts:                                        # chatbots; reply = arm 2's text (the parser's contract)
+  system: >
+    Answer this medical question, and give the probability that each option is the correct answer, as numbers between
+    0 and 1 that add up to 1.
+  reply: >
+    Always choose one option. Reply with a JSON object with two keys, "choice" (the letter of the option you choose)
+    and "probabilities" (an object with one number for each letter), and nothing else.
+  user_template: |
+    {state}
+
+    {options}
+analysis:
+  primary_metric: accuracy
+  strata_column: source
+  proper_score: brier                           # multiclass Brier score
+  n_boot: 2000
+  ci: 0.95
+  margin: 0.05                                  # non-inferiority and acceptable-cheaper margin (5 points)
+  alpha_one_sided: 0.025                        # Holm across the five primary chatbots, as arm 2
+  coverages: [0.5, 0.8]
+  ece_bins: 10
+  min_errors_auroc: 20
+  cost_basis: list
+  certain_at: 0.995                             # "probability 1.00": a top probability that shows as 1.00 at two
+                                                # decimals; share of items and accuracy there and below, every system
+  hybrid_share:
+    jev_share: 0.5                              # Jev answers its most confident 50% (ties by item id), the chatbot the rest
+  subsets:                                      # every analysis repeated on each subset (analysis_<variant>_<name>.json)
+    decision: {column: decision_question, equals: "True"}   # the lead-in asks for the next step, management or treatment
+  option_count_contrast: [medhelm, other_count] # accuracy with 5 options minus 4, same questions (options*.json)
+  result_tables: true                           # tables of accuracy (by source, probability 1.00) and of the hybrid
+  post_hoc:                                     # descriptive block (output key post_hoc)
+    certain_errors: true                        # Jev's wrong answers at probability 1.00
+    by_category: {exam: [source, meta_info]}    # MedQA Step 1, MedQA Step 2 and 3, Medbullets
+    confidence_table: true                      # Brier score beside the calibration error, AUROC, selective accuracy
+timing:
+  n: 100                                        # one question at a time per system, interleaved, same hour (as arm 2)
+  window_min: 60
+budget:
+  arm_stop_usd: null                            # refuse a run whose projected cost exceeds this (null: no stop)
+  project_stop_usd: null                        # before every batch submission: key usage + every open batch's
+                                                # worst-case hold + this submission's must stay at or below it (null:
+                                                # no stop); the balance must always cover the holds
+  holds_in_balance: true                        # the balance OpenRouter reports already has the booked holds taken
+                                                # off, so it must cover this submission alone
+  manifest_roots: [runs]                        # run folders (<root>/<run>/batches) whose open batches count as
+                                                # holds; relative to the repository root
+  tokens_out:                                   # assumed output tokens per call, for the cost projection only (as arm 2)
+    gpt: 400
+    claude: 150
+    gemini: 1100
+    muse: 1900
+    glm: 6000
+    gpt_free: 300
+    claude_free: 150
+    gemini_free: 100
+    medgemma: 100
+    gemma: 100
+    default: 2000

@@ -1,0 +1,44 @@
+# Non-regional lymph node sites that the AJCC notes of config/docuse_staging.yaml do not name, in place of the
+# misleading-feature set's para-aortic and aortocaval nodes (read by scripts/nonregional/run_nonregional.py).
+seed: 20260928
+ids: {prefix: nrs, first: 1001}     # nrs1001-nrs1020, apart from the pool's crc series
+source:
+  document: >-
+    College of American Pathologists, Protocol for the Examination of Resection Specimens from Patients with Primary
+    Carcinoma of the Colon and / or Rectum, version 4.4.0.1 (posted September 2025), the version config/crc_confusers.yaml
+    cites; www.cap.org/wp-content/uploads/protocols/ColoRectal_4.4.0.1.REL_CAPCP.pdf (read 28 Sep 2026)
+  regional_lists: >-
+    Explanatory notes, "N Category Considerations", page 24: the regional lymph nodes of each anatomical subsite of the
+    large intestine (the lists of CAP figure 7, which the protocol reproduces from the AJCC Cancer Staging Atlas)
+  nonregional_rule: >-
+    Page 26, "Nonregional Lymph Nodes": nodes are designated regional or nonregional by the tumor's anatomic location;
+    metastasis to nonregional lymph nodes is distant metastasis (M1)
+  iliac: >-
+    Page 25: for rectal cancers, metastasis in the external iliac or common iliac nodes is distant metastasis (the colon
+    lists on page 24 do not include them either)
+  ajcc_manual: >-
+    The AJCC Cancer Staging Manual, 8th edition, chapter 20, was not available to read; each site is confirmed by the
+    CAP lists and rule above
+# The tumor segments a report can have (no rectum or rectosigmoid) and their
+# regional nodes, CAP 4.4.0.1 page 24. A site is kept only if it is on none of these lists.
+regional_nodes:
+  cecum: [pericolic, ileocolic, right colic]
+  ascending colon: [pericolic, ileocolic, right colic, right branch of middle colic]
+  hepatic flexure: [pericolic, ileocolic, middle colic, right colic]
+  transverse colon: [pericolic, middle colic]
+  splenic flexure: [pericolic, middle colic, left colic]
+  descending colon: [pericolic, left colic, inferior mesenteric, sigmoid]
+  sigmoid colon: [pericolic, sigmoid, inferior mesenteric, superior rectal (hemorrhoidal)]
+# Kept sites, in the order the reports take them (spread evenly: 4 reports each, 2 per layout)
+sites:
+  - site: supraclavicular
+    source: "CAP 4.4.0.1 p. 24 (on no colon subsite's list) and p. 26 (nonregional: M1)"
+  - site: mediastinal
+    source: "CAP 4.4.0.1 p. 24 (on no colon subsite's list) and p. 26 (nonregional: M1)"
+  - site: inguinal
+    source: "CAP 4.4.0.1 p. 24 (on no colon subsite's list) and p. 26 (nonregional: M1)"
+  - site: external iliac
+    source: "CAP 4.4.0.1 p. 24 (on no colon subsite's list), p. 25 (distant even for rectal cancers) and p. 26 (nonregional: M1)"
+  - site: common iliac
+    source: "CAP 4.4.0.1 p. 24 (on no colon subsite's list), p. 25 (distant even for rectal cancers) and p. 26 (nonregional: M1)"
+dropped: []                         # candidate sites not confirmed non-regional (none)

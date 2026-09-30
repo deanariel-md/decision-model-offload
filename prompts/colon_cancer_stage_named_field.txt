@@ -1,0 +1,19 @@
+Colon cancer stage, level names only, with the report sent as a named field (Supplementary Table 5; Jev's request).
+Jev: the request of colon_cancer_stage.txt with the case sent as a JSON object whose one field, pathology_report,
+holds the report; nothing else changes. The chatbots received the request of colon_cancer_stage.txt unchanged, with
+the item set arm3, as their messages have no named fields. {report}: the pathology report. Built by
+scripts/arm3_jev_parts.py from Jev's stored request of colon_cancer_stage.txt for the same report.
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": {"pathology_report": "{report}"},
+  "questions": {
+    "crc_stage_group": {
+      "type": "score",
+      "instructions": "Assign the pathological stage group for this colorectal cancer according to the AJCC Cancer Staging Manual, 8th edition. Stage IVA-IVB here includes IVA and IVB.",
+      "criteria": ["0", "I", "IIA", "IIB", "IIC", "IIIA", "IIIB", "IIIC", "IVA-IVB", "IVC"]
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

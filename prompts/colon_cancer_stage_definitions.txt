@@ -1,0 +1,85 @@
+Colon cancer stage, each level followed by its definition (Supplementary Note 1). {report}: the pathology report.
+Reply schema: sent as response_format to every chatbot whose entry in config/models.yaml has structured_outputs: true.
+Built by src/jevity/categorical.py from config/arm3.yaml. In the comparison of every form on the 240 reports
+(Supplementary Table 5), the chatbots' requests are built by src/jevity/llm_forms.py from Jev's stored request for the
+same report.
+
+### SYSTEM MESSAGE
+Choose the stage group that is correct, and give the probability that each stage group is correct, as numbers between 0 and 1 that add up to 1. Always choose one stage group. Reply with a JSON object with two keys, "stage" (the stage group you choose, written exactly as in the list) and "probabilities" (an object with one number for each stage group), and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Pathology report:
+{report}
+
+Question: Assign the pathological stage group for this colorectal cancer according to the AJCC Cancer Staging Manual, 8th edition. Stage IVA-IVB here includes IVA and IVB.
+
+Stage groups:
+0: Tis N0 M0
+I: T1-T2 N0 M0
+IIA: T3 N0 M0
+IIB: T4a N0 M0
+IIC: T4b N0 M0
+IIIA: T1-T2 N1a-N1c M0; T1 N2a M0
+IIIB: T3-T4a N1a-N1c M0; T2-T3 N2a M0; T1-T2 N2b M0
+IIIC: T4a N2a M0; T3-T4a N2b M0; T4b N1a-N2b M0
+IVA-IVB: any T, any N, M1a-M1b
+IVC: any T, any N, M1c
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "arm3_answer",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "stage": {"type": "string", "enum": ["0", "I", "IIA", "IIB", "IIC", "IIIA", "IIIB", "IIIC", "IVA-IVB", "IVC"]},
+        "probabilities": {
+          "type": "object",
+          "properties": {
+            "0": {"type": "number", "minimum": 0, "maximum": 1},
+            "I": {"type": "number", "minimum": 0, "maximum": 1},
+            "IIA": {"type": "number", "minimum": 0, "maximum": 1},
+            "IIB": {"type": "number", "minimum": 0, "maximum": 1},
+            "IIC": {"type": "number", "minimum": 0, "maximum": 1},
+            "IIIA": {"type": "number", "minimum": 0, "maximum": 1},
+            "IIIB": {"type": "number", "minimum": 0, "maximum": 1},
+            "IIIC": {"type": "number", "minimum": 0, "maximum": 1},
+            "IVA-IVB": {"type": "number", "minimum": 0, "maximum": 1},
+            "IVC": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "required": ["0", "I", "IIA", "IIB", "IIC", "IIIA", "IIIB", "IIIC", "IVA-IVB", "IVC"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["stage", "probabilities"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{report}",
+  "questions": {
+    "crc_stage_group": {
+      "type": "score",
+      "instructions": "Assign the pathological stage group for this colorectal cancer according to the AJCC Cancer Staging Manual, 8th edition. Stage IVA-IVB here includes IVA and IVB.",
+      "criteria": [
+        "0: Tis N0 M0",
+        "I: T1-T2 N0 M0",
+        "IIA: T3 N0 M0",
+        "IIB: T4a N0 M0",
+        "IIC: T4b N0 M0",
+        "IIIA: T1-T2 N1a-N1c M0; T1 N2a M0",
+        "IIIB: T3-T4a N1a-N1c M0; T2-T3 N2a M0; T1-T2 N2b M0",
+        "IIIC: T4a N2a M0; T3-T4a N2b M0; T4b N1a-N2b M0",
+        "IVA-IVB: any T, any N, M1a-M1b",
+        "IVC: any T, any N, M1c"
+      ]
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

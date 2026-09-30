@@ -1,0 +1,282 @@
+# Arm 3, Jev used as documented: the whole report as the state and four Choice questions in one request; the stage
+# group is computed in code. Every question text, criterion, band and code mapping below names its source. Read by
+# src/jevity/docuse_staging.py and scripts/docuse/*.py. Only Jev is called; the chatbots' stored arm 3 answers, the
+# items, the key and the scoring are arm 3's (config/arm3.yaml, config/crc_ajcc8.yaml).
+arm: arm3_docuse
+population: arm3                    # the template-built reports of arm 3
+seed: 20260922                      # arm 3's seed: report order, repeat set, bootstrap
+variants: [documented, documented_notes]   # calls.variant of the Jev rows in results/arm3_docuse/calls.parquet; both on
+                                    # every report (the questions block below says what each sends)
+source_arm: config/arm3.yaml        # analysis settings, repeat set, timing sample and levels are read from it
+
+items:
+  main: data/arm3/items.csv                     # the 1,000 reports
+  confuser: data/arm3/confuser_items.csv        # the 100 misleading-feature reports
+  id_column: report_id
+  state_column: report
+  truth_column: level
+
+store: runs/arm3_docuse             # raw Jev responses, verbatim, first write wins (clients.RawStore)
+results: results/arm3_docuse
+workers: 8                          # parallel Jev requests on the full run (the timing sample runs one at a time)
+
+keys:
+  env_file: .env                    # API keys; a relative path is read from the repository root
+budget:
+  arm_stop_usd: null                # refuse a run whose projected cost (USD) is above this; null = no limit
+  project_stop_usd: null            # before live calls: key usage + open batch holds + this run's projection must stay
+                                    # at or below this (USD); null = no limit
+  manifest_roots: [runs]            # run folders whose open batches count as holds; relative to the repository root
+
+# ---------------------------------------------------------------------------------------------- documented design
+design:
+  - element: The whole report goes into `state` as a JSON object with one named field; nothing is extracted in code.
+    source: "docs.typesafe.ai/concepts/state (JSON object with descriptive field names, recommended for most requests); docs.typesafe.ai/models (put records in the state field)"
+  - element: Four Choice questions, all in one request.
+    source: "docs.typesafe.ai/primitives/choice (ask every Choice question your code needs in a single request)"
+  - element: The stage is not asked; the four answers are combined in code with the AJCC 8th table the key was built with.
+    source: "docs.typesafe.ai/models (composite scoring: atomic questions combined in code); config/crc_ajcc8.yaml"
+  - element: Positive nodes are asked in named bands; N and the stage group are computed in code.
+    source: "docs.typesafe.ai/model-jaggedness/jev-1.13 (count in code; convert numbers to named buckets; arithmetic in code)"
+  - element: Criteria are objects with `what`, `not_for` and `examples`; the options the model might confuse are separated by `not_for`; a `cannot be assessed` / `not stated` option where a report can fall outside the list.
+    source: "docs.typesafe.ai/primitives/choice"
+  - element: Two versions of the criteria, each on every report. documented sends what, not_for and examples; documented_notes sends the same with note_what appended to what and note_not_for appended to not_for, each joined by one space. An option without a note field is sent unchanged in both; a note field is never sent on its own.
+    source: "docs.typesafe.ai/primitives/choice"
+  - element: Confidence for routing and for the error filter is the product of the four top probabilities.
+    source: "docs.typesafe.ai/confidence; docs.typesafe.ai/primitives/choice (low confidence to a person)"
+  - element: The error filter and the hybrid use the same split. Jev keeps its most confident half of the reports (ties by report id); the rest go to a person (error filter) or to the chatbot (hybrid).
+    source: "config/arm3.yaml analysis.hybrid_share (jev_share 0.5, ties by report id); categorical_analysis.hybrid_split"
+
+state:
+  field: pathology_report
+  source: "docs.typesafe.ai/concepts/state"
+
+# Questions. The two versions share every sent word except the notes:
+#   documented        : instructions, what, not_for, examples: the AJCC 8th category definitions (T4a with its
+#                       parenthesis on perforation and inflammation; a positive node has tumor measuring 0.2 mm or more)
+#   documented_notes  : the same, with note_what appended to `what` and note_not_for appended to `not_for` (AJCC 8th
+#                       edition rules on isolated tumor cells, adhesions without tumor, and non-regional nodes)
+# Examples use ordinary report wording and never describe isolated tumor cells, an adhesion, a perforation, a
+# non-regional node or tumor deposits beside involved nodes (tests/test_docuse_staging.py enforces this).
+questions:
+  t_category:
+    instructions: "Which pathological T category does this colorectal cancer have, according to the AJCC Cancer Staging Manual, 8th edition?"
+    source: "AJCC Cancer Staging Manual, 8th edition, chapter 20 (Colon and Rectum), primary tumor (T)"
+    options:
+      Tis:
+        what: "Carcinoma in situ or intramucosal carcinoma: tumor involves the lamina propria, with no extension through the muscularis mucosae."
+        not_for: "Tumor that extends through the muscularis mucosae into the submucosa or deeper."
+        examples:
+          - "Intramucosal adenocarcinoma; no invasion of the submucosa."
+          - "Tumor extent: lamina propria (intramucosal)"
+        source: "AJCC 8th edition, chapter 20, Tis"
+        code: Tis
+      T1:
+        what: "Tumor invades the submucosa, through the muscularis mucosae but not into the muscularis propria."
+        not_for: "Tumor that invades the muscularis propria or deeper."
+        examples:
+          - "Adenocarcinoma invades the submucosa; the muscularis propria is not involved."
+          - "Tumor extent: submucosa"
+        source: "AJCC 8th edition, chapter 20, T1"
+        code: T1
+      T2:
+        what: "Tumor invades the muscularis propria, without extending through it."
+        not_for: "Tumor that extends through the muscularis propria into the pericolorectal tissues."
+        examples:
+          - "Invasive carcinoma is confined to the muscularis propria."
+          - "Tumor extent: muscularis propria"
+        source: "AJCC 8th edition, chapter 20, T2"
+        code: T2
+      T3:
+        what: "Tumor invades through the muscularis propria into the pericolorectal tissues, without reaching the surface of the visceral peritoneum and without invading another organ or structure."
+        not_for: "Tumor at the surface of the visceral peritoneum; macroscopic perforation of the bowel through the tumor; tumor that invades another organ or structure."
+        examples:
+          - "Adenocarcinoma penetrates the muscularis propria and infiltrates the pericolorectal fat."
+          - "Tumor extent: through the muscularis propria into pericolic fat"
+        source: "AJCC 8th edition, chapter 20, T3 and T4a (the T4a definition includes gross perforation through the tumor)"
+        code: T3
+      T4a:
+        what: "Tumor invades through the visceral peritoneum to its surface, including macroscopic perforation of the bowel through the tumor and continuous invasion of tumor through areas of inflammation to the surface of the visceral peritoneum."
+        not_for: "Tumor that invades another organ or structure."
+        examples:
+          - "Tumor cells are present at the serosal (visceral peritoneal) surface."
+          - "Tumor extent: reaches the visceral peritoneal surface"
+        source: "AJCC 8th edition, chapter 20, T4a (definition as printed, with its parenthesis on perforation and inflammation)"
+        code: T4a
+      T4b:
+        what: "Tumor directly invades another organ or structure."
+        note_what: "Tumor that is adherent to another organ or structure counts as T4b only when tumor is present in the adhesion on microscopy."
+        not_for: "Tumor limited to the bowel wall and the visceral peritoneum."
+        note_not_for: "An adhesion to another organ or structure with no tumor in it on microscopy, which is classified by the depth of invasion."
+        examples:
+          - "Carcinoma directly invades the wall of the urinary bladder."
+          - "Tumor extent: invades the adjacent small bowel"
+        source: "AJCC 8th edition, chapter 20, T4b; note: AJCC 8th edition T4b (adhesions)"
+        code: T4b
+      cannot be assessed:
+        what: "The report does not allow the depth of invasion of the primary tumor to be assessed."
+        not_for: "A report that states how deep the primary tumor invades."
+        examples:
+          - "Depth of invasion cannot be determined (fragmented specimen)."
+        source: "AJCC 8th edition, chapter 20, TX; docs.typesafe.ai/primitives/choice (an option for inputs outside the list)"
+        code: TX
+  regional_nodes:
+    instructions: "How many regional lymph nodes contain metastatic carcinoma (tumor in the node measuring 0.2 mm or more), according to the AJCC Cancer Staging Manual, 8th edition?"
+    source: "AJCC 8th edition, chapter 20, regional lymph nodes (N): positive nodes have tumor measuring 0.2 mm or more (N1 definition); bands N0 (0), N1a (1), N1b (2 to 3), N2a (4 to 6), N2b (7 or more)"
+    options:
+      none:
+        what: "No regional lymph node contains metastatic carcinoma."
+        note_what: "Nodes with isolated tumor cells only (single cells or clusters smaller than 0.2 mm) count as negative."
+        not_for: "A report in which at least one regional lymph node contains metastatic carcinoma."
+        examples:
+          - "No metastatic carcinoma in any of twenty-two regional lymph nodes (0/22)."
+          - "Lymph nodes: 0 positive / 18 examined"
+        source: "AJCC 8th edition, chapter 20, N0; note: AJCC 8th edition, isolated tumor cells (clusters smaller than 0.2 mm; positive nodes have tumor measuring 0.2 mm or more)"
+        band: [0, 0]
+      "1":
+        what: "Exactly one regional lymph node contains metastatic carcinoma."
+        note_what: "Nodes with isolated tumor cells only and non-regional lymph nodes (for example, para-aortic, aortocaval or other retroperitoneal nodes) are not counted; a metastasis in a non-regional lymph node is distant metastasis."
+        not_for: "No involved regional node, or two or more involved regional nodes."
+        examples:
+          - "One of nineteen regional lymph nodes contains metastatic adenocarcinoma (1/19)."
+          - "Lymph nodes: 1 positive / 14 examined"
+        source: "AJCC 8th edition, chapter 20, N1a; note: isolated tumor cells and non-regional nodes (AJCC 8th edition; CAP colon and rectum protocol)"
+        band: [1, 1]
+      "2 to 3":
+        what: "Two or three regional lymph nodes contain metastatic carcinoma."
+        note_what: "Nodes with isolated tumor cells only and non-regional lymph nodes (for example, para-aortic, aortocaval or other retroperitoneal nodes) are not counted; a metastasis in a non-regional lymph node is distant metastasis."
+        not_for: "Fewer than two or more than three involved regional nodes."
+        examples:
+          - "Metastatic carcinoma in three of twenty-one regional lymph nodes (3/21)."
+          - "Lymph nodes: 2 positive / 16 examined"
+        source: "AJCC 8th edition, chapter 20, N1b; note as N1a"
+        band: [2, 3]
+      "4 to 6":
+        what: "Four, five or six regional lymph nodes contain metastatic carcinoma."
+        note_what: "Nodes with isolated tumor cells only and non-regional lymph nodes (for example, para-aortic, aortocaval or other retroperitoneal nodes) are not counted; a metastasis in a non-regional lymph node is distant metastasis."
+        not_for: "Fewer than four or more than six involved regional nodes."
+        examples:
+          - "Five of eighteen regional lymph nodes contain metastatic adenocarcinoma (5/18)."
+          - "Lymph nodes: 4 positive / 23 examined"
+        source: "AJCC 8th edition, chapter 20, N2a; note as N1a"
+        band: [4, 6]
+      "7 or more":
+        what: "Seven or more regional lymph nodes contain metastatic carcinoma."
+        note_what: "Nodes with isolated tumor cells only and non-regional lymph nodes (for example, para-aortic, aortocaval or other retroperitoneal nodes) are not counted; a metastasis in a non-regional lymph node is distant metastasis."
+        not_for: "Six or fewer involved regional nodes."
+        examples:
+          - "Metastatic carcinoma in nine of twenty-four regional lymph nodes (9/24)."
+          - "Lymph nodes: 11 positive / 20 examined"
+        source: "AJCC 8th edition, chapter 20, N2b; note as N1a"
+        band: [7, null]
+      not stated:
+        what: "The report does not give the number of regional lymph nodes that contain metastatic carcinoma."
+        not_for: "A report that gives the number of involved regional nodes, including zero."
+        examples:
+          - "Lymph nodes: see separate report"
+        source: "AJCC 8th edition, chapter 20, NX; docs.typesafe.ai/primitives/choice (an option for inputs outside the list)"
+        band: null
+  tumor_deposits:
+    instructions: "Does the report describe tumor deposits, according to the AJCC Cancer Staging Manual, 8th edition?"
+    source: "AJCC 8th edition, chapter 20, tumor deposits (N1c)"
+    options:
+      present:
+        what: "The report records one or more tumor deposits: discrete tumor nodules in the pericolorectal fat or mesentery, separate from the primary tumor, without identifiable lymph node tissue or identifiable vascular or neural structure."
+        not_for: "A report that states tumor deposits are absent or does not mention them."
+        examples:
+          - "Two discrete tumor nodules in the mesenteric fat, without residual lymph node tissue (tumor deposits)."
+          - "Tumor deposits: present (number: 2)"
+        source: "AJCC 8th edition, chapter 20, tumor deposits"
+        code: 1
+      absent:
+        what: "The report states that no tumor deposits are present."
+        not_for: "A report that describes one or more tumor deposits."
+        examples:
+          - "Tumor deposits: none seen"
+        source: "AJCC 8th edition, chapter 20, tumor deposits"
+        code: 0
+      not stated:
+        what: "The report neither mentions tumor deposits nor describes such nodules."
+        not_for: "A report that states whether tumor deposits are present."
+        examples:
+          - "A report whose lymph node section gives the node count and says nothing about tumor deposits."
+        source: "docs.typesafe.ai/primitives/choice (an option for inputs outside the list); AJCC 8th edition: N1c requires tumor deposits to be present, so an unmentioned deposit is not counted"
+        code: 0
+  distant_metastasis:
+    instructions: "Which distant metastasis category do the pathology findings and any staging imaging in the report describe, according to the AJCC Cancer Staging Manual, 8th edition?"
+    source: "AJCC 8th edition, chapter 20, distant metastasis (M)"
+    options:
+      none:
+        what: "No distant metastasis."
+        not_for: "Metastasis in one or more distant sites or organs, or in the peritoneum."
+        note_not_for: "A metastasis in a non-regional lymph node (for example, para-aortic, aortocaval or other retroperitoneal nodes), which is distant metastasis in one site (M1a)."
+        examples:
+          - "CT chest, abdomen and pelvis: no metastatic disease."
+          - "Staging imaging: no distant metastasis"
+        source: "AJCC 8th edition, chapter 20, M0"
+        code: M0
+      M1a:
+        what: "Metastasis confined to one distant site or organ, without peritoneal metastasis."
+        note_what: "A metastasis in a non-regional lymph node (for example, para-aortic, aortocaval or other retroperitoneal nodes) counts as one distant site."
+        not_for: "Metastases in two or more distant sites or organs; any peritoneal metastasis."
+        examples:
+          - "Two lesions in the right lobe of the liver consistent with metastases; lungs and peritoneum clear."
+          - "Staging imaging: solitary lung metastasis"
+        source: "AJCC 8th edition, chapter 20, M1a; note: AJCC 8th edition, non-regional lymph nodes"
+        code: M1a
+      M1b:
+        what: "Metastases in two or more distant sites or organs, without peritoneal metastasis."
+        not_for: "Metastases confined to one site or organ; any peritoneal metastasis."
+        examples:
+          - "Metastases in the liver and in both lungs; no peritoneal disease."
+          - "Staging imaging: liver and adrenal metastases"
+        source: "AJCC 8th edition, chapter 20, M1b"
+        code: M1b
+      M1c:
+        what: "Metastasis to the peritoneal surface, alone or with metastases in other sites or organs."
+        not_for: "No peritoneal metastasis."
+        examples:
+          - "Multiple peritoneal and omental nodules consistent with metastatic carcinoma."
+          - "Staging imaging: peritoneal carcinomatosis and a liver metastasis"
+        source: "AJCC 8th edition, chapter 20, M1c"
+        code: M1c
+      not stated:
+        what: "The report, including any staging imaging, does not say whether distant metastasis is present."
+        not_for: "A report whose staging information states whether distant metastasis is present."
+        examples:
+          - "Staging imaging: not available"
+        source: "docs.typesafe.ai/primitives/choice (an option for inputs outside the list); as the other three questions. No stage group (AJCC 8th has no MX)"
+        code: null
+
+# ---------------------------------------------------------------------------------------------- code from parts to stage
+# N: crc.n_category(band lower bound, deposits code), the function the key was built with; the stage group:
+# crc.stage_group(T, N, M) over config/crc_ajcc8.yaml stage_table; the level: crc.level_of (IVA and IVB -> IVA-IVB).
+# A combination the table does not stage (TX, NX, or Tis with a positive node or deposits) has no level.
+combination:
+  t_rule: "cannot be assessed is TX, which has no stage group (unusable, as NX)"
+  m_rule: "M not stated has no stage group (as TX and NX)"
+  n_rule: "AJCC 8th: with no positive regional node and tumor deposits present, N1c; with a positive node, N follows the node count and deposits are not added"
+  source: "config/crc_ajcc8.yaml rules; src/jevity/crc.py n_category, stage_group, level_of"
+  stage_distribution: "P(level) = sum over the 7 x 6 x 3 x 5 answer combinations that map to the level of the product of the four answer probabilities, divided by 1 - P(no stage) (the list given a staged combination); P(no stage) is stored per report (parts.parquet p_unstaged)"
+  routing_confidence: "product of the four top probabilities (the probability that all four parts are right if they are independent)"
+
+# Error filter: Jev keeps its most confident half by the routing confidence (the hybrid's split); the other half goes to a
+# person. The share is read from config/arm3.yaml analysis.hybrid_share.jev_share.
+error_filter:
+  rule: "Jev keeps the reports in its most confident half (categorical_analysis.hybrid_split at arm 3's hybrid share, ties by report id); the rest go to a person"
+  source: "docs.typesafe.ai/confidence (low confidence: route to a person); config/arm3.yaml analysis.hybrid_share"
+
+# ---------------------------------------------------------------------------------------------- analysis
+analysis:
+  chatbot_variants: [names, definitions]      # the chatbots' two stored answer sets; each Jev variant against each
+  main_family: [gpt, claude, gemini, muse, glm]
+  cheaper_family: [gpt_free, claude_free, gemini_free, medgemma, gemma]
+  confuser_family: [gpt, claude, gemini, muse, glm]    # config/arm3_confuser.yaml: the five primary chatbots
+  chatbot_calls: results/arm3/calls.parquet
+  chatbot_confuser_calls: results/arm3_confuser/calls.parquet
+  chatbot_timing: results/arm3/timing_sample.parquet
+  reference_analysis: {names: results/arm3/analysis.json, definitions: results/arm3/analysis_definitions.json}
+  positive_sets:                              # sensitivity, specificity and AUROC of P(set)
+    stage_iii_iv: [IIIA, IIIB, IIIC, IVA-IVB, IVC]
+    stage_iv: [IVA-IVB, IVC]
+  source: "config/arm3.yaml analysis (outputs as arm 3)"

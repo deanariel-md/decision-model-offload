@@ -1,0 +1,1291 @@
+{
+ "prices": {
+  "jev": [
+   0.042,
+   0.0
+  ],
+  "gpt": [
+   5.0,
+   30.0
+  ],
+  "claude": [
+   4.0,
+   20.0
+  ],
+  "gemini": [
+   0.75,
+   3.75
+  ],
+  "muse": [
+   1.25,
+   4.25
+  ],
+  "glm": [
+   1.4,
+   4.4
+  ],
+  "gpt_free": [
+   0.2,
+   1.2
+  ],
+  "claude_free": [
+   2.0,
+   10.0
+  ],
+  "gemini_free": [
+   0.3,
+   2.5
+  ],
+  "medgemma": [
+   0.265,
+   0.65
+  ],
+  "gemma": [
+   0.1,
+   0.3
+  ]
+ },
+ "systems": [
+  "jev",
+  "gpt",
+  "claude",
+  "gemini",
+  "muse",
+  "glm",
+  "gpt_free",
+  "claude_free",
+  "gemini_free",
+  "medgemma",
+  "gemma"
+ ],
+ "forms": [
+  "names",
+  "named_field",
+  "definitions",
+  "structure_only",
+  "documented_no_examples",
+  "documented",
+  "documented_notes"
+ ],
+ "cost": {
+  "jev": {
+   "names": {
+    "n": 240,
+    "tokens_in": 158415.0,
+    "tokens_out": 4560.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.00665343,
+    "usd_per_1000": 0.027722625,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.00665343,
+     "usd_per_1000": 0.027722625
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 160335.0,
+    "tokens_out": 4560.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.006734070000000001,
+    "usd_per_1000": 0.028058625000000004,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.00673407,
+     "usd_per_1000": 0.028058625
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 194175.0,
+    "tokens_out": 4560.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.008155350000000002,
+    "usd_per_1000": 0.03398062500000001,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.008155349999999999,
+     "usd_per_1000": 0.033980624999999993
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 208815.0,
+    "tokens_out": 59685.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.00877023,
+    "usd_per_1000": 0.036542625,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.00877023,
+     "usd_per_1000": 0.036542625
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 482895.0,
+    "tokens_out": 59689.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.020281590000000002,
+    "usd_per_1000": 0.084506625,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.020281590000000002,
+     "usd_per_1000": 0.084506625
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 666255.0,
+    "tokens_out": 59683.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.02798271,
+    "usd_per_1000": 0.11659462500000001,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.02798271,
+     "usd_per_1000": 0.11659462500000001
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 758655.0,
+    "tokens_out": 59739.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.042,
+    "price_out": 0.0,
+    "usd_list_total": 0.031863510000000005,
+    "usd_per_1000": 0.13276462500000002,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.03186351,
+     "usd_per_1000": 0.132764625
+    }
+   }
+  },
+  "gpt": {
+   "names": {
+    "n": 240,
+    "tokens_in": 136811.0,
+    "tokens_out": 54115.0,
+    "tokens_reasoning": 32261.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 2.307505,
+    "usd_per_1000": 9.614604166666668,
+    "reported": {
+     "n_with": 38,
+     "usd_total": 0.1477535,
+     "usd_per_1000": 3.88825
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 0.814772,
+     "usd_per_1000": 3.3948833333333335
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 136811.0,
+    "tokens_out": 54115.0,
+    "tokens_reasoning": 32261.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 2.307505,
+    "usd_per_1000": 9.614604166666668,
+    "reported": {
+     "n_with": 38,
+     "usd_total": 0.1477535,
+     "usd_per_1000": 3.88825
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 0.814772,
+     "usd_per_1000": 3.3948833333333335
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 172331.0,
+    "tokens_out": 43104.0,
+    "tokens_reasoning": 21859.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 2.154775,
+    "usd_per_1000": 8.978229166666667,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.47855149999999996,
+     "usd_per_1000": 3.467764492753623
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 0.775702,
+     "usd_per_1000": 3.232091666666667
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 274571.0,
+    "tokens_out": 54025.0,
+    "tokens_reasoning": 5884.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 2.993605,
+    "usd_per_1000": 12.473354166666667,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.2263175,
+     "usd_per_1000": 5.10965625
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 1.089392,
+     "usd_per_1000": 4.539133333333333
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 499211.0,
+    "tokens_out": 50987.0,
+    "tokens_reasoning": 2882.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 4.025665,
+    "usd_per_1000": 16.773604166666665,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.7575375,
+     "usd_per_1000": 7.323072916666666
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 1.508292,
+     "usd_per_1000": 6.284549999999999
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 675371.0,
+    "tokens_out": 50057.0,
+    "tokens_reasoning": 2920.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 4.878565,
+    "usd_per_1000": 20.327354166666666,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.1886375,
+     "usd_per_1000": 9.119322916666667
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 1.8513119999999998,
+     "usd_per_1000": 7.7138
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 761291.0,
+    "tokens_out": 49035.0,
+    "tokens_reasoning": 2146.0,
+    "price_in": 5.0,
+    "price_out": 30.0,
+    "usd_list_total": 5.277505,
+    "usd_per_1000": 21.989604166666666,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.3932175,
+     "usd_per_1000": 9.971739583333335
+    },
+    "sensitivity": {
+     "price_in": 2.0,
+     "price_out": 10.0,
+     "usd_list_total": 2.012932,
+     "usd_per_1000": 8.387216666666667
+    }
+   }
+  },
+  "claude": {
+   "names": {
+    "n": 240,
+    "tokens_in": 312131.0,
+    "tokens_out": 35825.0,
+    "tokens_reasoning": 8697.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 1.965024,
+    "usd_per_1000": 8.1876,
+    "reported": {
+     "n_with": 38,
+     "usd_total": 0.34719599999999995,
+     "usd_per_1000": 9.136736842105263
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 312131.0,
+    "tokens_out": 35825.0,
+    "tokens_reasoning": 8697.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 1.965024,
+    "usd_per_1000": 8.1876,
+    "reported": {
+     "n_with": 38,
+     "usd_total": 0.34719599999999995,
+     "usd_per_1000": 9.136736842105263
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 353171.0,
+    "tokens_out": 33001.0,
+    "tokens_reasoning": 5888.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 2.072704,
+    "usd_per_1000": 8.636266666666666,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 1.2303639999999998,
+     "usd_per_1000": 8.915681159420288
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 631811.0,
+    "tokens_out": 87843.0,
+    "tokens_reasoning": 3924.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 4.284104,
+    "usd_per_1000": 17.850433333333335,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 4.284104,
+     "usd_per_1000": 17.850433333333335
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 980771.0,
+    "tokens_out": 70246.0,
+    "tokens_reasoning": 1764.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 5.328004,
+    "usd_per_1000": 22.200016666666667,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 5.328004,
+     "usd_per_1000": 22.200016666666667
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 1278131.0,
+    "tokens_out": 71263.0,
+    "tokens_reasoning": 2892.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 6.537784,
+    "usd_per_1000": 27.24076666666667,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 6.537784,
+     "usd_per_1000": 27.24076666666667
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 1410611.0,
+    "tokens_out": 69902.0,
+    "tokens_reasoning": 1364.0,
+    "price_in": 4.0,
+    "price_out": 20.0,
+    "usd_list_total": 7.040484,
+    "usd_per_1000": 29.335350000000002,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 7.040484,
+     "usd_per_1000": 29.335350000000002
+    }
+   }
+  },
+  "gemini": {
+   "names": {
+    "n": 240,
+    "tokens_in": 218777.0,
+    "tokens_out": 124118.0,
+    "tokens_reasoning": 93666.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 0.62952525,
+    "usd_per_1000": 2.623021875,
+    "reported": {
+     "n_with": 38,
+     "usd_total": 0.09635850000000001,
+     "usd_per_1000": 2.5357500000000006
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 218777.0,
+    "tokens_out": 124118.0,
+    "tokens_reasoning": 93666.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 0.62952525,
+    "usd_per_1000": 2.623021875,
+    "reported": {
+     "n_with": 38,
+     "usd_total": 0.09635850000000001,
+     "usd_per_1000": 2.5357500000000006
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 256697.0,
+    "tokens_out": 106682.0,
+    "tokens_reasoning": 75916.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 0.59258025,
+    "usd_per_1000": 2.469084375,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.36513149999999994,
+     "usd_per_1000": 2.6458804347826086
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 507017.0,
+    "tokens_out": 169051.0,
+    "tokens_reasoning": 83027.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 1.0142039999999999,
+    "usd_per_1000": 4.225849999999999,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.0142039999999999,
+     "usd_per_1000": 4.225849999999999
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 740537.0,
+    "tokens_out": 153579.0,
+    "tokens_reasoning": 68037.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 1.131324,
+    "usd_per_1000": 4.71385,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.131324,
+     "usd_per_1000": 4.71385
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 926057.0,
+    "tokens_out": 155563.0,
+    "tokens_reasoning": 69958.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 1.277904,
+    "usd_per_1000": 5.3246,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.277904,
+     "usd_per_1000": 5.3246
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 1007417.0,
+    "tokens_out": 152256.0,
+    "tokens_reasoning": 66416.0,
+    "price_in": 0.75,
+    "price_out": 3.75,
+    "usd_list_total": 1.3265227499999999,
+    "usd_per_1000": 5.527178125,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.3265227499999999,
+     "usd_per_1000": 5.527178125
+    }
+   }
+  },
+  "muse": {
+   "names": {
+    "n": 240,
+    "tokens_in": 104034.0,
+    "tokens_out": 290725.0,
+    "tokens_reasoning": 265667.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.3656237500000001,
+    "usd_per_1000": 5.690098958333334,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.33575215,
+     "usd_per_1000": 5.565633958333334
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 104034.0,
+    "tokens_out": 290725.0,
+    "tokens_reasoning": 265667.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.3656237500000001,
+    "usd_per_1000": 5.690098958333334,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.33575215,
+     "usd_per_1000": 5.565633958333334
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 139554.0,
+    "tokens_out": 289941.0,
+    "tokens_reasoning": 264592.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.40669175,
+    "usd_per_1000": 5.861215625,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.37556065,
+     "usd_per_1000": 5.731502708333333
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 184434.0,
+    "tokens_out": 282715.0,
+    "tokens_reasoning": 203732.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.43208125,
+    "usd_per_1000": 5.967005208333333,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.3826285500000002,
+     "usd_per_1000": 5.760952291666667
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 403314.0,
+    "tokens_out": 245471.0,
+    "tokens_reasoning": 167420.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.54739425,
+    "usd_per_1000": 6.4474760416666665,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.47884225,
+     "usd_per_1000": 6.161842708333333
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 573234.0,
+    "tokens_out": 236913.0,
+    "tokens_reasoning": 159188.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.7234227500000001,
+    "usd_per_1000": 7.180928125,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.69258865,
+     "usd_per_1000": 7.052452708333333
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 654834.0,
+    "tokens_out": 222288.0,
+    "tokens_reasoning": 144799.0,
+    "price_in": 1.25,
+    "price_out": 4.25,
+    "usd_list_total": 1.7632664999999998,
+    "usd_per_1000": 7.346943749999999,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.6445897,
+     "usd_per_1000": 6.852457083333333
+    }
+   }
+  },
+  "glm": {
+   "names": {
+    "n": 240,
+    "tokens_in": 106586.0,
+    "tokens_out": 517446.0,
+    "tokens_reasoning": 492985.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 2.4259828,
+    "usd_per_1000": 10.108261666666666,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.4004468,
+     "usd_per_1000": 10.001861666666667
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 106586.0,
+    "tokens_out": 517446.0,
+    "tokens_reasoning": 492985.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 2.4259828,
+    "usd_per_1000": 10.108261666666666,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.4004468,
+     "usd_per_1000": 10.001861666666667
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 142346.0,
+    "tokens_out": 355372.0,
+    "tokens_reasoning": 330740.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 1.7629212,
+    "usd_per_1000": 7.345505,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.74096024,
+     "usd_per_1000": 7.254001
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 186986.0,
+    "tokens_out": 421973.0,
+    "tokens_reasoning": 344671.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 2.1184616000000003,
+    "usd_per_1000": 8.826923333333333,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.03222288,
+     "usd_per_1000": 8.467595333333334
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 413546.0,
+    "tokens_out": 336195.0,
+    "tokens_reasoning": 258270.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 2.0582224,
+    "usd_per_1000": 8.575926666666668,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.9360144,
+     "usd_per_1000": 8.066726666666666
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 592586.0,
+    "tokens_out": 416843.0,
+    "tokens_reasoning": 338825.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 2.6637296,
+    "usd_per_1000": 11.098873333333334,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.6339619199999995,
+     "usd_per_1000": 10.974841333333332
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 678986.0,
+    "tokens_out": 284247.0,
+    "tokens_reasoning": 205902.0,
+    "price_in": 1.4,
+    "price_out": 4.4,
+    "usd_list_total": 2.2012671999999998,
+    "usd_per_1000": 9.171946666666665,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.96144768,
+     "usd_per_1000": 8.172698666666667
+    }
+   }
+  },
+  "gpt_free": {
+   "names": {
+    "n": 240,
+    "tokens_in": 136811.0,
+    "tokens_out": 51062.0,
+    "tokens_reasoning": 29855.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.08863660000000001,
+    "usd_per_1000": 0.36931916666666675,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.05623815,
+     "usd_per_1000": 0.4075228260869565
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 136811.0,
+    "tokens_out": 51062.0,
+    "tokens_reasoning": 29855.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.08863660000000001,
+    "usd_per_1000": 0.36931916666666675,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.05623815,
+     "usd_per_1000": 0.4075228260869565
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 172331.0,
+    "tokens_out": 39721.0,
+    "tokens_reasoning": 19118.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.08213140000000001,
+    "usd_per_1000": 0.3422141666666667,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.052136949999999994,
+     "usd_per_1000": 0.3778039855072463
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 274571.0,
+    "tokens_out": 68827.0,
+    "tokens_reasoning": 19034.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.13750659999999998,
+    "usd_per_1000": 0.5729441666666666,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.15119915,
+     "usd_per_1000": 0.6299964583333334
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 499211.0,
+    "tokens_out": 60596.0,
+    "tokens_reasoning": 13321.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.1725574,
+    "usd_per_1000": 0.7189891666666667,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.19748195000000002,
+     "usd_per_1000": 0.8228414583333333
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 675371.0,
+    "tokens_out": 62207.0,
+    "tokens_reasoning": 15094.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.20972259999999998,
+    "usd_per_1000": 0.8738441666666665,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.24345515,
+     "usd_per_1000": 1.0143964583333334
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 761291.0,
+    "tokens_out": 57843.0,
+    "tokens_reasoning": 10637.0,
+    "price_in": 0.2,
+    "price_out": 1.2,
+    "usd_list_total": 0.22166980000000003,
+    "usd_per_1000": 0.9236241666666668,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.25969835,
+     "usd_per_1000": 1.0820764583333333
+    }
+   }
+  },
+  "claude_free": {
+   "names": {
+    "n": 240,
+    "tokens_in": 311651.0,
+    "tokens_out": 49326.0,
+    "tokens_reasoning": 23668.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 1.116562,
+    "usd_per_1000": 4.6523416666666675,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.116562,
+     "usd_per_1000": 4.6523416666666675
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 311651.0,
+    "tokens_out": 49326.0,
+    "tokens_reasoning": 23668.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 1.116562,
+    "usd_per_1000": 4.6523416666666675,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.116562,
+     "usd_per_1000": 4.6523416666666675
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 352691.0,
+    "tokens_out": 43223.0,
+    "tokens_reasoning": 17591.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 1.137612,
+    "usd_per_1000": 4.74005,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 1.137612,
+     "usd_per_1000": 4.74005
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 631331.0,
+    "tokens_out": 86743.0,
+    "tokens_reasoning": 20567.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 2.130092,
+    "usd_per_1000": 8.875383333333334,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.130092,
+     "usd_per_1000": 8.875383333333334
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 980291.0,
+    "tokens_out": 83992.0,
+    "tokens_reasoning": 18966.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 2.8005020000000003,
+    "usd_per_1000": 11.668758333333335,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 2.8005020000000003,
+     "usd_per_1000": 11.668758333333335
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 1277651.0,
+    "tokens_out": 89570.0,
+    "tokens_reasoning": 24419.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 3.451002,
+    "usd_per_1000": 14.379175,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 3.451002,
+     "usd_per_1000": 14.379175
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 1410131.0,
+    "tokens_out": 84664.0,
+    "tokens_reasoning": 19483.0,
+    "price_in": 2.0,
+    "price_out": 10.0,
+    "usd_list_total": 3.6669020000000003,
+    "usd_per_1000": 15.278758333333336,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 3.6669020000000003,
+     "usd_per_1000": 15.278758333333336
+    }
+   }
+  },
+  "gemini_free": {
+   "names": {
+    "n": 240,
+    "tokens_in": 218777.0,
+    "tokens_out": 31332.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.1439631,
+    "usd_per_1000": 0.59984625,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.08357590000000001,
+     "usd_per_1000": 0.605622463768116
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 218777.0,
+    "tokens_out": 31332.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.1439631,
+    "usd_per_1000": 0.59984625,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.08357590000000001,
+     "usd_per_1000": 0.605622463768116
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 256697.0,
+    "tokens_out": 29197.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.1500016,
+    "usd_per_1000": 0.6250066666666668,
+    "reported": {
+     "n_with": 138,
+     "usd_total": 0.08715709999999999,
+     "usd_per_1000": 0.631573188405797
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 507017.0,
+    "tokens_out": 86435.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.3681926,
+    "usd_per_1000": 1.5341358333333333,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.3681926,
+     "usd_per_1000": 1.5341358333333333
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 740537.0,
+    "tokens_out": 85526.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.4359761,
+    "usd_per_1000": 1.8165670833333332,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.4359761,
+     "usd_per_1000": 1.8165670833333332
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 926057.0,
+    "tokens_out": 85391.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.4912946,
+    "usd_per_1000": 2.0470608333333336,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.4912946,
+     "usd_per_1000": 2.0470608333333336
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 1007417.0,
+    "tokens_out": 85465.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.3,
+    "price_out": 2.5,
+    "usd_list_total": 0.5158876,
+    "usd_per_1000": 2.149531666666667,
+    "reported": {
+     "n_with": 240,
+     "usd_total": 0.5158876,
+     "usd_per_1000": 2.149531666666667
+    }
+   }
+  },
+  "medgemma": {
+   "names": {
+    "n": 240,
+    "tokens_in": 100697.0,
+    "tokens_out": 25337.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.043153755,
+    "usd_per_1000": 0.1798073125,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 100697.0,
+    "tokens_out": 25337.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.043153755,
+    "usd_per_1000": 0.1798073125,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 138617.0,
+    "tokens_out": 24796.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.052850905000000004,
+    "usd_per_1000": 0.22021210416666667,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 190697.0,
+    "tokens_out": 85272.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.105961505,
+    "usd_per_1000": 0.4415062708333333,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 424217.0,
+    "tokens_out": 86267.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.168491055,
+    "usd_per_1000": 0.7020460624999999,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 609737.0,
+    "tokens_out": 85665.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.21726255500000002,
+    "usd_per_1000": 0.9052606458333334,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 691097.0,
+    "tokens_out": 85577.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.265,
+    "price_out": 0.65,
+    "usd_list_total": 0.23876575500000002,
+    "usd_per_1000": 0.9948573125000001,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   }
+  },
+  "gemma": {
+   "names": {
+    "n": 240,
+    "tokens_in": 100697.0,
+    "tokens_out": 26401.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.01799,
+    "usd_per_1000": 0.07495833333333332,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "named_field": {
+    "n": 240,
+    "tokens_in": 100697.0,
+    "tokens_out": 26401.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.01799,
+    "usd_per_1000": 0.07495833333333332,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "definitions": {
+    "n": 240,
+    "tokens_in": 138617.0,
+    "tokens_out": 26439.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.0217934,
+    "usd_per_1000": 0.09080583333333334,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "structure_only": {
+    "n": 240,
+    "tokens_in": 190697.0,
+    "tokens_out": 90046.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.0460835,
+    "usd_per_1000": 0.19201458333333335,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "documented_no_examples": {
+    "n": 240,
+    "tokens_in": 424217.0,
+    "tokens_out": 90421.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.069548,
+    "usd_per_1000": 0.28978333333333334,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "documented": {
+    "n": 240,
+    "tokens_in": 609737.0,
+    "tokens_out": 92205.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.0886352,
+    "usd_per_1000": 0.3693133333333333,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   },
+   "documented_notes": {
+    "n": 240,
+    "tokens_in": 691097.0,
+    "tokens_out": 90129.0,
+    "tokens_reasoning": 0.0,
+    "price_in": 0.1,
+    "price_out": 0.3,
+    "usd_list_total": 0.0961484,
+    "usd_per_1000": 0.4006183333333333,
+    "reported": {
+     "n_with": 0,
+     "usd_total": 0.0,
+     "usd_per_1000": null
+    }
+   }
+  }
+ }
+}

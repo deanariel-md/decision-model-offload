@@ -1,0 +1,82 @@
+# eICU AKI side set: tests of their own, never pooled with the main set. Patients on maintenance dialysis and stays with
+# no creatinine value in the first 72 h, one stay per patient, none of them a patient of the main set. The main set's
+# question, levels, versions, key, prompts, systems and routes word for word (tested against config/eicu_aki.yaml);
+# scored against the same key on what each record shows; descriptive, by subset. Records: scripts/make_eicu_aki.py.
+arm: eicu_aki_side
+kind: score
+population: eicu_demo
+seed: 20260922
+instructions: "By the KDIGO creatinine criteria, what was this patient's highest AKI stage during the first 72 hours in the intensive care unit?"
+answer_key: stage
+levels:
+  - {name: "no AKI",  definition: "no value from unit admission to 72 hours is 0.3 mg/dL or more above a value in the preceding 48 hours or 1.5 times or more the lowest value in the preceding 7 days, and no dialysis started"}
+  - {name: "stage 1", definition: "a value 1.5 times or more but less than 2.0 times the lowest value in the preceding 7 days, or 0.3 mg/dL or more above a value in the preceding 48 hours"}
+  - {name: "stage 2", definition: "a value 2.0 times or more but less than 3.0 times the lowest value in the preceding 7 days"}
+  - {name: "stage 3", definition: "a value 3.0 times or more the lowest value in the preceding 7 days; or a value of 4.0 mg/dL or more that itself meets the stage 1 rise or ratio; or dialysis started"}
+variants:
+  names: {definitions: false}
+  definitions: {definitions: true}
+primary_variant: names
+items:
+  main: data/eicu_aki/side_items.csv
+  id_column: item_id
+  state_column: record
+  truth_column: stage
+  stratum_column: subset            # maintenance_dialysis, no_value_in_icu
+  group_column: criterion
+repeats: {n_items: 0, n_repeats: 1}
+systems:
+  tiers: [primary, free, pair]
+route:
+  batch: true
+  workers: {glm: 100, medgemma: 3, gemma: 2}
+keys:
+  env_file: .env
+jev:
+  question_id: aki_stage
+prompts:
+  system: >
+    Choose the AKI stage that is correct, and give the probability that each AKI stage is correct, as numbers
+    between 0 and 1 that add up to 1.
+  reply: >
+    Always choose one AKI stage. Reply with a JSON object with two keys, "stage" (the AKI stage you choose, written
+    exactly as in the list) and "probabilities" (an object with one number for each AKI stage), and nothing else.
+  user_template: |
+    Patient:
+    {state}
+
+    Question: {instructions}
+
+    AKI stages:
+    {options}
+analysis:                           # the main set's settings, except the stratum and the hybrid test (main set only)
+  primary_metric: exact_accuracy
+  strata_column: subset
+  proper_score: rps
+  n_boot: 2000
+  ci: 0.95
+  margin: 0.05
+  coverages: [0.5, 0.8]
+  ece_bins: 10
+  min_errors_auroc: 20
+  cost_basis: list
+timing:
+  n: 100
+  window_min: 60
+  hold: "no timing sample for this set"   # the shared code refuses a live timing sample while this is set
+budget:
+  arm_stop_usd: null
+  project_stop_usd: null
+  manifest_roots: [runs]
+  tokens_out:
+    gpt: 400
+    claude: 150
+    gemini: 1100
+    muse: 1900
+    glm: 6000
+    gpt_free: 300
+    claude_free: 150
+    gemini_free: 100
+    medgemma: 100
+    gemma: 100
+    default: 2000

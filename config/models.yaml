@@ -1,0 +1,198 @@
+# Systems, tiers and arms. Endpoint facts (providers, prices, supported parameters) from
+# openrouter.ai/api/v1/models/<slug>/endpoints and router.huggingface.co/v1/models; recheck prices before a new run.
+#
+# Inclusion: a frontier developer with a consumer chatbot and evidence of clinical or mass-public use; per tier, the most
+# capable model included in the chat of that consumer plan.
+#
+# Tiers: primary (confirmatory: 11-edit family + clinical slope, one max-t), free (the free consumer plan), pair
+# (medical-training pair via the Hugging Face router). The reasoning arm re-runs every primary chatbot at OpenRouter's
+# unified reasoning.effort low and high on the same 200 records (block `arms`).
+# Settings for every family outside the reasoning arm: provider defaults, no reasoning or temperature parameter sent,
+# max_tokens 16000, seed 20260922 where the endpoint lists it, json_schema {"p": number}; one pinned first-party
+# provider, allow_fallbacks false; batch where the pinned provider has a batch endpoint (block `batch`).
+# A family with disabled: true is never called. Credentialed eICU rows never go to any model.
+jev:
+  slug: typesafe/jev-1.13                 # response echoes the dated id, e.g. typesafe/jev-1.13-20260917
+  transport: openrouter                   # openrouter | typesafe_direct
+  openrouter_path: /api/v1/systemone      # TypeSafe-SDK-compatible path; alternative /api/alpha/decisions
+  provider: typesafe                      # only provider
+  context_tokens: 32000
+  price_per_mtok_input: 0.042
+  known_properties:                       # third-party audits; measured again here
+    probability_grid: 0.01                # API returns probabilities on a 0.01 grid
+    complement_sum_range: [0.71, 1.42]    # P(statement) + P(complement) depends on phrasing
+families:
+  # ---------------------------------------------------------------- primary (confirmatory)
+  gpt:
+    tier: primary
+    developer: OpenAI
+    plan: ChatGPT Plus
+    slug: openai/gpt-5.6-sol              # canonical openai/gpt-5.6-sol-20260709
+    provider_only: [openai]
+    price_in: 5.0                         # OpenAI standard list price, openai.com/api/pricing (checked 28 Sep 2026)
+    price_out: 30.0
+    structured_outputs: true
+    temperature_honoured: false           # temperature not a supported parameter
+    seed: true
+    reasoning: null                       # provider default
+    max_tokens: 16000
+  claude:
+    tier: primary
+    developer: Anthropic
+    plan: Claude Pro
+    slug: anthropic/claude-opus-5.5       # canonical anthropic/claude-opus-5.5-20260921
+    provider_only: [anthropic]
+    price_in: 4.0
+    price_out: 20.0
+    structured_outputs: true
+    temperature_honoured: true
+    seed: false                           # not listed as supported
+    reasoning: null                       # provider default (Anthropic: no extended thinking)
+    max_tokens: 16000
+  gemini:
+    tier: primary
+    developer: Google
+    plan: Google AI Pro
+    slug: google/gemini-3.8-flash         # canonical google/gemini-3.8-flash-20260902
+    provider_only: [google-vertex]
+    price_in: 0.75                        # Vertex global standard
+    price_out: 3.75
+    structured_outputs: true
+    temperature_honoured: true
+    seed: true
+    reasoning: null                       # provider default (Gemini 3 Flash: dynamic, high)
+    max_tokens: 16000
+  muse:
+    tier: primary
+    developer: Meta
+    plan: Meta AI app (free)              # the model Meta names for the Meta AI app (Muse Spark 1.1, Thinking mode)
+    slug: meta/muse-spark-1.1             # canonical meta/muse-spark-1.1-20260709
+    provider_only: [meta]                 # Meta's own endpoint, standard tier (no batch endpoint); reasoning mandatory,
+                                          # default effort medium
+    price_in: 1.25
+    price_out: 4.25
+    structured_outputs: true
+    temperature_honoured: true
+    seed: false                           # not listed as supported
+    reasoning: null                       # provider default
+    max_tokens: 16000
+  glm:
+    tier: primary
+    plan: Z.ai chat (free)
+    developer: Z.ai
+    slug: z-ai/glm-5.3                    # canonical z-ai/glm-5.3-20260816
+    provider_only: [z-ai]                 # Z.ai's own endpoint (fp8)
+    price_in: 1.4
+    price_out: 4.4
+    structured_outputs: true              # endpoint lists response_format (not structured_outputs); json_schema sent
+    temperature_honoured: true
+    seed: false                           # not listed for the Z.ai endpoint
+    reasoning: null                       # provider default
+    max_tokens: 16000
+  # ---------------------------------------------------------------- free tier, full evaluation set
+  gpt_free:
+    tier: free
+    developer: OpenAI
+    plan: ChatGPT Free                    # the most capable chat model the free plan lists
+    slug: openai/gpt-5.6-luna             # canonical openai/gpt-5.6-luna-20260709
+    provider_only: [openai]
+    price_in: 0.2
+    price_out: 1.2
+    structured_outputs: true
+    temperature_honoured: false
+    seed: true
+    reasoning: null
+    max_tokens: 16000
+  claude_free:
+    tier: free
+    developer: Anthropic
+    plan: Claude Free
+    slug: anthropic/claude-sonnet-5       # canonical anthropic/claude-sonnet-5-20260630
+    provider_only: [anthropic]
+    price_in: 2.0
+    price_out: 10.0
+    structured_outputs: true
+    temperature_honoured: true
+    seed: false
+    reasoning: null
+    max_tokens: 16000
+  gemini_free:
+    tier: free
+    developer: Google
+    plan: Gemini app, free                # the free tier's model (Flash-Lite)
+    slug: google/gemini-3.5-flash-lite    # canonical google/gemini-3.5-flash-lite-20260721
+    provider_only: [google-vertex]
+    price_in: 0.3                         # Vertex global standard (flex 0.15 / 1.25)
+    price_out: 2.5
+    structured_outputs: true
+    temperature_honoured: true
+    seed: true
+    reasoning: null
+    max_tokens: 16000
+  # ---------------------------------------------------------------- medical-training pair, full evaluation set
+  medgemma:
+    tier: pair
+    developer: Google
+    pair_with: gemma                      # same base model without medical training
+    transport: hf_router                  # https://router.huggingface.co/v1, HF_TOKEN; no OpenRouter provider block
+    slug: google/medgemma-27b-text-it
+    hf_model: google/medgemma-27b-text-it:featherless-ai   # served FP8 by Featherless
+    price_in: 0.265                       # Featherless list price per 1M tokens (the Hugging Face router passes provider
+    price_out: 0.65                       # rates through without markup)
+    structured_outputs: true              # json_schema sent
+    temperature_honoured: true
+    seed: false                           # not documented for Featherless through the Hugging Face router
+    reasoning: null
+    max_tokens: 16000
+  gemma:
+    tier: pair
+    developer: Google
+    pair_with: medgemma
+    transport: hf_router
+    slug: google/gemma-3-27b-it
+    hf_model: google/gemma-3-27b-it:featherless-ai         # served FP8 by Featherless
+    price_in: 0.1                         # Featherless list price per 1M tokens (see medgemma)
+    price_out: 0.3
+    structured_outputs: true
+    temperature_honoured: true
+    seed: false
+    reasoning: null
+    max_tokens: 16000
+# Arms. `records`: all = every state of the split; subset = the 200 evaluation records in config/subsets.yaml (drawn
+# with seed 20260922 from evaluation IDs only). Secondary arms: main pass only (no repeats, no M1), their own bootstrap
+# intervals, outside the max-t family.
+arms:
+  primary:   {tier: primary, records: all, confirmatory: true}
+  free:      {tier: free,    records: all}
+  pair:      {tier: pair,    records: all}
+  reasoning: {tier: primary, records: subset, efforts: [low, high], reuse_default: {}}
+subset:
+  file: config/subsets.yaml
+  key: eval200
+  n: 200
+  seed: 20260922
+routing:
+  zdr: false                              # NHANES and the eICU demo are public; credentialed PhysioNet rows never go to any
+                                          # model (clients.py refuses population "eicu")
+  allow_fallbacks: false
+# OpenRouter Batch API (POST /api/v1/batches; asynchronous, 24 h window, billed at ~50% of standard). Same key and
+# base slug (the ':batch' suffix is only a catalogue filter and is rejected); the batch-level provider.only pins the
+# endpoint, so NHANES and the open eICU demo only. The batch API rejects allow_fallbacks and other routing keys; without
+# a matching batch endpoint the submission returns 404. Prices from openrouter.ai/api/v1/models/<slug>:batch/endpoints.
+# GLM, Muse, Claude Sonnet 5 and the Hugging Face pair run synchronously (standard route).
+batch:
+  enabled: true
+  populations: [nhanes, eicu_demo]        # open data only; credentialed eicu never goes to any model
+  max_requests: 1000                      # per submitted batch; lower it if refused
+  max_attempts: 3                         # submissions per request without a completed response; then unusable
+  fallback_to_standard: []                # families answered on the standard route when no batch answer is stored
+  families:
+    gpt:            {provider_only: [openai],        price_in: 1.0,   price_out: 5.0}     # GPT-5.6 Sol
+    claude:         {provider_only: [anthropic],     price_in: 2.0,   price_out: 10.0}    # Claude Opus 5.5
+    gemini:         {provider_only: [google-vertex], price_in: 0.375, price_out: 1.875}   # Gemini 3.8 Flash
+    gpt_free:       {provider_only: [openai],        price_in: 0.1,   price_out: 0.6}     # GPT-5.6 Luna
+    gemini_free:    {provider_only: [google-vertex], price_in: 0.15,  price_out: 1.25}    # Gemini 3.5 Flash-Lite
+generation:
+  temperature: null                       # provider default: not sent
+  seed: 20260922                          # sent to families with seed: true
+annotated_family: claude                  # the family that also answers the annotated states (with Jev)

@@ -1,0 +1,2271 @@
+{
+ "meta": {
+  "calls": "results/wide_docuse/calls.parquet",
+  "config": "config/docuse_risk.yaml",
+  "config_sha256": "6fb7896904906c6b1e01eaa131f33ea8ea9ff734846d875dba8e82692701ed8f",
+  "variant": "documented",
+  "written": "2026-09-30 16:19:06",
+  "reproduction": {
+   "tolerance": 1e-09,
+   "wide_run_wide": {
+    "reproduced": true,
+    "bit_exact": true,
+    "max_abs_diff": 0.0
+   },
+   "wide_prediction_inputs": {
+    "identical_to_run_wide": true,
+    "n_records": 12697
+   },
+   "eval_prediction": {
+    "reproduced": true,
+    "bit_exact": false,
+    "max_abs_diff": 1.3322676295501878e-15,
+    "references": "joblib",
+    "n_records": 983,
+    "focal_versus": [
+     "gpt",
+     "claude",
+     "gemini",
+     "muse",
+     "glm"
+    ],
+    "not_compared": null
+   },
+   "margins": {
+    "wide": {
+     "fixed": 0.006015999869042211,
+     "recomputed": 0.006015999869042211,
+     "abs_diff": 0.0,
+     "bit_exact": true,
+     "outcomes_at_fixed_margin_equal_stored": true
+    },
+    "eval": {
+     "fixed": 0.005267415423968958,
+     "recomputed": 0.005267415423968958,
+     "abs_diff": 0.0,
+     "bit_exact": true,
+     "outcomes_at_fixed_margin_equal_stored": true
+    }
+   },
+   "eval_cheap_family": {
+    "reproduced": true,
+    "bit_exact": false,
+    "max_abs_diff": 8.43769498715119e-15,
+    "margin": 0.005267415423968958
+   }
+  }
+ },
+ "records": {
+  "wide": {
+   "original": 12697,
+   "scored": 12697,
+   "dropped": 0,
+   "dropped_ids": []
+  },
+  "eval": {
+   "original": 983,
+   "scored": 983,
+   "dropped": 0,
+   "dropped_ids": []
+  }
+ },
+ "margins": {
+  "wide_fixed": 0.006015999869042211,
+  "eval_fixed": 0.005267415423968958,
+  "source": "config/docuse_risk.yaml analysis.wide_margin, analysis.eval_margin; noninferior_fixed_margin is the outcome at these, noninferior the outcome at prediction_block's margin on the records scored"
+ },
+ "prediction": {
+  "n_records": 12697,
+  "deaths": 2002,
+  "systems": {
+   "jev_documented": {
+    "log_loss": 0.36176161766057896,
+    "log_loss_ci": [
+     0.3545112795750103,
+     0.3689487130858541
+    ],
+    "log_loss_recalibrated": 0.33920716840378135,
+    "calibration_component": 0.022554449256797615,
+    "brier": 0.11048045207529339,
+    "brier_ci": [
+     0.10768722473812711,
+     0.11318849472316299
+    ],
+    "auroc": 0.8203077894522495,
+    "calibration_slope": 1.2252769782852757,
+    "calibration_intercept": -0.4178819585278124,
+    "mean_p": 0.23201307395447743
+   },
+   "gpt": {
+    "log_loss": 0.32890784450168464,
+    "log_loss_ci": [
+     0.32061266318675624,
+     0.3373883958682323
+    ],
+    "log_loss_recalibrated": 0.3248857361234903,
+    "calibration_component": 0.004022108378194333,
+    "brier": 0.10065647152870759,
+    "brier_ci": [
+     0.09766404882846341,
+     0.1038026159525872
+    ],
+    "auroc": 0.8385146176871282,
+    "calibration_slope": 1.0083694280685087,
+    "calibration_intercept": -0.2817597620706646,
+    "mean_p": 0.1883956052610853
+   },
+   "claude": {
+    "log_loss": 0.32651135125015335,
+    "log_loss_ci": [
+     0.3184813100285173,
+     0.33458266690818395
+    ],
+    "log_loss_recalibrated": 0.31878456737017064,
+    "calibration_component": 0.007726783879982713,
+    "brier": 0.09948628691816964,
+    "brier_ci": [
+     0.09661811748247623,
+     0.10242585954753101
+    ],
+    "auroc": 0.8455342927292436,
+    "calibration_slope": 1.1031367633295877,
+    "calibration_intercept": -0.28237834793394756,
+    "mean_p": 0.19849893675671418
+   },
+   "gemini": {
+    "log_loss": 0.3253520694631379,
+    "log_loss_ci": [
+     0.31688328963710405,
+     0.334172420473397
+    ],
+    "log_loss_recalibrated": 0.3221262140139751,
+    "calibration_component": 0.0032258554491627622,
+    "brier": 0.09943108387808142,
+    "brier_ci": [
+     0.09644922598251551,
+     0.10267949180121293
+    ],
+    "auroc": 0.8420913822035843,
+    "calibration_slope": 1.009331345369913,
+    "calibration_intercept": -0.25830132346576345,
+    "mean_p": 0.18549169095061827
+   },
+   "muse": {
+    "log_loss": 0.36153773638542164,
+    "log_loss_ci": [
+     0.353960451980786,
+     0.3691666333485609
+    ],
+    "log_loss_recalibrated": 0.32661973954538687,
+    "calibration_component": 0.03491799684003477,
+    "brier": 0.11243697204063953,
+    "brier_ci": [
+     0.10954286291643696,
+     0.11538310475112226
+    ],
+    "auroc": 0.8369246228292513,
+    "calibration_slope": 1.0294432217811376,
+    "calibration_intercept": -0.7780419241439499,
+    "mean_p": 0.25156477908167285
+   },
+   "glm": {
+    "log_loss": 0.33041152787929673,
+    "log_loss_ci": [
+     0.32217506184224004,
+     0.3386246191576952
+    ],
+    "log_loss_recalibrated": 0.32664117588488717,
+    "calibration_component": 0.00377035199440956,
+    "brier": 0.10111059675513902,
+    "brier_ci": [
+     0.09816521241041196,
+     0.10415692650823032
+    ],
+    "auroc": 0.837101748181692,
+    "calibration_slope": 1.0890206701855893,
+    "calibration_intercept": -0.1690693217083951,
+    "mean_p": 0.1857428526423565
+   },
+   "reference_spline_logit": {
+    "log_loss": 0.3113120641395155,
+    "log_loss_ci": [
+     0.30138966873924095,
+     0.3214839936853064
+    ],
+    "log_loss_recalibrated": 0.31106521597056597,
+    "calibration_component": 0.00024684816894954276,
+    "brier": 0.0943717466059396,
+    "brier_ci": [
+     0.09108337074137288,
+     0.0977122191402426
+    ],
+    "auroc": 0.8540778529558334,
+    "calibration_slope": 0.9275771191173869,
+    "calibration_intercept": -0.07817758643347825,
+    "mean_p": 0.15666730012360167
+   },
+   "reference_lightgbm": {
+    "log_loss": 0.3134241807230899,
+    "log_loss_ci": [
+     0.30292028261606585,
+     0.3238553265661647
+    ],
+    "log_loss_recalibrated": 0.3126249293654457,
+    "calibration_component": 0.0007992513576441929,
+    "brier": 0.09498476983395818,
+    "brier_ci": [
+     0.09163718453221507,
+     0.09832548126275861
+    ],
+    "auroc": 0.8513340796650755,
+    "calibration_slope": 0.906003594640677,
+    "calibration_intercept": -0.05869890157426278,
+    "mean_p": 0.1525706969479457
+   },
+   "reference_age_sex": {
+    "log_loss": 0.3714720628299376,
+    "log_loss_ci": [
+     0.36153335905778,
+     0.38161887306582304
+    ],
+    "log_loss_recalibrated": 0.37163954401627525,
+    "calibration_component": -0.00016748118633763687,
+    "brier": 0.11425862833450712,
+    "brier_ci": [
+     0.1107444960769156,
+     0.11770663309585504
+    ],
+    "auroc": 0.7693094189587877,
+    "calibration_slope": 0.9886582079093408,
+    "calibration_intercept": -0.01774645671341729,
+    "mean_p": 0.15795872305777506
+   },
+   "phenoage_10y": {
+    "log_loss": 0.36401974836691675,
+    "log_loss_ci": [
+     0.350891913324869,
+     0.376655816706991
+    ],
+    "log_loss_recalibrated": 0.3512648591387376,
+    "calibration_component": 0.012754889228179134,
+    "brier": 0.10949404812511997,
+    "brier_ci": [
+     0.10528084928593881,
+     0.11357174356014534
+    ],
+    "auroc": 0.8117211446804715,
+    "calibration_slope": 0.7691525837235144,
+    "calibration_intercept": 0.00886467686822247,
+    "mean_p": 0.12034746028482346
+   }
+  },
+  "age_sex_to_reference_gap": 0.0601599986904221,
+  "vs_reference": {
+   "critical_value": 2.5781312155407456,
+   "pairs": {
+    "jev_documented - reference_spline_logit": {
+     "diff": 0.0504495535210609,
+     "ci": [
+      0.044616531450373934,
+      0.05607415008473846
+     ],
+     "ci_simultaneous": [
+      0.04293565039504356,
+      0.057963456647078235
+     ],
+     "fraction_of_age_sex_gap": 0.8385896711977958,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "gpt - reference_spline_logit": {
+     "diff": 0.017595780362168134,
+     "ci": [
+      0.012871281518710082,
+      0.022070607911630822
+     ],
+     "ci_simultaneous": [
+      0.011721919022133188,
+      0.02346964170220308
+     ],
+     "fraction_of_age_sex_gap": 0.2924830575996922,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "claude - reference_spline_logit": {
+     "diff": 0.015199287110649107,
+     "ci": [
+      0.010684462277480499,
+      0.01938785975733808
+     ],
+     "ci_simultaneous": [
+      0.009531936611304137,
+      0.020866637609994076
+     ],
+     "fraction_of_age_sex_gap": 0.2526477300783077,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "gemini - reference_spline_logit": {
+     "diff": 0.014040005323621096,
+     "ci": [
+      0.009528978335331343,
+      0.018350117723978022
+     ],
+     "ci_simultaneous": [
+      0.00834079309926895,
+      0.019739217547973243
+     ],
+     "fraction_of_age_sex_gap": 0.23337775314573544,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "muse - reference_spline_logit": {
+     "diff": 0.05022567224590385,
+     "ci": [
+      0.04413052688963933,
+      0.056124343010528
+     ],
+     "ci_simultaneous": [
+      0.04235216451127964,
+      0.05809917998052806
+     ],
+     "fraction_of_age_sex_gap": 0.8348682403462242,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "glm - reference_spline_logit": {
+     "diff": 0.019099463739783384,
+     "ci": [
+      0.014405269234890092,
+      0.0235960364924219
+     ],
+     "ci_simultaneous": [
+      0.013006344268853713,
+      0.025192583210713056
+     ],
+     "fraction_of_age_sex_gap": 0.3174777951387182,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "reference_lightgbm - reference_spline_logit": {
+     "diff": 0.002112116583573409,
+     "ci": [
+      -0.0005215510204587977,
+      0.005172108792068913
+     ],
+     "ci_simultaneous": [
+      -0.0016592259679682913,
+      0.005883459135115109
+     ],
+     "fraction_of_age_sex_gap": 0.035108321634815344,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    },
+    "reference_age_sex - reference_spline_logit": {
+     "diff": 0.06015999869042227,
+     "ci": [
+      0.05328804975963946,
+      0.06713969105139488
+     ],
+     "ci_simultaneous": [
+      0.05093525825858279,
+      0.06938473912226174
+     ],
+     "fraction_of_age_sex_gap": 1.0000000000000027,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "phenoage_10y - reference_spline_logit": {
+     "diff": 0.0527076842274003,
+     "ci": [
+      0.0458714439148583,
+      0.060114643827874736
+     ],
+     "ci_simultaneous": [
+      0.04326135978328639,
+      0.0621540086715142
+     ],
+     "fraction_of_age_sex_gap": 0.8761250893409965,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "vs_reference_recalibrated": {
+   "critical_value": 2.5268313817536487,
+   "pairs": {
+    "jev_documented - reference_spline_logit": {
+     "diff": 0.028141952433213935,
+     "ci": [
+      0.023167210320764138,
+      0.03272811691405068
+     ],
+     "ci_simultaneous": [
+      0.021796658937215233,
+      0.03448724592921264
+     ],
+     "fraction_of_age_sex_gap": 0.4677851237668716,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "gpt - reference_spline_logit": {
+     "diff": 0.013820520152920457,
+     "ci": [
+      0.009713395086680184,
+      0.017835953129309138
+     ],
+     "ci_simultaneous": [
+      0.008654297648857032,
+      0.01898674265698388
+     ],
+     "fraction_of_age_sex_gap": 0.22972939584057508,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "claude - reference_spline_logit": {
+     "diff": 0.007719351399596064,
+     "ci": [
+      0.004248288021090653,
+      0.011175150417735827
+     ],
+     "ci_simultaneous": [
+      0.003046409679124531,
+      0.012392293120067597
+     ],
+     "fraction_of_age_sex_gap": 0.12831368962155645,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "gemini - reference_spline_logit": {
+     "diff": 0.01106099804341687,
+     "ci": [
+      0.006832264044978044,
+      0.014874573900681531
+     ],
+     "ci_simultaneous": [
+      0.00604524445833339,
+      0.01607675162850035
+     ],
+     "fraction_of_age_sex_gap": 0.18385967892612104,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "muse - reference_spline_logit": {
+     "diff": 0.015554523574819179,
+     "ci": [
+      0.011442711598517877,
+      0.019681426625815443
+     ],
+     "ci_simultaneous": [
+      0.010219560044614107,
+      0.02088948710502425
+     ],
+     "fraction_of_age_sex_gap": 0.2585525916458434,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "glm - reference_spline_logit": {
+     "diff": 0.015575959914319926,
+     "ci": [
+      0.011472908529716955,
+      0.0195767102064601
+     ],
+     "ci_simultaneous": [
+      0.01017739481836491,
+      0.02097452501027494
+     ],
+     "fraction_of_age_sex_gap": 0.2589089137862586,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "reference_lightgbm - reference_spline_logit": {
+     "diff": 0.0015597133948802022,
+     "ci": [
+      -0.0008676487759003246,
+      0.00442655170174414
+     ],
+     "ci_simultaneous": [
+      -0.0018167047278279747,
+      0.004936131517588379
+     ],
+     "fraction_of_age_sex_gap": 0.025926087580326357,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    },
+    "reference_age_sex - reference_spline_logit": {
+     "diff": 0.060574328045712056,
+     "ci": [
+      0.05396101979302508,
+      0.06721634298879231
+     ],
+     "ci_simultaneous": [
+      0.051995244057545596,
+      0.06915341203387852
+     ],
+     "fraction_of_age_sex_gap": 1.0068871237418415,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "phenoage_10y - reference_spline_logit": {
+     "diff": 0.04019964316817276,
+     "ci": [
+      0.03463662087364834,
+      0.04608743702950684
+     ],
+     "ci_simultaneous": [
+      0.03291355569626987,
+      0.04748573064007565
+     ],
+     "fraction_of_age_sex_gap": 0.6682121682720853,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms": {
+   "critical_value": 2.391518312938964,
+   "pairs": {
+    "jev_documented - gpt": {
+     "diff": 0.03285377315889276,
+     "ci": [
+      0.02963125690989834,
+      0.0357725541708867
+     ],
+     "ci_simultaneous": [
+      0.02909301583354246,
+      0.03661453048424307
+     ],
+     "fraction_of_age_sex_gap": 0.5461066135981036,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - claude": {
+     "diff": 0.03525026641041179,
+     "ci": [
+      0.0322148237600364,
+      0.03820478708788141
+     ],
+     "ci_simultaneous": [
+      0.03167162306879846,
+      0.03882890975202512
+     ],
+     "fraction_of_age_sex_gap": 0.5859419411194882,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - gemini": {
+     "diff": 0.0364095481974398,
+     "ci": [
+      0.033100960558770355,
+      0.03946340478535916
+     ],
+     "ci_simultaneous": [
+      0.032458176654408075,
+      0.040360919740471526
+     ],
+     "fraction_of_age_sex_gap": 0.6052119180520604,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - muse": {
+     "diff": 0.00022388127515704515,
+     "ci": [
+      -0.0029812856341587396,
+      0.003346230106114986
+     ],
+     "ci_simultaneous": [
+      -0.0037255459846500683,
+      0.004173308534964159
+     ],
+     "fraction_of_age_sex_gap": 0.0037214308515716213,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    },
+    "jev_documented - glm": {
+     "diff": 0.03135008978127751,
+     "ci": [
+      0.028299683665562316,
+      0.034382432789986046
+     ],
+     "ci_simultaneous": [
+      0.02759915529240662,
+      0.035101024270148405
+     ],
+     "fraction_of_age_sex_gap": 0.5211118760590776,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms_recalibrated": {
+   "critical_value": 2.3592212218380557,
+   "pairs": {
+    "jev_documented - gpt": {
+     "diff": 0.014321432280293478,
+     "ci": [
+      0.011447572234022792,
+      0.016989349198404488
+     ],
+     "ci_simultaneous": [
+      0.010881694452496387,
+      0.01776117010809057
+     ],
+     "fraction_of_age_sex_gap": 0.2380557279262965,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - claude": {
+     "diff": 0.02042260103361787,
+     "ci": [
+      0.01721060089768435,
+      0.023652390516666604
+     ],
+     "ci_simultaneous": [
+      0.01657703609823551,
+      0.024268165969000232
+     ],
+     "fraction_of_age_sex_gap": 0.3394714341453151,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - gemini": {
+     "diff": 0.017080954389797065,
+     "ci": [
+      0.014026636784812379,
+      0.020112279147110414
+     ],
+     "ci_simultaneous": [
+      0.013435364551013136,
+      0.020726544228580994
+     ],
+     "fraction_of_age_sex_gap": 0.28392544484075055,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - muse": {
+     "diff": 0.012587428858394756,
+     "ci": [
+      0.00974071897070931,
+      0.01523144991312437
+     ],
+     "ci_simultaneous": [
+      0.009223073763744885,
+      0.015951783953044626
+     ],
+     "fraction_of_age_sex_gap": 0.2092325321210282,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - glm": {
+     "diff": 0.01256599251889401,
+     "ci": [
+      0.009212999837934504,
+      0.015743249569488197
+     ],
+     "ci_simultaneous": [
+      0.008715491299638273,
+      0.016416493738149747
+     ],
+     "fraction_of_age_sex_gap": 0.208876209980613,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms_brier": {
+   "critical_value": 2.452007943734853,
+   "pairs": {
+    "jev_documented - gpt": {
+     "diff": 0.0098239805465907,
+     "ci": [
+      0.0087189578030244,
+      0.010819165164999629
+     ],
+     "ci_simultaneous": [
+      0.00849716271721051,
+      0.011150798375970888
+     ],
+     "fraction_of_age_sex_gap": 0.1632975525339356,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - claude": {
+     "diff": 0.010994165157129185,
+     "ci": [
+      0.009911105503268399,
+      0.012072530324092244
+     ],
+     "ci_simultaneous": [
+      0.009656448899541127,
+      0.012331881414717243
+     ],
+     "fraction_of_age_sex_gap": 0.1827487599144435,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - gemini": {
+     "diff": 0.01104936819721565,
+     "ci": [
+      0.009859902788060128,
+      0.012160527453335483
+     ],
+     "ci_simultaneous": [
+      0.009626303569665892,
+      0.012472432824765409
+     ],
+     "fraction_of_age_sex_gap": 0.18366636365925967,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - muse": {
+     "diff": -0.0019565199653413384,
+     "ci": [
+      -0.003298612000866407,
+      -0.0005653133023548394
+     ],
+     "ci_simultaneous": [
+      -0.0036589243223417644,
+      -0.00025411560834091265
+     ],
+     "fraction_of_age_sex_gap": -0.032521941621199375,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    },
+    "jev_documented - glm": {
+     "diff": 0.0093698553201578,
+     "ci": [
+      0.008191382936914274,
+      0.010476071335748578
+     ],
+     "ci_simultaneous": [
+      0.00794201368352717,
+      0.010797696956788429
+     ],
+     "fraction_of_age_sex_gap": 0.15574892826002582,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_age_sex": {
+   "critical_value": 1.9905363954967616,
+   "pairs": {
+    "jev_documented - reference_age_sex": {
+     "diff": -0.00971044516936137,
+     "ci": [
+      -0.01613523993089726,
+      -0.0042740464948203445
+     ],
+     "ci_simultaneous": [
+      -0.015737260352473605,
+      -0.003683629986249136
+     ],
+     "fraction_of_age_sex_gap": -0.16141032880220693,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    }
+   }
+  }
+ },
+ "documented_vs_original": {
+  "n_records": 12697,
+  "deaths": 2002,
+  "systems": {
+   "jev_documented": {
+    "log_loss": 0.36176161766057896,
+    "log_loss_ci": [
+     0.3545112795750103,
+     0.3689487130858541
+    ],
+    "log_loss_recalibrated": 0.33920716840378135,
+    "calibration_component": 0.022554449256797615,
+    "brier": 0.11048045207529339,
+    "brier_ci": [
+     0.10768722473812711,
+     0.11318849472316299
+    ],
+    "auroc": 0.8203077894522495,
+    "calibration_slope": 1.2252769782852757,
+    "calibration_intercept": -0.4178819585278124,
+    "mean_p": 0.23201307395447743
+   },
+   "jev": {
+    "log_loss": 0.37874544531692744,
+    "log_loss_ci": [
+     0.37181481553260376,
+     0.3857720624197238
+    ],
+    "log_loss_recalibrated": 0.3375758983525881,
+    "calibration_component": 0.04116954696433933,
+    "brier": 0.1172328581554698,
+    "brier_ci": [
+     0.11440931637394658,
+     0.12002701149877923
+    ],
+    "auroc": 0.8222103515932407,
+    "calibration_slope": 1.1449684029764726,
+    "calibration_intercept": -0.7423342230061297,
+    "mean_p": 0.263166102228873
+   },
+   "reference_spline_logit": {
+    "log_loss": 0.3113120641395155,
+    "log_loss_ci": [
+     0.30138966873924095,
+     0.3214839936853064
+    ],
+    "log_loss_recalibrated": 0.31106521597056597,
+    "calibration_component": 0.00024684816894954276,
+    "brier": 0.0943717466059396,
+    "brier_ci": [
+     0.09108337074137288,
+     0.0977122191402426
+    ],
+    "auroc": 0.8540778529558334,
+    "calibration_slope": 0.9275771191173869,
+    "calibration_intercept": -0.07817758643347825,
+    "mean_p": 0.15666730012360167
+   },
+   "reference_age_sex": {
+    "log_loss": 0.3714720628299376,
+    "log_loss_ci": [
+     0.36153335905778,
+     0.38161887306582304
+    ],
+    "log_loss_recalibrated": 0.37163954401627525,
+    "calibration_component": -0.00016748118633763687,
+    "brier": 0.11425862833450712,
+    "brier_ci": [
+     0.1107444960769156,
+     0.11770663309585504
+    ],
+    "auroc": 0.7693094189587877,
+    "calibration_slope": 0.9886582079093408,
+    "calibration_intercept": -0.01774645671341729,
+    "mean_p": 0.15795872305777506
+   }
+  },
+  "age_sex_to_reference_gap": 0.0601599986904221,
+  "vs_reference": {
+   "critical_value": 2.282104768187421,
+   "pairs": {
+    "jev_documented - reference_spline_logit": {
+     "diff": 0.0504495535210609,
+     "ci": [
+      0.044616531450373934,
+      0.05607415008473846
+     ],
+     "ci_simultaneous": [
+      0.043798412551889564,
+      0.05710069449023223
+     ],
+     "fraction_of_age_sex_gap": 0.8385896711977958,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev - reference_spline_logit": {
+     "diff": 0.06743338117741049,
+     "ci": [
+      0.061281286668810046,
+      0.07344013205928127
+     ],
+     "ci_simultaneous": [
+      0.060061359126011585,
+      0.0748054032288094
+     ],
+     "fraction_of_age_sex_gap": 1.1209006423756183,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "reference_age_sex - reference_spline_logit": {
+     "diff": 0.06015999869042227,
+     "ci": [
+      0.05328804975963946,
+      0.06713969105139488
+     ],
+     "ci_simultaneous": [
+      0.0519944623523594,
+      0.06832553502848514
+     ],
+     "fraction_of_age_sex_gap": 1.0000000000000027,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "vs_reference_recalibrated": {
+   "critical_value": 2.262480655364245,
+   "pairs": {
+    "jev_documented - reference_spline_logit": {
+     "diff": 0.028141952433213935,
+     "ci": [
+      0.023167210320764138,
+      0.03272811691405068
+     ],
+     "ci_simultaneous": [
+      0.022460487539683,
+      0.03382341732674487
+     ],
+     "fraction_of_age_sex_gap": 0.4677851237668716,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "jev - reference_spline_logit": {
+     "diff": 0.02651068238201454,
+     "ci": [
+      0.021897398496857907,
+      0.030954695328691526
+     ],
+     "ci_simultaneous": [
+      0.02101187275061988,
+      0.0320094920134092
+     ],
+     "fraction_of_age_sex_gap": 0.4406695970596028,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    },
+    "reference_age_sex - reference_spline_logit": {
+     "diff": 0.060574328045712056,
+     "ci": [
+      0.05396101979302508,
+      0.06721634298879231
+     ],
+     "ci_simultaneous": [
+      0.052892766187595114,
+      0.068255889903829
+     ],
+     "fraction_of_age_sex_gap": 1.0068871237418415,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms": {
+   "critical_value": 1.9302078405674872,
+   "pairs": {
+    "jev_documented - jev": {
+     "diff": -0.016983827656349593,
+     "ci": [
+      -0.019500433883230736,
+      -0.014829455896652091
+     ],
+     "ci_simultaneous": [
+      -0.0193019343158863,
+      -0.014665720996812886
+     ],
+     "fraction_of_age_sex_gap": -0.2823109711778225,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    }
+   }
+  },
+  "focal_vs_llms_recalibrated": {
+   "critical_value": 1.9712162726974756,
+   "pairs": {
+    "jev_documented - jev": {
+     "diff": 0.001631270051199396,
+     "ci": [
+      -0.0005722918089029208,
+      0.0037495546930701213
+     ],
+     "ci_simultaneous": [
+      -0.0005395644114981686,
+      0.0038021045138969607
+     ],
+     "fraction_of_age_sex_gap": 0.027115526707268793,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    }
+   }
+  },
+  "focal_vs_llms_brier": {
+   "critical_value": 1.9460575744920074,
+   "pairs": {
+    "jev_documented - jev": {
+     "diff": -0.00675240608017498,
+     "ci": [
+      -0.007842846735449367,
+      -0.005787930416633859
+     ],
+     "ci_simultaneous": [
+      -0.007776236016380435,
+      -0.0057285761439695255
+     ],
+     "fraction_of_age_sex_gap": -0.11224079499938572,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    }
+   }
+  },
+  "focal_vs_age_sex": {
+   "critical_value": 1.9905363954967616,
+   "pairs": {
+    "jev_documented - reference_age_sex": {
+     "diff": -0.00971044516936137,
+     "ci": [
+      -0.01613523993089726,
+      -0.0042740464948203445
+     ],
+     "ci_simultaneous": [
+      -0.015737260352473605,
+      -0.003683629986249136
+     ],
+     "fraction_of_age_sex_gap": -0.16141032880220693,
+     "noninferiority_margin": 0.006015999869042211,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.006015999869042211,
+     "noninferior_fixed_margin": true
+    }
+   }
+  }
+ },
+ "eval_prediction": {
+  "n_records": 983,
+  "deaths": 157,
+  "systems": {
+   "jev_documented": {
+    "log_loss": 0.3791744152153802,
+    "log_loss_ci": [
+     0.35130165571016436,
+     0.4076018922868075
+    ],
+    "log_loss_recalibrated": 0.3601880247140876,
+    "calibration_component": 0.018986390501292583,
+    "brier": 0.11680925737538148,
+    "brier_ci": [
+     0.10593017039674467,
+     0.12746105544252287
+    ],
+    "auroc": 0.791794543575824,
+    "calibration_slope": 1.0985083988388589,
+    "calibration_intercept": -0.49227284377603797,
+    "mean_p": 0.2335198372329603
+   },
+   "gpt": {
+    "log_loss": 0.35275479159039663,
+    "log_loss_ci": [
+     0.3182520370842634,
+     0.38787862045266125
+    ],
+    "log_loss_recalibrated": 0.34921658818030893,
+    "calibration_component": 0.0035382034100877036,
+    "brier": 0.10797921770091558,
+    "brier_ci": [
+     0.09576039893184131,
+     0.12040944371820954
+    ],
+    "auroc": 0.8092719112906959,
+    "calibration_slope": 0.896983220688065,
+    "calibration_intercept": -0.37245557555603576,
+    "mean_p": 0.18925635808748728
+   },
+   "claude": {
+    "log_loss": 0.35263731197271747,
+    "log_loss_ci": [
+     0.3206166832252471,
+     0.3840496311646545
+    ],
+    "log_loss_recalibrated": 0.34730676576855907,
+    "calibration_component": 0.005330546204158404,
+    "brier": 0.10805224516785353,
+    "brier_ci": [
+     0.09688287449135302,
+     0.11945494898270603
+    ],
+    "auroc": 0.8151054116993878,
+    "calibration_slope": 0.9600077996826092,
+    "calibration_intercept": -0.3829894612816479,
+    "mean_p": 0.19904272634791456
+   },
+   "gemini": {
+    "log_loss": 0.352672149129801,
+    "log_loss_ci": [
+     0.3183442328815919,
+     0.3882389475997739
+    ],
+    "log_loss_recalibrated": 0.35002615243786606,
+    "calibration_component": 0.0026459966919349376,
+    "brier": 0.10786540895218717,
+    "brier_ci": [
+     0.09537560264496438,
+     0.12039528031536112
+    ],
+    "auroc": 0.809059854104656,
+    "calibration_slope": 0.8801031613451216,
+    "calibration_intercept": -0.3720189347629781,
+    "mean_p": 0.18647507629704985
+   },
+   "muse": {
+    "log_loss": 0.3858990363255617,
+    "log_loss_ci": [
+     0.35502222583234927,
+     0.4173058254737107
+    ],
+    "log_loss_recalibrated": 0.35108247305779233,
+    "calibration_component": 0.034816563267769385,
+    "brier": 0.12070604069175991,
+    "brier_ci": [
+     0.10858612543234994,
+     0.13254779926246188
+    ],
+    "auroc": 0.8084738051541462,
+    "calibration_slope": 0.9089737286345702,
+    "calibration_intercept": -0.8241215837424938,
+    "mean_p": 0.25451678535096645
+   },
+   "glm": {
+    "log_loss": 0.35802700772635554,
+    "log_loss_ci": [
+     0.3243502951453514,
+     0.3922316075189113
+    ],
+    "log_loss_recalibrated": 0.3552538917372409,
+    "calibration_component": 0.002773115989114616,
+    "brier": 0.11021152797558494,
+    "brier_ci": [
+     0.09777079234486268,
+     0.12185018977619531
+    ],
+    "auroc": 0.8037160130164558,
+    "calibration_slope": 0.9264940292161687,
+    "calibration_intercept": -0.3295761351856154,
+    "mean_p": 0.188382502543235
+   },
+   "gpt_free": {
+    "log_loss": 0.3616094112880904,
+    "log_loss_ci": [
+     0.3300777270910794,
+     0.3930529204321516
+    ],
+    "log_loss_recalibrated": 0.3557518618067572,
+    "calibration_component": 0.0058575494813331574,
+    "brier": 0.11166206408952188,
+    "brier_ci": [
+     0.10055910857070195,
+     0.1227110572736521
+    ],
+    "auroc": 0.8044100183525855,
+    "calibration_slope": 0.9923483108234321,
+    "calibration_intercept": -0.3827390270791654,
+    "mean_p": 0.20442217700915566
+   },
+   "claude_free": {
+    "log_loss": 0.3707220263599611,
+    "log_loss_ci": [
+     0.34196343992576844,
+     0.3989883207286105
+    ],
+    "log_loss_recalibrated": 0.3524743427857622,
+    "calibration_component": 0.018247683574198925,
+    "brier": 0.11416788504577823,
+    "brier_ci": [
+     0.10310402632248218,
+     0.12473287558494407
+    ],
+    "auroc": 0.8034229885412008,
+    "calibration_slope": 1.0772458476693498,
+    "calibration_intercept": -0.5114770309835003,
+    "mean_p": 0.2312706002034588
+   },
+   "gemini_free": {
+    "log_loss": 0.3615710887721463,
+    "log_loss_ci": [
+     0.33022545719849666,
+     0.39501781550564724
+    ],
+    "log_loss_recalibrated": 0.35712297030313,
+    "calibration_component": 0.004448118469016271,
+    "brier": 0.11111372329603257,
+    "brier_ci": [
+     0.09965033847914545,
+     0.12296046258901319
+    ],
+    "auroc": 0.8021892012769699,
+    "calibration_slope": 1.0068658071715317,
+    "calibration_intercept": -0.32095715797851254,
+    "mean_p": 0.19873448626653104
+   },
+   "medgemma": {
+    "log_loss": 0.3843761432696407,
+    "log_loss_ci": [
+     0.3418938378728031,
+     0.43187514479850864
+    ],
+    "log_loss_recalibrated": 0.3805914764966503,
+    "calibration_component": 0.003784666772990386,
+    "brier": 0.11534305086469988,
+    "brier_ci": [
+     0.10181588753814853,
+     0.1290614886571719
+    ],
+    "auroc": 0.7668720408383586,
+    "calibration_slope": 0.7459854547178956,
+    "calibration_intercept": -0.21988219704250608,
+    "mean_p": 0.1438138351983723
+   },
+   "gemma": {
+    "log_loss": 0.375491686246226,
+    "log_loss_ci": [
+     0.3393872671784779,
+     0.41576105410547654
+    ],
+    "log_loss_recalibrated": 0.3760077954067307,
+    "calibration_component": -0.0005161091605047075,
+    "brier": 0.11586132960325533,
+    "brier_ci": [
+     0.10277618809766023,
+     0.12969804651576808
+    ],
+    "auroc": 0.7749456362486699,
+    "calibration_slope": 0.994871679777176,
+    "calibration_intercept": 0.09170152478528662,
+    "mean_p": 0.1486500508646999
+   },
+   "reference_spline_logit": {
+    "log_loss": 0.34002533984058037,
+    "log_loss_ci": [
+     0.299234902544599,
+     0.38180632314976626
+    ],
+    "log_loss_recalibrated": 0.338002491920031,
+    "calibration_component": 0.0020228479205493533,
+    "brier": 0.10262542705491534,
+    "brier_ci": [
+     0.0892291507793134,
+     0.1157763563288904
+    ],
+    "auroc": 0.8242392930398975,
+    "calibration_slope": 0.8172083268563571,
+    "calibration_intercept": -0.19290978857366942,
+    "mean_p": 0.15593539770032377
+   },
+   "reference_lightgbm": {
+    "log_loss": 0.3416020716817208,
+    "log_loss_ci": [
+     0.2993964890422495,
+     0.3853078567818326
+    ],
+    "log_loss_recalibrated": 0.33861907040142925,
+    "calibration_component": 0.002983001280291553,
+    "brier": 0.10239468076358532,
+    "brier_ci": [
+     0.08832432382327798,
+     0.11626276494615098
+    ],
+    "auroc": 0.8224425903363612,
+    "calibration_slope": 0.8007993831239207,
+    "calibration_intercept": -0.1654606106125444,
+    "mean_p": 0.15163237523684678
+   },
+   "reference_survival_logit": {
+    "log_loss": 0.3386314537766073,
+    "log_loss_ci": [
+     0.2994001945570489,
+     0.37753208204646255
+    ],
+    "log_loss_recalibrated": 0.34003111894816096,
+    "calibration_component": -0.0013996651715536546,
+    "brier": 0.10212983006077525,
+    "brier_ci": [
+     0.08882697561173218,
+     0.11462530658588682
+    ],
+    "auroc": 0.8243009824031092,
+    "calibration_slope": 0.8823626975732973,
+    "calibration_intercept": -0.11119518468418285,
+    "mean_p": 0.15512747923347267
+   },
+   "reference_age_sex": {
+    "log_loss": 0.39269949408026994,
+    "log_loss_ci": [
+     0.3534661375107645,
+     0.4313600667629697
+    ],
+    "log_loss_recalibrated": 0.39155214654752757,
+    "calibration_component": 0.001147347532742371,
+    "brier": 0.12019232906639052,
+    "brier_ci": [
+     0.10630317944720624,
+     0.13358469712802568
+    ],
+    "auroc": 0.7366519640351011,
+    "calibration_slope": 0.8127557949252293,
+    "calibration_intercept": -0.27507191012717613,
+    "mean_p": 0.16224510450813115
+   },
+   "phenoage_10y": {
+    "log_loss": 0.39090016653257087,
+    "log_loss_ci": [
+     0.3407231184712906,
+     0.4429160931573776
+    ],
+    "log_loss_recalibrated": 0.37111728881870815,
+    "calibration_component": 0.019782877713862723,
+    "brier": 0.11764992477600002,
+    "brier_ci": [
+     0.10235589415736498,
+     0.1329774169854567
+    ],
+    "auroc": 0.7912971730849307,
+    "calibration_slope": 0.668304189688221,
+    "calibration_intercept": -0.16233948016993913,
+    "mean_p": 0.1188887427559702
+   }
+  },
+  "age_sex_to_reference_gap": 0.052674154239689575,
+  "vs_reference": {
+   "critical_value": 2.7084907762105495,
+   "pairs": {
+    "jev_documented - reference_spline_logit": {
+     "diff": 0.039149075374800446,
+     "ci": [
+      0.015736876043746295,
+      0.059965488885180565
+     ],
+     "ci_simultaneous": [
+      0.008969254151588207,
+      0.06932889659801268
+     ],
+     "fraction_of_age_sex_gap": 0.7432312096869306,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gpt - reference_spline_logit": {
+     "diff": 0.012729451749816711,
+     "ci": [
+      -0.0023422449452743187,
+      0.027001905560836596
+     ],
+     "ci_simultaneous": [
+      -0.008013220058802412,
+      0.03347212355843583
+     ],
+     "fraction_of_age_sex_gap": 0.24166409377723178,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "claude - reference_spline_logit": {
+     "diff": 0.012611972132137272,
+     "ci": [
+      -0.0016731879293945913,
+      0.026991823057924358
+     ],
+     "ci_simultaneous": [
+      -0.0074188571523408214,
+      0.032642801416615366
+     ],
+     "fraction_of_age_sex_gap": 0.2394337852060707,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gemini - reference_spline_logit": {
+     "diff": 0.01264680928922124,
+     "ci": [
+      -0.002366377935246372,
+      0.026279475202045925
+     ],
+     "ci_simultaneous": [
+      -0.007451837992517182,
+      0.03274545657095966
+     ],
+     "fraction_of_age_sex_gap": 0.24009515618747163,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "muse - reference_spline_logit": {
+     "diff": 0.045873696484981574,
+     "ci": [
+      0.022704335622582856,
+      0.06721345066304096
+     ],
+     "ci_simultaneous": [
+      0.015968246919862483,
+      0.07577914605010067
+     ],
+     "fraction_of_age_sex_gap": 0.8708957390419018,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "glm - reference_spline_logit": {
+     "diff": 0.018001667885774286,
+     "ci": [
+      0.0021395545587844416,
+      0.03432829503241255
+     ],
+     "ci_simultaneous": [
+      -0.0045408676057028495,
+      0.040544203377251425
+     ],
+     "fraction_of_age_sex_gap": 0.341755233579245,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gpt_free - reference_spline_logit": {
+     "diff": 0.021584071447510178,
+     "ci": [
+      0.0035762597403747472,
+      0.038393209389903184
+     ],
+     "ci_simultaneous": [
+      -0.00272349265192931,
+      0.045891635546949666
+     ],
+     "fraction_of_age_sex_gap": 0.4097658853579987,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "claude_free - reference_spline_logit": {
+     "diff": 0.030696686519380345,
+     "ci": [
+      0.009901274578748542,
+      0.04982029103029931
+     ],
+     "ci_simultaneous": [
+      0.002658578331626551,
+      0.058734794707134136
+     ],
+     "fraction_of_age_sex_gap": 0.582765626946709,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gemini_free - reference_spline_logit": {
+     "diff": 0.021545748931566466,
+     "ci": [
+      0.0032966655837284218,
+      0.038458036392564274
+     ],
+     "ci_simultaneous": [
+      -0.0023901221579464976,
+      0.04548162002107943
+     ],
+     "fraction_of_age_sex_gap": 0.40903834608381634,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "medgemma - reference_spline_logit": {
+     "diff": 0.04435080342905967,
+     "ci": [
+      0.019520201474666706,
+      0.07159385314796361
+     ],
+     "ci_simultaneous": [
+      0.008652804616395157,
+      0.08004880224172418
+     ],
+     "fraction_of_age_sex_gap": 0.8419841584403016,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gemma - reference_spline_logit": {
+     "diff": 0.03546634640564483,
+     "ci": [
+      0.01153328183104514,
+      0.060682395867267556
+     ],
+     "ci_simultaneous": [
+      0.002601298682196114,
+      0.06833139412909356
+     ],
+     "fraction_of_age_sex_gap": 0.673315915890325,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "reference_lightgbm - reference_spline_logit": {
+     "diff": 0.0015767318411404885,
+     "ci": [
+      -0.007868904951463234,
+      0.010307576043087264
+     ],
+     "ci_simultaneous": [
+      -0.011720525251663146,
+      0.014873988933944123
+     ],
+     "fraction_of_age_sex_gap": 0.029933690704661245,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "reference_survival_logit - reference_spline_logit": {
+     "diff": -0.0013938860639725603,
+     "ci": [
+      -0.007467039671691883,
+      0.004314835512928837
+     ],
+     "ci_simultaneous": [
+      -0.009624392268121328,
+      0.006836620140176207
+     ],
+     "fraction_of_age_sex_gap": -0.026462428948166722,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "reference_age_sex - reference_spline_logit": {
+     "diff": 0.05267415423968935,
+     "ci": [
+      0.027221822682054853,
+      0.07764173769089491
+     ],
+     "ci_simultaneous": [
+      0.01808812845641198,
+      0.08726018002296673
+     ],
+     "fraction_of_age_sex_gap": 0.9999999999999958,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "phenoage_10y - reference_spline_logit": {
+     "diff": 0.05087482669198984,
+     "ci": [
+      0.022900819234805886,
+      0.08074774013157944
+     ],
+     "ci_simultaneous": [
+      0.010845334800485572,
+      0.0909043185834941
+     ],
+     "fraction_of_age_sex_gap": 0.9658404093303133,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "vs_reference_recalibrated": {
+   "critical_value": 2.70696579702509,
+   "pairs": {
+    "jev_documented - reference_spline_logit": {
+     "diff": 0.022185532794055662,
+     "ci": [
+      0.006512839492135931,
+      0.0377831492584861
+     ],
+     "ci_simultaneous": [
+      0.0005572333750620447,
+      0.043813832213049284
+     ],
+     "fraction_of_age_sex_gap": 0.42118441414554375,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gpt - reference_spline_logit": {
+     "diff": 0.011214096260277806,
+     "ci": [
+      3.885111600450988e-05,
+      0.022964380166711675
+     ],
+     "ci_simultaneous": [
+      -0.005021181790416881,
+      0.027449374310972493
+     ],
+     "fraction_of_age_sex_gap": 0.21289561118056016,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "claude - reference_spline_logit": {
+     "diff": 0.009304273848527667,
+     "ci": [
+      -0.0004830407686711765,
+      0.01907530924505569
+     ],
+     "ci_simultaneous": [
+      -0.00447385853267643,
+      0.02308240622973176
+     ],
+     "fraction_of_age_sex_gap": 0.17663831499200355,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gemini - reference_spline_logit": {
+     "diff": 0.012023660517834989,
+     "ci": [
+      0.001142952567657704,
+      0.023077272780221706
+     ],
+     "ci_simultaneous": [
+      -0.0035476481683677837,
+      0.027594969204037763
+     ],
+     "fraction_of_age_sex_gap": 0.2282648993873214,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "muse - reference_spline_logit": {
+     "diff": 0.013079981137760488,
+     "ci": [
+      0.001421029175703305,
+      0.02619911310325488
+     ],
+     "ci_simultaneous": [
+      -0.004007139830029153,
+      0.03016710210555013
+     ],
+     "fraction_of_age_sex_gap": 0.24831876897806593,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "glm - reference_spline_logit": {
+     "diff": 0.017251399817209412,
+     "ci": [
+      0.004634946843820273,
+      0.030100395166422118
+     ],
+     "ci_simultaneous": [
+      -0.0003526140971824021,
+      0.034855413731601226
+     ],
+     "fraction_of_age_sex_gap": 0.32751166233649015,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gpt_free - reference_spline_logit": {
+     "diff": 0.017749369886725486,
+     "ci": [
+      0.005273230527741926,
+      0.030036855108771115
+     ],
+     "ci_simultaneous": [
+      4.200108157738358e-05,
+      0.03545673869187359
+     ],
+     "fraction_of_age_sex_gap": 0.3369654462026743,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "claude_free - reference_spline_logit": {
+     "diff": 0.014471850865730662,
+     "ci": [
+      0.0012959623015342163,
+      0.027610951781603423
+     ],
+     "ci_simultaneous": [
+      -0.004192172977046955,
+      0.033135874708508276
+     ],
+     "fraction_of_age_sex_gap": 0.27474291850757865,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gemini_free - reference_spline_logit": {
+     "diff": 0.019120478383098827,
+     "ci": [
+      0.006072064291223059,
+      0.032389820495053886
+     ],
+     "ci_simultaneous": [
+      0.0014000743757431981,
+      0.03684088239045445
+     ],
+     "fraction_of_age_sex_gap": 0.3629954511674284,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "medgemma - reference_spline_logit": {
+     "diff": 0.04258898457661936,
+     "ci": [
+      0.022733754774199512,
+      0.06391711059457464
+     ],
+     "ci_simultaneous": [
+      0.014147270602686127,
+      0.07103069855055259
+     ],
+     "fraction_of_age_sex_gap": 0.8085366569498497,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "gemma - reference_spline_logit": {
+     "diff": 0.038005303486699726,
+     "ci": [
+      0.01870240160669972,
+      0.05949320319832096
+     ],
+     "ci_simultaneous": [
+      0.010448666607405978,
+      0.06556194036599347
+     ],
+     "fraction_of_age_sex_gap": 0.7215171090125073,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "reference_lightgbm - reference_spline_logit": {
+     "diff": 0.0006165784813979558,
+     "ci": [
+      -0.00722223696297182,
+      0.00810345420137558
+     ],
+     "ci_simultaneous": [
+      -0.010560010837947817,
+      0.011793167800743729
+     ],
+     "fraction_of_age_sex_gap": 0.011705522192008327,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "reference_survival_logit - reference_spline_logit": {
+     "diff": 0.0020286270281300034,
+     "ci": [
+      -0.003254221780308672,
+      0.00725565766242757
+     ],
+     "ci_simultaneous": [
+      -0.005098291072073851,
+      0.009155545128333858
+     ],
+     "fraction_of_age_sex_gap": 0.038512759386679404,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "reference_age_sex - reference_spline_logit": {
+     "diff": 0.053549654627495835,
+     "ci": [
+      0.03212525850061599,
+      0.07501157283783386
+     ],
+     "ci_simultaneous": [
+      0.02415741392946841,
+      0.08294189532552326
+     ],
+     "fraction_of_age_sex_gap": 1.016621062083358,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "phenoage_10y - reference_spline_logit": {
+     "diff": 0.03311479689867641,
+     "ci": [
+      0.01271034411767109,
+      0.05426376752255716
+     ],
+     "ci_simultaneous": [
+      0.005158384173630147,
+      0.06107120962372268
+     ],
+     "fraction_of_age_sex_gap": 0.6286725886093993,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms": {
+   "critical_value": 2.3466265777921396,
+   "pairs": {
+    "jev_documented - gpt": {
+     "diff": 0.026419623624983735,
+     "ci": [
+      0.013374944852976403,
+      0.03931462537871272
+     ],
+     "ci_simultaneous": [
+      0.010904060600364385,
+      0.041935186649603086
+     ],
+     "fraction_of_age_sex_gap": 0.5015671159096988,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - claude": {
+     "diff": 0.026537103242663174,
+     "ci": [
+      0.013328704296738922,
+      0.038701559411157826
+     ],
+     "ci_simultaneous": [
+      0.011608764241402522,
+      0.041465442243923824
+     ],
+     "fraction_of_age_sex_gap": 0.5037974244808598,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - gemini": {
+     "diff": 0.026502266085579207,
+     "ci": [
+      0.011947222622400517,
+      0.040109750928203916
+     ],
+     "ci_simultaneous": [
+      0.00996708362076592,
+      0.043037448550392494
+     ],
+     "fraction_of_age_sex_gap": 0.503136053499459,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - muse": {
+     "diff": -0.006724621110181128,
+     "ci": [
+      -0.020674683166759196,
+      0.006618628859825568
+     ],
+     "ci_simultaneous": [
+      -0.02259076320080693,
+      0.009141520980444674
+     ],
+     "fraction_of_age_sex_gap": -0.12766452935497116,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - glm": {
+     "diff": 0.02114740748902616,
+     "ci": [
+      0.007191859590148007,
+      0.034562936052440735
+     ],
+     "ci_simultaneous": [
+      0.0047398973380231475,
+      0.037554917640029176
+     ],
+     "fraction_of_age_sex_gap": 0.40147597610768565,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms_recalibrated": {
+   "critical_value": 2.375052694904308,
+   "pairs": {
+    "jev_documented - gpt": {
+     "diff": 0.010971436533777856,
+     "ci": [
+      0.0005143353246774258,
+      0.02108969363327525
+     ],
+     "ci_simultaneous": [
+      -0.0015458010058782487,
+      0.02348867407343396
+     ],
+     "fraction_of_age_sex_gap": 0.2082888029649836,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - claude": {
+     "diff": 0.012881258945527996,
+     "ci": [
+      0.000943914273052951,
+      0.02482638746454121
+     ],
+     "ci_simultaneous": [
+      -0.0014389934139570765,
+      0.027201511305013068
+     ],
+     "fraction_of_age_sex_gap": 0.2445460991535402,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - gemini": {
+     "diff": 0.010161872276220674,
+     "ci": [
+      -0.0006189085758348864,
+      0.020602796225827346
+     ],
+     "ci_simultaneous": [
+      -0.0030436616401226177,
+      0.023367406192563965
+     ],
+     "fraction_of_age_sex_gap": 0.19291951475822236,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - muse": {
+     "diff": 0.009105551656295174,
+     "ci": [
+      -0.0009791471195110615,
+      0.019546491337167977
+     ],
+     "ci_simultaneous": [
+      -0.0036395093520576217,
+      0.02185061266464797
+     ],
+     "fraction_of_age_sex_gap": 0.1728656451674778,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - glm": {
+     "diff": 0.0049341329768462505,
+     "ci": [
+      -0.00692205187321371,
+      0.016029996407786018
+     ],
+     "ci_simultaneous": [
+      -0.00901508036093116,
+      0.018883346314623663
+     ],
+     "fraction_of_age_sex_gap": 0.09367275180905361,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_llms_brier": {
+   "critical_value": 2.400782157585955,
+   "pairs": {
+    "jev_documented - gpt": {
+     "diff": 0.008830039674466009,
+     "ci": [
+      0.004621471592065111,
+      0.012827339318413023
+     ],
+     "ci_simultaneous": [
+      0.0037577318211424347,
+      0.013902347527789582
+     ],
+     "fraction_of_age_sex_gap": 0.16763514862119305,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - claude": {
+     "diff": 0.008757012207527962,
+     "ci": [
+      0.004377962410986753,
+      0.012847536444557465
+     ],
+     "ci_simultaneous": [
+      0.0035582064886609853,
+      0.013955817926394939
+     ],
+     "fraction_of_age_sex_gap": 0.16624874825098984,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - gemini": {
+     "diff": 0.008943848423194262,
+     "ci": [
+      0.004338211368260454,
+      0.013278037716174999
+     ],
+     "ci_simultaneous": [
+      0.00342554954000692,
+      0.014462147306381602
+     ],
+     "fraction_of_age_sex_gap": 0.16979576705676158,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    },
+    "jev_documented - muse": {
+     "diff": -0.0038967833163786186,
+     "ci": [
+      -0.009436322838250263,
+      0.0015014374109867928
+     ],
+     "ci_simultaneous": [
+      -0.010500648119986248,
+      0.0027070814872290115
+     ],
+     "fraction_of_age_sex_gap": -0.07397903910609772,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": true,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": true
+    },
+    "jev_documented - glm": {
+     "diff": 0.006597729399796554,
+     "ci": [
+      0.0020275477619531757,
+      0.011240483799593083
+     ],
+     "ci_simultaneous": [
+      0.0007954992582101944,
+      0.012399959541382913
+     ],
+     "fraction_of_age_sex_gap": 0.1252555355663445,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    }
+   }
+  },
+  "focal_vs_age_sex": {
+   "critical_value": 1.9485528274324275,
+   "pairs": {
+    "jev_documented - reference_age_sex": {
+     "diff": -0.013525078864888906,
+     "ci": [
+      -0.035314534916441515,
+      0.007310823396092939
+     ],
+     "ci_simultaneous": [
+      -0.03486453124190117,
+      0.00781437351212336
+     ],
+     "fraction_of_age_sex_gap": -0.2567687903130652,
+     "noninferiority_margin": 0.005267415423968958,
+     "noninferior": false,
+     "noninferiority_margin_fixed": 0.005267415423968958,
+     "noninferior_fixed_margin": false
+    }
+   }
+  }
+ },
+ "eval_prediction_references": "joblib",
+ "eval_cheap_family": {
+  "n_records": 983,
+  "deaths": 157,
+  "margin": 0.005267415423968958,
+  "critical_value": 2.506574706627417,
+  "B": 2000,
+  "seed": 20260927,
+  "note": "log-loss, lower is better; difference Jev used as documented minus system",
+  "comparisons": {
+   "gpt_free": {
+    "diff": 0.017565003927289848,
+    "ci": [
+     0.007194307520999614,
+     0.02753925904922029
+    ],
+    "ci_simultaneous": [
+     0.004746885287116188,
+     0.03038312256746351
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   },
+   "claude_free": {
+    "diff": 0.008452388855419143,
+    "ci": [
+     5.1276986547574876e-05,
+     0.01739758492937186
+    ],
+    "ci_simultaneous": [
+     -0.0025164997331288633,
+     0.01942127744396715
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   },
+   "gemini_free": {
+    "diff": 0.017603326443233966,
+    "ci": [
+     0.006557111180432441,
+     0.028078929142862127
+    ],
+    "ci_simultaneous": [
+     0.0037773461374113575,
+     0.03142930674905657
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   },
+   "medgemma": {
+    "diff": -0.00520172805426042,
+    "ci": [
+     -0.030020219706937766,
+     0.018642917753217983
+    ],
+    "ci_simultaneous": [
+     -0.03669465564713356,
+     0.026291199538612725
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   },
+   "gemma": {
+    "diff": 0.0036827289691542696,
+    "ci": [
+     -0.01780316147748796,
+     0.02460692762846418
+    ],
+    "ci_simultaneous": [
+     -0.022447832048391986,
+     0.029813289986700527
+    ],
+    "noninferior": false,
+    "worse": false,
+    "outcome": "inconclusive"
+   }
+  }
+ },
+ "validity": {
+  "n_calls": 12910,
+  "usable": 12910,
+  "usable_share": 1.0,
+  "parse": {
+   "noul": 12910
+  },
+  "errors": {},
+  "providers_reported": {
+   "TypeSafe": 12910
+  },
+  "models_reported": {
+   "typesafe/jev-1.13-20260917": 12910
+  },
+  "tokens_in_total": 10650442.0,
+  "tokens_in_mean": 824.9761425251743,
+  "usd_list_total": 0.44731856400000003,
+  "price_per_mtok_input": 0.042,
+  "latency_median_s": 0.9925392866134644,
+  "latency_p90_s": 1.125649905204773
+ }
+}

@@ -1,0 +1,191 @@
+Colon cancer stage with structured input, task decomposition only (Supplementary Note 1; Supplementary Table 5): the
+request of colon_cancer_stage_structured.txt (Supplementary Note 2) with every option's criterion null, so each option
+is sent as its label alone. Jev: the report is the one field of the case, and the four Choice questions go in one
+request. Chatbots: the system message, then the report and Jev's four questions written as JSON with two-space indents
+and Jev's key order; the reply schema lists each question's options in Jev's order. The stage group is computed in
+code from the four answers, for every system. {report}: the pathology report, without leading or trailing white space.
+Reply schema: sent as response_format to every chatbot whose entry in config/models.yaml has structured_outputs: true.
+Built by src/jevity/docuse_structure_only.py from config/docuse_staging.yaml (Jev) and by src/jevity/llm_forms.py from
+Jev's stored request for the same report (chatbots).
+
+### SYSTEM MESSAGE
+For each question, choose the option that is correct, and give the probability that each option is correct, as numbers between 0 and 1 that add up to 1. Always choose one option for each question. Reply with a JSON object with one key for each question ID, each holding an object with two keys, "choice" (the option you choose, written exactly as in the question's criteria) and "probabilities" (an object with one number for each option), and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Pathology report:
+{report}
+
+Questions:
+{
+  "t_category": {
+    "type": "choice",
+    "instructions": "Which pathological T category does this colorectal cancer have, according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "Tis": null,
+      "T1": null,
+      "T2": null,
+      "T3": null,
+      "T4a": null,
+      "T4b": null,
+      "cannot be assessed": null
+    }
+  },
+  "regional_nodes": {
+    "type": "choice",
+    "instructions": "How many regional lymph nodes contain metastatic carcinoma (tumor in the node measuring 0.2 mm or more), according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "none": null,
+      "1": null,
+      "2 to 3": null,
+      "4 to 6": null,
+      "7 or more": null,
+      "not stated": null
+    }
+  },
+  "tumor_deposits": {
+    "type": "choice",
+    "instructions": "Does the report describe tumor deposits, according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "present": null,
+      "absent": null,
+      "not stated": null
+    }
+  },
+  "distant_metastasis": {
+    "type": "choice",
+    "instructions": "Which distant metastasis category do the pathology findings and any staging imaging in the report describe, according to the AJCC Cancer Staging Manual, 8th edition?",
+    "criteria": {
+      "none": null,
+      "M1a": null,
+      "M1b": null,
+      "M1c": null,
+      "not stated": null
+    }
+  }
+}
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "arm3_parts_answer",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "t_category": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["Tis", "T1", "T2", "T3", "T4a", "T4b", "cannot be assessed"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "Tis": {"type": "number", "minimum": 0, "maximum": 1},
+                "T1": {"type": "number", "minimum": 0, "maximum": 1},
+                "T2": {"type": "number", "minimum": 0, "maximum": 1},
+                "T3": {"type": "number", "minimum": 0, "maximum": 1},
+                "T4a": {"type": "number", "minimum": 0, "maximum": 1},
+                "T4b": {"type": "number", "minimum": 0, "maximum": 1},
+                "cannot be assessed": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["Tis", "T1", "T2", "T3", "T4a", "T4b", "cannot be assessed"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        },
+        "regional_nodes": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["none", "1", "2 to 3", "4 to 6", "7 or more", "not stated"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "none": {"type": "number", "minimum": 0, "maximum": 1},
+                "1": {"type": "number", "minimum": 0, "maximum": 1},
+                "2 to 3": {"type": "number", "minimum": 0, "maximum": 1},
+                "4 to 6": {"type": "number", "minimum": 0, "maximum": 1},
+                "7 or more": {"type": "number", "minimum": 0, "maximum": 1},
+                "not stated": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["none", "1", "2 to 3", "4 to 6", "7 or more", "not stated"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        },
+        "tumor_deposits": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["present", "absent", "not stated"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "present": {"type": "number", "minimum": 0, "maximum": 1},
+                "absent": {"type": "number", "minimum": 0, "maximum": 1},
+                "not stated": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["present", "absent", "not stated"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        },
+        "distant_metastasis": {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "string", "enum": ["none", "M1a", "M1b", "M1c", "not stated"]},
+            "probabilities": {
+              "type": "object",
+              "properties": {
+                "none": {"type": "number", "minimum": 0, "maximum": 1},
+                "M1a": {"type": "number", "minimum": 0, "maximum": 1},
+                "M1b": {"type": "number", "minimum": 0, "maximum": 1},
+                "M1c": {"type": "number", "minimum": 0, "maximum": 1},
+                "not stated": {"type": "number", "minimum": 0, "maximum": 1}
+              },
+              "required": ["none", "M1a", "M1b", "M1c", "not stated"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["choice", "probabilities"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["t_category", "regional_nodes", "tumor_deposits", "distant_metastasis"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": {"pathology_report": "{report}"},
+  "questions": {
+    "t_category": {
+      "type": "choice",
+      "instructions": "Which pathological T category does this colorectal cancer have, according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {"Tis": null, "T1": null, "T2": null, "T3": null, "T4a": null, "T4b": null, "cannot be assessed": null}
+    },
+    "regional_nodes": {
+      "type": "choice",
+      "instructions": "How many regional lymph nodes contain metastatic carcinoma (tumor in the node measuring 0.2 mm or more), according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {"none": null, "1": null, "2 to 3": null, "4 to 6": null, "7 or more": null, "not stated": null}
+    },
+    "tumor_deposits": {
+      "type": "choice",
+      "instructions": "Does the report describe tumor deposits, according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {"present": null, "absent": null, "not stated": null}
+    },
+    "distant_metastasis": {
+      "type": "choice",
+      "instructions": "Which distant metastasis category do the pathology findings and any staging imaging in the report describe, according to the AJCC Cancer Staging Manual, 8th edition?",
+      "criteria": {"none": null, "M1a": null, "M1b": null, "M1c": null, "not stated": null}
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

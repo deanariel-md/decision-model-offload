@@ -1,0 +1,67 @@
+Kidney-injury stage, each stage followed by its definition (Supplementary Note 1). {record}: the intensive care
+record. {item set}: eicu_aki for the main records, eicu_aki_side for the patients on maintenance dialysis and the
+stays with no creatinine value in the first 72 hours. Record layout: kidney_injury_stage.txt. Reply schema: sent as
+response_format to every chatbot whose entry in config/models.yaml has structured_outputs: true. Built by
+src/jevity/categorical.py from config/eicu_aki.yaml and config/eicu_aki_side.yaml.
+
+### SYSTEM MESSAGE
+Choose the AKI stage that is correct, and give the probability that each AKI stage is correct, as numbers between 0 and 1 that add up to 1. Always choose one AKI stage. Reply with a JSON object with two keys, "stage" (the AKI stage you choose, written exactly as in the list) and "probabilities" (an object with one number for each AKI stage), and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Patient:
+{record}
+
+Question: By the KDIGO creatinine criteria, what was this patient's highest AKI stage during the first 72 hours in the intensive care unit?
+
+AKI stages:
+no AKI: no value from unit admission to 72 hours is 0.3 mg/dL or more above a value in the preceding 48 hours or 1.5 times or more the lowest value in the preceding 7 days, and no dialysis started
+stage 1: a value 1.5 times or more but less than 2.0 times the lowest value in the preceding 7 days, or 0.3 mg/dL or more above a value in the preceding 48 hours
+stage 2: a value 2.0 times or more but less than 3.0 times the lowest value in the preceding 7 days
+stage 3: a value 3.0 times or more the lowest value in the preceding 7 days; or a value of 4.0 mg/dL or more that itself meets the stage 1 rise or ratio; or dialysis started
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "{item set}_answer",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "stage": {"type": "string", "enum": ["no AKI", "stage 1", "stage 2", "stage 3"]},
+        "probabilities": {
+          "type": "object",
+          "properties": {
+            "no AKI": {"type": "number", "minimum": 0, "maximum": 1},
+            "stage 1": {"type": "number", "minimum": 0, "maximum": 1},
+            "stage 2": {"type": "number", "minimum": 0, "maximum": 1},
+            "stage 3": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "required": ["no AKI", "stage 1", "stage 2", "stage 3"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["stage", "probabilities"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{record}",
+  "questions": {
+    "aki_stage": {
+      "type": "score",
+      "instructions": "By the KDIGO creatinine criteria, what was this patient's highest AKI stage during the first 72 hours in the intensive care unit?",
+      "criteria": [
+        "no AKI: no value from unit admission to 72 hours is 0.3 mg/dL or more above a value in the preceding 48 hours or 1.5 times or more the lowest value in the preceding 7 days, and no dialysis started",
+        "stage 1: a value 1.5 times or more but less than 2.0 times the lowest value in the preceding 7 days, or 0.3 mg/dL or more above a value in the preceding 48 hours",
+        "stage 2: a value 2.0 times or more but less than 3.0 times the lowest value in the preceding 7 days",
+        "stage 3: a value 3.0 times or more the lowest value in the preceding 7 days; or a value of 4.0 mg/dL or more that itself meets the stage 1 rise or ratio; or dialysis started"
+      ]
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

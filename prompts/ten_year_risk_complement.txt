@@ -1,0 +1,12 @@
+Ten-year risk of death, complementary statement (Supplementary Note 1; Jev only). {record}: the survey record as text
+(src/jevity/serialize.py). Built by src/jevity/clients.py (JevClient, question "complement") from config/prompts.yaml.
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{record}",
+  "questions": {
+    "alive": {"type": "noul", "instructions": "This person will be alive ten years after this examination."}
+  },
+  "provider": {"allow_fallbacks": false}
+}

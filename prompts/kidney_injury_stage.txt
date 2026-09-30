@@ -1,0 +1,77 @@
+Kidney-injury stage, stage names only (Supplementary Note 1). {record}: the intensive care record. {item set}:
+eicu_aki for the main records, eicu_aki_side for the patients on maintenance dialysis and the stays with no creatinine
+value in the first 72 hours. RECORD LAYOUT is the record ({record}), written by scripts/make_eicu_aki.py: {age} in
+whole years ("64 years"), "over 89 years" or "not recorded"; {sex} as recorded, in lower case, or "not recorded";
+{admission weight} in kilograms with one decimal ("70.0 kg") or "not recorded"; one CREATININE LINE per value,
+earliest first, {time} from unit admission ("+6 h 05 min", "-2 h 30 min") and {value} with two decimals; {dialysis}:
+the time dialysis started, written as {time}, or "no". Reply schema: sent as response_format to every chatbot whose
+entry in config/models.yaml has structured_outputs: true. Built by src/jevity/categorical.py from config/eicu_aki.yaml
+and config/eicu_aki_side.yaml.
+
+### SYSTEM MESSAGE
+Choose the AKI stage that is correct, and give the probability that each AKI stage is correct, as numbers between 0 and 1 that add up to 1. Always choose one AKI stage. Reply with a JSON object with two keys, "stage" (the AKI stage you choose, written exactly as in the list) and "probabilities" (an object with one number for each AKI stage), and nothing else.
+
+### USER MESSAGE (ends with a line break)
+Patient:
+{record}
+
+Question: By the KDIGO creatinine criteria, what was this patient's highest AKI stage during the first 72 hours in the intensive care unit?
+
+AKI stages:
+no AKI
+stage 1
+stage 2
+stage 3
+
+### REPLY SCHEMA
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "{item set}_answer",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "stage": {"type": "string", "enum": ["no AKI", "stage 1", "stage 2", "stage 3"]},
+        "probabilities": {
+          "type": "object",
+          "properties": {
+            "no AKI": {"type": "number", "minimum": 0, "maximum": 1},
+            "stage 1": {"type": "number", "minimum": 0, "maximum": 1},
+            "stage 2": {"type": "number", "minimum": 0, "maximum": 1},
+            "stage 3": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "required": ["no AKI", "stage 1", "stage 2", "stage 3"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["stage", "probabilities"],
+      "additionalProperties": false
+    }
+  }
+}
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{record}",
+  "questions": {
+    "aki_stage": {
+      "type": "score",
+      "instructions": "By the KDIGO creatinine criteria, what was this patient's highest AKI stage during the first 72 hours in the intensive care unit?",
+      "criteria": ["no AKI", "stage 1", "stage 2", "stage 3"]
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}
+
+### RECORD LAYOUT
+Age: {age}
+Sex: {sex}
+Admission weight: {admission weight}
+Serum creatinine (mg/dL), from 7 days before to 72 hours after intensive care unit admission; times are from unit admission:
+{creatinine values, one per line}
+Dialysis started: {dialysis}
+
+### CREATININE LINE
+{time}: {value}

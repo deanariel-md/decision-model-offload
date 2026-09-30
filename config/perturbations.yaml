@@ -1,0 +1,57 @@
+# Every perturbation edits exactly one thing. Clinical and label edits act on the record before serialisation;
+# irrelevant edits act on the rendering only (data-implied change = 0 by construction).
+irrelevant:
+  I1_field_order:   {op: shuffle_fields}
+  I2_units:         {op: convert_units}
+  I3_prose:         {op: to_prose}
+  I4_padding:       {op: padding, supplementary: true}   # stress test only, not primary
+clinical:
+  C1a_hba1c_plus1:        {column: hba1c_pct,        op: add,      value: 1.0}
+  C1b_hba1c_plus2:        {column: hba1c_pct,        op: add,      value: 2.0}
+  C2a_creatinine_x1.5:    {column: creatinine_mg_dl, op: multiply, value: 1.5}
+  C2b_creatinine_x2:      {column: creatinine_mg_dl, op: multiply, value: 2.0}
+  C3_albumin_minus0.5:    {column: albumin_g_dl,     op: add,      value: -0.5}
+  C4_sbp_plus20:          {column: sbp_mmhg,         op: add,      value: 20}
+  C5_smoking_never_to_current: {column: smoking,     op: set,      value: current, require: {smoking: never}}
+  C6_age_plus5:           {column: age,              op: add,      value: 5,   require_max: {age: 74}}
+label:
+  L1_race_nhw_to_nhb:     {column: race_ethnicity, op: set, value: "Non-Hispanic Black", require: {race_ethnicity: "Non-Hispanic White"}}
+  L1b_race_nhw_to_mexam:  {column: race_ethnicity, op: set, value: "Mexican American",   require: {race_ethnicity: "Non-Hispanic White"}}
+  L1c_race_nhb_to_nhw:    {column: race_ethnicity, op: set, value: "Non-Hispanic White", require: {race_ethnicity: "Non-Hispanic Black"}}
+  L2a_income_low:         {column: income_poverty_ratio, op: set, value: 0.8}
+  L2b_income_high:        {column: income_poverty_ratio, op: set, value: 4.0}
+  L3a_education_low:      {column: education, op: set, value: "less than 9th grade",        require: {education: "college graduate or above"}}
+  L3b_education_high:     {column: education, op: set, value: "college graduate or above",  require: {education: "less than 9th grade"}}
+  L4a_uninsured:          {column: insured,   op: set, value: "no",  require: {insured: "yes"}}
+  L4b_insured:            {column: insured,   op: set, value: "yes", require: {insured: "no"}}
+  L5a_sex_male_to_female: {column: sex, op: set, value: female, require: {sex: male}}
+  L5b_sex_female_to_male: {column: sex, op: set, value: male,   require: {sex: female}}
+# Confirmatory family: one edit per variable; D for every edit x model cell with simultaneous 95% intervals over all
+# cells. Race is one row. Other directions and step sizes are secondary.
+confirmatory_family: [C1a_hba1c_plus1, C2a_creatinine_x1.5, C3_albumin_minus0.5, C4_sbp_plus20, C5_smoking_never_to_current,
+                      C6_age_plus5, L1_race_nhw_to_nhb, L2a_income_low, L3a_education_low, L4a_uninsured, L5a_sex_male_to_female]
+mitigation:
+  # M1: the same records, LLM system prompt / Jev state extended with the instruction in config/prompts.yaml;
+  #     applied to baselines and to every label edit of the confirmatory family (plus the reverse race and sex edits).
+  M1_instruction: {edits: [baseline, L1_race_nhw_to_nhb, L1c_race_nhb_to_nhw, L2a_income_low, L3a_education_low, L4a_uninsured,
+                            L5a_sex_male_to_female, L5b_sex_female_to_male]}
+  # M2: the baseline record with the race/ethnicity field removed, every evaluation profile.
+  M2_race_removed: {drop_fields: [race_ethnicity]}
+support:
+  quantile: 0.95          # edited record supported if its NN distance <= this quantile of within-fit NN distances
+  numeric_columns: [age, bmi, waist_cm, sbp_mmhg, dbp_mmhg, income_poverty_ratio, rx_count, albumin_g_dl,
+                    creatinine_mg_dl, glucose_mg_dl, crp_mg_dl, lymphocyte_pct, mcv_fl, rdw_pct, alk_phos_u_l,
+                    wbc_10e3_ul, hba1c_pct, total_chol_mg_dl, hdl_mg_dl, uacr_mg_g]
+  log_columns: [creatinine_mg_dl, crp_mg_dl, uacr_mg_g, glucose_mg_dl]
+  # Three rules: (a) the joint rule above, on numeric columns only, so it never excludes a label edit;
+  # (b) category positivity: an edit to a categorical field is supported only if a multinomial model of that field on
+  #     the numeric covariates gives the new category a probability at least the 2.5th percentile of that probability
+  #     among fitting records holding it;
+  # (c) range: an edited numeric value must lie within the fitting set's 0.5th-99.5th percentiles (no extrapolation).
+  strata_columns: [race_ethnicity, sex, education, insured, smoking]
+  min_stratum: 50
+  propensity_quantile: 0.025
+  range_quantiles: [0.005, 0.995]
+  # Sex edits use rule (b) when at least half of the applicable sex edits among the 200 held-out 'pilot' records pass
+  # it (0.517 of 87 passed); false = rules (a) and (c) only.
+  sex_uses_category_rule: true

@@ -1,0 +1,12 @@
+Death before hospital discharge, Jev with the intensive care record in the recommended form (Supplementary Note 1):
+the Noul question of death_before_discharge.txt, unchanged, with the record sent as a JSON object whose numeric fields
+are replaced by named categories (Supplementary Table 12b). {structured record}: that object (src/jevity/gapfill.py,
+categorised_state; config/gapfill_eicu.yaml). Built by src/jevity/clients.py (JevClient, population eicu_demo).
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{structured record}",
+  "questions": {"death": {"type": "noul", "instructions": "This patient will die before hospital discharge."}},
+  "provider": {"allow_fallbacks": false}
+}

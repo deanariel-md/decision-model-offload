@@ -1,0 +1,258 @@
+# Jev on the eICU demo records in the recommended form, and the eICU outcome Choice (src/jevity/gapfill.py). Two parts:
+#   fields: the eICU record in the recommended form: each numeric field of eicu.to_state replaced, at its place, by the
+#     name of its published category, as config/docuse_risk.yaml does for NHANES (Supplementary Table 12a). Kept fields
+#     unchanged; a missing value stays missing; values banded exactly as the original record showed them (eicu._num).
+#     Rule for sources, applied the same to every field:
+#       (a) a field the NHANES recommended form also has: that field's NHANES source and cut points, unchanged
+#           (`from_nhanes`, or the eGFR kind; read from config/docuse_risk.yaml at run time, never copied);
+#       (b) other laboratory values: the NHANES laboratory source, ABIM Laboratory Test Reference Ranges, January 2026;
+#       (c) fields found only in intensive care: one document, the Third International Consensus Definitions for Sepsis
+#           and Septic Shock (Singer et al., JAMA 2016;315:801-10), which tabulates the SOFA score (Table 1, adapted
+#           from Vincent et al., Intensive Care Med 1996;22:707-10), the SIRS criteria (Box 1, from Bone et al., Chest
+#           1992;101:1644-55) and the lactate threshold of septic shock (Box 3); a field it has no category for falls
+#           back to (b).
+#   band_question: Jev's eICU outcome Choice, the NHANES risk-band question's template (config/prompts.yaml
+#     jev.risk_bands) with its time reference adapted; the options are the outcomes the demo records.
+# Band rule (docuse_risk.band): bands read in order, first match taken; `below: x` matches v < x, `at_most: x` v <= x,
+# a band with neither matches the rest. `needs_support`: the band applies only when the record says mechanically
+# ventilated (SOFA respiration 3 and 4 require respiratory support); otherwise the next band is tried.
+
+state:
+  kept_fields: [record_type, source, sex, ethnicity, admission_diagnosis, admitted_from, unit_type, elective_surgery,
+                mechanically_ventilated, intubated, chronic_dialysis, chronic_conditions]
+
+fields:
+  # ---------------------------------------------------------------- (a) shared with the NHANES recommended form
+  age:
+    key: age_group
+    from: [age]
+    from_columns: [age]
+    source: >
+      NHANES source unchanged (config/docuse_risk.yaml age: US Census Bureau and NCHS standard five-year age groups;
+      the range is the name), over the eICU age range: NCHS 2000 standard population groups 18 to 19 years, 20 to 24
+      ... 80 to 84 years, 85 years and over (Klein and Schoenborn, Healthy People 2010 Statistical Notes 20, Table 1).
+      The NHANES groups 40 to 44 ... 75 to 79 are the same cut points. eICU top-codes ages above 89 as 90.
+    bands:
+      - {label: "18 to 19 years", below: 20}
+      - {label: "20 to 24 years", below: 25}
+      - {label: "25 to 29 years", below: 30}
+      - {label: "30 to 34 years", below: 35}
+      - {label: "35 to 39 years", below: 40}
+      - {label: "40 to 44 years", below: 45}
+      - {label: "45 to 49 years", below: 50}
+      - {label: "50 to 54 years", below: 55}
+      - {label: "55 to 59 years", below: 60}
+      - {label: "60 to 64 years", below: 65}
+      - {label: "65 to 69 years", below: 70}
+      - {label: "70 to 74 years", below: 75}
+      - {label: "75 to 79 years", below: 80}
+      - {label: "80 to 84 years", below: 85}
+      - {label: "85 years and over"}
+
+  kidney_function:
+    key: estimated_glomerular_filtration_rate_category
+    from: [serum_creatinine]
+    from_columns: [creatinine_mg_dl]
+    kind: egfr
+    source: >
+      NHANES source unchanged (config/docuse_risk.yaml kidney_function): eGFR by the race-free CKD-EPI 2021 creatinine
+      equation from creatinine, age and sex, reported as KDIGO 2012 GFR categories G1-G5 (the same equation constants
+      and bands, read from that file).
+
+  glucose:
+    key: serum_glucose_category
+    from: [serum_glucose]
+    from_columns: [glucose_mg_dl]
+    from_nhanes: glucose
+    source: >
+      NHANES source unchanged (config/docuse_risk.yaml glucose): ADA Standards of Care 2024, random plasma glucose
+      >= 200 mg/dL (APACHE's worst first-day glucose is not a fasting sample).
+
+  albumin:
+    key: serum_albumin_category
+    from: [serum_albumin]
+    from_columns: [albumin_g_dl]
+    from_nhanes: albumin
+    source: "NHANES source unchanged (config/docuse_risk.yaml albumin): ABIM, January 2026, albumin, serum 3.5-5.5 g/dL."
+
+  white_cells:
+    key: white_blood_cell_count_category
+    from: [white_blood_cell_count]
+    from_columns: [wbc_10e3_ul]
+    from_nhanes: white_cells
+    source: "NHANES source unchanged (config/docuse_risk.yaml white_cells): ABIM, January 2026, leukocyte count 4000-11,000/uL."
+
+  # ---------------------------------------------------------------- (b) other laboratory values: ABIM, January 2026
+  sodium:
+    key: serum_sodium_category
+    from: [serum_sodium]
+    from_columns: [sodium_mmol_l]
+    source: "ABIM Laboratory Test Reference Ranges, January 2026: sodium, serum 136-145 mEq/L (= mmol/L)."
+    bands:
+      - {label: "below the reference range", below: 136}
+      - {label: "within the reference range", at_most: 145}
+      - {label: "above the reference range"}
+
+  haematocrit:
+    key: haematocrit_category
+    from: [haematocrit]
+    from_columns: [hematocrit_pct]
+    by_sex: true
+    source: "ABIM Laboratory Test Reference Ranges, January 2026: hematocrit, blood, female 37%-47%, male 42%-50%."
+    bands:
+      female:
+        - {label: "below the reference range", below: 37.0}
+        - {label: "within the reference range", at_most: 47.0}
+        - {label: "above the reference range"}
+      male:
+        - {label: "below the reference range", below: 42.0}
+        - {label: "within the reference range", at_most: 50.0}
+        - {label: "above the reference range"}
+
+  urea:
+    key: blood_urea_nitrogen_category
+    from: [blood_urea_nitrogen]
+    from_columns: [bun_mg_dl]
+    source: "ABIM Laboratory Test Reference Ranges, January 2026: blood urea nitrogen, serum or plasma 8-20 mg/dL."
+    bands:
+      - {label: "below the reference range", below: 8}
+      - {label: "within the reference range", at_most: 20}
+      - {label: "above the reference range"}
+
+  bilirubin:
+    key: serum_bilirubin_category
+    from: [serum_bilirubin]
+    from_columns: [bilirubin_mg_dl]
+    source: "ABIM Laboratory Test Reference Ranges, January 2026: bilirubin, serum, total 0.3-1.0 mg/dL."
+    bands:
+      - {label: "below the reference range", below: 0.3}
+      - {label: "within the reference range", at_most: 1.0}
+      - {label: "above the reference range"}
+
+  ph:
+    key: arterial_ph_category
+    from: [arterial_ph]
+    from_columns: [ph]
+    source: >
+      ABIM Laboratory Test Reference Ranges, January 2026: arterial blood gas studies (patient breathing room air), pH
+      7.38-7.44 (the Sepsis-3 document has no pH category, so rule (c) falls back to (b)).
+    bands:
+      - {label: "below the reference range", below: 7.38}
+      - {label: "within the reference range", at_most: 7.44}
+      - {label: "above the reference range"}
+
+  # ---------------------------------------------------------------- (c) intensive care only: Sepsis-3 (JAMA 2016)
+  oxygenation:
+    key: pao2_fio2_ratio_category
+    from: [arterial_po2, inspired_oxygen_fraction]
+    from_columns: [pao2_mmhg, fio2_pct]
+    kind: pf_ratio
+    support_column: vent
+    source: >
+      SOFA respiration (Sepsis-3 Table 1, adapted from Vincent 1996): PaO2/FIO2 >= 400 score 0; < 400 score 1; < 300
+      score 2; < 200 with respiratory support score 3; < 100 with respiratory support score 4. The ratio is computed in
+      code from the record's PaO2 (mmHg) and FiO2 (per cent / 100), as eGFR is for NHANES; respiratory support is the
+      record's mechanically-ventilated field. Both inputs are replaced by the category.
+    bands:
+      - {label: "SOFA respiration score 4", below: 100, needs_support: true}
+      - {label: "SOFA respiration score 3", below: 200, needs_support: true}
+      - {label: "SOFA respiration score 2", below: 300}
+      - {label: "SOFA respiration score 1", below: 400}
+      - {label: "SOFA respiration score 0"}
+
+  mean_arterial_pressure:
+    key: mean_arterial_pressure_category
+    from: [mean_arterial_pressure]
+    from_columns: [map_mmhg]
+    source: >
+      SOFA cardiovascular (Sepsis-3 Table 1): MAP >= 70 mmHg score 0; MAP < 70 mmHg score 1. Scores 2-4 need vasopressor
+      doses, which the record does not hold, so only the pressure criterion is named.
+    bands:
+      - {label: "SOFA cardiovascular score 1 by mean arterial pressure", below: 70}
+      - {label: "SOFA cardiovascular score 0 by mean arterial pressure"}
+
+  glasgow_coma_scale:
+    key: glasgow_coma_scale_category
+    from: [glasgow_coma_scale]
+    from_columns: [gcs_total]
+    source: "SOFA central nervous system (Sepsis-3 Table 1): GCS 15 score 0; 13-14 score 1; 10-12 score 2; 6-9 score 3; < 6 score 4."
+    bands:
+      - {label: "SOFA central nervous system score 4", below: 6}
+      - {label: "SOFA central nervous system score 3", below: 10}
+      - {label: "SOFA central nervous system score 2", below: 13}
+      - {label: "SOFA central nervous system score 1", below: 15}
+      - {label: "SOFA central nervous system score 0"}
+
+  urine_output:
+    key: urine_output_24h_category
+    from: [urine_output_24h]
+    from_columns: [urine_ml]
+    source: >
+      SOFA renal, urine-output criteria (Sepsis-3 Table 1): < 500 mL/day score 3; < 200 mL/day score 4 (the record's
+      first-day 24-hour total). The creatinine criteria are not used: creatinine is shared with NHANES, rule (a).
+    bands:
+      - {label: "SOFA renal score 4 by urine output", below: 200}
+      - {label: "SOFA renal score 3 by urine output", below: 500}
+      - {label: "above the SOFA urine-output thresholds"}
+
+  temperature:
+    key: temperature_category
+    from: [temperature]
+    from_columns: [temperature_c]
+    source: "SIRS (Sepsis-3 Box 1, from Bone 1992): temperature > 38 degrees C or < 36 degrees C."
+    bands:
+      - {label: "below the SIRS temperature range", below: 36.0}
+      - {label: "within the SIRS temperature range", at_most: 38.0}
+      - {label: "above the SIRS temperature range"}
+
+  heart_rate:
+    key: heart_rate_category
+    from: [heart_rate]
+    from_columns: [heart_rate]
+    source: "SIRS (Sepsis-3 Box 1): heart rate > 90/min."
+    bands:
+      - {label: "at or below the SIRS heart-rate threshold", at_most: 90}
+      - {label: "above the SIRS heart-rate threshold"}
+
+  respiratory_rate:
+    key: respiratory_rate_category
+    from: [respiratory_rate]
+    from_columns: [resp_rate]
+    source: "SIRS (Sepsis-3 Box 1): respiratory rate > 20/min."
+    bands:
+      - {label: "at or below the SIRS respiratory-rate threshold", at_most: 20}
+      - {label: "above the SIRS respiratory-rate threshold"}
+
+  paco2:
+    key: arterial_pco2_category
+    from: [arterial_pco2]
+    from_columns: [paco2_mmhg]
+    source: "SIRS (Sepsis-3 Box 1): PaCO2 < 32 mm Hg."
+    bands:
+      - {label: "below the SIRS PaCO2 threshold", below: 32}
+      - {label: "at or above the SIRS PaCO2 threshold"}
+
+  lactate:
+    key: maximum_lactate_category
+    from: [maximum_lactate]
+    from_columns: [lactate_mmol_l]
+    source: "Sepsis-3 septic shock (Box 3): serum lactate > 2 mmol/L (18 mg/dL)."
+    bands:
+      - {label: "at or below the Sepsis-3 lactate threshold", at_most: 2.0}
+      - {label: "above the Sepsis-3 lactate threshold"}
+
+band_question:
+  source: >
+    config/prompts.yaml jev.risk_bands (Supplementary Note 1): a Choice, the record as the case, the instruction "Which
+    of these will happen to this person after this examination?" with only its time reference adapted, and options in
+    the NHANES criteria's wording ("Died from any cause ..."). The options are the outcomes the demo records
+    (patient.unitdischargestatus, hospitaldischargestatus): unit death; hospital death after the unit; discharged alive.
+  question_id: hospital_outcome
+  instructions: "Which of these will happen to this person after this intensive care unit admission?"
+  criteria:
+    died_in_intensive_care_unit: "Died from any cause in the intensive care unit."
+    died_in_hospital_after_leaving_unit: "Died from any cause in hospital after leaving the intensive care unit."
+    discharged_alive: "Discharged from hospital alive."
+  death_options: [died_in_intensive_care_unit, died_in_hospital_after_leaving_unit]
+  outcomes: {unit_death: died_in_intensive_care_unit, hospital_death_after_unit: died_in_hospital_after_leaving_unit,
+             alive: discharged_alive}

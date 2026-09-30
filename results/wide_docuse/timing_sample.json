@@ -1,0 +1,29 @@
+{
+ "n_records": 100,
+ "records_from": "data/states_eval.parquet",
+ "window_min": 60.0,
+ "store": "runs/wide_docuse_timing_20260927",
+ "started": "2026-09-27 22:40:49",
+ "finished": "2026-09-27 23:40:13",
+ "note": "Jev used as documented, one question at a time; latency includes client retries on 429/5xx",
+ "systems": {
+  "jev_documented": {
+   "n": 100,
+   "usable": 100,
+   "errors": 0,
+   "median_s": 0.6599688529968262,
+   "p90_s": 0.8230476617813112,
+   "mean_s": 0.6601275467872619,
+   "min_s": 0.4687318801879883,
+   "max_s": 1.2087481021881104,
+   "mean_tokens_in": 824.48,
+   "mean_tokens_out": 20.0,
+   "usd_list_total": 0.003462816,
+   "providers": {
+    "TypeSafe": 100
+   },
+   "first_started": 1790538049.1478012,
+   "last_started": 1790541613.1472063
+  }
+ }
+}

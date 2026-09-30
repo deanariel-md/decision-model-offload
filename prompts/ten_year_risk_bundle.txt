@@ -1,0 +1,28 @@
+Ten-year risk of death, three questions in one request (Jev only, on the baseline records of the complementary
+statement): the death statement, the complementary statement and the risk-band question. Not given in the
+Supplementary Notes. {record}: the survey record as text (src/jevity/serialize.py). Built by src/jevity/clients.py
+(JevClient, question "bundle") from config/prompts.yaml.
+
+### JEV REQUEST BODY
+{
+  "model": "typesafe/jev-1.13",
+  "state": "{record}",
+  "questions": {
+    "death": {
+      "type": "noul",
+      "instructions": "This person will die from any cause within ten years of this examination."
+    },
+    "alive": {"type": "noul", "instructions": "This person will be alive ten years after this examination."},
+    "ten_year_outcome": {
+      "type": "choice",
+      "instructions": "Which of these will happen to this person after this examination?",
+      "criteria": {
+        "died_within_2_years": "Died from any cause within 2 years of this examination.",
+        "died_2_to_5_years": "Died from any cause at least 2 and under 5 years after this examination.",
+        "died_5_to_10_years": "Died from any cause at least 5 and under 10 years after this examination.",
+        "alive_at_10_years": "Alive ten years after this examination."
+      }
+    }
+  },
+  "provider": {"allow_fallbacks": false}
+}

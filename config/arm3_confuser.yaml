@@ -1,0 +1,84 @@
+# Arm 3 confuser set: the 100 reports with one misleading feature each, run through the shared categorical code as
+# its own arm. Names version only, Jev and the
+# five primary chatbots. The question, levels, prompts and reply rule are arm 3's, word for word (tested against
+# config/arm3.yaml); only the items, the systems and the repeats differ.
+arm: arm3_confuser
+kind: score
+population: arm3                    # the same synthetic population as arm 3 (template-built reports)
+seed: 20260922
+instructions: "Assign the pathological stage group for this colorectal cancer according to the AJCC Cancer Staging Manual, 8th edition. Stage IVA-IVB here includes IVA and IVB."
+answer_key: stage
+answer_aliases: {IVA: IVA-IVB, IVB: IVA-IVB}
+levels:
+  - {name: "0",    definition: "Tis N0 M0"}
+  - {name: "I",    definition: "T1-T2 N0 M0"}
+  - {name: "IIA",  definition: "T3 N0 M0"}
+  - {name: "IIB",  definition: "T4a N0 M0"}
+  - {name: "IIC",  definition: "T4b N0 M0"}
+  - {name: "IIIA", definition: "T1-T2 N1a-N1c M0; T1 N2a M0"}
+  - {name: "IIIB", definition: "T3-T4a N1a-N1c M0; T2-T3 N2a M0; T1-T2 N2b M0"}
+  - {name: "IIIC", definition: "T4a N2a M0; T3-T4a N2b M0; T4b N1a-N2b M0"}
+  - {name: "IVA-IVB", definition: "any T, any N, M1a-M1b"}
+  - {name: "IVC",  definition: "any T, any N, M1c"}
+variants:
+  names: {definitions: false}       # names only
+primary_variant: names
+items:
+  main: data/arm3/confuser_items.csv   # 100 reports, 20 per confuser type
+  id_column: report_id
+  state_column: report
+  truth_column: level
+  stratum_column: confuser_type     # the bootstrap resamples within confuser type
+  group_column: substage
+repeats: {n_items: 0, n_repeats: 1}  # no repeats
+systems:
+  tiers: [primary]                  # Jev and the five primary chatbots
+route:
+  batch: true
+  workers: {}                       # optional cap on parallel requests per system, e.g. {glm: 8}; empty = no cap
+keys:
+  env_file: .env                    # API keys; a relative path is read from the repository root
+jev:
+  question_id: crc_stage_group
+prompts:
+  system: >
+    Choose the stage group that is correct, and give the probability that each stage group is correct, as numbers
+    between 0 and 1 that add up to 1.
+  reply: >
+    Always choose one stage group. Reply with a JSON object with two keys, "stage" (the stage group you choose, written
+    exactly as in the list) and "probabilities" (an object with one number for each stage group), and nothing else.
+  user_template: |
+    Pathology report:
+    {state}
+
+    Question: {instructions}
+
+    Stage groups:
+    {options}
+analysis:
+  primary_metric: exact_accuracy
+  strata_column: confuser_type
+  proper_score: rps
+  n_boot: 2000
+  ci: 0.95
+  margin: 0.05
+  coverages: [0.5, 0.8]
+  ece_bins: 10
+  min_errors_auroc: 20
+  cost_basis: list
+timing:
+  n: 0
+  window_min: 0
+  hold: "no timing sample for the confuser set"
+budget:
+  arm_stop_usd: null                # refuse a run whose projected cost (USD) is above this; null = no limit
+  project_stop_usd: null            # before every batch submission: key usage + open holds + this submission must stay
+                                    # at or below this (USD); null = no limit
+  manifest_roots: [runs]            # run folders whose open batches count as holds; relative to the repository root
+  tokens_out:                       # output tokens per call, for the cost projection only
+    gpt: 400
+    claude: 150
+    gemini: 1100
+    muse: 1900
+    glm: 6000
+    default: 2000

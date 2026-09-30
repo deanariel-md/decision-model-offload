@@ -1,0 +1,311 @@
+{
+ "note": "Recommended-form pairing (Jev when fully confident, each main LLM otherwise), colon cancer stage, by report group:\nordinary (the first 1,000 reports and the 200 written by another model) and difficult (100 with a misleading feature and\n20 with a metastatic node at an unusual site), and all 1,320 together (mixed). Pooled accuracy difference from the LLM alone with a paired bootstrap\nstratified by report set (2,000 resamples, seed as workflow_checks.py), 95% percentile interval and the Bonferroni one-sided\nlower bound (alpha 0.025 / 5), and cost as a share of the LLM alone. Same item-level code path as workflow_checks.py part C;\nevery set's counts and costs are asserted against workflow_checks.json. For Fig. 2c-d. Stored answers only; no model call.",
+ "B": 2000,
+ "seed": 20260927,
+ "groups": {
+  "ordinary": {
+   "n": 1200,
+   "sets": [
+    "main",
+    "heldout"
+   ],
+   "kept": 759,
+   "llms": {
+    "gpt": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 1200,
+     "alone_correct": 1200,
+     "cost_share": 0.38565687712945823
+    },
+    "claude": {
+     "diff_pts": 1.3333333333333335,
+     "ci": [
+      0.75,
+      2.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.5833333333333334,
+     "pair_correct": 1184,
+     "alone_correct": 1168,
+     "cost_share": 0.38708558419815464
+    },
+    "gemini": {
+     "diff_pts": 0.08333333333333334,
+     "ci": [
+      0.0,
+      0.25
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 1200,
+     "alone_correct": 1199,
+     "cost_share": 0.43439703743274544
+    },
+    "muse": {
+     "diff_pts": 0.16666666666666669,
+     "ci": [
+      0.0,
+      0.4166666666666667
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 1200,
+     "alone_correct": 1198,
+     "cost_share": 0.4031854063161312
+    },
+    "glm": {
+     "diff_pts": 2.0,
+     "ci": [
+      1.25,
+      2.833333333333333
+     ],
+     "lower_bound_bonferroni_one_sided": 1.0833333333333335,
+     "pair_correct": 1160,
+     "alone_correct": 1136,
+     "cost_share": 0.4743300199982974
+    }
+   }
+  },
+  "difficult": {
+   "n": 120,
+   "sets": [
+    "misleading_feature",
+    "nonregional_sites"
+   ],
+   "kept": 40,
+   "llms": {
+    "gpt": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 118,
+     "alone_correct": 118,
+     "cost_share": 0.7304625306623918
+    },
+    "claude": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 118,
+     "alone_correct": 118,
+     "cost_share": 0.7127326923530846
+    },
+    "gemini": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 120,
+     "alone_correct": 120,
+     "cost_share": 0.7454934307976826
+    },
+    "muse": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 119,
+     "alone_correct": 119,
+     "cost_share": 0.7279999403054934
+    },
+    "glm": {
+     "diff_pts": 0.8333333333333334,
+     "ci": [
+      0.0,
+      2.5
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 113,
+     "alone_correct": 112,
+     "cost_share": 0.839696384475606
+    }
+   }
+  },
+  "mixed": {
+   "n": 1320,
+   "sets": [
+    "main",
+    "heldout",
+    "misleading_feature",
+    "nonregional_sites"
+   ],
+   "kept": 799,
+   "llms": {
+    "gpt": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 1318,
+     "alone_correct": 1318,
+     "cost_share": 0.41847163798281367
+    },
+    "claude": {
+     "diff_pts": 1.2121212121212122,
+     "ci": [
+      0.6818181818181818,
+      1.8181818181818181
+     ],
+     "lower_bound_bonferroni_one_sided": 0.5303030303030304,
+     "pair_correct": 1302,
+     "alone_correct": 1286,
+     "cost_share": 0.4192659070490529
+    },
+    "gemini": {
+     "diff_pts": 0.07575757575757576,
+     "ci": [
+      0.0,
+      0.22727272727272727
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 1320,
+     "alone_correct": 1319,
+     "cost_share": 0.4672614137620693
+    },
+    "muse": {
+     "diff_pts": 0.15151515151515152,
+     "ci": [
+      0.0,
+      0.3787878787878788
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 1319,
+     "alone_correct": 1317,
+     "cost_share": 0.4365214689827802
+    },
+    "glm": {
+     "diff_pts": 1.893939393939394,
+     "ci": [
+      1.2121212121212122,
+      2.6515151515151514
+     ],
+     "lower_bound_bonferroni_one_sided": 1.0606060606060608,
+     "pair_correct": 1273,
+     "alone_correct": 1248,
+     "cost_share": 0.520012360695802
+    }
+   }
+  },
+  "pool240": {
+   "n": 240,
+   "sets": {
+    "main": 102,
+    "heldout": 18,
+    "misleading_feature": 100,
+    "nonregional_sites": 20
+   },
+   "kept": 116,
+   "file": "pool240.csv",
+   "llms": {
+    "gpt": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 238,
+     "alone_correct": 238,
+     "cost_share": 0.5637009280586608,
+     "time_share_estimate": 0.6969384145416287,
+     "pair_crossings": 0,
+     "alone_crossings": 0
+    },
+    "claude": {
+     "diff_pts": 1.25,
+     "ci": [
+      0.0,
+      2.9166666666666665
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 236,
+     "alone_correct": 233,
+     "cost_share": 0.5551538861611869,
+     "time_share_estimate": 0.6679626748661528,
+     "pair_crossings": 0,
+     "alone_crossings": 0
+    },
+    "gemini": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 240,
+     "alone_correct": 240,
+     "cost_share": 0.5950249175867053,
+     "time_share_estimate": 0.660014024868111,
+     "pair_crossings": 0,
+     "alone_crossings": 0
+    },
+    "muse": {
+     "diff_pts": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 239,
+     "alone_correct": 239,
+     "cost_share": 0.5765456700646865,
+     "time_share_estimate": 0.6487555980952752,
+     "pair_crossings": 0,
+     "alone_crossings": 0
+    },
+    "glm": {
+     "diff_pts": 1.6666666666666667,
+     "ci": [
+      0.4166666666666667,
+      3.3333333333333335
+     ],
+     "lower_bound_bonferroni_one_sided": 0.0,
+     "pair_correct": 230,
+     "alone_correct": 226,
+     "cost_share": 0.6683342973412673,
+     "time_share_estimate": 0.5537962265624251,
+     "pair_crossings": 8,
+     "alone_crossings": 11
+    }
+   }
+  }
+ },
+ "summary": {
+  "ordinary_cost_share": {
+   "min": 0.38565687712945823,
+   "max": 0.4743300199982974
+  },
+  "ordinary_kept_share": 0.6325,
+  "difficult_jev_correct": 86,
+  "difficult_jev_accuracy": 0.7166666666666667,
+  "ordinary_jev_correct": 1200,
+  "jev_errors": 34,
+  "mixed_n": 1320,
+  "mixed_jev_correct": 1286,
+  "mixed_jev_accuracy": 0.9742424242424242,
+  "mixed_kept_share": 0.6053030303030303,
+  "mixed_cost_share": {
+   "min": 0.41847163798281367,
+   "max": 0.520012360695802
+  },
+  "mixed_diff_pts": {
+   "min": 0.0,
+   "max": 1.893939393939394
+  },
+  "mixed_lower_bound_min": 0.0
+ }
+}
