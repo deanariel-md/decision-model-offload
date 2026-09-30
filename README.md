@@ -1,14 +1,14 @@
 # Decision models can offload structured clinical tasks from large language models
 
-Code for a study that compares Jev, a non-generative decision model (TypeSafe, `typesafe/jev-1.13`), with widely used
-chatbots on three kinds of clinical question: a probability (ten-year risk of death; death in hospital in intensive
-care), a choice (the next step for a patient's message; board-examination questions) and an ordered level (colon cancer
+Code for a study that compares Jev, a non-generative decision model (TypeSafe, `typesafe/jev-1.13`), with large
+language models (LLMs) on three kinds of clinical question: a probability (ten-year risk of death; death in hospital in intensive
+care), a choice (Choosing Wisely decisions for patient questions; board-examination questions) and an ordered level (colon cancer
 stage; acute kidney injury stage).
 
 The repository holds the code that builds the records and prompts, queries each system and analyses the replies, the
 prompt templates (`prompts/`) and the aggregate results the paper reports (`results/`). It holds no data: the code
 rebuilds the survey and intensive care records and the board-examination questions from their public sources. The
-patient messages, the pathology reports and the model responses are available from the corresponding author on
+patient questions, the pathology reports and the model responses are available from the corresponding author on
 reasonable request.
 
 ## Install
@@ -33,7 +33,7 @@ and simulated systems, offline.
 | eICU Collaborative Research Database demo 2.0.1 | PhysioNet, Open Database License | `scripts/build_eicu.py demo`, `scripts/make_eicu_aki.py` |
 | eICU Collaborative Research Database 2.0 (outcome reference only) | PhysioNet, credentialed access | `scripts/build_eicu.py full`, `scripts/fit_eicu_reference.py` |
 | MedQA and Medbullets | their original sources | `scripts/build_arm2_ext_items.py --download` |
-| Patient messages, pathology reports | the corresponding author, on reasonable request | supplied by the user |
+| Patient questions, pathology reports | the corresponding author, on reasonable request | supplied by the user |
 
 Downloads are checked against `config/nhanes_sha256.txt` and `config/arm2_ext/items_manifest.json`. No record from the
 credentialed eICU database is sent to any model; it is used only to fit the outcome reference.
@@ -74,7 +74,7 @@ python scripts\run_eicu.py estimate; python scripts\run_eicu.py eval; python scr
 python scripts\analyze_eicu.py eval
 ```
 
-**Next step for a patient's message and board-examination questions.** Put the patient messages in `data\arm2\items.csv`
+**Patient questions and board-examination questions.** Put the patient questions in `data\arm2\items.csv`
 (`config\arm2.yaml`); the board-examination questions are downloaded and checked against the manifest:
 
 ```powershell
@@ -97,7 +97,7 @@ python scripts\run_categorical.py eicu_aki plan           # likewise for eicu_ak
 python scripts\eicu_aki_supplement.py; python scripts\eicu_aki_on_arrival.py
 ```
 
-**Jev given structured input** (colon cancer stage, ten-year risk and death in hospital), with the reworded,
+**Jev in the recommended form** (colon cancer stage, ten-year risk and death in hospital), with the reworded,
 non-regional and held-out report sets (each read from its folder under `data\`). The structure-only version reads the
 stored answers of the structured runs, so it runs after them; the intensive care items need the eICU demo built above:
 

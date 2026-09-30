@@ -13,15 +13,15 @@ further analyses the paper does not report, and intermediate files that later co
 | `eval/exposure.json`, `eval/cost_speed.json` | Masked-field recovery, cost and speed | `scripts/exposure_diagnostic.py`, `cost_speed.py eval` |
 | `eval/characteristics.json`, `eval/supplement_descriptives.json` | Characteristics of the record sets, descriptive tables | `scripts/characteristics.py`, `supplement_descriptives.py eval` |
 | `wide/arm1_extras.json` | Further descriptive analyses | `scripts/arm1_extras.py` |
-| `wide_cheaper/analysis.json` | The free-plan chatbots, MedGemma and Gemma on the wide set | `scripts/run_wide_cheaper.py analyse` |
-| `wide_docuse/analysis.json`, `timing_sample.json` | Ten-year risk with Jev given structured input | `scripts/docuse/analyze_risk.py`, `run_risk.py --timing` |
+| `wide_cheaper/analysis.json` | The smaller LLMs (free-plan models, MedGemma and Gemma) on the wide set | `scripts/run_wide_cheaper.py analyse` |
+| `wide_docuse/analysis.json`, `timing_sample.json` | Ten-year risk with Jev in the recommended form | `scripts/docuse/analyze_risk.py`, `run_risk.py --timing` |
 | `eicu/analysis.json`, `eicu/exposure.json` | Death in hospital, eICU demo (the main systems, and the free-plan and open-weight models in `secondary_prediction`) | `scripts/analyze_eicu.py eval`, `eicu_exposure.py` |
 | `eicu_aki/analysis.json`, `analysis_definitions.json`, `supplement_*.json` | Kidney-injury stage, eICU demo | `scripts/run_categorical.py eicu_aki analyze`, `eicu_aki_supplement.py` |
-| `arm2/analysis.json`, `arm2/timing_sample.json` | Next step for patient messages | `scripts/run_categorical.py arm2 analyze`, `arm2 timing` |
+| `arm2/analysis.json`, `arm2/timing_sample.json` | Patient questions | `scripts/run_categorical.py arm2 analyze`, `arm2 timing` |
 | `arm2_ext/analysis*.json`, `arm2_ext/timing_sample.json` | Board-examination questions (all, next-step subgroup, other option count) | `scripts/run_categorical.py arm2_ext analyze`, `arm2_ext timing` |
 | `arm3/supplement_names.json` | Colon cancer stage: repeatability on the 40 repeated reports | `scripts/run_categorical.py arm3 analyze`, `arm3_supplement.py` |
 | `arm3_confuser/analysis.json`, `misread.json` | Reports with a misleading feature | `scripts/run_categorical.py arm3_confuser analyze`, `arm3_confuser_misread.py` |
-| `arm3_docuse/documented/analysis_definitions.json`, `arm3_docuse/timing_sample.json` | Colon cancer stage with Jev given structured input | `scripts/docuse/analyze_staging.py`, `run_staging.py --timing` |
+| `arm3_docuse/documented/analysis_definitions.json`, `arm3_docuse/timing_sample.json` | Colon cancer stage with Jev in the recommended form | `scripts/docuse/analyze_staging.py`, `run_staging.py --timing` |
 | `arm3_nonregional_sites/summary.json` | The same on reports with a non-regional node the notes do not name | `scripts/nonregional/run_nonregional.py --analyze` |
 | `arm3_llm_forms/analysis.json` | Colon cancer stage on the pool of 240 reports: tokens and list cost of every system in every form of the question (with `summaries/staging_pool240.json`'s counts of correct answers, the cost per correct answer) | `scripts/llm_forms/analyze.py` |
 | `summaries/staging_pool240.json` | Colon cancer stage on the pool of 240 reports: every system in every form of the question, Jev against each LLM, the pairing at full confidence, clinical decisions | `scripts/summaries/staging_pool240.py` |

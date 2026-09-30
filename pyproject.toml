@@ -1,7 +1,7 @@
 [project]
 name = "jevity"
 version = "1.0.0"
-description = "Code for a comparison of Jev with chatbots on clinical probability, choice and ordered-level questions"
+description = "Code for a comparison of Jev with large language models on clinical probability, choice and ordered-level questions"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
